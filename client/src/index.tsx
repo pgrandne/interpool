@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './utils/css/normalize.css';
+import './utils/css/webflow.css';
+import './utils/css/interpool.webflow.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
