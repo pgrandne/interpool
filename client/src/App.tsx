@@ -22,7 +22,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 function App() {
   const { chains, provider } = configureChains(
-    [chain.mainnet],
+    [chain.polygonMumbai],
     [alchemyProvider({ apiKey: 'zAaG93FcznRw4tXmKEg7m6t6DeJK_sZS' })],
   );
 
@@ -53,9 +53,9 @@ function App() {
         borderRadius: 'large',
       })}
       >
-        <Header />
-        <Navbar />
         <div className="content">
+          <Navbar />
+          <Header />
           <SectionHome />
           <SectionGetYourTickets />
           <SectionHowToPlay />

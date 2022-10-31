@@ -10,9 +10,10 @@
   grid-column-gap: 16px;
 }
 
-body {
+.content {
   height: 100%;
-  padding-left: 329px;
+  /* padding-left: 329px; */
+  padding-left: 260px;
   background-color: #edeff2;
   font-family: Oswald, sans-serif;
   color: rgba(0, 0, 0, 0.74);
@@ -718,7 +719,7 @@ p {
   margin-left: 20px;
   padding: 60px 40px;
   background-image: url('../../images/Ticket-entier-modif-3.svg');
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   background-position: 0px 0px;
   background-size: auto;
 }

@@ -5,7 +5,7 @@ function Footer() {
         <Fragment>
             <footer className="footer center wf-section">
                 <div className="w-container">
-                    <div className="footer-text">Power by <a href="https://irruption-lab.webflow.io/" className="link-2">Irruption Lab</a>
+                    <div className="footer-text">Powered by <a href="https://irruption-lab.webflow.io/" className="link-2">Irruption Lab</a>
                     </div>
                 </div>
             </footer>
