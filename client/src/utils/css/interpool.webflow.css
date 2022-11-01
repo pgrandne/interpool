@@ -1646,9 +1646,14 @@ p {
     height: 500px;
   }
 
-  .body {
+  /* .body {
+    padding-left: 0px;
+  } */
+
+  .content {
     padding-left: 0px;
   }
+
 
   .grid.grid-account-section {
     -ms-grid-columns: 1fr 1fr;
