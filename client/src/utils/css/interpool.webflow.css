@@ -734,7 +734,7 @@ p {
   background-image: url('../../images/Ticket-entier-modif-3.svg');
   /* background-repeat: no-repeat; */
   background-position: 0px 0px;
-  background-size: auto;
+  background-size: 100% 100%;
 }
 
 .form-block-2 {
