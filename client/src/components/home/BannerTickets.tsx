@@ -1,3 +1,6 @@
+import Countdown from "../../utils/Countdown"
+import PrizePool from "../../utils/PrizePool";
+
 function BannerTickets() {
     return (
         <div className="w-layout-grid grid grid-with-ticket">
@@ -22,14 +25,14 @@ function BannerTickets() {
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217058-3d3dc5f0" className="div-block-2"><img src="images/piggy-bank-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb21705a-3d3dc5f0" className="div-block-info">
                     <div className="text-block-3">Prize Pool</div>
-                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb21705d-3d3dc5f0" className="text-block">$10.000</div>
+                    <PrizePool />
                 </div>
             </div>
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb21705f-3d3dc5f0" className="div-block colorvariation-3">
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217060-3d3dc5f0" className="div-block-2"><img src="images/time-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217062-3d3dc5f0" className="div-block-info">
                     <div className="text-block-3">Prediction period</div>
-                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217065-3d3dc5f0" className="text-block">02:10:30 </div>
+                    <Countdown />
                 </div>
             </div>
         </div>
