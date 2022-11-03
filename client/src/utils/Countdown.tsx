@@ -18,7 +18,11 @@ function Countdown() {
     }, [countDown]);
 
     return (
-        <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f4-3d3dc5f0" className="text-block text-block-variation">{hours}:{minutes}:{seconds} </div>
+        <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f4-3d3dc5f0" className="text-block text-block-variation">
+            {Math.floor(hours / 10)}{Math.floor(hours % 10)}:
+            {Math.floor(minutes / 10)}{Math.floor(minutes % 10)}:
+            {Math.floor(seconds / 10)}{Math.floor(seconds % 10)}
+        </div>
     )
 }
 export default Countdown;

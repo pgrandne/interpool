@@ -1,4 +1,23 @@
-function ModalDeposit({ setModalDeposit }: { setModalDeposit: React.Dispatch<React.SetStateAction<boolean>> }) {
+import { ethers } from 'ethers'
+import { useState } from 'react'
+import { useAccount, useContractRead } from 'wagmi'
+import { erc20ABI } from 'wagmi'
+import { mumbai } from '../../utils/contractAddress'
+
+function ModalDeposit({ setModalDeposit, amount }: { setModalDeposit: React.Dispatch<React.SetStateAction<boolean>>, amount: string }) {
+    const [balance, setBalance] = useState('0')
+    const { address } = useAccount()!
+    const add: `0x${string}` = address!
+    useContractRead({
+        address: mumbai.usdcContract,
+        abi: erc20ABI,
+        functionName: 'balanceOf',
+        args: [add],
+        onSuccess(data) {
+            setBalance(ethers.utils.formatUnits(data._hex))
+        }
+    })
+
     return (
         <div className="modal-wrapper">
             <div data-w-id="17b55dba-8acd-ac79-4b99-88a555b29f51" className="modal-outside-trigger" onClick={(e) => { setModalDeposit(false) }}></div>
@@ -8,19 +27,19 @@ function ModalDeposit({ setModalDeposit }: { setModalDeposit: React.Dispatch<Rea
                 <p className="paragraph">Once you have your ticket(s) you become eligible to enter the prediction game. More tickets you own, higher are your rewards (more info <a href="https://app.gitbook.com/o/esvKHPPOt4LZoy42lERC/s/9TtqoT2sXyCd3aHeyycM/welcome/frequently-asked-questions#prizes-and-winning">here</a>)<br /></p>
                 <div className="div-block-50">
                     <div className="text-block-45">Wallet balance:</div>
-                    <div className="text-block-44">1060.00 USDC</div>
+                    <div className="text-block-44">{balance}</div>
                 </div>
                 <div className="div-block-39 div-block-39-variation">
                     <div className="div-block-36">
                         <div className="div-block-37"><img src="images/usd-coin-usdc-logo.png" loading="lazy" srcSet="images/usd-coin-usdc-logo-p-500.png 500w, images/usd-coin-usdc-logo-p-800.png 800w, images/usd-coin-usdc-logo-p-2000.png 2000w, images/usd-coin-usdc-logo.png 2000w" sizes="100vw" alt="" className="image-16" />
-                            <div className="text-block-43">150</div>
+                            <div className="text-block-43">{parseInt(amount) * 50}</div>
                         </div>
                         <div className="text-block-41">USDC*</div>
                     </div>
                     <div className="div-block-38"><img src="images/next.png" loading="lazy" alt="" className="image-17" /></div>
                     <div className="div-block-36">
                         <div className="div-block-37"><img src="images/ticket-2.png" loading="lazy" alt="" className="image-16" />
-                            <div className="text-block-43">3</div>
+                            <div className="text-block-43">{amount}</div>
                         </div>
                         <div className="text-block-41">x Ticket(s)</div>
                     </div>
