@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function BannerCountdown() {
     const [countDown, setCountDown] = useState(0)
-    const countDownDate = 1668963600000
+    const countDownDate = 1670025600000
     const [days, setDays] = useState(0)
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(0)

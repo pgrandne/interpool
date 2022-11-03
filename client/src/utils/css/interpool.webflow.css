@@ -10,6 +10,15 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.rainbowConnect {
+  border: "2px solid";
+  line-height: "21px";
+  text-decoration: "none";
+  border-color: "#000";
+  border-radius: "25px";
+  color: "#000";
+}
+
 
 .w-layout-grid {
   display: -ms-grid;
@@ -1252,29 +1261,12 @@ p {
   right: 0%;
   bottom: 0%;
   z-index: 999;
-  display: none;
   height: 100%;
   padding-top: 100px;
   background-color: rgba(0, 0, 0, 0.1);
   -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
   text-align: center;
-}
-
-.modal-wrapper.modal-wrapper-redeem-tickets {
-  display: none;
-}
-
-.modal-wrapper.modal-wrapper-claim {
-  display: none;
-}
-
-.modal-wrapper.modal-wrapper-get-more-tickets {
-  display: none;
-}
-
-.modal-wrapper.modal-wrapper-deposit {
-  display: none;
 }
 
 .modal-outside-trigger {

@@ -170,7 +170,7 @@ function CLMatchLists() {
                     <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">Barcelona</div>
                 </div>
                 <div className="div-block-6">
-                    <input type="submit" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />
+                    <input type="submit" value="Submit your predictions!" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />
                 </div>
             </div>
         </form>

@@ -1,4 +1,21 @@
+import { useEffect, useState } from "react"
+
 function BannerNoTicket() {
+    const [countDown, setCountDown] = useState(0)
+    const countDownDate = 1668974400000
+    const [hours, setHours] = useState(0)
+    const [minutes, setMinutes] = useState(0)
+    const [seconds, setSeconds] = useState(0)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCountDown(countDownDate - new Date().getTime());
+        }, 1);
+        setHours(Math.floor((countDown % (1000 * 60 * 60 * 24 * 31)) / (1000 * 60 * 60)))
+        setMinutes(Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60)))
+        setSeconds(Math.floor((countDown % (1000 * 60)) / (1000)))
+        return () => clearInterval(interval);
+    }, [countDown]);
     return (
         <div className="w-layout-grid grid grid-no-ticket-yet">
             <a href="#Get-your-tickets" id="w-node-c281c257-2dba-658d-2aa3-0705c6a485a3-3d3dc5f0" className="link-block-2 w-inline-block">
@@ -20,7 +37,7 @@ function BannerNoTicket() {
                 <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974ef-3d3dc5f0" className="div-block-2"><img src="images/time-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f1-3d3dc5f0" className="div-block-info">
                     <div className="text-block-3 text-block-3-variation">Prediction period</div>
-                    <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f4-3d3dc5f0" className="text-block text-block-variation">02:10:30 </div>
+                    <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f4-3d3dc5f0" className="text-block text-block-variation">{hours}:{minutes}:{seconds} </div>
                 </div>
             </div>
         </div>
