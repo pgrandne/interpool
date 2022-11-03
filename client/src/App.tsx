@@ -10,6 +10,7 @@ import {
 } from '@rainbow-me/rainbowkit/wallets';
 import { publicProvider } from "wagmi/providers/public";
 import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { rainbowMagicConnector } from './components/connection/RainbowMagicConnector';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -18,23 +19,22 @@ import SectionHowToPlay from './sections/SectionHowToPlay';
 import SectionGetYourTickets from './sections/SectionGetYourTickets';
 import SectionHome from './sections/SectionHome';
 
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-
 function App() {
   const { chains, provider } = configureChains(
     [chain.polygonMumbai],
-    [alchemyProvider({ apiKey: 'zAaG93FcznRw4tXmKEg7m6t6DeJK_sZS' })],
+    [alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_ID })],
   );
 
   const connectors = connectorsForWallets([
     {
       groupName: 'Suggested',
       wallets: [
-        //rainbowMagicConnector({ chains }),
+        rainbowMagicConnector({ chains }),
         // injectedWallet({ chains, }),
         metaMaskWallet({ chains }),
         rainbowWallet({ chains }),
         walletConnectWallet({ chains }),
+
 
       ],
     },

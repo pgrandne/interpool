@@ -1,5 +1,4 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Fragment } from "react";
 
 function Connection() {
     return (

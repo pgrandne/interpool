@@ -1,8 +1,8 @@
-import Connection from "../components/Connection";
+import Connection from "./connection/Connection";
 
 function Header() {
     return (
-        <div className="container w-container">
+        <div className="section-header wf-section">
             <div className="div-block-14">
                 <h1 className="heading-8">The only prediction contest where everyone wins! </h1>
                 <div className="div-block-15">

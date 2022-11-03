@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useContractWrite, usePrepareContractWrite, useContractRead } from 'wagmi'
-import { ABI_Interpool } from '../utils/ABI_Interpool'
+import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { mumbai } from '../utils/contractAddress'
 interface IFormInput {
     match1HomeScore: string,
@@ -72,7 +71,7 @@ function CLMatchLists() {
         functionName: 'savePrediction',
         args: [prediction]
     })
-    const { data, isLoading, isSuccess, write } = useContractWrite(config)
+    const { isLoading, isSuccess, write } = useContractWrite(config)
 
 
 
@@ -109,7 +108,7 @@ function CLMatchLists() {
                     <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">FC Porto</div>
                     <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                         <div className="form-3">
-                            <input type="number" {...register('match1HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
+                            <input type="number" {...register('match1HomeScore', { required: true, min: 0, max: 99 })} max={2} className="text-field-2 w-input" />
                             <input type="number" {...register('match1AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                         </div>
                     </div>

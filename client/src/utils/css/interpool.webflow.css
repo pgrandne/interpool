@@ -579,7 +579,11 @@ p {
 }
 
 .section-home {
-  padding: 20px 40px 40px;
+  padding: 0px 40px 40px;
+}
+
+.section-header {
+  padding: 20px 40px 0px;
 }
 
 .grid-2 {
@@ -1021,7 +1025,8 @@ p {
 
 .text-field-2 {
   max-height: 30px;
-  max-width: 30px;
+  /* max-width: 50px; */
+  width: 30px;
   margin-top: 3px;
   margin-bottom: 0px;
   border-radius: 7px;
@@ -1886,6 +1891,11 @@ p {
     padding-left: 30px;
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    padding-right: 10px;
+    padding-left: 10px;
   }
 
   .section-home {

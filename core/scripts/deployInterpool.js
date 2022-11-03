@@ -5,7 +5,7 @@ async function main() {
 
     console.log("Account balance:", (await deployer.getBalance()).toString());
 
-    const Contract = await ethers.getContractFactory("Enet");
+    const Contract = await ethers.getContractFactory("IpPrediction");
     const contract = await Contract.deploy();
 
     console.log("Contract address:", contract.address);
