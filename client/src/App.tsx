@@ -20,6 +20,7 @@ import SectionGetYourTickets from './sections/SectionGetYourTickets';
 import SectionHome from './sections/SectionHome';
 
 function App() {
+  console.log(process.env.REACT_APP_TEST)
   const { chains, provider } = configureChains(
     [chain.polygonMumbai],
     [alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_ID })],
