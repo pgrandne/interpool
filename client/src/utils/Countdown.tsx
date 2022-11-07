@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 function Countdown() {
     const [countDown, setCountDown] = useState(0)
-    const countDownDate = 1667595600000
+    const countDownDate = 1668189600000
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(0)
     const [seconds, setSeconds] = useState(0)

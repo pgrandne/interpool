@@ -1,7 +1,44 @@
-import Countdown from "../../utils/Countdown"
-import PrizePool from "../../utils/PrizePool";
+import Countdown from '../../utils/Countdown'
+import PrizePool from '../../utils/PrizePool'
+import { useAccount, useContractReads } from 'wagmi'
+import { mumbai, contestId } from '../../utils/contractAddress'
+import { ABI_Interpool } from '../../utils/ABI_Interpool'
+import { ethers } from 'ethers'
+import { useState } from 'react'
+
+const interPoolContract = {
+    address: mumbai.interPoolContract,
+    abi: ABI_Interpool,
+}
 
 function BannerTickets() {
+    const [rank, setRank] = useState('0');
+    const [nbPlayers, setNbPlayers] = useState('0');
+    const { address } = useAccount();
+    useContractReads({
+        contracts: [
+            {
+                ...interPoolContract,
+                functionName: 'getPlayerRank',
+                args: [contestId, address],
+            },
+            {
+                address: mumbai.interPoolContract,
+                abi: ABI_Interpool,
+                functionName: 'getNumberOfPlayers',
+                args: [contestId],
+            },
+        ],
+        onSuccess(data: any) {
+            setRank(ethers.utils.formatUnits(data[0]._hex, 0))
+            setNbPlayers(ethers.utils.formatUnits(data[1]._hex, 0))
+
+
+        },
+    })
+
+
+
     return (
         <div className="w-layout-grid grid grid-with-ticket">
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217044-3d3dc5f0" className="div-block">
@@ -18,7 +55,7 @@ function BannerTickets() {
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217050-3d3dc5f0" className="div-block-2"><img src="images/ranking-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217052-3d3dc5f0" className="div-block-info">
                     <div className="text-block-3">Current Rank</div>
-                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217055-3d3dc5f0" className="text-block">3 / 102</div>
+                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217055-3d3dc5f0" className="text-block">{rank} / {nbPlayers}</div>
                 </div>
             </div>
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217057-3d3dc5f0" className="div-block colorvariation-2">

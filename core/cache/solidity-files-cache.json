@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/perrin/Project/Interpool/core/contracts/IpPrediction.sol": {
-      "lastModificationDate": 1667338800080,
-      "contentHash": "2ed22bac404ad8edef73c2dff3dbceb5",
+      "lastModificationDate": 1667388304206,
+      "contentHash": "1f40a88750cb9d1b0a4212a7f0dcd50c",
       "sourceName": "contracts/IpPrediction.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -36,7 +36,7 @@
         "0.8.15"
       ],
       "artifacts": [
-        "IpPrediction"
+        "Test"
       ]
     },
     "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
@@ -510,6 +510,116 @@
       ],
       "artifacts": [
         "OracleInterface"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/contracts/IpFakeEnetScore.sol": {
+      "lastModificationDate": 1667858275012,
+      "contentHash": "32bbf9e233a02c3a3e1fc60e50f775a3",
+      "sourceName": "contracts/IpFakeEnetScore.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.15"
+      ],
+      "artifacts": [
+        "IpFakeEnetScore"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/contracts/Test.sol": {
+      "lastModificationDate": 1667582832832,
+      "contentHash": "2fa4cb99f5cedf529554a00e510fd418",
+      "sourceName": "contracts/Test.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@chainlink/contracts/src/v0.8/ChainlinkClient.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "0.8.15"
+      ],
+      "artifacts": [
+        "Test"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/contracts/IpCalculation.sol": {
+      "lastModificationDate": 1667858186774,
+      "contentHash": "fd3d09d7943c88949069718221b5e8fa",
+      "sourceName": "contracts/IpCalculation.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IpFakeEnetScore.sol"
+      ],
+      "versionPragmas": [
+        "0.8.15"
+      ],
+      "artifacts": [
+        "IpCalculation"
       ]
     }
   }

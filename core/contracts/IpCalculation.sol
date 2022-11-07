@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.15;
 
-import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import {IpFakeEnetScore} from "./IpFakeEnetScore.sol";
 
 /*
  * @title A consumer contract for Enetscores.
@@ -10,7 +9,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @notice Interact with the daily events API.
  * @dev Uses @chainlink/contracts 0.4.2.
  */
-contract Test {
+
+/* function to add
+ */
+contract IpCalculation is IpFakeEnetScore {
     struct Gain {
         address player;
         uint256 score;
@@ -48,7 +50,6 @@ contract Test {
 
     uint256 prizePool;
     uint256 gainPercentage;
-    mapping(uint256 => PlayerScoreTicket[]) public scoreTable;
     mapping(uint256 => ContestResult[]) public contestTable;
 
     mapping(uint256 => uint256) nbTotalTicketsPerContest;
@@ -56,37 +57,38 @@ contract Test {
     constructor() {
         prizePool = 1758;
         gainPercentage = 5;
-        pushInScoreTable(1, 0x94b9420F65fB3ec966d96BB034b35AF86487D929, 1, 100);
-        pushInScoreTable(1, 0xD9464d0F4Bd1Da4DdA0Dd998Bc73aE2EC42418de, 2, 73);
-        pushInScoreTable(1, 0x823dcdE7d906CF8bF1BB4208238eBB015Fe5bd0a, 10, 99);
-        pushInScoreTable(1, 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2, 1, 73);
-        pushInScoreTable(1, 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 1, 100);
-        pushInScoreTable(1, 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db, 5, 73);
-        pushInScoreTable(1, 0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB, 3, 90);
-        pushInScoreTable(1, 0x2F9691Dd9E3fDB64Daf2dC36A3B8d4F67A764654, 2, 92);
         nbTotalTicketsPerContest[1] = 25;
     }
 
-    function pushInScoreTable(
-        uint256 _contestId,
-        address _player,
-        uint256 _nbTickets,
-        uint256 _score
-    ) public {
-        scoreTable[_contestId].push(
-            PlayerScoreTicket({
-                player: _player,
-                nbTickets: _nbTickets,
-                score: _score
-            })
-        );
-    }
-
-    function calculateGain(uint _contestId)
+    function getScoreTable(uint256 _contestId)
         public
         view
-        returns (Gain[] memory)
+        returns (PlayerScoreTicket[] memory)
     {
+        uint256 nbPlayers = IpFakeEnetScore
+            .listPlayersPerContest[_contestId]
+            .length;
+        address player;
+        PlayerScoreTicket[] memory scoreTable = new PlayerScoreTicket[](
+            nbPlayers
+        );
+        uint256 scorePlayer;
+        for (uint256 i = 0; i < nbPlayers; i++) {
+            player = listPlayersPerContest[_contestId][i];
+            scorePlayer = IpFakeEnetScore.checkResult(_contestId, player);
+            scoreTable[i] = PlayerScoreTicket({
+                player: player,
+                nbTickets: 1,
+                score: scorePlayer
+            });
+        }
+        return scoreTable;
+    }
+
+    function calculateGain(
+        uint _contestId,
+        PlayerScoreTicket[] memory _scoreTable
+    ) public view returns (Gain[] memory) {
         uint256 ranking;
         uint256 lastRanking;
         uint256 cumulatedRewardsNoExAequo = 0;
@@ -99,10 +101,8 @@ contract Test {
         );
         Rank[] memory rankTable = new Rank[](nbTotalTickets);
         Gain[] memory gainTable = new Gain[](nbTotalTickets);
-        for (uint256 i = 0; i < scoreTable[_contestId].length; i++) {
-            PlayerScoreTicket memory tempPlayerScore = scoreTable[_contestId][
-                i
-            ];
+        for (uint256 i = 0; i < _scoreTable.length; i++) {
+            PlayerScoreTicket memory tempPlayerScore = _scoreTable[i];
             for (uint256 j = 0; j < tempPlayerScore.nbTickets; j++) {
                 scoreTablePerTicket[indexTable] = PlayerScore({
                     player: tempPlayerScore.player,
@@ -201,7 +201,8 @@ contract Test {
     }
 
     function updateContestTable(uint _contestId) public {
-        Gain[] memory gainTable = calculateGain(_contestId);
+        PlayerScoreTicket[] memory scoreTable = getScoreTable(_contestId);
+        Gain[] memory gainTable = calculateGain(_contestId, scoreTable);
         uint256 indexTable = 0;
         /// Inititate the table with the first row
         contestTable[_contestId].push(
@@ -235,12 +236,36 @@ contract Test {
         }
     }
 
-    function getScoreTable(uint256 _contestId)
+    function getPlayerRank(uint _contestId, address _player)
         public
         view
-        returns (PlayerScoreTicket[] memory)
+        returns (uint256)
     {
-        return scoreTable[_contestId];
+        PlayerScoreTicket[] memory scoreTable = getScoreTable(_contestId);
+        uint256 ranking;
+        uint256 nbPlayers = scoreTable.length;
+        uint256 playerRank = 0;
+        Rank[] memory rankTable = new Rank[](nbPlayers);
+        for (uint256 i = 0; i < nbPlayers; i++) {
+            ranking = 1;
+            for (uint256 j = 0; j < nbPlayers; j++) {
+                if (scoreTable[i].score < scoreTable[j].score) {
+                    ranking++;
+                }
+            }
+            rankTable[i] = Rank({
+                player: scoreTable[i].player,
+                score: scoreTable[i].score,
+                rankExAequo: ranking
+            });
+        }
+        for (uint256 i = 0; i < nbPlayers; i++) {
+            if (_player == rankTable[i].player) {
+                playerRank = rankTable[i].rankExAequo;
+                break;
+            }
+        }
+        return playerRank;
     }
 
     function getContestTable(uint256 _contestId)
