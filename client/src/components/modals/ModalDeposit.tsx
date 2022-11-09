@@ -19,7 +19,7 @@ function Approve({ amount }: { amount: number }) {
     const { write } = useContractWrite({
         ...config,
         onSuccess(data) {
-            toast("⚽ Approve Request Submitted!");
+            toast("⚽ USDC spending limit approval!");
         },
     })
 
@@ -27,7 +27,7 @@ function Approve({ amount }: { amount: number }) {
         <a href="/" className="hollow-button white" onClick={(e) => {
             e.preventDefault()
             write?.()
-        }}>Approve USDC Amount</a>
+        }}>Approve USDC</a>
     )
 }
 
@@ -43,7 +43,7 @@ function Deposit({ amount, setModalDeposit }: { amount: number, setModalDeposit:
     const { write } = useContractWrite({
         ...config,
         onSuccess(data) {
-            toast("⚽ Deposit Request Submitted!")
+            toast("⚽ USDC Deposit Confirmation!", { autoClose: 2000, })
             setTimeout(function () { setModalDeposit(false) }, 3000)
         },
     })
@@ -88,10 +88,10 @@ function ModalDeposit({ nbTickets, setModalDeposit }: { nbTickets: number, setMo
             <div className="modal-inner-wrapper">
                 <div className="div-block-41"><img src="images/close.png" loading="lazy" width="20" height="20" data-w-id="17b55dba-8acd-ac79-4b99-88a555b29f54" alt="" className="image-18" onClick={(e) => { setModalDeposit(false) }} /></div>
                 <h2 className="heading-7">Deposit Confirmation</h2>
-                <p className="paragraph">Once you have your ticket(s) you become eligible to enter the prediction game. More tickets you own, higher are your rewards (more info <a href="https://app.gitbook.com/o/esvKHPPOt4LZoy42lERC/s/9TtqoT2sXyCd3aHeyycM/welcome/frequently-asked-questions#prizes-and-winning">here</a>)<br /></p>
+                <p className="paragraph">Once you have your ticket(s) you become eligible to enter the prediction game. More tickets you own, higher are your rewards (more info <a href="https://irruption-lab.gitbook.io/interpool/welcome/frequently-asked-questions#prizes-and-winning" target="_blank" rel="noreferrer">here</a>)<br /></p>
                 <div className="div-block-50">
                     <div className="text-block-45">Wallet balance:</div>
-                    <div className="text-block-44">{balance}</div>
+                    <div className="text-block-44">{balance} USDC</div>
                 </div>
                 <div className="div-block-39 div-block-39-variation">
                     <div className="div-block-36">
@@ -108,8 +108,8 @@ function ModalDeposit({ nbTickets, setModalDeposit }: { nbTickets: number, setMo
                         <div className="text-block-41">x Ticket(s)</div>
                     </div>
                 </div>
-                {balance >= 50 && amountApproved < nbTickets * 50 && <Approve amount={nbTickets * 50} />}
-                {balance >= 50 && amountApproved >= nbTickets * 50 && <Deposit amount={nbTickets * 50} setModalDeposit={setModalDeposit} />}
+                {balance >= 50 && <Approve amount={nbTickets * 50} />}
+                {balance >= 50 && <Deposit amount={nbTickets * 50} setModalDeposit={setModalDeposit} />}
                 {balance < 50 && <Faucet />}
                 <p className="paragraph-2">*Get your Deposit back anytime after the game completion.</p>
             </div>

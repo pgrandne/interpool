@@ -15,6 +15,7 @@ function SectionHome() {
         address: goerli.interPoolTicketContract,
         abi: erc20ABI,
         functionName: 'balanceOf',
+        watch: true,
         args: [address],
         onSuccess(data: any) {
             setTicket(parseInt(ethers.utils.formatUnits(data._hex, 0)))

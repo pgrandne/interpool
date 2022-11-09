@@ -50,14 +50,14 @@ contract IpFakeEnetScore {
     mapping(uint256 => string[]) private listRequestsPerContest;
 
     // @notice assocation between contest info and contest
-    mapping(uint256 => ContestInfo) private infoContest;
+    mapping(uint256 => ContestInfo) internal infoContest;
 
     // @notice use struct Score for a game id
     mapping(uint32 => Scores) private scoresPerGameId;
 
     // @notice use struct Score for all game id predicted for a contest by a player
     mapping(address => mapping(uint256 => mapping(uint32 => Scores)))
-        private predictionsPerPlayerPerContest;
+        internal predictionsPerPlayerPerContest;
 
     // @notice list of all playesr who participate to the contest
     mapping(uint256 => address[]) internal listPlayersPerContest;
@@ -66,9 +66,9 @@ contract IpFakeEnetScore {
     bytes32 private specId;
     // @notice amount of Link for Oracle
     uint256 private payment;
-    uint256 private currentContestId;
+    uint256 internal currentContestId;
 
-    mapping(uint32 => bool) gamePlayed;
+    mapping(uint32 => bool) public gamePlayed;
 
     constructor() {
         currentContestId = 0; // initialisation of current contest id
@@ -114,15 +114,6 @@ contract IpFakeEnetScore {
         }
     }
 
-    // function fakeGameResolve() public {
-
-    //         struct GameResolve {
-    //     uint32 gameId;
-    //     uint8 homeScore;
-    //     uint8 awayScore;
-    //     string status;
-    // }
-
     /*
      * @notice Creation of a Contest : 1667315919 ; 1669907919
      * @param _leagueId: 53 for Ligue 1, 42 Champion's League, 77 World Cup
@@ -162,34 +153,6 @@ contract IpFakeEnetScore {
             });
             gamePlayed[_fakeGameResolve[i].gameId] = true;
         }
-    }
-
-    /**
-     * @notice Save predictions for a player for the current contest
-     * @param _gamePredictions: table of games with predicted scores received from the front end
-     * Verify the contest is still open and the number of predictions is the expected number
-     * Save scores of games in predictionsPerPlayerPerContest
-     */
-    function savePrediction(GamePredict[] memory _gamePredictions) public {
-        require(
-            block.timestamp < infoContest[currentContestId].dateEnd,
-            "Prediction Period is closed!"
-        );
-        require(
-            _gamePredictions.length ==
-                getNumberOfGamesPerContest(currentContestId),
-            "The number of predictions doesn't match!"
-        );
-        uint256 nbOfGames = getNumberOfGamesPerContest(currentContestId);
-        for (uint256 i = 0; i < nbOfGames; i++) {
-            predictionsPerPlayerPerContest[msg.sender][currentContestId][
-                _gamePredictions[i].gameId
-            ] = Scores({
-                homeScore: _gamePredictions[i].homeScore,
-                awayScore: _gamePredictions[i].awayScore
-            });
-        }
-        listPlayersPerContest[currentContestId].push(msg.sender);
     }
 
     /* ========== INTERPOOL VIEW FUNCTIONS ========== */
@@ -393,5 +356,9 @@ contract IpFakeEnetScore {
         returns (uint256)
     {
         return (listPlayersPerContest[_contestId].length);
+    }
+
+    function getContestPredictionEndDate() public view returns (uint256) {
+        return infoContest[currentContestId].dateEnd;
     }
 }

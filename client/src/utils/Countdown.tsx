@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react"
 import { useContractRead } from 'wagmi'
 import { useAddressNetwork } from "./useAddressNetwork"
 import { ABI_Interpool } from './ABI_Interpool'
+import { ethers } from "ethers"
 
 function Countdown() {
     const [countDown, setCountDown] = useState(0)
@@ -16,8 +17,8 @@ function Countdown() {
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getContestPredictionEndDate',
-        onSuccess(data) {
-            console.log(data)
+        onSuccess(data: any) {
+            setCountdownDate(parseInt(ethers.utils.formatUnits(data._hex, 0)) * 1000)
         },
     })
 

@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/perrin/Project/Interpool/core/contracts/IpPrediction.sol": {
-      "lastModificationDate": 1667388304206,
-      "contentHash": "1f40a88750cb9d1b0a4212a7f0dcd50c",
-      "sourceName": "contracts/IpPrediction.sol",
+    "/home/perrin/Project/Interpool/core/contracts/InterpoolContract.sol": {
+      "lastModificationDate": 1667988981216,
+      "contentHash": "c86838a800258c1f56b2b32b0f22f4f5",
+      "sourceName": "contracts/InterpoolContract.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
@@ -29,14 +29,126 @@
         }
       },
       "imports": [
-        "@chainlink/contracts/src/v0.8/ChainlinkClient.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
+        "./IpFakeEnetScore.sol",
+        "./IpPool.sol"
       ],
       "versionPragmas": [
         "0.8.15"
       ],
       "artifacts": [
-        "Test"
+        "InterpoolContract"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/contracts/IpFakeEnetScore.sol": {
+      "lastModificationDate": 1667988991176,
+      "contentHash": "0e8388b102cfec50fdcf712035c0739a",
+      "sourceName": "contracts/IpFakeEnetScore.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.15"
+      ],
+      "artifacts": [
+        "IpFakeEnetScore"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/contracts/IpPool.sol": {
+      "lastModificationDate": 1667989000164,
+      "contentHash": "003a1dd3a89dafc745ff68a4d9a2690d",
+      "sourceName": "contracts/IpPool.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/security/Pausable.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.15"
+      ],
+      "artifacts": [
+        "IERC20",
+        "IpPool",
+        "PoolAave"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/security/Pausable.sol": {
+      "lastModificationDate": 1666105542713,
+      "contentHash": "25c8108f36fdd472bc78d4c4af240c11",
+      "sourceName": "@openzeppelin/contracts/security/Pausable.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Pausable"
       ]
     },
     "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
@@ -76,49 +188,6 @@
         "Ownable"
       ]
     },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/ChainlinkClient.sol": {
-      "lastModificationDate": 1666105542781,
-      "contentHash": "6af479cbde42f1a7225c9cebc6e32239",
-      "sourceName": "@chainlink/contracts/src/v0.8/ChainlinkClient.sol",
-      "solcConfig": {
-        "version": "0.8.15",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./Chainlink.sol",
-        "./interfaces/ENSInterface.sol",
-        "./interfaces/LinkTokenInterface.sol",
-        "./interfaces/ChainlinkRequestInterface.sol",
-        "./interfaces/OperatorInterface.sol",
-        "./interfaces/PointerInterface.sol",
-        "./vendor/ENSResolver.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ChainlinkClient"
-      ]
-    },
     "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/utils/Context.sol": {
       "lastModificationDate": 1666105542397,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
@@ -154,10 +223,10 @@
         "Context"
       ]
     },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/Chainlink.sol": {
-      "lastModificationDate": 1666105542781,
-      "contentHash": "9dc050539cdf1579d5650d41d0df9ec2",
-      "sourceName": "@chainlink/contracts/src/v0.8/Chainlink.sol",
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol": {
+      "lastModificationDate": 1666105542509,
+      "contentHash": "a1c7f80ae26f5b2d7d563475627fbf25",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
@@ -182,125 +251,20 @@
         }
       },
       "imports": [
-        "./vendor/CBORChainlink.sol",
-        "./vendor/BufferChainlink.sol"
+        "../ERC20.sol",
+        "../../../utils/Context.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "Chainlink"
+        "ERC20Burnable"
       ]
     },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/interfaces/ENSInterface.sol": {
-      "lastModificationDate": 1666105542885,
-      "contentHash": "06b6aefcae95de6d1597ad8e1d73a08b",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/ENSInterface.sol",
-      "solcConfig": {
-        "version": "0.8.15",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ENSInterface"
-      ]
-    },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol": {
-      "lastModificationDate": 1666105542889,
-      "contentHash": "da5a0c3bd86c896f6a407f909c57edf3",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol",
-      "solcConfig": {
-        "version": "0.8.15",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "LinkTokenInterface"
-      ]
-    },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/interfaces/ChainlinkRequestInterface.sol": {
-      "lastModificationDate": 1666105542885,
-      "contentHash": "14407a6ead15cff8a0e0a7f8037c68f5",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/ChainlinkRequestInterface.sol",
-      "solcConfig": {
-        "version": "0.8.15",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ChainlinkRequestInterface"
-      ]
-    },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/interfaces/OperatorInterface.sol": {
-      "lastModificationDate": 1666105542889,
-      "contentHash": "e1822c36361fc3a26b5a68df3ddab15d",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/OperatorInterface.sol",
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+      "lastModificationDate": 1666105542505,
+      "contentHash": "af7bd64e1cfefbf6cb07f2adc1a25392",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
@@ -325,20 +289,21 @@
         }
       },
       "imports": [
-        "./OracleInterface.sol",
-        "./ChainlinkRequestInterface.sol"
+        "./IERC20.sol",
+        "./extensions/IERC20Metadata.sol",
+        "../../utils/Context.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "OperatorInterface"
+        "ERC20"
       ]
     },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol": {
-      "lastModificationDate": 1666105542889,
-      "contentHash": "27da4b2007d200dd5afff31dbf31ac99",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol",
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1666105542617,
+      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
@@ -367,48 +332,13 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "PointerInterface"
+        "IERC20"
       ]
     },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/vendor/ENSResolver.sol": {
-      "lastModificationDate": 1666105542921,
-      "contentHash": "24a98b0606654e662097eed9ffa91a11",
-      "sourceName": "@chainlink/contracts/src/v0.8/vendor/ENSResolver.sol",
-      "solcConfig": {
-        "version": "0.8.15",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ENSResolver"
-      ]
-    },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/vendor/CBORChainlink.sol": {
-      "lastModificationDate": 1666105542917,
-      "contentHash": "99b3ee2c29bc0d1a5cba583d9e8d835e",
-      "sourceName": "@chainlink/contracts/src/v0.8/vendor/CBORChainlink.sol",
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+      "lastModificationDate": 1666105542621,
+      "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
@@ -433,124 +363,19 @@
         }
       },
       "imports": [
-        "./BufferChainlink.sol"
+        "../IERC20.sol"
       ],
-      "versionPragmas": [
-        ">=0.4.19"
-      ],
-      "artifacts": [
-        "CBORChainlink"
-      ]
-    },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol": {
-      "lastModificationDate": 1666105542917,
-      "contentHash": "52ac6f99fb0635751ae4ed11139878fd",
-      "sourceName": "@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol",
-      "solcConfig": {
-        "version": "0.8.15",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "BufferChainlink"
+        "IERC20Metadata"
       ]
     },
-    "/home/perrin/Project/Interpool/core/node_modules/@chainlink/contracts/src/v0.8/interfaces/OracleInterface.sol": {
-      "lastModificationDate": 1666105542889,
-      "contentHash": "6283e42024961596926c2b5015eef8e0",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/OracleInterface.sol",
-      "solcConfig": {
-        "version": "0.8.15",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "OracleInterface"
-      ]
-    },
-    "/home/perrin/Project/Interpool/core/contracts/IpFakeEnetScore.sol": {
-      "lastModificationDate": 1667858275012,
-      "contentHash": "32bbf9e233a02c3a3e1fc60e50f775a3",
-      "sourceName": "contracts/IpFakeEnetScore.sol",
-      "solcConfig": {
-        "version": "0.8.15",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "0.8.15"
-      ],
-      "artifacts": [
-        "IpFakeEnetScore"
-      ]
-    },
-    "/home/perrin/Project/Interpool/core/contracts/Test.sol": {
-      "lastModificationDate": 1667582832832,
-      "contentHash": "2fa4cb99f5cedf529554a00e510fd418",
-      "sourceName": "contracts/Test.sol",
+    "/home/perrin/Project/Interpool/core/contracts/IpErc20Ticket.sol": {
+      "lastModificationDate": 1667921381945,
+      "contentHash": "1b4eee8720027fe13a5e25872015db50",
+      "sourceName": "contracts/IpErc20Ticket.sol",
       "solcConfig": {
         "version": "0.8.15",
         "settings": {
@@ -575,14 +400,198 @@
         }
       },
       "imports": [
-        "@chainlink/contracts/src/v0.8/ChainlinkClient.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol",
+        "@openzeppelin/contracts/security/Pausable.sol",
+        "@openzeppelin/contracts/access/AccessControl.sol"
       ],
       "versionPragmas": [
-        "0.8.15"
+        "^0.8.4"
       ],
       "artifacts": [
-        "Test"
+        "IpErc20Ticket"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/access/AccessControl.sol": {
+      "lastModificationDate": 1666105542381,
+      "contentHash": "e6ef731d275b1e7b2995f00fa56d9dab",
+      "sourceName": "@openzeppelin/contracts/access/AccessControl.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IAccessControl.sol",
+        "../utils/Context.sol",
+        "../utils/Strings.sol",
+        "../utils/introspection/ERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "AccessControl"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/access/IAccessControl.sol": {
+      "lastModificationDate": 1666105542581,
+      "contentHash": "57c84298234411cea19c7c284d86be8b",
+      "sourceName": "@openzeppelin/contracts/access/IAccessControl.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IAccessControl"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1666105542729,
+      "contentHash": "cf46906c4035f51639a22265066a9e78",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Strings"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+      "lastModificationDate": 1666105542485,
+      "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC165"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1666105542601,
+      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC165"
       ]
     },
     "/home/perrin/Project/Interpool/core/contracts/IpCalculation.sol": {

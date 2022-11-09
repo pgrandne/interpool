@@ -1,20 +1,21 @@
 import Countdown from '../../utils/Countdown'
 import PrizePool from '../../utils/PrizePool'
 import { useAccount, useContractReads } from 'wagmi'
-import { mumbai, contestId } from '../../utils/contractAddress'
+import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { ethers } from 'ethers'
 import { useState } from 'react'
-
-const interPoolContract = {
-    address: mumbai.interPoolContract,
-    abi: ABI_Interpool,
-}
+import { contestId } from '../../utils/contractAddress'
 
 function BannerTickets({ ticket }: { ticket: number }) {
     const [rank, setRank] = useState('0');
     const [nbPlayers, setNbPlayers] = useState('0');
     const { address } = useAccount();
+    const addressNetwork = useAddressNetwork();
+    const interPoolContract = {
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+    }
     useContractReads({
         contracts: [
             {
@@ -23,7 +24,7 @@ function BannerTickets({ ticket }: { ticket: number }) {
                 args: [contestId, address],
             },
             {
-                address: mumbai.interPoolContract,
+                address: addressNetwork.interPoolContract,
                 abi: ABI_Interpool,
                 functionName: 'getNumberOfPlayers',
                 args: [contestId],
@@ -32,8 +33,6 @@ function BannerTickets({ ticket }: { ticket: number }) {
         onSuccess(data: any) {
             setRank(ethers.utils.formatUnits(data[0]._hex, 0))
             setNbPlayers(ethers.utils.formatUnits(data[1]._hex, 0))
-
-
         },
     })
 

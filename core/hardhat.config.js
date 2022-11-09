@@ -39,7 +39,7 @@ module.exports = {
     },
   },
   etherscan: {
-    // apiKey: ETHERSCAN_API_KEY,
-    apiKey: POLYGONSCAN_API,
+    apiKey: ETHERSCAN_API_KEY,
+    // apiKey: POLYGONSCAN_API,
   },
 };
