@@ -20,7 +20,7 @@ function ModalSubmit({ setModalSubmit, prediction }: { setModalSubmit: React.Dis
     const { write } = useContractWrite({
         ...config,
         onSuccess(data) {
-            toast("⚽ Your predictions are being recorded on the blockchain!")
+            toast("⚽ Your predictions are being recorded on the blockchain!", { autoClose: 2000, })
             setTimeout(function () { setModalSubmit(false) }, 3000)
         },
     })

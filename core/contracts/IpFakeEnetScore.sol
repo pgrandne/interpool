@@ -59,7 +59,7 @@ contract IpFakeEnetScore {
     mapping(address => mapping(uint256 => mapping(uint32 => Scores)))
         internal predictionsPerPlayerPerContest;
 
-    // @notice list of all playesr who participate to the contest
+    // @notice list of all players who participate to the contest
     mapping(uint256 => address[]) internal listPlayersPerContest;
 
     // @notice specId = jobId from https://market.link/nodes/Enetscores/integrations

@@ -8,7 +8,7 @@ function PrizePool() {
     const [prizePool, setPrizePool] = useState(0)
     const addressNetwork: any = useAddressNetwork()
 
-    const { isError } = useContractRead({
+    useContractRead({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getGlobalPrizePool',

@@ -47,7 +47,6 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
         uint256 rewardPerRankPerPlayer;
     }
 
-    uint256 prizePool;
     uint256 gainPercentage;
     mapping(uint256 => ContestResult[]) public contestTable;
 
@@ -94,6 +93,7 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
         uint256 nbExAequo;
         uint256 rewardNoExAequo;
         uint256 indexTable = 0;
+        uint256 prizePool = getGlobalPrizePool();
         uint256 nbTotalTickets = nbTotalTicketsPerContest[_contestId];
         PlayerScore[] memory scoreTablePerTicket = new PlayerScore[](
             nbTotalTickets
@@ -266,7 +266,18 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
                 awayScore: _gamePredictions[i].awayScore
             });
         }
-        listPlayersPerContest[currentContestId].push(msg.sender);
+        bool alreadyExist;
+        for (
+            uint256 i = 0;
+            i < listPlayersPerContest[currentContestId].length;
+            i++
+        ) {
+            if (listPlayersPerContest[currentContestId][i] == msg.sender)
+                alreadyExist = true;
+        }
+        if (alreadyExist = true) {
+            listPlayersPerContest[currentContestId].push(msg.sender);
+        }
     }
 
     function getPlayerRank(uint _contestId, address _player)
