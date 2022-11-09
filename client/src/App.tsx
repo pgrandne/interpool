@@ -1,5 +1,6 @@
 import './App.css';
 import "@rainbow-me/rainbowkit/styles.css";
+import 'react-toastify/dist/ReactToastify.css';
 import { connectorsForWallets, RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import {
@@ -19,10 +20,10 @@ import SectionHowToPlay from './sections/SectionHowToPlay';
 import SectionGetYourTickets from './sections/SectionGetYourTickets';
 import SectionHome from './sections/SectionHome';
 
+
 function App() {
-  console.log(process.env.REACT_APP_TEST)
   const { chains, provider } = configureChains(
-    [chain.polygonMumbai],
+    [chain.goerli],
     [alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_ID })],
   );
 

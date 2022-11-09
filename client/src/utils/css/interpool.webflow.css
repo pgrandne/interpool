@@ -200,6 +200,7 @@ p {
   color: #1db0fc;
   line-height: 21px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .hollow-button:hover {
@@ -811,6 +812,8 @@ p {
   max-width: 50px;
   margin-bottom: 0px;
   border-radius: 5px;
+  text-align: center;
+  font-size: 25px;
 }
 
 .div-block-8 {

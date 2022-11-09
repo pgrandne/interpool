@@ -1,20 +1,84 @@
 import { ethers } from 'ethers'
 import { useState } from 'react'
-import { useAccount, useContractRead } from 'wagmi'
+import { useAccount, usePrepareContractWrite, useContractWrite, useContractReads } from 'wagmi'
 import { erc20ABI } from 'wagmi'
-import { mumbai } from '../../utils/contractAddress'
+import { ABI_Interpool } from '../../utils/ABI_Interpool'
+import Faucet from '../../utils/Faucet'
+import { useAddressNetwork } from '../../utils/useAddressNetwork'
+import { ToastContainer, toast } from 'react-toastify';
 
-function ModalDeposit({ setModalDeposit, amount }: { setModalDeposit: React.Dispatch<React.SetStateAction<boolean>>, amount: string }) {
-    const [balance, setBalance] = useState('0')
-    const { address } = useAccount()!
-    const add: `0x${string}` = address!
-    useContractRead({
-        address: mumbai.usdcContract,
+function Approve({ amount }: { amount: number }) {
+    const addressNetwork: any = useAddressNetwork()
+
+    const { config } = usePrepareContractWrite({
+        address: addressNetwork.usdcContract,
         abi: erc20ABI,
-        functionName: 'balanceOf',
-        args: [add],
+        functionName: 'approve',
+        args: [addressNetwork.interPoolContract, ethers.BigNumber.from(amount * 10 ** 6)],
+    })
+    const { write } = useContractWrite({
+        ...config,
         onSuccess(data) {
-            setBalance(ethers.utils.formatUnits(data._hex))
+            toast("⚽ Approve Request Submitted!");
+        },
+    })
+
+    return (
+        <a href="/" className="hollow-button white" onClick={(e) => {
+            e.preventDefault()
+            write?.()
+        }}>Approve USDC Amount</a>
+    )
+}
+
+function Deposit({ amount, setModalDeposit }: { amount: number, setModalDeposit: React.Dispatch<React.SetStateAction<boolean>> }) {
+    const addressNetwork: any = useAddressNetwork()
+
+    const { config }: { config: any } = usePrepareContractWrite({
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+        functionName: 'depositOnAave',
+        args: [ethers.BigNumber.from(amount)]
+    })
+    const { write } = useContractWrite({
+        ...config,
+        onSuccess(data) {
+            toast("⚽ Deposit Request Submitted!")
+            setTimeout(function () { setModalDeposit(false) }, 3000)
+        },
+    })
+    return (
+        <a href="/" className="hollow-button white" onClick={(e) => {
+            e.preventDefault()
+            write?.()
+        }}>Confirm Deposit</a>
+    )
+}
+
+function ModalDeposit({ nbTickets, setModalDeposit }: { nbTickets: number, setModalDeposit: React.Dispatch<React.SetStateAction<boolean>> }) {
+    const addressNetwork: any = useAddressNetwork()
+    const [balance, setBalance] = useState(0)
+    const [amountApproved, setAmountApproved] = useState(0)
+    const { address }: { address: any } = useAccount()
+    useContractReads({
+        contracts: [
+            {
+                address: addressNetwork.usdcContract,
+                abi: erc20ABI,
+                functionName: 'balanceOf',
+                args: [address],
+            },
+            {
+                address: addressNetwork.usdcContract,
+                abi: erc20ABI,
+                functionName: 'allowance',
+                args: [address, addressNetwork.interPoolContract],
+            },
+        ],
+        watch: true,
+        onSuccess(data) {
+            setBalance(parseFloat(ethers.utils.formatUnits(data[0]._hex, 6)))
+            setAmountApproved(parseFloat(ethers.utils.formatUnits(data[1]._hex, 0)))
         }
     })
 
@@ -32,21 +96,24 @@ function ModalDeposit({ setModalDeposit, amount }: { setModalDeposit: React.Disp
                 <div className="div-block-39 div-block-39-variation">
                     <div className="div-block-36">
                         <div className="div-block-37"><img src="images/usd-coin-usdc-logo.png" loading="lazy" srcSet="images/usd-coin-usdc-logo-p-500.png 500w, images/usd-coin-usdc-logo-p-800.png 800w, images/usd-coin-usdc-logo-p-2000.png 2000w, images/usd-coin-usdc-logo.png 2000w" sizes="100vw" alt="" className="image-16" />
-                            <div className="text-block-43">{parseInt(amount) * 50}</div>
+                            <div className="text-block-43">{nbTickets * 50}</div>
                         </div>
                         <div className="text-block-41">USDC*</div>
                     </div>
                     <div className="div-block-38"><img src="images/next.png" loading="lazy" alt="" className="image-17" /></div>
                     <div className="div-block-36">
                         <div className="div-block-37"><img src="images/ticket-2.png" loading="lazy" alt="" className="image-16" />
-                            <div className="text-block-43">{amount}</div>
+                            <div className="text-block-43">{nbTickets}</div>
                         </div>
                         <div className="text-block-41">x Ticket(s)</div>
                     </div>
                 </div>
-                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className="hollow-button white">Confirm Deposit</a>
+                {balance >= 50 && amountApproved < nbTickets * 50 && <Approve amount={nbTickets * 50} />}
+                {balance >= 50 && amountApproved >= nbTickets * 50 && <Deposit amount={nbTickets * 50} setModalDeposit={setModalDeposit} />}
+                {balance < 50 && <Faucet />}
                 <p className="paragraph-2">*Get your Deposit back anytime after the game completion.</p>
             </div>
+            <ToastContainer />
         </div>
     )
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import ModalDeposit from "../components/modals/ModalDeposit";
 
 function SectionGetYourTickets() {
-    const [amount, setAmount] = useState("1");
+    const [nbTickets, setNbTickets] = useState(1);
     const [modalDeposit, setModalDeposit] = useState(false);
     return (
         <section id="Get-your-tickets" data-w-id="1d9e582d-b4e2-39bf-da9e-2c5517289a0e" className="section-buy-ticket wf-section">
@@ -13,11 +13,11 @@ function SectionGetYourTickets() {
                     <div className="div-block-8">
                         <div className="form-block-2 w-form">
                             <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" className="form-2"><label className="field-label">Get</label>
-                                <input type="string" className="text-field w-input" maxLength={256} name="name-8" data-name="Name 8" placeholder={amount} id="name-8"
+                                <input type="string" className="text-field w-input" maxLength={256} name="name-8" data-name="Name 8" placeholder={nbTickets.toString()} id="name-8"
                                     onChange={(e) => {
                                         e.target.value !== '' ?
-                                        setAmount(e.target.value) :
-                                        setAmount("0")
+                                            setNbTickets(parseInt(e.target.value)) :
+                                            setNbTickets(0)
                                     }}
                                 /><label className="field-label">Tickets</label></form>
                         </div>
@@ -32,7 +32,7 @@ function SectionGetYourTickets() {
                     <div className="text-block-14">* You can get your deposit back right after the end of the contest, or fill in your prediction for the next contest and win more prizes!</div>
                 </div>
             </div>
-            {modalDeposit && <ModalDeposit setModalDeposit={setModalDeposit} amount={amount} />}
+            {modalDeposit && <ModalDeposit setModalDeposit={setModalDeposit} nbTickets={nbTickets} />}
         </section >
     )
 }

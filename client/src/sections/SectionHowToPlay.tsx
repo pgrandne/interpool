@@ -1,4 +1,20 @@
+import { erc20ABI, useContractRead } from "wagmi";
+import { goerli } from '../utils/contractAddress'
+import { ethers } from 'ethers'
+
 function SectionHowToPlay() {
+    useContractRead({
+        address: '0x1Ee669290939f8a8864497Af3BC83728715265FF',
+        abi: erc20ABI,
+        functionName: 'balanceOf',
+        args: ['0x52CF62b15bA2b932006A3ffd9F3C5aaD496e9F9E'],
+        onSuccess(data) {
+            console.log(ethers.utils.formatUnits(data._hex, 6))
+        },
+    })
+
+
+
     return (
         <section id="How-to-play" data-w-id="188a1cbe-f5f2-a28c-fb5f-7b23cda3aa9a" className="section-how-to-play wf-section">
             <div className="w-container">

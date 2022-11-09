@@ -11,7 +11,7 @@ const interPoolContract = {
     abi: ABI_Interpool,
 }
 
-function BannerTickets() {
+function BannerTickets({ ticket }: { ticket: number }) {
     const [rank, setRank] = useState('0');
     const [nbPlayers, setNbPlayers] = useState('0');
     const { address } = useAccount();
@@ -45,10 +45,10 @@ function BannerTickets() {
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217045-3d3dc5f0" className="div-block-2"><img src="images/ticket-2-blanc.png" loading="lazy" width="35" alt="" className="image" /></div>
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217047-3d3dc5f0" className="div-block-info">
                     <div className="div-block-13">
-                        <div className="text-block-3">3</div>
+                        <div className="text-block-3">{ticket}</div>
                         <div className="text-block-3">x Tickets</div>
                     </div>
-                    <div className="text-block">$ 150</div>
+                    <div className="text-block">$ {ticket * 50}</div>
                 </div>
             </div>
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb21704f-3d3dc5f0" className="div-block color-variation-1">
