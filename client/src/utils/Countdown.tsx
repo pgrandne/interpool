@@ -13,7 +13,7 @@ function Countdown() {
 
     const addressNetwork: any = useAddressNetwork()
 
-    const { data, isError, isLoading } = useContractRead({
+    useContractRead({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getContestPredictionEndDate',
@@ -30,7 +30,7 @@ function Countdown() {
         setMinutes(Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60)))
         setSeconds(Math.floor((countDown % (1000 * 60)) / (1000)))
         return () => clearInterval(interval);
-    }, [countDown]);
+    }, [countDownDate, countDown]);
 
     return (
         <Fragment>

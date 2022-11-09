@@ -1,6 +1,11 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useAccount, useContractRead } from 'wagmi'
 import ModalSubmit from './modals/ModalSubmit'
+import { useAddressNetwork } from "../utils/useAddressNetwork"
+import { ABI_Interpool } from '../utils/ABI_Interpool'
+import { ToastContainer, toast } from 'react-toastify';
+import { ethers } from 'ethers'
 interface IFormInput {
     match1HomeScore: string,
     match1AwayScore: string,
@@ -31,7 +36,27 @@ interface IPrediction {
 }
 
 function Ligue1MatchLists() {
+    const addressNetwork = useAddressNetwork()
+    const { isConnected } = useAccount()
     const [modalSubmit, setModalSubmit] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
+    const [predictionsOpen, setPredictionsOpen] = useState(true)
+    useEffect(() => {
+        if (submitted) {
+            toast("⚽ Your predictions are being recorded on the blockchain!")
+            setSubmitted(false)
+        }
+    }, [submitted])
+
+    useContractRead({
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+        functionName: 'getContestPredictionEndDate',
+        onSuccess(data: any) {
+            new Date().getTime() > (parseInt(ethers.utils.formatUnits(data._hex, 0)) * 1000) ? setPredictionsOpen(false) : setPredictionsOpen(true)
+        },
+    })
+
     const [prediction, setPrediction] = useState<IPrediction[]>([{
         gameId: 0,
         homeScore: 0,
@@ -187,11 +212,14 @@ function Ligue1MatchLists() {
                         <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">Monaco</div>
                     </div>
                     <div className="div-block-6">
-                        <input type="submit" value="Submit your predictions!" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />
+                        {isConnected && predictionsOpen && <input type="submit" value="Submit your predictions!" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />}
+                        {isConnected && !predictionsOpen && <input type="submit" value="Predictions period closed!" className="hollow-button notactive" />}
+                        {!isConnected && <input type="submit" value="Please connect!" className="hollow-button notactive" />}
                     </div>
                 </div>
             </form >
-            {modalSubmit && <ModalSubmit setModalSubmit={setModalSubmit} prediction={prediction} />}
+            {modalSubmit && <ModalSubmit prediction={prediction} setModalSubmit={setModalSubmit} setSubmitted={setSubmitted} />}
+            <ToastContainer />
         </Fragment>
     )
 }

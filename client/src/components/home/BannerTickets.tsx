@@ -10,7 +10,7 @@ import { contestId } from '../../utils/contractAddress'
 function BannerTickets({ ticket }: { ticket: number }) {
     const [rank, setRank] = useState('0');
     const [nbPlayers, setNbPlayers] = useState('0');
-    const { address } = useAccount();
+    const { address, isConnected } = useAccount();
     const addressNetwork = useAddressNetwork();
     const interPoolContract = {
         address: addressNetwork.interPoolContract,
@@ -32,7 +32,7 @@ function BannerTickets({ ticket }: { ticket: number }) {
         ],
         watch: true,
         onSuccess(data: any) {
-            setRank(ethers.utils.formatUnits(data[0]._hex, 0))
+            isConnected ? setRank(ethers.utils.formatUnits(data[0]._hex, 0)) : setRank("0")
             setNbPlayers(ethers.utils.formatUnits(data[1]._hex, 0))
         },
     })
@@ -55,7 +55,7 @@ function BannerTickets({ ticket }: { ticket: number }) {
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217050-3d3dc5f0" className="div-block-2"><img src="images/ranking-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217052-3d3dc5f0" className="div-block-info">
                     <div className="text-block-3">Current Rank</div>
-                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217055-3d3dc5f0" className="text-block">{rank} / {nbPlayers}</div>
+                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217055-3d3dc5f0" className="text-block">{rank === "0" ? "-" : rank} / {nbPlayers}</div>
                 </div>
             </div>
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217057-3d3dc5f0" className="div-block colorvariation-2">

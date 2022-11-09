@@ -1,7 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalDeposit from "../components/modals/ModalDeposit";
+import { ToastContainer, toast } from 'react-toastify';
+import { useAccount } from "wagmi";
 
 function SectionGetYourTickets() {
+    const { isConnected } = useAccount()
+    const [deposited, setDeposited] = useState(false)
+    useEffect(() => {
+        if (deposited) {
+            toast("⚽ USDC Deposit Confirmation!")
+            setDeposited(false)
+        }
+    }, [deposited])
+
     const [nbTickets, setNbTickets] = useState(1);
     const [modalDeposit, setModalDeposit] = useState(false);
     return (
@@ -22,17 +33,19 @@ function SectionGetYourTickets() {
                                 /><label className="field-label">Tickets</label></form>
                         </div>
                         {/* <div className="text-block-8">($150)*</div> */}
-                        <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted"
+                        {!isConnected && <a href="/" className="hollow-button notactive">Please connect!</a>}
+                        {isConnected && <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted"
                             onClick={(e) => {
                                 e.preventDefault()
                                 setModalDeposit(true)
                             }}
-                        >Confirm</a>
+                        >Confirm</a>}
                     </div>
                     <div className="text-block-14">* You can get your deposit back right after the end of the contest, or fill in your prediction for the next contest and win more prizes!</div>
                 </div>
             </div>
-            {modalDeposit && <ModalDeposit setModalDeposit={setModalDeposit} nbTickets={nbTickets} />}
+            {modalDeposit && <ModalDeposit nbTickets={nbTickets} setModalDeposit={setModalDeposit} setDeposited={setDeposited} />}
+            <ToastContainer />
         </section >
     )
 }

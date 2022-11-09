@@ -8,7 +8,7 @@ function BannerNoTicket() {
                 <div id="w-node-_2b135944-a289-2599-66e8-4fff354fe2b1-3d3dc5f0" className="div-block">
                     <div id="w-node-_4e7f2e1c-88ec-5813-188a-414986da3a49-3d3dc5f0" className="div-block-2"><img src="images/ticket-2-blanc.png" loading="lazy" width="35" alt="" className="image" /></div>
                     <div className="div-block-info">
-                        <h1 data-w-id="57b8ba69-3cd6-333f-92d6-29d7b8e787b2" className="heading-9 translateTicket">Get your Tickets!</h1>
+                        <h1 data-w-id="57b8ba69-3cd6-333f-92d6-29d7b8e787b2" className="heading-9">Get your Tickets!</h1>
                     </div>
                 </div>
             </a>

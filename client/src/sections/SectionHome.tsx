@@ -4,19 +4,20 @@ import BannerCountdown from "../components/home/BannerCountdown";
 import BannerNoTicket from "../components/home/BannerNoTicket";
 import BannerTickets from "../components/home/BannerTickets";
 import { useAccount, useContractRead, erc20ABI } from "wagmi";
-import { goerli } from '../utils/contractAddress'
+import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ethers } from 'ethers'
 import { useState } from "react";
 
 function SectionHome() {
+    const addressNetwork = useAddressNetwork()
     const [ticket, setTicket] = useState(0)
-    const { address }: { isConnected: boolean, address: any } = useAccount()
+    const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
     useContractRead({
-        address: goerli.interPoolTicketContract,
+        address: addressNetwork.interPoolTicketContract,
         abi: erc20ABI,
         functionName: 'balanceOf',
         watch: true,
-        args: [address],
+        args: [isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
         onSuccess(data: any) {
             setTicket(parseInt(ethers.utils.formatUnits(data._hex, 0)))
         },

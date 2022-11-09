@@ -7,9 +7,8 @@ import Faucet from '../../utils/Faucet'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { ToastContainer, toast } from 'react-toastify';
 
-function Approve({ amount }: { amount: number }) {
+function Approve({ amount, amountApproved }: { amount: number, amountApproved: number }) {
     const addressNetwork: any = useAddressNetwork()
-
     const { config } = usePrepareContractWrite({
         address: addressNetwork.usdcContract,
         abi: erc20ABI,
@@ -24,42 +23,48 @@ function Approve({ amount }: { amount: number }) {
     })
 
     return (
-        <a href="/" className="hollow-button white" onClick={(e) => {
-            e.preventDefault()
-            write?.()
-        }}>Approve USDC</a>
+        <a href="/" className={amountApproved < amount ? "hollow-button white" : "hollow-button notactive"}
+            onClick={(e) => {
+                e.preventDefault()
+                write?.()
+            }}>Approve USDC</a>
     )
 }
 
-function Deposit({ amount, setModalDeposit }: { amount: number, setModalDeposit: React.Dispatch<React.SetStateAction<boolean>> }) {
+function Deposit({ amount, amountApproved, setModalDeposit, setDeposited }: {
+    amount: number,
+    amountApproved: number,
+    setModalDeposit: React.Dispatch<React.SetStateAction<boolean>>,
+    setDeposited: React.Dispatch<React.SetStateAction<boolean>>
+}) {
     const addressNetwork: any = useAddressNetwork()
 
-    const { config }: { config: any } = usePrepareContractWrite({
+    const { write } = useContractWrite({
+        mode: 'recklesslyUnprepared',
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'depositOnAave',
-        args: [ethers.BigNumber.from(amount)]
-    })
-    const { write } = useContractWrite({
-        ...config,
+        args: [ethers.BigNumber.from(amount)],
         onSuccess(data) {
-            toast("⚽ USDC Deposit Confirmation!", { autoClose: 2000, })
-            setTimeout(function () { setModalDeposit(false) }, 3000)
+            setTimeout(function () { setModalDeposit(false) }, 1000)
+            setDeposited(true)
         },
     })
     return (
-        <a href="/" className="hollow-button white" onClick={(e) => {
-            e.preventDefault()
-            write?.()
-        }}>Confirm Deposit</a>
+        <a href="/" className={amountApproved >= amount ? "hollow-button white" : "hollow-button notactive"}
+            onClick={(e) => {
+                e.preventDefault()
+                write?.()
+            }}>Confirm Deposit</a>
     )
 }
 
-function ModalDeposit({ nbTickets, setModalDeposit }: { nbTickets: number, setModalDeposit: React.Dispatch<React.SetStateAction<boolean>> }) {
+function ModalDeposit({ nbTickets, setModalDeposit, setDeposited }: { nbTickets: number, setModalDeposit: React.Dispatch<React.SetStateAction<boolean>>, setDeposited: React.Dispatch<React.SetStateAction<boolean>> }) {
     const addressNetwork: any = useAddressNetwork()
-    const [balance, setBalance] = useState(0)
+    const [balance, setBalance] = useState(50)
     const [amountApproved, setAmountApproved] = useState(0)
     const { address }: { address: any } = useAccount()
+    console.log(amountApproved)
     useContractReads({
         contracts: [
             {
@@ -78,7 +83,7 @@ function ModalDeposit({ nbTickets, setModalDeposit }: { nbTickets: number, setMo
         watch: true,
         onSuccess(data) {
             setBalance(parseFloat(ethers.utils.formatUnits(data[0]._hex, 6)))
-            setAmountApproved(parseFloat(ethers.utils.formatUnits(data[1]._hex, 0)))
+            setAmountApproved(parseFloat(ethers.utils.formatUnits(data[1]._hex, 6)))
         }
     })
 
@@ -108,8 +113,8 @@ function ModalDeposit({ nbTickets, setModalDeposit }: { nbTickets: number, setMo
                         <div className="text-block-41">x Ticket(s)</div>
                     </div>
                 </div>
-                {balance >= 50 && <Approve amount={nbTickets * 50} />}
-                {balance >= 50 && <Deposit amount={nbTickets * 50} setModalDeposit={setModalDeposit} />}
+                {balance >= nbTickets * 50 && <Approve amount={nbTickets * 50} amountApproved={amountApproved} />}
+                {balance >= nbTickets * 50 && <Deposit amount={nbTickets * 50} amountApproved={amountApproved} setModalDeposit={setModalDeposit} setDeposited={setDeposited} />}
                 {balance < 50 && <Faucet />}
                 <p className="paragraph-2">*Get your Deposit back anytime after the game completion.</p>
             </div>

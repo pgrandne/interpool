@@ -19,14 +19,6 @@ input[type=number] {
   color: "#000";
 }
 
-.translateTicket {
-  opacity: 1;
-  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg);
-  transform-style: preserve-3d;
-}
-
-
-
 .w-layout-grid {
   display: -ms-grid;
   display: grid;
@@ -212,6 +204,14 @@ p {
   border-color: #000;
   border-radius: 25px;
   color: #000;
+}
+
+.hollow-button.notactive {
+  border-color: grey;
+  border-radius: 25px;
+  color: grey;
+  cursor: not-allowed;
+
 }
 
 .hollow-button.white:hover {
@@ -1245,6 +1245,7 @@ p {
   color: rgba(0, 0, 0, 0.74);
   text-decoration: none;
 }
+
 
 .link-block-2:hover {
   border-radius: 10px;

@@ -1,5 +1,4 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useEffect } from "react";
 import { useAccount } from "wagmi";
 function Connection() {
     const { isDisconnected } = useAccount()
@@ -9,11 +8,11 @@ function Connection() {
             <div
                 style={{
                     border: '2px solid',
-                    lineHeight: "21px",
+                    // lineHeight: "21px",
                     textDecoration: "none",
-                    borderColor: "#000",
+                    // borderColor: "#000",
                     borderRadius: "25px",
-                    color: "#000",
+                    // color: "#000",
                 }}
             >
                 <ConnectButton />

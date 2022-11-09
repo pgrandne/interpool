@@ -2,9 +2,26 @@ import { useState } from "react";
 import ModalMoreTickets from "../components/modals/ModalMoreTickets";
 import ModalRedeem from "../components/modals/ModalRedeem";
 import ModalClaim from "../components/modals/ModalClaim";
-
+import BannerTickets from "../components/home/BannerTickets";
+import { useAccount, useContractRead, erc20ABI } from "wagmi";
+import { useAddressNetwork } from '../utils/useAddressNetwork'
+import { ethers } from 'ethers'
 
 function SectionAccount() {
+    const addressNetwork = useAddressNetwork()
+    const [ticket, setTicket] = useState(0)
+    const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
+    useContractRead({
+        address: addressNetwork.interPoolTicketContract,
+        abi: erc20ABI,
+        functionName: 'balanceOf',
+        watch: true,
+        args: [isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
+        onSuccess(data: any) {
+            setTicket(parseInt(ethers.utils.formatUnits(data._hex, 0)))
+        },
+    })
+
     const [modalRedeem, setModalRedeem] = useState(false)
     const [modalMoreTickets, setModalMoreTickets] = useState(false)
     const [modalClaim, setModalClaim] = useState(false)
@@ -12,63 +29,12 @@ function SectionAccount() {
     return (
         <section id="Account" data-w-id="90400c33-4d36-cc84-d01f-507bc873a726" className="section-account wf-section">
             <div className="container-3 w-container">
-                <h1>Account</h1>
-                <h2>On-going prediction game</h2>
-                <div className="block-contest-result-in block-account-section">
-                    <div className="div-block colorvariation-4">
-                        <div id="w-node-adf91842-517e-055e-a17d-f4b89b47d3c7-3d3dc5f0" className="div-block-2"><img src="images/Coupe-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
-                        <div id="w-node-adf91842-517e-055e-a17d-f4b89b47d3c9-3d3dc5f0" className="div-block-20">
-                            <div className="text-block-15">Winners announcement in </div>
-                            <div className="div-block-21">
-                                <div className="w-layout-grid grid-7">
-                                    <div id="w-node-adf91842-517e-055e-a17d-f4b89b47d3ce-3d3dc5f0" className="text-block-16 text-block-16-right-align">15 </div>
-                                    <div id="w-node-adf91842-517e-055e-a17d-f4b89b47d3d0-3d3dc5f0" className="text-block-16">D </div>
-                                    <div className="text-block-16 text-block-16-right-align">10 </div>
-                                    <div className="text-block-16">H </div>
-                                    <div className="text-block-16 text-block-16-right-align">30 </div>
-                                    <div className="text-block-16">min </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-layout-grid grid grid-account-section">
-                    <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9aee-3d3dc5f0" className="div-block">
-                        <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9aef-3d3dc5f0" className="div-block-2"><img src="images/ticket-2-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
-                        <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9af1-3d3dc5f0" className="div-block-info">
-                            <div className="div-block-13">
-                                <div className="text-block-3">3</div>
-                                <div className="text-block-3">x Tickets</div>
-                            </div>
-                            <div className="text-block">$ 150</div>
-                        </div>
-                    </div>
-                    <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9af9-3d3dc5f0" className="div-block color-variation-1">
-                        <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9afa-3d3dc5f0" className="div-block-2"><img src="images/ranking-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
-                        <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9afc-3d3dc5f0" className="div-block-info">
-                            <div className="text-block-3">Current Rank</div>
-                            <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9aff-3d3dc5f0" className="text-block">3 / 102</div>
-                        </div>
-                    </div>
-                    <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9b01-3d3dc5f0" className="div-block colorvariation-2">
-                        <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9b02-3d3dc5f0" className="div-block-2"><img src="images/Coupe-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
-                        <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9b04-3d3dc5f0" className="div-block-info">
-                            <div className="text-block-3">Prize Pool</div>
-                            <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9b07-3d3dc5f0" className="text-block">$10.000</div>
-                        </div>
-                    </div>
-                    <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9b09-3d3dc5f0" className="div-block colorvariation-3">
-                        <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9b0a-3d3dc5f0" className="div-block-2"><img src="images/time-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
-                        <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9b0c-3d3dc5f0" className="div-block-info">
-                            <div className="text-block-3">Prediction period</div>
-                            <div id="w-node-_303bb72d-f63a-b478-7c00-6a5efdde9b0f-3d3dc5f0" className="text-block">02:10:30 </div>
-                        </div>
-                    </div>
-                </div>
-                <h2>Account details</h2>
+                <h1>On-going prediction game</h1>
+                <BannerTickets ticket={ticket} />
+                <h1>Account details</h1>
                 <div className="w-layout-grid grid-5">
                     <div id="w-node-e00559bd-addc-db20-b067-e2b04976c8e7-3d3dc5f0" className="account-details-grid-heading">Tickets</div>
-                    <div id="w-node-c1e81ac4-71c0-32d4-6233-8d1a57d9a86d-3d3dc5f0" className="text-block-grid-content">3</div>
+                    <div id="w-node-c1e81ac4-71c0-32d4-6233-8d1a57d9a86d-3d3dc5f0" className="text-block-grid-content">{ticket}</div>
                     <div id="w-node-_23834aa8-b05c-48c4-6c93-858034514a29-3d3dc5f0">
                         <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className="hollow-button white"
                             onClick={(e) => {
@@ -98,7 +64,7 @@ function SectionAccount() {
                     <div id="w-node-cd5c49f3-3443-15f4-fee3-549c3907df1f-3d3dc5f0" className="account-details-grid-heading">Total Winnings</div>
                     <div id="w-node-_691393fb-f6ac-f9a3-ad79-c9918787c975-3d3dc5f0" className="text-block-grid-content">$205.0</div>
                 </div>
-                <h2>History</h2>
+                <h1>Current contest ranking</h1>
                 <div className="w-layout-grid grid-4">
                     <div id="w-node-ade59832-9e80-0a14-2933-cb481c0bd5c8-3d3dc5f0" className="header-grid-history header-grid-history-left">Prediction Game</div>
                     <div id="w-node-_529643fb-8c8a-4deb-3340-ec7494a5abee-3d3dc5f0" className="header-grid-history">Prize Pool</div>

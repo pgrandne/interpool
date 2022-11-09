@@ -12,4 +12,4 @@ export const goerli = {
     usdcContract: '0xA2025B15a1757311bfD68cb14eaeFCc237AF5b43'
 }
 
-export const contestId = 1;
+export const contestId = 2;

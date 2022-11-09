@@ -1,7 +1,7 @@
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 interface IPrediction {
     gameId: number,
@@ -9,7 +9,13 @@ interface IPrediction {
     awayScore: number
 }
 
-function ModalSubmit({ setModalSubmit, prediction }: { setModalSubmit: React.Dispatch<React.SetStateAction<boolean>>, prediction: IPrediction[] }) {
+function ModalSubmit({ prediction, setModalSubmit, setSubmitted }: {
+    prediction: IPrediction[],
+    setModalSubmit: React.Dispatch<React.SetStateAction<boolean>>,
+    setSubmitted: React.Dispatch<React.SetStateAction<boolean>>,
+
+
+}) {
     const addressNetwork: any = useAddressNetwork();
     const { config }: { config: any } = usePrepareContractWrite({
         address: addressNetwork.interPoolContract,
@@ -20,8 +26,8 @@ function ModalSubmit({ setModalSubmit, prediction }: { setModalSubmit: React.Dis
     const { write } = useContractWrite({
         ...config,
         onSuccess(data) {
-            toast("⚽ Your predictions are being recorded on the blockchain!", { autoClose: 2000, })
-            setTimeout(function () { setModalSubmit(false) }, 3000)
+            setTimeout(function () { setModalSubmit(false) }, 1000)
+            setSubmitted(true)
         },
     })
 
