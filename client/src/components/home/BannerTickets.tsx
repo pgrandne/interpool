@@ -30,6 +30,7 @@ function BannerTickets({ ticket }: { ticket: number }) {
                 args: [contestId],
             },
         ],
+        watch: true,
         onSuccess(data: any) {
             setRank(ethers.utils.formatUnits(data[0]._hex, 0))
             setNbPlayers(ethers.utils.formatUnits(data[1]._hex, 0))

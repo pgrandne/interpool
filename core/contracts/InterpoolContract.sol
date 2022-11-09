@@ -272,10 +272,10 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
             i < listPlayersPerContest[currentContestId].length;
             i++
         ) {
-            if (listPlayersPerContest[currentContestId][i] == msg.sender)
+            if (msg.sender == listPlayersPerContest[currentContestId][i])
                 alreadyExist = true;
         }
-        if (alreadyExist = true) {
+        if (alreadyExist == false) {
             listPlayersPerContest[currentContestId].push(msg.sender);
         }
     }
