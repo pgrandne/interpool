@@ -319,4 +319,6 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
     {
         return contestTable[_contestId];
     }
+
+    function claim() public {}
 }

@@ -31,6 +31,8 @@ input[type=number] {
   grid-column-gap: 16px;
 }
 
+
+
 .content {
   height: 100%;
   /* padding-left: 329px; */
@@ -375,7 +377,6 @@ ul {
   color: #404047;
   font-weight: 700;
   text-transform: capitalize;
-  transition: 0.3s;
 }
 
 .nav-menu {
@@ -1524,6 +1525,12 @@ ul {
   grid-template-columns: 1fr 0.25fr 1fr;
   -ms-grid-rows: auto 0px auto 0px auto;
   grid-template-rows: auto auto auto;
+}
+
+.grid-9 {
+  margin-top: 30px;
+  -ms-grid-columns: 40px 1fr;
+  grid-template-columns: 40px 1fr;
 }
 
 .text-block-47 {

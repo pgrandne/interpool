@@ -35,7 +35,7 @@ interface IPrediction {
     awayScore: number
 }
 
-function Ligue1MatchLists() {
+function Ligue1MatchLists({ ticket }: { ticket: number }) {
     const addressNetwork = useAddressNetwork()
     const { isConnected } = useAccount()
     const [modalSubmit, setModalSubmit] = useState(false)
@@ -65,23 +65,25 @@ function Ligue1MatchLists() {
 
     const { register, handleSubmit } = useForm<IFormInput>();
     const onSubmit: SubmitHandler<IFormInput> = data => {
-        const result = [
-            { gameId: 3904630, homeScore: parseInt(data.match1HomeScore), awayScore: parseInt(data.match1AwayScore) }, //1
-            { gameId: 3904621, homeScore: parseInt(data.match2HomeScore), awayScore: parseInt(data.match2AwayScore) }, //2
-            { gameId: 3904622, homeScore: parseInt(data.match3HomeScore), awayScore: parseInt(data.match3AwayScore) }, //3
-            { gameId: 3904623, homeScore: parseInt(data.match4HomeScore), awayScore: parseInt(data.match4AwayScore) }, //4
-            { gameId: 3904624, homeScore: parseInt(data.match5HomeScore), awayScore: parseInt(data.match5AwayScore) }, //5
-            { gameId: 3904625, homeScore: parseInt(data.match6HomeScore), awayScore: parseInt(data.match6AwayScore) }, //6
-            { gameId: 3904626, homeScore: parseInt(data.match7HomeScore), awayScore: parseInt(data.match7AwayScore) }, //7
-            { gameId: 3904627, homeScore: parseInt(data.match8HomeScore), awayScore: parseInt(data.match8AwayScore) }, //8
-            { gameId: 3904628, homeScore: parseInt(data.match9HomeScore), awayScore: parseInt(data.match9AwayScore) }, //9
-            { gameId: 3904629, homeScore: parseInt(data.match10HomeScore), awayScore: parseInt(data.match10AwayScore) },//10
-        ]
-        setPrediction(result)
-        setModalSubmit(true)
+        if (ticket === 0) {
+            toast("⚽ You have to buy tickets for submitting!")
+        } else {
+            const result = [
+                { gameId: 3904630, homeScore: parseInt(data.match1HomeScore), awayScore: parseInt(data.match1AwayScore) }, //1
+                { gameId: 3904621, homeScore: parseInt(data.match2HomeScore), awayScore: parseInt(data.match2AwayScore) }, //2
+                { gameId: 3904622, homeScore: parseInt(data.match3HomeScore), awayScore: parseInt(data.match3AwayScore) }, //3
+                { gameId: 3904623, homeScore: parseInt(data.match4HomeScore), awayScore: parseInt(data.match4AwayScore) }, //4
+                { gameId: 3904624, homeScore: parseInt(data.match5HomeScore), awayScore: parseInt(data.match5AwayScore) }, //5
+                { gameId: 3904625, homeScore: parseInt(data.match6HomeScore), awayScore: parseInt(data.match6AwayScore) }, //6
+                { gameId: 3904626, homeScore: parseInt(data.match7HomeScore), awayScore: parseInt(data.match7AwayScore) }, //7
+                { gameId: 3904627, homeScore: parseInt(data.match8HomeScore), awayScore: parseInt(data.match8AwayScore) }, //8
+                { gameId: 3904628, homeScore: parseInt(data.match9HomeScore), awayScore: parseInt(data.match9AwayScore) }, //9
+                { gameId: 3904629, homeScore: parseInt(data.match10HomeScore), awayScore: parseInt(data.match10AwayScore) },//10
+            ]
+            setPrediction(result)
+            setModalSubmit(true)
+        }
     }
-
-
 
     return (
         <Fragment>

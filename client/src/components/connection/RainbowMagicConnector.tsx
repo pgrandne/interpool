@@ -7,6 +7,7 @@ export interface MyWalletOptions {
     chains: Chain[];
 }
 
+const APIKEY: string = process.env.REACT_APP_MAGICLINK_KEY!
 
 export const rainbowMagicConnector = ({ chains }: MyWalletOptions): Wallet => ({
     id: 'magic',
@@ -18,7 +19,7 @@ export const rainbowMagicConnector = ({ chains }: MyWalletOptions): Wallet => ({
         const connector: any = new MagicConnectConnector({
             chains: chains,
             options: {
-                apiKey: "REACT_APP_MAGICLINK_KEY",
+                apiKey: APIKEY,
                 magicSdkConfiguration: {
                     network: "goerli"
                 },
