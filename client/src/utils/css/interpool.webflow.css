@@ -100,6 +100,12 @@ p {
   font-size: 15px;
 }
 
+ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+
 .button {
   display: inline-block;
   padding: 12px 20px;
@@ -369,6 +375,7 @@ p {
   color: #404047;
   font-weight: 700;
   text-transform: capitalize;
+  transition: 0.3s;
 }
 
 .nav-menu {
@@ -480,6 +487,18 @@ p {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.div-block-ticket {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 20px 20px 20px 25px;
+  grid-column-gap: 20px;
+  border-radius: 10px;
+  background-color: #4e36e2;
+  z-index: 0;
 }
 
 .heading {

@@ -16,7 +16,7 @@ function SectionGetYourTickets() {
     const [nbTickets, setNbTickets] = useState(1);
     const [modalDeposit, setModalDeposit] = useState(false);
     return (
-        <section id="Get-your-tickets" data-w-id="1d9e582d-b4e2-39bf-da9e-2c5517289a0e" className="section-buy-ticket wf-section">
+        <section id="get-your-tickets" data-w-id="1d9e582d-b4e2-39bf-da9e-2c5517289a0e" className="section-buy-ticket wf-section">
             <div className="container-2 w-container">
                 <div className="div-block-18">
                     <h1 data-w-id="11d36449-1ec6-cc9e-b0ea-c2b94a3fc351" className="heading-6">Get your Tickets!</h1>

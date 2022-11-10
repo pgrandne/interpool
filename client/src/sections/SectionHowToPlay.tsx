@@ -1,6 +1,6 @@
 function SectionHowToPlay() {
     return (
-        <section id="How-to-play" data-w-id="188a1cbe-f5f2-a28c-fb5f-7b23cda3aa9a" className="section-how-to-play wf-section">
+        <section id="how-to-play" data-w-id="188a1cbe-f5f2-a28c-fb5f-7b23cda3aa9a" className="section-how-to-play wf-section">
             <div className="w-container">
                 <h1>How to Play?</h1>
                 <p>1. InterPool is live on Goerli (Ethereum Testnet) and Mumbai (Polygon Testnet). Professional third parties will audit the InterPool code prior full deployment on the mainnet. <br />

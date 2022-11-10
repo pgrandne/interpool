@@ -24,8 +24,8 @@ function SectionHome() {
     })
 
     return (
-        <div id="Home" data-w-id="67ad9710-d385-0ebf-87e3-5d5f429160e0" className="section-home wf-section">
-            <div id="home" className="container w-container">
+        <section id="home" data-w-id="67ad9710-d385-0ebf-87e3-5d5f429160e0" className="section-home wf-section">
+            <div className="container w-container">
                 <BannerCountdown />
                 {(ticket === 0) && <BannerNoTicket />}
                 {(ticket > 0) && <BannerTickets ticket={ticket} />}
@@ -39,7 +39,7 @@ function SectionHome() {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 export default SectionHome;

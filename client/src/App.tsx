@@ -19,9 +19,21 @@ import SectionAccount from './sections/SectionAccount';
 import SectionHowToPlay from './sections/SectionHowToPlay';
 import SectionGetYourTickets from './sections/SectionGetYourTickets';
 import SectionHome from './sections/SectionHome';
+import { useState } from 'react';
 
+const sections = document.querySelectorAll("section");
 
 function App() {
+  const [currentSection, setCurrentSection] = useState<any>("home")
+  window.onscroll = () => {
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      if (document.documentElement.scrollTop >= sectionTop - 80) {
+        setCurrentSection(section.getAttribute("id"))
+      }
+    });
+  };
+
   const { chains, provider } = configureChains(
     [chain.goerli],
     [alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_ID })],
@@ -56,7 +68,7 @@ function App() {
       })}
       >
         <div className="content">
-          <Navbar />
+          <Navbar currentSection={currentSection} setCurrentSection={setCurrentSection} />
           <Header />
           <SectionHome />
           <SectionGetYourTickets />

@@ -1,7 +1,4 @@
-import { useState } from "react";
-
-function Navbar() {
-    const [current, setCurrent] = useState('home')
+function Navbar({ currentSection, setCurrentSection }: { currentSection: any, setCurrentSection: React.Dispatch<any> }) {
 
     return (
         <div data-collapse="medium" data-animation="default" data-duration="400" data-no-scroll="1" data-easing="ease" data-easing2="ease" role="banner" className="left-navigation w-nav">
@@ -9,40 +6,44 @@ function Navbar() {
                 <h1 className="brand-text">InterPool</h1>
             </a>
             <nav role="navigation" className="nav-menu w-nav-menu">
-                <a href="#home" className={(current === "home") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}
-                    onClick={() => setCurrent('home')}
-                    onScroll={() => setCurrent('home')}>
-                    <div className="div-block-3">
-                        {(current !== "home") && <img src="images/soccer-fieldb-blanc.png" loading="lazy" width="25" alt="" className="image-2 image-home-current" />}
-                        {(current === "home") && <img src="images/soccer-field-blue.png" loading="lazy" width="25" alt="" className="image-2 image-home-current" />}
-                        <div>Home</div>
-                    </div>
-                </a>
-                <a href="#Get-your-tickets" className={(current === "get") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}
-                    onClick={() => setCurrent('get')}
-                    onScroll={() => setCurrent('get')}>
-                    <div className="div-block-3">
-                        {(current !== "get") && <img src="images/ticket-2-blanc.png" loading="lazy" width="25" alt="" className="image-2 image-get-ticket-inactive" />}
-                        {(current === "get") && <img src="images/ticket-2-bleu.png" loading="lazy" width="25" alt="" className="image-2 image-get-ticket-inactive" />}
-                        <div>Get Tickets</div>
-                    </div>
-                </a>
-                <a href="#How-to-play" className={(current === "how") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}
-                    onClick={() => setCurrent('how')}>
-                    <div className="div-block-3">
-                        {(current !== "how") && <img src="images/megaphone-blanc.png" loading="lazy" width="25" alt="" className="image-2 image-how-to-play-inactive" />}
-                        {(current === "how") && <img src="images/megaphone-blue.png" loading="lazy" width="25" alt="" className="image-2 image-how-to-play-inactive" />}
-                        <div>How to play</div>
-                    </div>
-                </a>
-                <a href="#Account" className={(current === "account") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}
-                    onClick={() => setCurrent('account')}>
-                    <div className="div-block-3">
-                        {(current !== "account") && <img src="images/account-blanc.png" loading="lazy" width="23" alt="" className="image-2 image-account-inactive" />}
-                        {(current === "account") && <img src="images/Account-blue.png" loading="lazy" width="22" alt="" className="image-2 image-account-inactive" />}
-                        <div>Account</div>
-                    </div>
-                </a>
+                <ul>
+                    <li>
+                        <a href="#home" className={(currentSection === "home") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}>
+                            <div className="div-block-3">
+                                {(currentSection !== "home") && <img src="images/soccer-fieldb-blanc.png" loading="lazy" width="25" alt="" className="image-2 image-home-current" />}
+                                {(currentSection === "home") && <img src="images/soccer-field-blue.png" loading="lazy" width="25" alt="" className="image-2 image-home-current" />}
+                                <div>Home</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#get-your-tickets" className={(currentSection === "get-your-tickets") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}>
+                            <div className="div-block-3">
+                                {(currentSection !== "get-your-tickets") && <img src="images/ticket-2-blanc.png" loading="lazy" width="25" alt="" className="image-2 image-get-ticket-inactive" />}
+                                {(currentSection === "get-your-tickets") && <img src="images/ticket-2-bleu.png" loading="lazy" width="25" alt="" className="image-2 image-get-ticket-inactive" />}
+                                <div>Get Tickets</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#how-to-play" className={(currentSection === "how-to-play") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}>
+                            <div className="div-block-3">
+                                {(currentSection !== "how-to-play") && <img src="images/megaphone-blanc.png" loading="lazy" width="25" alt="" className="image-2 image-how-to-play-inactive" />}
+                                {(currentSection === "how-to-play") && <img src="images/megaphone-blue.png" loading="lazy" width="25" alt="" className="image-2 image-how-to-play-inactive" />}
+                                <div>How to play</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#account" className={(currentSection === "account") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}>
+                            <div className="div-block-3">
+                                {(currentSection !== "account") && <img src="images/account-blanc.png" loading="lazy" width="23" alt="" className="image-2 image-account-inactive" />}
+                                {(currentSection === "account") && <img src="images/Account-blue.png" loading="lazy" width="22" alt="" className="image-2 image-account-inactive" />}
+                                <div>Account</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </nav>
             <div className="hamburger-button w-nav-button">
                 <div className="w-icon-nav-menu"></div>
