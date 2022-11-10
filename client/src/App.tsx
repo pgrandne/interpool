@@ -19,17 +19,24 @@ import SectionAccount from './sections/SectionAccount';
 import SectionHowToPlay from './sections/SectionHowToPlay';
 import SectionGetYourTickets from './sections/SectionGetYourTickets';
 import SectionHome from './sections/SectionHome';
-import { useState } from 'react';
-
-const sections = document.querySelectorAll("section");
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [currentSection, setCurrentSection] = useState<any>("home")
+  const [sections, setSections] = useState<any>()
+  const [navLi, setNavLi] = useState<any>()
+  const [currentSection, setCurrentSection] = useState("home")
+
+  useEffect(() => {
+    setSections(document.querySelectorAll("section"))
+    setNavLi(document.querySelectorAll("nav ul li a"))
+  }, [])
+
   window.onscroll = () => {
-    sections.forEach((section) => {
+    sections.forEach((section: any) => {
       const sectionTop = section.offsetTop;
       if (document.documentElement.scrollTop >= sectionTop - 80) {
         setCurrentSection(section.getAttribute("id"))
+        console.log(currentSection)
       }
     });
   };
