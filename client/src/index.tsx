@@ -32,7 +32,7 @@ const connectors = connectorsForWallets([
     groupName: 'Suggested',
     wallets: [
       rainbowMagicConnector({ chains }),
-      // injectedWallet({ chains, }),
+      injectedWallet({ chains, }),
       metaMaskWallet({ chains }),
       rainbowWallet({ chains }),
       walletConnectWallet({ chains }),

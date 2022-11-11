@@ -35,9 +35,9 @@ function ModalMoreTickets({ setModalMoreTickets, ticket, pendingWinnings }: {
             <div className="modal-inner-wrapper">
                 <div className="div-block-41"><img src="images/close.png" loading="lazy" width="20" height="20" data-w-id="8332a3c0-a742-fae8-9847-b84aee7f42c4" alt="" className="image-18" onClick={(e) => { setModalMoreTickets(false) }} /></div>
                 <h2 className="heading-6 heading-6-variation-2 heading-6-var-3">Get more Tickets!</h2>
-                <p>Convert your winnings into additional tickets and get higher rewards for the next contest! More details <a href="https://app.gitbook.com/o/esvKHPPOt4LZoy42lERC/s/9TtqoT2sXyCd3aHeyycM/welcome/frequently-asked-questions#prizes-and-winning">here</a>
+                <p>Convert your winnings into additional tickets and get higher rewards for the next contest! More details <a href="https://irruption-lab.gitbook.io/interpool/welcome/frequently-asked-questions" target="_blank" rel="noreferrer">here</a>
                 </p>
-                <p className="paragraph">You currently own <strong>{ticket} Ticket(s)</strong> and have <strong>${pendingWinnings} in winnings</strong> to convert. If required additional USDC can be deposited from your personal wallet.<a href="https://app.gitbook.com/o/esvKHPPOt4LZoy42lERC/s/9TtqoT2sXyCd3aHeyycM/welcome/frequently-asked-questions#prizes-and-winning"></a>
+                <p className="paragraph">You currently own <strong>{ticket} Ticket(s)</strong> and have <strong>${pendingWinnings} in winnings</strong> to convert. If required additional USDC can be deposited from your personal wallet.
                 </p>
                 <div className="div-block-43">
                     <div className="div-block-45">

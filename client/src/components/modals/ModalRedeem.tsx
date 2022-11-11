@@ -3,7 +3,11 @@ import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 
 
-function ModalRedeem({ setModalRedeem, ticket }: { setModalRedeem: React.Dispatch<React.SetStateAction<boolean>>, ticket: number }) {
+function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
+    setModalRedeem: React.Dispatch<React.SetStateAction<boolean>>,
+    ticket: number,
+    setRedeemed: React.Dispatch<React.SetStateAction<boolean>>
+}) {
     const addressNetwork: any = useAddressNetwork()
     const { config }: { config: any } = usePrepareContractWrite({
         address: addressNetwork.interPoolContract,
@@ -11,10 +15,13 @@ function ModalRedeem({ setModalRedeem, ticket }: { setModalRedeem: React.Dispatc
         functionName: 'withdrawFromInterpool',
         args: [ticket]
     })
-    const { write } = useContractWrite(config)
-
-
-
+    const { write } = useContractWrite({
+        ...config,
+        onSuccess(data) {
+            setTimeout(function () { setModalRedeem(false) }, 500)
+            setRedeemed(true)
+        },
+    })
 
     return (
         <div className="modal-wrapper">

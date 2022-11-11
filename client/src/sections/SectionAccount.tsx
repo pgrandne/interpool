@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalMoreTickets from "../components/modals/ModalMoreTickets";
 import ModalRedeem from "../components/modals/ModalRedeem";
 import ModalClaim from "../components/modals/ModalClaim";
@@ -7,12 +7,15 @@ import { useAccount, useContractReads, erc20ABI } from "wagmi";
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ABI_Interpool } from '../utils/ABI_Interpool'
 import { ethers } from 'ethers'
+import { ToastContainer, toast } from 'react-toastify';
 
 function SectionAccount() {
     const addressNetwork = useAddressNetwork()
     const [ticket, setTicket] = useState(0)
     const [pendingWinnings, setPendingWinnings] = useState(0)
     const [claimedWinnings, setClaimedWinnings] = useState(0)
+    const [redeemed, setRedeemed] = useState(false)
+    const [claimed, setClaimed] = useState(false)
     const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
 
     const interpoolTicketContract = {
@@ -23,6 +26,18 @@ function SectionAccount() {
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
     }
+
+    useEffect(() => {
+        if (redeemed) {
+            toast("⚽ Redeem Confirmation!")
+            setRedeemed(false)
+        }
+        if (claimed) {
+            toast("⚽ Claim Confirmation!")
+            setClaimed(false)
+
+        }
+    }, [redeemed, claimed])
 
     useContractReads({
         contracts: [
@@ -116,9 +131,10 @@ function SectionAccount() {
                     <div id="w-node-_2325228c-eb24-899d-519d-258763b597cb-3d3dc5f0" className="content-grid-history">$1.00</div>
                 </div>
             </div>
-            {modalRedeem && <ModalRedeem setModalRedeem={setModalRedeem} ticket={ticket} />}
+            {modalRedeem && <ModalRedeem setModalRedeem={setModalRedeem} ticket={ticket} setRedeemed={setRedeemed} />}
             {modalMoreTickets && <ModalMoreTickets setModalMoreTickets={setModalMoreTickets} ticket={ticket} pendingWinnings={pendingWinnings} />}
-            {modalClaim && <ModalClaim setModalClaim={setModalClaim} pendingWinnings={pendingWinnings} />}
+            {modalClaim && <ModalClaim setModalClaim={setModalClaim} pendingWinnings={pendingWinnings} setClaimed={setClaimed} />}
+            <ToastContainer />
         </section>
     )
 }

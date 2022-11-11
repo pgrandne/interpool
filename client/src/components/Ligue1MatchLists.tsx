@@ -66,7 +66,7 @@ function Ligue1MatchLists({ ticket }: { ticket: number }) {
     const { register, handleSubmit } = useForm<IFormInput>();
     const onSubmit: SubmitHandler<IFormInput> = data => {
         if (ticket === 0) {
-            toast("⚽ You have to buy tickets for submitting!")
+            toast("⚽ Get your tickets to submit your predictions!")
         } else {
             const result = [
                 { gameId: 3904630, homeScore: parseInt(data.match1HomeScore), awayScore: parseInt(data.match1AwayScore) }, //1

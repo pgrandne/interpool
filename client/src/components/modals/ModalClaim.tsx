@@ -2,14 +2,24 @@ import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 
-function ModalClaim({ setModalClaim, pendingWinnings }: { setModalClaim: React.Dispatch<React.SetStateAction<boolean>>, pendingWinnings: number }) {
+function ModalClaim({ setModalClaim, pendingWinnings, setClaimed }: {
+    setModalClaim: React.Dispatch<React.SetStateAction<boolean>>,
+    pendingWinnings: number,
+    setClaimed: React.Dispatch<React.SetStateAction<boolean>>
+}) {
     const addressNetwork: any = useAddressNetwork()
     const { config }: { config: any } = usePrepareContractWrite({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'claimFromInterpool',
     })
-    const { write } = useContractWrite(config)
+    const { write } = useContractWrite({
+        ...config,
+        onSuccess(data) {
+            setTimeout(function () { setModalClaim(false) }, 500)
+            setClaimed(true)
+        },
+    })
 
     return (
         <div className="modal-wrapper">

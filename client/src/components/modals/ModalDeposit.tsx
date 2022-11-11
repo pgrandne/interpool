@@ -46,7 +46,7 @@ function Deposit({ amount, amountApproved, setModalDeposit, setDeposited }: {
         functionName: 'depositOnAave',
         args: [ethers.BigNumber.from(amount)],
         onSuccess(data) {
-            setTimeout(function () { setModalDeposit(false) }, 1000)
+            setTimeout(function () { setModalDeposit(false) }, 500)
             setDeposited(true)
         },
     })
