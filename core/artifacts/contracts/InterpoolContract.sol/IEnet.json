@@ -6,92 +6,6 @@
     {
       "inputs": [
         {
-          "internalType": "string",
-          "name": "_requestId",
-          "type": "string"
-        },
-        {
-          "components": [
-            {
-              "internalType": "uint32",
-              "name": "gameId",
-              "type": "uint32"
-            },
-            {
-              "internalType": "uint40",
-              "name": "startTime",
-              "type": "uint40"
-            },
-            {
-              "internalType": "string",
-              "name": "homeTeam",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "awayTeam",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct IEnet.GameCreate[]",
-          "name": "_fakeGameCreate",
-          "type": "tuple[]"
-        }
-      ],
-      "name": "fakeGameCreate",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "_requestId",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_idx",
-          "type": "uint256"
-        }
-      ],
-      "name": "getGameCreate",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "uint32",
-              "name": "gameId",
-              "type": "uint32"
-            },
-            {
-              "internalType": "uint40",
-              "name": "startTime",
-              "type": "uint40"
-            },
-            {
-              "internalType": "string",
-              "name": "homeTeam",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "awayTeam",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct IEnet.GameCreate",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
           "internalType": "uint32",
           "name": "_gameId",
           "type": "uint32"
@@ -106,41 +20,6 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "components": [
-            {
-              "internalType": "uint32",
-              "name": "gameId",
-              "type": "uint32"
-            },
-            {
-              "internalType": "uint8",
-              "name": "homeScore",
-              "type": "uint8"
-            },
-            {
-              "internalType": "uint8",
-              "name": "awayScore",
-              "type": "uint8"
-            },
-            {
-              "internalType": "string",
-              "name": "status",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct IEnet.GameResolve[]",
-          "name": "_fakeGameResolve",
-          "type": "tuple[]"
-        }
-      ],
-      "name": "getGameResolve",
-      "outputs": [],
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -181,11 +60,6 @@
           "internalType": "uint32",
           "name": "",
           "type": "uint32"
-        },
-        {
-          "internalType": "uint40",
-          "name": "",
-          "type": "uint40"
         },
         {
           "internalType": "string",

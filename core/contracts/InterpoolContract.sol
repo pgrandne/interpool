@@ -3,64 +3,99 @@ pragma solidity 0.8.15;
 
 import {IpPool} from "./IpPool.sol";
 
+/// @title InterPool : InterPool Contract
+/// @author Perrin GRANDNE
+/// @notice Contract for
+/// @notice
+/// @custom:experimental This is an experimental contract.
+
+/// @notice Only EnetPulse functions we need
 interface IEnet {
-    struct GameCreate {
-        uint32 gameId;
-        uint40 startTime;
-        string homeTeam;
-        string awayTeam;
-    }
-
-    struct GameResolve {
-        uint32 gameId;
-        uint8 homeScore;
-        uint8 awayScore;
-        string status;
-    }
-
+    /// @notice Boolean to know if a game is finished
     function getGamePlayed(uint32 _gameId) external view returns (bool);
 
+    /// @notice Get Games Info : idGames, homeTeam, awayTeam
     function getRequestIdGames(string memory _requestId, uint256 _index)
         external
         view
         returns (
             uint32,
-            uint40,
             string memory,
             string memory
         );
 
+    /// @notice Get Results of Games for a game id : homeScore, awayScore
     function getScoresPerGameId(uint32 _gameId)
         external
         view
         returns (uint8, uint8);
 
+    /// @notice Get Number of Games per Request Id
     function getNumberOfGamesPerRequest(string memory _requestId)
         external
         view
         returns (uint);
-
-    function getGameCreate(string memory _requestId, uint256 _idx)
-        external
-        view
-        returns (GameCreate memory);
-
-    function fakeGameCreate(
-        string memory _requestId,
-        GameCreate[] memory _fakeGameCreate
-    ) external;
-
-    function getGameResolve(GameResolve[] memory _fakeGameResolve) external;
 }
 
+/* ========== CONTRACT BEGINNING ========== */
+
 contract InterpoolContract is IpPool {
-    struct GameCreate {
+    /// @notice structure for id league and end of contest for each contest
+    struct ContestInfo {
+        uint256 leagueId;
+        uint256 dateEnd;
+    }
+
+    /// @notice Game Id, Name of the home and away team from Game Create of EnetPulse
+    struct GameInfo {
         uint32 gameId;
-        uint40 startTime;
         string homeTeam;
         string awayTeam;
     }
 
+    /// @notice structure for data received from the front end, predictions from a player
+    struct GamePredict {
+        uint32 gameId;
+        uint8 homeScore;
+        uint8 awayScore;
+    }
+
+    /// @notice structure for scores from a game
+    struct GameScores {
+        uint8 homeScore;
+        uint8 awayScore;
+    }
+
+    /// @notice Number of ticket of a player when he submits his predictions
+    struct NbTicketsPerPlayer {
+        address player;
+        uint256 nbTickets;
+    }
+
+    /// @notice Number of tickets and score for player of a contest
+    /// @notice Used for Score Table
+    struct PlayerScoreTicket {
+        address player;
+        uint256 nbTickets;
+        uint256 score;
+    }
+
+    /// @notice Scores for a Player in a Contest
+    struct PlayerScore {
+        address player;
+        uint256 score;
+    }
+
+    /// @notice Rank of player with ex-aequo
+    /// @notice if 2 players have the same score, they have the same rank
+    /// @notice and the next rank is + 2 instrad of +1
+    struct Rank {
+        address player;
+        uint256 score;
+        uint256 rankExAequo;
+    }
+
+    /// @notice struct of Gain per Player for Contest Result calculation
     struct Gain {
         address player;
         uint256 score;
@@ -71,23 +106,7 @@ contract InterpoolContract is IpPool {
         uint256 rewardPerRankPerPlayer;
     }
 
-    struct Rank {
-        address player;
-        uint256 score;
-        uint256 rankExAequo;
-    }
-
-    struct PlayerScoreTicket {
-        address player;
-        uint256 nbTickets;
-        uint256 score;
-    }
-
-    struct PlayerScore {
-        address player;
-        uint256 score;
-    }
-
+    /// @notice struct for Contest Table
     struct ContestResult {
         address player;
         uint256 nbTickets;
@@ -96,51 +115,45 @@ contract InterpoolContract is IpPool {
         uint256 rewardPerRankPerPlayer;
     }
 
-    uint256 gainPercentage;
-    mapping(uint256 => ContestResult[]) public contestTable;
-
-    mapping(uint256 => uint256) public nbTotalTicketsPerContest;
-
-    /*
-     *
-     * Fake Enet Score
-     *
-     */
-
-    // @notice structure for scores from a game
-    struct Scores {
-        uint8 homeScore;
-        uint8 awayScore;
-    }
-
-    // @notice structure for data received from the front end, predictions from a player
-    struct GamePredict {
-        uint32 gameId;
-        uint8 homeScore;
-        uint8 awayScore;
-    }
-
-    // @notice structure for id league and end of contest for each contest
-    struct ContestInfo {
-        uint256 leagueId;
-        uint256 dateEnd;
-    }
-
-    //@notice association between array of requests and contest
-    mapping(uint256 => string[]) private listRequestsPerContest;
-
-    // @notice assocation between contest info and contest
+    /// @notice association between contest info and contest
     mapping(uint256 => ContestInfo) internal infoContest;
 
-    // @notice use struct Score for all game id predicted for a contest by a player
-    mapping(address => mapping(uint256 => mapping(uint32 => Scores)))
+    /// @notice list of all players who participate to the contest
+    /// @notice and their number of ticket when they submitted their predictions
+    /// @notice contest Id = Table with players and their number of tickets
+    mapping(uint256 => NbTicketsPerPlayer[])
+        internal nbTicketsPerPlayersPerContest;
+
+    /// @notice Total Number of Tickets per Contest
+    /// @notice contest id => number ot tickets
+    mapping(uint256 => uint256) private nbTotalTicketsPerContest;
+
+    /// @notice use struct Score for all game id predicted for a contest by a player
+    /// @notice player => contest id => game id => score prediction
+    mapping(address => mapping(uint256 => mapping(uint32 => GameScores)))
         internal predictionsPerPlayerPerContest;
 
-    // @notice list of all players who participate to the contest
-    mapping(uint256 => address[]) internal listPlayersPerContest;
+    /// @notice association between array of requests and contest
+    /// @notice contest id => array of request id
+    mapping(uint256 => string[]) private listRequestsPerContest;
 
+    /// @notice Contest Table at the end of a contest
+    /// @notice contest id => Table of results for the contest
+    mapping(uint256 => ContestResult[]) private contestTable;
+
+    /// @notice Check if a player submitted predictions during the current contest
+    /// @notice If yes he cannot withdraw his tickets
+    /// @notice contest id => player => Played or Not
+    mapping(uint256 => mapping(address => bool))
+        private verifPlayerPlayedPerContest;
+
+    /// @notice current contest id
     uint256 internal currentContestId;
 
+    /// @notice Percentage that each player will earn from the remaining winnings
+    uint256 private gainPercentage;
+
+    /// @notice interface for EnetPulse Contract
     IEnet private enetContract;
 
     constructor() {
@@ -149,12 +162,138 @@ contract InterpoolContract is IpPool {
         currentContestId = 0; // initialisation of current contest id
     }
 
+    /* ========== INTERPOOL WRITE FUNCTIONS ========== */
+
+    /**
+     * @notice Save predictions for a player for the current contest
+     * @param _gamePredictions: table of games with predicted scores received from the front end
+     * Verify the contest is still open and the number of predictions is the expected number
+     * Save scores of games in predictionsPerPlayerPerContest
+     */
+    function savePrediction(GamePredict[] memory _gamePredictions) public {
+        require(
+            IpPool.interPoolTicket.balanceOf(msg.sender) > 0,
+            "You need a ticket for saving predictions!"
+        );
+        require(
+            block.timestamp < infoContest[currentContestId].dateEnd,
+            "Prediction Period is closed!"
+        );
+        require(
+            _gamePredictions.length ==
+                getNumberOfGamesPerContest(currentContestId),
+            "The number of predictions doesn't match!"
+        );
+        uint256 nbOfGames = getNumberOfGamesPerContest(currentContestId);
+        uint256 nbTickets = interPoolTicket.balanceOf(msg.sender);
+        for (uint256 i = 0; i < nbOfGames; i++) {
+            predictionsPerPlayerPerContest[msg.sender][currentContestId][
+                _gamePredictions[i].gameId
+            ] = GameScores({
+                homeScore: _gamePredictions[i].homeScore,
+                awayScore: _gamePredictions[i].awayScore
+            });
+        }
+        bool alreadyExist;
+        for (
+            uint256 i = 0;
+            i < nbTicketsPerPlayersPerContest[currentContestId].length;
+            i++
+        ) {
+            if (
+                msg.sender ==
+                nbTicketsPerPlayersPerContest[currentContestId][i].player
+            )
+                nbTicketsPerPlayersPerContest[currentContestId][i]
+                    .nbTickets = nbTickets;
+            alreadyExist = true;
+        }
+        if (alreadyExist == false) {
+            nbTicketsPerPlayersPerContest[currentContestId].push(
+                NbTicketsPerPlayer({player: msg.sender, nbTickets: nbTickets})
+            );
+        }
+        verifPlayerPlayedPerContest[currentContestId][msg.sender] = true;
+    }
+
+    function createContest(
+        uint256 _leagueId,
+        string[] memory _listRequestId,
+        uint256 _dateEndContest
+    ) public onlyOwner {
+        currentContestId++;
+        for (uint256 i = 0; i < _listRequestId.length; i++) {
+            listRequestsPerContest[currentContestId].push(_listRequestId[i]);
+        }
+        infoContest[currentContestId] = ContestInfo({
+            leagueId: _leagueId,
+            dateEnd: _dateEndContest
+        });
+    }
+
+    function updateContestTable(uint _contestId) public onlyOwner {
+        nbTotalTicketsPerContest[_contestId] = interPoolTicket.totalSupply();
+        PlayerScoreTicket[] memory scoreTable = getScoreTable(_contestId);
+        Gain[] memory gainTable = calculateGain(_contestId, scoreTable);
+        uint256 indexTable = 0;
+        /// Inititate the table with the first row
+        contestTable[_contestId].push(
+            ContestResult({
+                player: gainTable[0].player,
+                nbTickets: 1,
+                score: gainTable[0].score,
+                rankExAequo: gainTable[0].rankExAequo,
+                rewardPerRankPerPlayer: gainTable[0].rewardPerRankPerPlayer
+            })
+        );
+        for (uint i = 1; i < nbTotalTicketsPerContest[_contestId]; i++) {
+            if (gainTable[i].player == gainTable[i - 1].player) {
+                contestTable[_contestId][indexTable].nbTickets++;
+                contestTable[_contestId][indexTable]
+                    .rewardPerRankPerPlayer += gainTable[i]
+                    .rewardPerRankPerPlayer;
+            } else {
+                contestTable[_contestId].push(
+                    ContestResult({
+                        player: gainTable[i].player,
+                        nbTickets: 1,
+                        score: gainTable[i].score,
+                        rankExAequo: gainTable[i].rankExAequo,
+                        rewardPerRankPerPlayer: gainTable[i]
+                            .rewardPerRankPerPlayer
+                    })
+                );
+                indexTable++;
+            }
+        }
+        for (uint256 i = 0; i < contestTable[_contestId].length; i++) {
+            address player = contestTable[_contestId][i].player;
+            IpPool.winningsPerPlayer[player].pendingWinnings += contestTable[
+                _contestId
+            ][i].rewardPerRankPerPlayer;
+            IpPool.globalPendingWinnings += contestTable[_contestId][i]
+                .rewardPerRankPerPlayer;
+        }
+    }
+
+    function withdraw(uint256 _nbTickets) public {
+        require(
+            verifPlayerPlayedPerContest[currentContestId][msg.sender] ==
+                false ||
+                block.timestamp > infoContest[currentContestId].dateEnd,
+            "You cannot withdraw until the end of the contest!"
+        );
+        withdrawFromPool(_nbTickets);
+    }
+
+    /* ========== INTERPOOL READ FUNCTIONS ========== */
+
     function getScoreTable(uint256 _contestId)
         public
         view
         returns (PlayerScoreTicket[] memory)
     {
-        uint256 nbPlayers = listPlayersPerContest[_contestId].length;
+        uint256 nbPlayers = nbTicketsPerPlayersPerContest[_contestId].length;
         address player;
         uint256 nbTickets;
         PlayerScoreTicket[] memory scoreTable = new PlayerScoreTicket[](
@@ -162,8 +301,8 @@ contract InterpoolContract is IpPool {
         );
         uint256 scorePlayer;
         for (uint256 i = 0; i < nbPlayers; i++) {
-            player = listPlayersPerContest[_contestId][i];
-            nbTickets = interPoolTicket.balanceOf(player);
+            player = nbTicketsPerPlayersPerContest[_contestId][i].player;
+            nbTickets = nbTicketsPerPlayersPerContest[_contestId][i].nbTickets;
             scorePlayer = checkResult(_contestId, player);
             scoreTable[i] = PlayerScoreTicket({
                 player: player,
@@ -177,7 +316,7 @@ contract InterpoolContract is IpPool {
     function calculateGain(
         uint _contestId,
         PlayerScoreTicket[] memory _scoreTable
-    ) public view returns (Gain[] memory) {
+    ) private view returns (Gain[] memory) {
         uint256 ranking;
         uint256 lastRanking;
         uint256 cumulatedRewardsNoExAequo = 0;
@@ -290,94 +429,6 @@ contract InterpoolContract is IpPool {
         return gainTable;
     }
 
-    function updateContestTable(uint _contestId) public {
-        nbTotalTicketsPerContest[_contestId] = interPoolTicket.totalSupply();
-        PlayerScoreTicket[] memory scoreTable = getScoreTable(_contestId);
-        Gain[] memory gainTable = calculateGain(_contestId, scoreTable);
-        uint256 indexTable = 0;
-        /// Inititate the table with the first row
-        contestTable[_contestId].push(
-            ContestResult({
-                player: gainTable[0].player,
-                nbTickets: 1,
-                score: gainTable[0].score,
-                rankExAequo: gainTable[0].rankExAequo,
-                rewardPerRankPerPlayer: gainTable[0].rewardPerRankPerPlayer
-            })
-        );
-        for (uint i = 1; i < nbTotalTicketsPerContest[_contestId]; i++) {
-            if (gainTable[i].player == gainTable[i - 1].player) {
-                contestTable[_contestId][indexTable].nbTickets++;
-                contestTable[_contestId][indexTable]
-                    .rewardPerRankPerPlayer += gainTable[i]
-                    .rewardPerRankPerPlayer;
-            } else {
-                contestTable[_contestId].push(
-                    ContestResult({
-                        player: gainTable[i].player,
-                        nbTickets: 1,
-                        score: gainTable[i].score,
-                        rankExAequo: gainTable[i].rankExAequo,
-                        rewardPerRankPerPlayer: gainTable[i]
-                            .rewardPerRankPerPlayer
-                    })
-                );
-                indexTable++;
-            }
-        }
-        for (uint256 i = 0; i < contestTable[_contestId].length; i++) {
-            address player = contestTable[_contestId][i].player;
-            IpPool.winningsPerPlayer[player].pendingWinnings += contestTable[
-                _contestId
-            ][i].rewardPerRankPerPlayer;
-            IpPool.globalPendingWinnings += contestTable[_contestId][i]
-                .rewardPerRankPerPlayer;
-        }
-    }
-
-    /**
-     * @notice Save predictions for a player for the current contest
-     * @param _gamePredictions: table of games with predicted scores received from the front end
-     * Verify the contest is still open and the number of predictions is the expected number
-     * Save scores of games in predictionsPerPlayerPerContest
-     */
-    function savePrediction(GamePredict[] memory _gamePredictions) public {
-        require(
-            IpPool.interPoolTicket.balanceOf(msg.sender) > 0,
-            "You need a ticket for saving predictions!"
-        );
-        require(
-            block.timestamp < infoContest[currentContestId].dateEnd,
-            "Prediction Period is closed!"
-        );
-        require(
-            _gamePredictions.length ==
-                getNumberOfGamesPerContest(currentContestId),
-            "The number of predictions doesn't match!"
-        );
-        uint256 nbOfGames = getNumberOfGamesPerContest(currentContestId);
-        for (uint256 i = 0; i < nbOfGames; i++) {
-            predictionsPerPlayerPerContest[msg.sender][currentContestId][
-                _gamePredictions[i].gameId
-            ] = Scores({
-                homeScore: _gamePredictions[i].homeScore,
-                awayScore: _gamePredictions[i].awayScore
-            });
-        }
-        bool alreadyExist;
-        for (
-            uint256 i = 0;
-            i < listPlayersPerContest[currentContestId].length;
-            i++
-        ) {
-            if (msg.sender == listPlayersPerContest[currentContestId][i])
-                alreadyExist = true;
-        }
-        if (alreadyExist == false) {
-            listPlayersPerContest[currentContestId].push(msg.sender);
-        }
-    }
-
     function getPlayerRank(uint _contestId, address _player)
         public
         view
@@ -418,37 +469,8 @@ contract InterpoolContract is IpPool {
         return contestTable[_contestId];
     }
 
-    /*
-     *
-     * Fake Enet Score
-     *
-     */
-
-    function createContest(
-        uint256 _leagueId,
-        string[] memory _listRequestId,
-        uint256 _dateEndContest
-    ) public {
-        currentContestId++;
-        for (uint256 i = 0; i < _listRequestId.length; i++) {
-            listRequestsPerContest[currentContestId].push(_listRequestId[i]);
-        }
-        infoContest[currentContestId] = ContestInfo({
-            leagueId: _leagueId,
-            dateEnd: _dateEndContest
-        });
-    }
-
-    function getNumberOfGamesPerRequest(string memory _requestId)
-        public
-        view
-        returns (uint)
-    {
-        return enetContract.getNumberOfGamesPerRequest(_requestId);
-    }
-
     function getRequestIdPerContest(uint256 _contestId)
-        external
+        private
         view
         returns (string[] memory)
     {
@@ -456,7 +478,7 @@ contract InterpoolContract is IpPool {
     }
 
     function getNumberOfGamesPerContest(uint256 _contestId)
-        public
+        private
         view
         returns (uint256)
     {
@@ -476,11 +498,11 @@ contract InterpoolContract is IpPool {
     function getListGamesPerContest(uint256 _contestId)
         public
         view
-        returns (GameCreate[] memory)
+        returns (GameInfo[] memory)
     {
         uint256 nbGames = getNumberOfGamesPerContest(_contestId);
         uint256 iGames;
-        GameCreate[] memory listGamesPerContest = new GameCreate[](nbGames);
+        GameInfo[] memory listGamesPerContest = new GameInfo[](nbGames);
         for (
             uint256 i = 0;
             i < listRequestsPerContest[_contestId].length;
@@ -492,7 +514,6 @@ contract InterpoolContract is IpPool {
             for (uint256 j = 0; j < nbGames; j++) {
                 (
                     listGamesPerContest[iGames].gameId,
-                    listGamesPerContest[iGames].startTime,
                     listGamesPerContest[iGames].homeTeam,
                     listGamesPerContest[iGames].awayTeam
                 ) = enetContract.getRequestIdGames(
@@ -514,7 +535,7 @@ contract InterpoolContract is IpPool {
         GamePredict[] memory listPredictionsPerContest = new GamePredict[](
             nbGames
         );
-        GameCreate[] memory listGamesPerContest = new GameCreate[](nbGames);
+        GameInfo[] memory listGamesPerContest = new GameInfo[](nbGames);
         listGamesPerContest = getListGamesPerContest(_contestId);
         for (uint256 i = 0; i < nbGames; i++) {
             gameId = listGamesPerContest[i].gameId;
@@ -548,7 +569,7 @@ contract InterpoolContract is IpPool {
     }
 
     function checkResult(uint256 _contestId, address _player)
-        public
+        private
         view
         returns (uint256)
     {
@@ -557,7 +578,7 @@ contract InterpoolContract is IpPool {
         uint256 playerScoring = 0;
         uint32 gameId;
         uint256 nbGames = getNumberOfGamesPerContest(_contestId);
-        GameCreate[] memory listGamesPerContest = new GameCreate[](nbGames);
+        GameInfo[] memory listGamesPerContest = new GameInfo[](nbGames);
         listGamesPerContest = getListGamesPerContest(_contestId);
         for (uint256 i = 0; i < nbGames; i++) {
             gameId = listGamesPerContest[i].gameId;
@@ -602,7 +623,7 @@ contract InterpoolContract is IpPool {
         view
         returns (uint256)
     {
-        return (listPlayersPerContest[_contestId].length);
+        return (nbTicketsPerPlayersPerContest[_contestId].length);
     }
 
     function getContestPredictionEndDate() public view returns (uint256) {

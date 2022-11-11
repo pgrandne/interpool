@@ -55,8 +55,8 @@ function SectionAccount() {
         watch: true,
         onSuccess(data: any) {
             setTicket(parseInt(ethers.utils.formatUnits(data[0]._hex, 0)))
-            setPendingWinnings(parseInt(ethers.utils.formatUnits(data[1][0]._hex, 6)))
-            setClaimedWinnings(parseInt(ethers.utils.formatUnits(data[1][1]._hex, 6)))
+            setPendingWinnings(parseFloat(ethers.utils.formatUnits(data[1][0]._hex, 6)))
+            setClaimedWinnings(parseFloat(ethers.utils.formatUnits(data[1][1]._hex, 6)))
         },
     })
 

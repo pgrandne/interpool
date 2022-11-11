@@ -4,12 +4,13 @@ pragma solidity ^0.8.15;
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/// @title InterPool : Pool Contract
+/// @title InterPool : General Pool Contract
 /// @author Perrin GRANDNE
 /// @notice Contract for Deposit and Withdraw on the Pool
+/// @notice This contract can be used for several applications
 /// @custom:experimental This is an experimental contract.
 
-/// @notice Only the ERC-20 functions we need
+/// @notice Only ERC-20 functions we need
 interface IERC20 {
     /// @notice Get the balance of aUSDC in No Pool No Game
     /// @notice and balance of USDC from the Player
@@ -24,27 +25,24 @@ interface IERC20 {
         view
         returns (uint);
 
-    /// @notice Withdraw USDC from No Pool No Game
-    function transfer(address recipient, uint amount) external returns (bool);
-
-    /// @notice Transfer USDC from User to No Pool No Game
+    /// @notice Transfer USDC from User to Pool contract
     function transferFrom(
         address sender,
         address recipient,
         uint amount
     ) external returns (bool);
 
-    /// @notice Mint NPNGaUSDC when user deposits on the pool
+    /// @notice Mint token when user deposits on the pool
     function mint(address sender, uint amount) external;
 
-    /// @notice Burn NPNGaUSDC when user withdraws from the pool
+    /// @notice Burn token when user withdraws from the pool
     function burn(address sender, uint amount) external;
 
     /// @notice Get the Total Supply of the token
     function totalSupply() external view returns (uint);
 }
 
-/// @notice Only the PoolAave functions we need
+/// @notice Only PoolAave functions we need
 interface PoolAave {
     /// @notice Deposit USDC to Aave Pool
     function supply(
@@ -62,15 +60,20 @@ interface PoolAave {
     ) external;
 }
 
-/// BEGINNING OF THE CONTRACT
+/* ========== CONTRACT BEGINNING ========== */
+
 contract IpPool is Ownable, Pausable {
+    /// @notice struct for mapping Winnings per Player
     struct Winnings {
         uint256 pendingWinnings;
         uint256 claimedWinnings;
     }
 
-    mapping(address => Winnings) public winningsPerPlayer;
+    /// @notice mapping for saving pending and claimed winnings for each player
+    /// @notice Player => Winnings
+    mapping(address => Winnings) internal winningsPerPlayer;
 
+    /// @notice all the winnings waiting claimings from players
     uint256 public globalPendingWinnings;
 
     IERC20 private usdcToken;
@@ -86,9 +89,9 @@ contract IpPool is Ownable, Pausable {
         globalPendingWinnings = 0;
     }
 
-    /* ========== INTERPOOL WRITE FUNCTIONS ========== */
+    /* ========== POOL WRITE FUNCTIONS ========== */
 
-    /// Pausable functions
+    /// @notice Pausable functions
     function pause() public onlyOwner {
         _pause();
     }
@@ -97,7 +100,8 @@ contract IpPool is Ownable, Pausable {
         _unpause();
     }
 
-    /// @notice Deposit USDC on Pool which will be deposited on Aave and get the same amount ofNPNGaUSCD
+    /// @notice Deposit USDC on Pool which will be deposited on Aave and receive tickets
+    /// @notice Amount = nb of tickets / 1 ticket = 50 USDC
     function depositOnAave(uint _amount) public {
         require(_amount % 50 == 0, "The amount must be a multiple of 50");
         require(
@@ -115,28 +119,22 @@ contract IpPool is Ownable, Pausable {
         interPoolTicket.mint(msg.sender, nbTickets);
     }
 
-    /// READ FUNCTIONS
-
-    /// @notice get the Prize Pool of the current contest
-    function getGlobalPrizePool() public view returns (uint) {
-        uint256 aavePoolValue = aUsdcToken.balanceOf(address(this));
-        uint256 ipPoolValue = interPoolTicket.totalSupply() * 50 * 10**6;
-        return aavePoolValue - ipPoolValue - globalPendingWinnings;
-    }
-
-    function claimFromInterpool() public {
+    /// @notice Claim pendings winnings
+    /// @notice reinit pendings winnings and substract from all pendings waiting claiming
+    function claimFromPool() public {
         require(
             winningsPerPlayer[msg.sender].pendingWinnings > 0,
             "There is no pending winnings!"
         );
         uint256 amount = winningsPerPlayer[msg.sender].pendingWinnings;
-        poolAave.withdraw(address(usdcToken), amount * 10**6, msg.sender);
+        poolAave.withdraw(address(usdcToken), amount, msg.sender);
         winningsPerPlayer[msg.sender].pendingWinnings = 0;
         winningsPerPlayer[msg.sender].claimedWinnings += amount;
         globalPendingWinnings -= amount;
     }
 
-    function withdrawFromInterpool(uint256 _nbTickets) public {
+    /// @notice Withdraw from the pool, 1 ticket = 50 USDC
+    function withdrawFromPool(uint256 _nbTickets) internal {
         require(
             interPoolTicket.balanceOf(msg.sender) >= _nbTickets,
             "You don't have enough tickets!"
@@ -149,6 +147,17 @@ contract IpPool is Ownable, Pausable {
         );
     }
 
+    /* ========== POOL READ FUNCTIONS ========== */
+
+    /// @notice get the Prize Pool of the current contest
+    /// @notice Prize Pool = USDC on Aave Pool - (Number of supplied tickets x 50) - pendings waiting claiming
+    function getGlobalPrizePool() public view returns (uint) {
+        uint256 aavePoolValue = aUsdcToken.balanceOf(address(this));
+        uint256 ipPoolValue = interPoolTicket.totalSupply() * 50 * 10**6;
+        return aavePoolValue - ipPoolValue - globalPendingWinnings;
+    }
+
+    /// @notice get pendings and claimed winings for a player
     function getWinningsPerPlayer(address _player)
         public
         view
