@@ -740,7 +740,7 @@ export const ABI_Interpool =
                     "type": "uint256"
                 }
             ],
-            "name": "witdrawFromInterpool",
+            "name": "withdrawFromInterpool",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"

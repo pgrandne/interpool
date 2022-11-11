@@ -8,7 +8,7 @@ function ModalRedeem({ setModalRedeem, ticket }: { setModalRedeem: React.Dispatc
     const { config }: { config: any } = usePrepareContractWrite({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
-        functionName: 'witdrawFromInterpool',
+        functionName: 'withdrawFromInterpool',
         args: [ticket]
     })
     const { write } = useContractWrite(config)

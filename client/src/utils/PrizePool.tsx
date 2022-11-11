@@ -14,7 +14,7 @@ function PrizePool() {
         functionName: 'getGlobalPrizePool',
         onSuccess(data: any) {
             console.log(data)
-            // setPrizePool(parseFloat(ethers.utils.formatUnits(data._hex, 6)))
+            setPrizePool(parseFloat(ethers.utils.formatUnits(data._hex, 6)))
         },
     })
 

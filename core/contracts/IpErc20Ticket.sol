@@ -28,6 +28,13 @@ contract IpErc20Ticket is ERC20, ERC20Burnable, Pausable, AccessControl {
         _mint(to, amount);
     }
 
+    function burn(address account, uint256 amount)
+        public
+        onlyRole(MINTER_ROLE)
+    {
+        _burn(account, amount);
+    }
+
     function decimals() public view virtual override returns (uint8) {
         return 0;
     }
