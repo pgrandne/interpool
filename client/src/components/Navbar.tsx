@@ -49,7 +49,7 @@ function Navbar({ currentSection, setCurrentSection }: { currentSection: any, se
                 <div className="w-icon-nav-menu"></div>
             </div>
             <div className="social-footer w-hidden-medium w-hidden-small w-hidden-tiny">
-                <a href="https://app.gitbook.com/o/esvKHPPOt4LZoy42lERC/s/9TtqoT2sXyCd3aHeyycM/welcome/about-interpool" target="_blank" rel="noreferrer" className="social-icon-link w-inline-block">
+                <a href="https://irruption-lab.gitbook.io/interpool/" target="_blank" rel="noreferrer" className="social-icon-link w-inline-block">
                     <div className="text-block-49">Documentation</div>
                 </a>
                 <a href="https://www.linkedin.com/company/irruption-lab" target="_blank" rel="noreferrer" className="social-icon-link w-inline-block"><img src="images/social-09-white.svg" width="17" alt="" /></a>

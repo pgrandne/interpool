@@ -3,22 +3,45 @@ import ModalMoreTickets from "../components/modals/ModalMoreTickets";
 import ModalRedeem from "../components/modals/ModalRedeem";
 import ModalClaim from "../components/modals/ModalClaim";
 import BannerTickets from "../components/home/BannerTickets";
-import { useAccount, useContractRead, erc20ABI } from "wagmi";
+import { useAccount, useContractReads, erc20ABI } from "wagmi";
 import { useAddressNetwork } from '../utils/useAddressNetwork'
+import { ABI_Interpool } from '../utils/ABI_Interpool'
 import { ethers } from 'ethers'
 
 function SectionAccount() {
     const addressNetwork = useAddressNetwork()
     const [ticket, setTicket] = useState(0)
+    const [pendingWinnings, setPendingWinnings] = useState(0)
+    const [claimedWinnings, setClaimedWinnings] = useState(0)
     const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
-    useContractRead({
+
+    const interpoolTicketContract = {
         address: addressNetwork.interPoolTicketContract,
         abi: erc20ABI,
-        functionName: 'balanceOf',
+    }
+    const interpoolContract = {
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+    }
+
+    useContractReads({
+        contracts: [
+            {
+                ...interpoolTicketContract,
+                functionName: 'balanceOf',
+                args: [isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
+            },
+            {
+                ...interpoolContract,
+                functionName: 'getWinningsPerPlayer',
+                args: [isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
+            },
+        ],
         watch: true,
-        args: [isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
         onSuccess(data: any) {
-            setTicket(parseInt(ethers.utils.formatUnits(data._hex, 0)))
+            setTicket(parseInt(ethers.utils.formatUnits(data[0]._hex, 0)))
+            setPendingWinnings(parseInt(ethers.utils.formatUnits(data[1][0]._hex, 6)))
+            setClaimedWinnings(parseInt(ethers.utils.formatUnits(data[1][1]._hex, 6)))
         },
     })
 
@@ -46,7 +69,7 @@ function SectionAccount() {
                     <div id="w-node-c4b2e9f4-9be0-f147-c346-35eca6c6e9d5-3d3dc5f0" className="div-block-48">
                         <div id="w-node-f34601d1-b651-b667-ebec-c34b6d7c6687-3d3dc5f0" className="account-details-grid-heading">Pending Winnings</div><img src="images/trophy.png" loading="lazy" width="35" id="w-node-ac5ac2a7-1fb1-3ea2-a16d-f95ef4722400-3d3dc5f0" sizes="34.99055099487305px" srcSet="images/trophy.png 500w, images/trophy.png 512w" alt="" className="image-19" />
                     </div>
-                    <div id="w-node-_18474311-dda1-9d24-5fc2-19e8d34e7da1-3d3dc5f0" className="text-block-grid-content">$82.0</div>
+                    <div id="w-node-_18474311-dda1-9d24-5fc2-19e8d34e7da1-3d3dc5f0" className="text-block-grid-content">${pendingWinnings}</div>
                     <div id="w-node-_3613a481-370e-2c98-3fc4-cbfe298cc1cd-3d3dc5f0" className="div-block-49">
                         <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted"
                             onClick={(e) => {
@@ -62,7 +85,7 @@ function SectionAccount() {
                         >Claim now!</a>
                     </div>
                     <div id="w-node-cd5c49f3-3443-15f4-fee3-549c3907df1f-3d3dc5f0" className="account-details-grid-heading">Total Winnings</div>
-                    <div id="w-node-_691393fb-f6ac-f9a3-ad79-c9918787c975-3d3dc5f0" className="text-block-grid-content">$205.0</div>
+                    <div id="w-node-_691393fb-f6ac-f9a3-ad79-c9918787c975-3d3dc5f0" className="text-block-grid-content">${pendingWinnings + claimedWinnings}</div>
                 </div>
                 <h1>Current contest ranking</h1>
                 <div className="w-layout-grid grid-4">
@@ -93,9 +116,9 @@ function SectionAccount() {
                     <div id="w-node-_2325228c-eb24-899d-519d-258763b597cb-3d3dc5f0" className="content-grid-history">$1.00</div>
                 </div>
             </div>
-            {modalRedeem && <ModalRedeem setModalRedeem={setModalRedeem} />}
-            {modalMoreTickets && <ModalMoreTickets setModalMoreTickets={setModalMoreTickets} />}
-            {modalClaim && <ModalClaim setModalClaim={setModalClaim} />}
+            {modalRedeem && <ModalRedeem setModalRedeem={setModalRedeem} ticket={ticket} />}
+            {modalMoreTickets && <ModalMoreTickets setModalMoreTickets={setModalMoreTickets} ticket={ticket} pendingWinnings={pendingWinnings} />}
+            {modalClaim && <ModalClaim setModalClaim={setModalClaim} pendingWinnings={pendingWinnings} />}
         </section>
     )
 }

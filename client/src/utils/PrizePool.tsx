@@ -13,7 +13,8 @@ function PrizePool() {
         abi: ABI_Interpool,
         functionName: 'getGlobalPrizePool',
         onSuccess(data: any) {
-            setPrizePool(parseFloat(ethers.utils.formatUnits(data._hex, 6)))
+            console.log(data)
+            // setPrizePool(parseFloat(ethers.utils.formatUnits(data._hex, 6)))
         },
     })
 

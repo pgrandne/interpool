@@ -153,6 +153,13 @@ export const ABI_Interpool =
             "type": "function"
         },
         {
+            "inputs": [],
+            "name": "claimFromInterpool",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
             "inputs": [
                 {
                     "internalType": "uint256",
@@ -233,65 +240,6 @@ export const ABI_Interpool =
             "type": "function"
         },
         {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_requestId",
-                    "type": "string"
-                },
-                {
-                    "components": [
-                        {
-                            "internalType": "uint32",
-                            "name": "gameId",
-                            "type": "uint32"
-                        },
-                        {
-                            "internalType": "uint40",
-                            "name": "startTime",
-                            "type": "uint40"
-                        },
-                        {
-                            "internalType": "string",
-                            "name": "homeTeam",
-                            "type": "string"
-                        },
-                        {
-                            "internalType": "string",
-                            "name": "awayTeam",
-                            "type": "string"
-                        }
-                    ],
-                    "internalType": "struct IpFakeEnetScore.GameCreate[]",
-                    "name": "_fakeGameCreate",
-                    "type": "tuple[]"
-                }
-            ],
-            "name": "fakeGameCreate",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint32",
-                    "name": "",
-                    "type": "uint32"
-                }
-            ],
-            "name": "gamePlayed",
-            "outputs": [
-                {
-                    "internalType": "bool",
-                    "name": "",
-                    "type": "bool"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
             "inputs": [],
             "name": "getContestPredictionEndDate",
             "outputs": [
@@ -364,52 +312,6 @@ export const ABI_Interpool =
             "type": "function"
         },
         {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_requestId",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_idx",
-                    "type": "uint256"
-                }
-            ],
-            "name": "getGameCreate",
-            "outputs": [
-                {
-                    "components": [
-                        {
-                            "internalType": "uint32",
-                            "name": "gameId",
-                            "type": "uint32"
-                        },
-                        {
-                            "internalType": "uint40",
-                            "name": "startTime",
-                            "type": "uint40"
-                        },
-                        {
-                            "internalType": "string",
-                            "name": "homeTeam",
-                            "type": "string"
-                        },
-                        {
-                            "internalType": "string",
-                            "name": "awayTeam",
-                            "type": "string"
-                        }
-                    ],
-                    "internalType": "struct IpFakeEnetScore.GameCreate",
-                    "name": "",
-                    "type": "tuple"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
             "inputs": [],
             "name": "getGlobalPrizePool",
             "outputs": [
@@ -455,7 +357,7 @@ export const ABI_Interpool =
                             "type": "string"
                         }
                     ],
-                    "internalType": "struct IpFakeEnetScore.GameCreate[]",
+                    "internalType": "struct InterpoolContract.GameCreate[]",
                     "name": "",
                     "type": "tuple[]"
                 }
@@ -577,7 +479,7 @@ export const ABI_Interpool =
                             "type": "uint8"
                         }
                     ],
-                    "internalType": "struct IpFakeEnetScore.GamePredict[]",
+                    "internalType": "struct InterpoolContract.GamePredict[]",
                     "name": "",
                     "type": "tuple[]"
                 }
@@ -599,37 +501,6 @@ export const ABI_Interpool =
                     "internalType": "string[]",
                     "name": "",
                     "type": "string[]"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint32",
-                    "name": "_gameId",
-                    "type": "uint32"
-                }
-            ],
-            "name": "getScorePerGameId",
-            "outputs": [
-                {
-                    "components": [
-                        {
-                            "internalType": "uint8",
-                            "name": "homeScore",
-                            "type": "uint8"
-                        },
-                        {
-                            "internalType": "uint8",
-                            "name": "awayScore",
-                            "type": "uint8"
-                        }
-                    ],
-                    "internalType": "struct IpFakeEnetScore.Scores",
-                    "name": "",
-                    "type": "tuple"
                 }
             ],
             "stateMutability": "view",
@@ -666,6 +537,50 @@ export const ABI_Interpool =
                     "internalType": "struct InterpoolContract.PlayerScoreTicket[]",
                     "name": "",
                     "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_player",
+                    "type": "address"
+                }
+            ],
+            "name": "getWinningsPerPlayer",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "uint256",
+                            "name": "pendingWinnings",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "claimedWinnings",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct IpPool.Winnings",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "globalPendingWinnings",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
                 }
             ],
             "stateMutability": "view",
@@ -750,47 +665,12 @@ export const ABI_Interpool =
                             "type": "uint8"
                         }
                     ],
-                    "internalType": "struct IpFakeEnetScore.GamePredict[]",
+                    "internalType": "struct InterpoolContract.GamePredict[]",
                     "name": "_gamePredictions",
                     "type": "tuple[]"
                 }
             ],
             "name": "savePrediction",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "components": [
-                        {
-                            "internalType": "uint32",
-                            "name": "gameId",
-                            "type": "uint32"
-                        },
-                        {
-                            "internalType": "uint8",
-                            "name": "homeScore",
-                            "type": "uint8"
-                        },
-                        {
-                            "internalType": "uint8",
-                            "name": "awayScore",
-                            "type": "uint8"
-                        },
-                        {
-                            "internalType": "string",
-                            "name": "status",
-                            "type": "string"
-                        }
-                    ],
-                    "internalType": "struct IpFakeEnetScore.GameResolve[]",
-                    "name": "_fakeGameResolve",
-                    "type": "tuple[]"
-                }
-            ],
-            "name": "saveRequestResults",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -824,6 +704,43 @@ export const ABI_Interpool =
                 }
             ],
             "name": "updateContestTable",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "name": "winningsPerPlayer",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "pendingWinnings",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "claimedWinnings",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_nbTickets",
+                    "type": "uint256"
+                }
+            ],
+            "name": "witdrawFromInterpool",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"

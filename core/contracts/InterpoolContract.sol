@@ -1,17 +1,66 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.15;
 
-import {IpFakeEnetScore} from "./IpFakeEnetScore.sol";
 import {IpPool} from "./IpPool.sol";
 
-/*
- * @title A consumer contract for Enetscores.
- * @author Perrin GRANDNE from Irruption Lab.
- * @notice Interact with the daily events API.
- * @dev Uses @chainlink/contracts 0.4.2.
- */
+interface IEnet {
+    struct GameCreate {
+        uint32 gameId;
+        uint40 startTime;
+        string homeTeam;
+        string awayTeam;
+    }
 
-contract InterpoolContract is IpFakeEnetScore, IpPool {
+    struct GameResolve {
+        uint32 gameId;
+        uint8 homeScore;
+        uint8 awayScore;
+        string status;
+    }
+
+    function getGamePlayed(uint32 _gameId) external view returns (bool);
+
+    function getRequestIdGames(string memory _requestId, uint256 _index)
+        external
+        view
+        returns (
+            uint32,
+            uint40,
+            string memory,
+            string memory
+        );
+
+    function getScoresPerGameId(uint32 _gameId)
+        external
+        view
+        returns (uint8, uint8);
+
+    function getNumberOfGamesPerRequest(string memory _requestId)
+        external
+        view
+        returns (uint);
+
+    function getGameCreate(string memory _requestId, uint256 _idx)
+        external
+        view
+        returns (GameCreate memory);
+
+    function fakeGameCreate(
+        string memory _requestId,
+        GameCreate[] memory _fakeGameCreate
+    ) external;
+
+    function getGameResolve(GameResolve[] memory _fakeGameResolve) external;
+}
+
+contract InterpoolContract is IpPool {
+    struct GameCreate {
+        uint32 gameId;
+        uint40 startTime;
+        string homeTeam;
+        string awayTeam;
+    }
+
     struct Gain {
         address player;
         uint256 score;
@@ -52,8 +101,52 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
 
     mapping(uint256 => uint256) public nbTotalTicketsPerContest;
 
+    /*
+     *
+     * Fake Enet Score
+     *
+     */
+
+    // @notice structure for scores from a game
+    struct Scores {
+        uint8 homeScore;
+        uint8 awayScore;
+    }
+
+    // @notice structure for data received from the front end, predictions from a player
+    struct GamePredict {
+        uint32 gameId;
+        uint8 homeScore;
+        uint8 awayScore;
+    }
+
+    // @notice structure for id league and end of contest for each contest
+    struct ContestInfo {
+        uint256 leagueId;
+        uint256 dateEnd;
+    }
+
+    //@notice association between array of requests and contest
+    mapping(uint256 => string[]) private listRequestsPerContest;
+
+    // @notice assocation between contest info and contest
+    mapping(uint256 => ContestInfo) internal infoContest;
+
+    // @notice use struct Score for all game id predicted for a contest by a player
+    mapping(address => mapping(uint256 => mapping(uint32 => Scores)))
+        internal predictionsPerPlayerPerContest;
+
+    // @notice list of all players who participate to the contest
+    mapping(uint256 => address[]) internal listPlayersPerContest;
+
+    uint256 internal currentContestId;
+
+    IEnet private enetContract;
+
     constructor() {
+        enetContract = IEnet(0x973680af677B40128B8c4015e2EF4C0D889Ed7b0);
         gainPercentage = 5;
+        currentContestId = 0; // initialisation of current contest id
     }
 
     function getScoreTable(uint256 _contestId)
@@ -61,9 +154,7 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
         view
         returns (PlayerScoreTicket[] memory)
     {
-        uint256 nbPlayers = IpFakeEnetScore
-            .listPlayersPerContest[_contestId]
-            .length;
+        uint256 nbPlayers = listPlayersPerContest[_contestId].length;
         address player;
         uint256 nbTickets;
         PlayerScoreTicket[] memory scoreTable = new PlayerScoreTicket[](
@@ -73,7 +164,7 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
         for (uint256 i = 0; i < nbPlayers; i++) {
             player = listPlayersPerContest[_contestId][i];
             nbTickets = interPoolTicket.balanceOf(player);
-            scorePlayer = IpFakeEnetScore.checkResult(_contestId, player);
+            scorePlayer = checkResult(_contestId, player);
             scoreTable[i] = PlayerScoreTicket({
                 player: player,
                 nbTickets: nbTickets,
@@ -234,6 +325,14 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
                 indexTable++;
             }
         }
+        for (uint256 i = 0; i < contestTable[_contestId].length; i++) {
+            address player = contestTable[_contestId][i].player;
+            IpPool.winningsPerPlayer[player].pendingWinnings += contestTable[
+                _contestId
+            ][i].rewardPerRankPerPlayer;
+            IpPool.globalPendingWinnings += contestTable[_contestId][i]
+                .rewardPerRankPerPlayer;
+        }
     }
 
     /**
@@ -248,8 +347,7 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
             "You need a ticket for saving predictions!"
         );
         require(
-            block.timestamp <
-                IpFakeEnetScore.infoContest[currentContestId].dateEnd,
+            block.timestamp < infoContest[currentContestId].dateEnd,
             "Prediction Period is closed!"
         );
         require(
@@ -320,5 +418,194 @@ contract InterpoolContract is IpFakeEnetScore, IpPool {
         return contestTable[_contestId];
     }
 
-    function claim() public {}
+    /*
+     *
+     * Fake Enet Score
+     *
+     */
+
+    function createContest(
+        uint256 _leagueId,
+        string[] memory _listRequestId,
+        uint256 _dateEndContest
+    ) public {
+        currentContestId++;
+        for (uint256 i = 0; i < _listRequestId.length; i++) {
+            listRequestsPerContest[currentContestId].push(_listRequestId[i]);
+        }
+        infoContest[currentContestId] = ContestInfo({
+            leagueId: _leagueId,
+            dateEnd: _dateEndContest
+        });
+    }
+
+    function getNumberOfGamesPerRequest(string memory _requestId)
+        public
+        view
+        returns (uint)
+    {
+        return enetContract.getNumberOfGamesPerRequest(_requestId);
+    }
+
+    function getRequestIdPerContest(uint256 _contestId)
+        external
+        view
+        returns (string[] memory)
+    {
+        return listRequestsPerContest[_contestId];
+    }
+
+    function getNumberOfGamesPerContest(uint256 _contestId)
+        public
+        view
+        returns (uint256)
+    {
+        uint256 nbGames = 0;
+        for (
+            uint256 i = 0;
+            i < listRequestsPerContest[_contestId].length;
+            i++
+        ) {
+            nbGames += enetContract.getNumberOfGamesPerRequest(
+                listRequestsPerContest[_contestId][i]
+            );
+        }
+        return nbGames;
+    }
+
+    function getListGamesPerContest(uint256 _contestId)
+        public
+        view
+        returns (GameCreate[] memory)
+    {
+        uint256 nbGames = getNumberOfGamesPerContest(_contestId);
+        uint256 iGames;
+        GameCreate[] memory listGamesPerContest = new GameCreate[](nbGames);
+        for (
+            uint256 i = 0;
+            i < listRequestsPerContest[_contestId].length;
+            i++
+        ) {
+            nbGames = enetContract.getNumberOfGamesPerRequest(
+                listRequestsPerContest[_contestId][i]
+            );
+            for (uint256 j = 0; j < nbGames; j++) {
+                (
+                    listGamesPerContest[iGames].gameId,
+                    listGamesPerContest[iGames].startTime,
+                    listGamesPerContest[iGames].homeTeam,
+                    listGamesPerContest[iGames].awayTeam
+                ) = enetContract.getRequestIdGames(
+                    listRequestsPerContest[_contestId][i],
+                    j
+                );
+                iGames++;
+            }
+        }
+        return listGamesPerContest;
+    }
+
+    function getPrevisionsPerPlayerPerContest(
+        uint256 _contestId,
+        address _player
+    ) public view returns (GamePredict[] memory) {
+        uint256 nbGames = getNumberOfGamesPerContest(_contestId);
+        uint32 gameId;
+        GamePredict[] memory listPredictionsPerContest = new GamePredict[](
+            nbGames
+        );
+        GameCreate[] memory listGamesPerContest = new GameCreate[](nbGames);
+        listGamesPerContest = getListGamesPerContest(_contestId);
+        for (uint256 i = 0; i < nbGames; i++) {
+            gameId = listGamesPerContest[i].gameId;
+            listPredictionsPerContest[i] = GamePredict({
+                gameId: gameId,
+                homeScore: predictionsPerPlayerPerContest[_player][_contestId][
+                    gameId
+                ].homeScore,
+                awayScore: predictionsPerPlayerPerContest[_player][_contestId][
+                    gameId
+                ].awayScore
+            });
+        }
+        return listPredictionsPerContest;
+    }
+
+    function calculateMatchResult(uint8 _homeScore, uint8 _awayScore)
+        private
+        pure
+        returns (uint256)
+    {
+        uint256 gameResult;
+        if (_homeScore > _awayScore) {
+            gameResult = 0;
+        } else if (_awayScore > _homeScore) {
+            gameResult = 2;
+        } else {
+            gameResult = 1;
+        }
+        return gameResult;
+    }
+
+    function checkResult(uint256 _contestId, address _player)
+        public
+        view
+        returns (uint256)
+    {
+        uint256 gameResultPlayer;
+        uint256 gameResultOracle;
+        uint256 playerScoring = 0;
+        uint32 gameId;
+        uint256 nbGames = getNumberOfGamesPerContest(_contestId);
+        GameCreate[] memory listGamesPerContest = new GameCreate[](nbGames);
+        listGamesPerContest = getListGamesPerContest(_contestId);
+        for (uint256 i = 0; i < nbGames; i++) {
+            gameId = listGamesPerContest[i].gameId;
+            gameResultPlayer = calculateMatchResult(
+                predictionsPerPlayerPerContest[_player][_contestId][gameId]
+                    .homeScore,
+                predictionsPerPlayerPerContest[_player][_contestId][gameId]
+                    .awayScore
+            );
+            (uint8 resolveHomeScore, uint8 resolveAwayScore) = enetContract
+                .getScoresPerGameId(gameId);
+            gameResultOracle = calculateMatchResult(
+                resolveHomeScore,
+                resolveAwayScore
+            );
+            if (
+                gameResultPlayer == gameResultOracle &&
+                enetContract.getGamePlayed(gameId) == true
+            ) {
+                playerScoring += 1;
+                if (
+                    predictionsPerPlayerPerContest[_player][_contestId][gameId]
+                        .homeScore ==
+                    resolveHomeScore &&
+                    predictionsPerPlayerPerContest[_player][_contestId][gameId]
+                        .awayScore ==
+                    resolveAwayScore
+                ) {
+                    playerScoring += 2;
+                }
+            }
+        }
+        return playerScoring;
+    }
+
+    function getCurrentContestId() public view returns (uint256) {
+        return currentContestId;
+    }
+
+    function getNumberOfPlayers(uint256 _contestId)
+        public
+        view
+        returns (uint256)
+    {
+        return (listPlayersPerContest[_contestId].length);
+    }
+
+    function getContestPredictionEndDate() public view returns (uint256) {
+        return infoContest[currentContestId].dateEnd;
+    }
 }

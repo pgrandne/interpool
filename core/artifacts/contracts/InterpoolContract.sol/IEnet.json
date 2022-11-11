@@ -1,0 +1,233 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IEnet",
+  "sourceName": "contracts/InterpoolContract.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_requestId",
+          "type": "string"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint32",
+              "name": "gameId",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint40",
+              "name": "startTime",
+              "type": "uint40"
+            },
+            {
+              "internalType": "string",
+              "name": "homeTeam",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "awayTeam",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct IEnet.GameCreate[]",
+          "name": "_fakeGameCreate",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "fakeGameCreate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_requestId",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_idx",
+          "type": "uint256"
+        }
+      ],
+      "name": "getGameCreate",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint32",
+              "name": "gameId",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint40",
+              "name": "startTime",
+              "type": "uint40"
+            },
+            {
+              "internalType": "string",
+              "name": "homeTeam",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "awayTeam",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct IEnet.GameCreate",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "_gameId",
+          "type": "uint32"
+        }
+      ],
+      "name": "getGamePlayed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint32",
+              "name": "gameId",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint8",
+              "name": "homeScore",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "awayScore",
+              "type": "uint8"
+            },
+            {
+              "internalType": "string",
+              "name": "status",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct IEnet.GameResolve[]",
+          "name": "_fakeGameResolve",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "getGameResolve",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_requestId",
+          "type": "string"
+        }
+      ],
+      "name": "getNumberOfGamesPerRequest",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_requestId",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRequestIdGames",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        },
+        {
+          "internalType": "uint40",
+          "name": "",
+          "type": "uint40"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "_gameId",
+          "type": "uint32"
+        }
+      ],
+      "name": "getScoresPerGameId",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

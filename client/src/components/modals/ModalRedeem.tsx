@@ -1,4 +1,21 @@
-function ModalRedeem({ setModalRedeem }: { setModalRedeem: React.Dispatch<React.SetStateAction<boolean>> }) {
+import { useContractWrite, usePrepareContractWrite } from 'wagmi'
+import { ABI_Interpool } from '../../utils/ABI_Interpool'
+import { useAddressNetwork } from '../../utils/useAddressNetwork'
+
+
+function ModalRedeem({ setModalRedeem, ticket }: { setModalRedeem: React.Dispatch<React.SetStateAction<boolean>>, ticket: number }) {
+    const addressNetwork: any = useAddressNetwork()
+    const { config }: { config: any } = usePrepareContractWrite({
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+        functionName: 'witdrawFromInterpool',
+        args: [ticket]
+    })
+    const { write } = useContractWrite(config)
+
+
+
+
     return (
         <div className="modal-wrapper">
             <div data-w-id="603c69d3-e3d9-0e33-110b-153490c7d332" className="modal-outside-trigger" onClick={(e) => { setModalRedeem(false) }} ></div>
@@ -9,21 +26,25 @@ function ModalRedeem({ setModalRedeem }: { setModalRedeem: React.Dispatch<React.
                 <div className="div-block-39">
                     <div className="div-block-36">
                         <div className="div-block-37"><img src="images/ticket-2.png" loading="lazy" alt="" className="image-16" />
-                            <div className="text-block-43">3</div>
+                            <div className="text-block-43">{ticket}</div>
                         </div>
                         <div className="text-block-41">x Ticket(s)</div>
                     </div>
                     <div className="div-block-38"><img src="images/next.png" loading="lazy" alt="" className="image-17" /></div>
                     <div className="div-block-36">
                         <div className="div-block-37"><img src="images/usd-coin-usdc-logo.png" loading="lazy" srcSet="images/usd-coin-usdc-logo-p-500.png 500w, images/usd-coin-usdc-logo-p-800.png 800w, images/usd-coin-usdc-logo-p-2000.png 2000w, images/usd-coin-usdc-logo.png 2000w" sizes="100vw" alt="" className="image-16" />
-                            <div className="text-block-43">150</div>
+                            <div className="text-block-43">{ticket * 50}</div>
                         </div>
                         <div className="text-block-41">USDC</div>
                     </div>
                 </div>
-                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className="hollow-button white">Confirm Ticket Redeem</a>
+                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className="hollow-button white"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        write?.()
+                    }}> Confirm Ticket Redeem</a>
             </div>
-        </div>
+        </div >
     )
 }
 

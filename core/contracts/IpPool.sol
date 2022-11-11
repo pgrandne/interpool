@@ -64,10 +64,14 @@ interface PoolAave {
 
 /// BEGINNING OF THE CONTRACT
 contract IpPool is Ownable, Pausable {
-    mapping(uint => uint) private remainedUnclaimedRewardsPerContest;
+    struct Winnings {
+        uint256 pendingWinnings;
+        uint256 claimedWinnings;
+    }
 
-    /// @notice balance of total claimed rewards per player
-    mapping(address => uint) private balanceOfClaimedRewards;
+    mapping(address => Winnings) public winningsPerPlayer;
+
+    uint256 public globalPendingWinnings;
 
     IERC20 private usdcToken;
     IERC20 private aUsdcToken;
@@ -79,6 +83,7 @@ contract IpPool is Ownable, Pausable {
         poolAave = PoolAave(0x368EedF3f56ad10b9bC57eed4Dac65B26Bb667f6);
         aUsdcToken = IERC20(0x1Ee669290939f8a8864497Af3BC83728715265FF);
         interPoolTicket = IERC20(0x3cB49B846F13c89dEe256E90A3E8830F6a6Fa9D1);
+        globalPendingWinnings = 0;
     }
 
     /* ========== INTERPOOL WRITE FUNCTIONS ========== */
@@ -116,6 +121,39 @@ contract IpPool is Ownable, Pausable {
     function getGlobalPrizePool() public view returns (uint) {
         uint256 aavePoolValue = aUsdcToken.balanceOf(address(this));
         uint256 ipPoolValue = interPoolTicket.totalSupply() * 50 * 10**6;
-        return aavePoolValue - ipPoolValue;
+        return aavePoolValue - ipPoolValue - globalPendingWinnings;
+    }
+
+    function claimFromInterpool() public {
+        require(
+            winningsPerPlayer[msg.sender].pendingWinnings > 0,
+            "There is no pending winnings!"
+        );
+        uint256 amount = winningsPerPlayer[msg.sender].pendingWinnings;
+        poolAave.withdraw(address(usdcToken), amount * 10**6, msg.sender);
+        winningsPerPlayer[msg.sender].pendingWinnings = 0;
+        winningsPerPlayer[msg.sender].claimedWinnings += amount;
+        globalPendingWinnings -= amount;
+    }
+
+    function withdrawFromInterpool(uint256 _nbTickets) public {
+        require(
+            interPoolTicket.balanceOf(msg.sender) >= _nbTickets,
+            "You don't have enough tickets!"
+        );
+        interPoolTicket.burn(msg.sender, _nbTickets);
+        poolAave.withdraw(
+            address(usdcToken),
+            _nbTickets * 50 * 10**6,
+            msg.sender
+        );
+    }
+
+    function getWinningsPerPlayer(address _player)
+        public
+        view
+        returns (Winnings memory)
+    {
+        return winningsPerPlayer[_player];
     }
 }
