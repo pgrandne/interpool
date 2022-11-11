@@ -1,30 +1,30 @@
-import { MagicConnectConnector } from '@everipedia/wagmi-magic-connector';
-import {
-    Chain,
-    Wallet,
-} from '@rainbow-me/rainbowkit';
+// RainbowMagicConnector.ts
+
+import { MagicAuthConnector } from '@everipedia/wagmi-magic-connector';
+import { Chain, Wallet } from '@rainbow-me/rainbowkit';
 export interface MyWalletOptions {
     chains: Chain[];
 }
 
-const APIKEY: string = process.env.REACT_APP_MAGICLINK_KEY!
-
 export const rainbowMagicConnector = ({ chains }: MyWalletOptions): Wallet => ({
     id: 'magic',
-    name: 'eMail or Social Login ',
+    name: 'eMail or Social Login',
     iconUrl: './images/email.png',
     iconBackground: '#fff',
-    createConnector: () => {
-        // const connector = getWalletConnectConnector({ chains });
-        const connector: any = new MagicConnectConnector({
+    createConnector: (): any => {
+        const connector = new MagicAuthConnector({
             chains: chains,
             options: {
-                apiKey: APIKEY,
+                apiKey: process.env.REACT_APP_MAGICLINK_KEY!,
                 magicSdkConfiguration: {
-                    network: "goerli"
+                    network: {
+                        rpcUrl: 'https://goerli.prylabs.net', // your ethereum, polygon, or optimism mainnet/testnet rpc URL
+                        chainId: 5,
+                    },
                 },
+                //...Other options (check out full API below)
             },
-        })
+        });
         return {
             connector,
         };
