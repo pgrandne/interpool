@@ -12,7 +12,7 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
     const { config }: { config: any } = usePrepareContractWrite({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
-        functionName: 'withdrawFromInterpool',
+        functionName: 'withdraw',
         args: [ticket]
     })
     const { write } = useContractWrite({

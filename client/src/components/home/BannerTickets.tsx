@@ -5,9 +5,10 @@ import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { ethers } from 'ethers'
 import { useState } from 'react'
-import { contestId } from '../../utils/contractAddress'
+import { useCurrentContest } from '../../utils/useCurrentContest'
 
 function BannerTickets({ ticket }: { ticket: number }) {
+    const contestId = useCurrentContest();
     const [rank, setRank] = useState('0');
     const [nbPlayers, setNbPlayers] = useState('0');
     const { address, isConnected } = useAccount();

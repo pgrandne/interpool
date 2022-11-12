@@ -7,9 +7,9 @@ export const mumbai = {
 
 export const goerli = {
     name: 'Goerli',
-    interPoolContract: '0x7BA5766948De2A453E14e07Fd0B778a1D6922708',
+    interPoolContract: '0xE60e67c9F864876Db3E7c49377Bcb1624b4FCAD4',
     interPoolTicketContract: '0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1',
     usdcContract: '0xA2025B15a1757311bfD68cb14eaeFCc237AF5b43'
 }
 
-export const contestId = 1;
+export const contestId = 2;

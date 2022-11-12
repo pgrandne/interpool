@@ -51,156 +51,10 @@ export const ABI_Interpool =
             "type": "event"
         },
         {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "_contestId",
-                    "type": "uint256"
-                },
-                {
-                    "components": [
-                        {
-                            "internalType": "address",
-                            "name": "player",
-                            "type": "address"
-                        },
-                        {
-                            "internalType": "uint256",
-                            "name": "nbTickets",
-                            "type": "uint256"
-                        },
-                        {
-                            "internalType": "uint256",
-                            "name": "score",
-                            "type": "uint256"
-                        }
-                    ],
-                    "internalType": "struct InterpoolContract.PlayerScoreTicket[]",
-                    "name": "_scoreTable",
-                    "type": "tuple[]"
-                }
-            ],
-            "name": "calculateGain",
-            "outputs": [
-                {
-                    "components": [
-                        {
-                            "internalType": "address",
-                            "name": "player",
-                            "type": "address"
-                        },
-                        {
-                            "internalType": "uint256",
-                            "name": "score",
-                            "type": "uint256"
-                        },
-                        {
-                            "internalType": "uint256",
-                            "name": "rankExAequo",
-                            "type": "uint256"
-                        },
-                        {
-                            "internalType": "uint256",
-                            "name": "rewardNoExAequo",
-                            "type": "uint256"
-                        },
-                        {
-                            "internalType": "uint256",
-                            "name": "cumulatedRewardsNoExAequo",
-                            "type": "uint256"
-                        },
-                        {
-                            "internalType": "uint256",
-                            "name": "cumulatedRewardsPerRank",
-                            "type": "uint256"
-                        },
-                        {
-                            "internalType": "uint256",
-                            "name": "rewardPerRankPerPlayer",
-                            "type": "uint256"
-                        }
-                    ],
-                    "internalType": "struct InterpoolContract.Gain[]",
-                    "name": "",
-                    "type": "tuple[]"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "_contestId",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "address",
-                    "name": "_player",
-                    "type": "address"
-                }
-            ],
-            "name": "checkResult",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
             "inputs": [],
-            "name": "claimFromInterpool",
+            "name": "claimFromPool",
             "outputs": [],
             "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "name": "contestTable",
-            "outputs": [
-                {
-                    "internalType": "address",
-                    "name": "player",
-                    "type": "address"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "nbTickets",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "score",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "rankExAequo",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "rewardPerRankPerPlayer",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -211,14 +65,14 @@ export const ABI_Interpool =
                     "type": "uint256"
                 },
                 {
-                    "internalType": "string[]",
-                    "name": "_listRequestId",
-                    "type": "string[]"
+                    "internalType": "uint256",
+                    "name": "_dateEndContestPredictions",
+                    "type": "uint256"
                 },
                 {
-                    "internalType": "uint256",
-                    "name": "_dateEndContest",
-                    "type": "uint256"
+                    "internalType": "uint256[]",
+                    "name": "_requestDates",
+                    "type": "uint256[]"
                 }
             ],
             "name": "createContest",
@@ -332,72 +186,12 @@ export const ABI_Interpool =
                     "type": "uint256"
                 }
             ],
-            "name": "getListGamesPerContest",
+            "name": "getIdGamesPerContest",
             "outputs": [
                 {
-                    "components": [
-                        {
-                            "internalType": "uint32",
-                            "name": "gameId",
-                            "type": "uint32"
-                        },
-                        {
-                            "internalType": "uint40",
-                            "name": "startTime",
-                            "type": "uint40"
-                        },
-                        {
-                            "internalType": "string",
-                            "name": "homeTeam",
-                            "type": "string"
-                        },
-                        {
-                            "internalType": "string",
-                            "name": "awayTeam",
-                            "type": "string"
-                        }
-                    ],
-                    "internalType": "struct InterpoolContract.GameCreate[]",
+                    "internalType": "uint32[]",
                     "name": "",
-                    "type": "tuple[]"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "_contestId",
-                    "type": "uint256"
-                }
-            ],
-            "name": "getNumberOfGamesPerContest",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_requestId",
-                    "type": "string"
-                }
-            ],
-            "name": "getNumberOfGamesPerRequest",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
+                    "type": "uint32[]"
                 }
             ],
             "stateMutability": "view",
@@ -490,17 +284,27 @@ export const ABI_Interpool =
         {
             "inputs": [
                 {
-                    "internalType": "uint256",
-                    "name": "_contestId",
-                    "type": "uint256"
+                    "internalType": "address",
+                    "name": "_player",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint32",
+                    "name": "_gameId",
+                    "type": "uint32"
                 }
             ],
-            "name": "getRequestIdPerContest",
+            "name": "getPrevisionsPerPlayerPerGame",
             "outputs": [
                 {
-                    "internalType": "string[]",
+                    "internalType": "uint8",
                     "name": "",
-                    "type": "string[]"
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "",
+                    "type": "uint8"
                 }
             ],
             "stateMutability": "view",
@@ -537,6 +341,35 @@ export const ABI_Interpool =
                     "internalType": "struct InterpoolContract.PlayerScoreTicket[]",
                     "name": "",
                     "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_contestId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint32",
+                    "name": "_gameId",
+                    "type": "uint32"
+                }
+            ],
+            "name": "getScoresPerGameId",
+            "outputs": [
+                {
+                    "internalType": "uint8",
+                    "name": "",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "",
+                    "type": "uint8"
                 }
             ],
             "stateMutability": "view",
@@ -587,25 +420,6 @@ export const ABI_Interpool =
             "type": "function"
         },
         {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "name": "nbTotalTicketsPerContest",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
             "inputs": [],
             "name": "owner",
             "outputs": [
@@ -641,6 +455,24 @@ export const ABI_Interpool =
         {
             "inputs": [],
             "name": "renounceOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_leagueId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256[]",
+                    "name": "_requestDates",
+                    "type": "uint256[]"
+                }
+            ],
+            "name": "resolveGames",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -711,36 +543,12 @@ export const ABI_Interpool =
         {
             "inputs": [
                 {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }
-            ],
-            "name": "winningsPerPlayer",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "pendingWinnings",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "claimedWinnings",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
                     "internalType": "uint256",
                     "name": "_nbTickets",
                     "type": "uint256"
                 }
             ],
-            "name": "withdrawFromInterpool",
+            "name": "withdraw",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
