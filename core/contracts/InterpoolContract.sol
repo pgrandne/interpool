@@ -132,7 +132,7 @@ contract InterpoolContract is IpPool {
     /// @notice and their number of ticket when they submitted their predictions
     /// @notice contest Id = Table with players and their number of tickets
     mapping(uint256 => NbTicketsPerPlayer[])
-        internal nbTicketsPerPlayersPerContest;
+        public listPlayersWithNbTicketsPerContest;
 
     /// @notice Total Number of Tickets per Contest
     /// @notice contest id => number ot tickets
@@ -167,19 +167,29 @@ contract InterpoolContract is IpPool {
     /// @notice Percentage that each player will earn from the remaining winnings
     uint256 private gainPercentage;
 
+    bool public test;
+
     /// @notice interface for EnetPulse Contract
     IEnet private enetContract;
 
     constructor() {
         enetContract = IEnet(0xeF249F41e80f34A2a96Dd07AB0403777317Ef726);
         gainPercentage = 5;
-        currentContestId = 0; // initialisation of current contest id
+        currentContestId = 1; // initialisation of current contest id
         listCreatedRequestsPerContest[1].push(
             0x8f1abe4dfa5f4feed04ebefcdf63a9a7a5dce5f9ed4840524b3d8023be78398a
         );
+        listCreatedRequestsPerContest[1].push(
+            0xd7ec1b7c00530e241857f8325a597e950028e7102e82be696a339563e244045d
+        );
+        infoContest[1] = ContestInfo({leagueId: 53, dateEnd: 1668384000});
     }
 
     /* ========== INTERPOOL WRITE FUNCTIONS ========== */
+
+    function getBool() public view returns (bool) {
+        return test;
+    }
 
     /**
      * @notice Create a contest with a list of requests/games, league Id and end of predictions
@@ -254,19 +264,20 @@ contract InterpoolContract is IpPool {
         bool alreadyExist;
         for (
             uint256 i = 0;
-            i < nbTicketsPerPlayersPerContest[currentContestId].length;
+            i < listPlayersWithNbTicketsPerContest[currentContestId].length;
             i++
         ) {
             if (
                 msg.sender ==
-                nbTicketsPerPlayersPerContest[currentContestId][i].player
-            )
-                nbTicketsPerPlayersPerContest[currentContestId][i]
+                listPlayersWithNbTicketsPerContest[currentContestId][i].player
+            ) {
+                listPlayersWithNbTicketsPerContest[currentContestId][i]
                     .nbTickets = nbTickets;
-            alreadyExist = true;
+                alreadyExist = true;
+            }
         }
         if (alreadyExist == false) {
-            nbTicketsPerPlayersPerContest[currentContestId].push(
+            listPlayersWithNbTicketsPerContest[currentContestId].push(
                 NbTicketsPerPlayer({player: msg.sender, nbTickets: nbTickets})
             );
             verifPlayerPlayedPerContest[currentContestId][msg.sender] = true;
@@ -338,7 +349,7 @@ contract InterpoolContract is IpPool {
      */
 
     function calculateMatchResult(uint8 _homeScore, uint8 _awayScore)
-        private
+        public
         pure
         returns (uint256)
     {
@@ -354,7 +365,7 @@ contract InterpoolContract is IpPool {
     }
 
     function getScoreOfPlayerForContest(uint256 _contestId, address _player)
-        private
+        public
         view
         returns (uint256)
     {
@@ -383,7 +394,9 @@ contract InterpoolContract is IpPool {
                 resolveHomeScore,
                 resolveAwayScore
             );
-            if (gameResultPlayer == gameResultOracle) {
+            if (
+                gameResultPlayer == gameResultOracle && resolveHomeScore != 255
+            ) {
                 playerScoring += 1;
                 if (
                     playerHomeScore == resolveHomeScore &&
@@ -401,7 +414,8 @@ contract InterpoolContract is IpPool {
         view
         returns (PlayerScoreTicket[] memory)
     {
-        uint256 nbPlayers = nbTicketsPerPlayersPerContest[_contestId].length;
+        uint256 nbPlayers = listPlayersWithNbTicketsPerContest[_contestId]
+            .length;
         address player;
         uint256 nbTickets;
         PlayerScoreTicket[] memory scoreTable = new PlayerScoreTicket[](
@@ -409,8 +423,9 @@ contract InterpoolContract is IpPool {
         );
         uint256 scorePlayer;
         for (uint256 i = 0; i < nbPlayers; i++) {
-            player = nbTicketsPerPlayersPerContest[_contestId][i].player;
-            nbTickets = nbTicketsPerPlayersPerContest[_contestId][i].nbTickets;
+            player = listPlayersWithNbTicketsPerContest[_contestId][i].player;
+            nbTickets = listPlayersWithNbTicketsPerContest[_contestId][i]
+                .nbTickets;
             scorePlayer = getScoreOfPlayerForContest(_contestId, player);
             scoreTable[i] = PlayerScoreTicket({
                 player: player,
@@ -424,7 +439,7 @@ contract InterpoolContract is IpPool {
     function calculateGain(
         uint _contestId,
         PlayerScoreTicket[] memory _scoreTable
-    ) private view returns (Gain[] memory) {
+    ) public view returns (Gain[] memory) {
         uint256 ranking;
         uint256 lastRanking;
         uint256 cumulatedRewardsNoExAequo = 0;
@@ -485,7 +500,7 @@ contract InterpoolContract is IpPool {
                 }
             }
         }
-        /// Inititate the table with the first row
+        /// Initiate the table with the first row
         rewardNoExAequo =
             ((prizePool - cumulatedRewardsNoExAequo) * gainPercentage) /
             100;
@@ -577,17 +592,17 @@ contract InterpoolContract is IpPool {
         return contestTable[_contestId];
     }
 
-    function getListRequestIdPerContest(uint256 _contestId, uint256 _market)
-        public
-        view
-        returns (bytes32[] memory)
-    {
-        if (_market == 0) {
-            return listCreatedRequestsPerContest[_contestId];
-        } else {
-            return listResolvedRequestsPerContest[_contestId];
-        }
-    }
+    // function getListRequestIdPerContest(uint256 _contestId, uint256 _market)
+    //     public
+    //     view
+    //     returns (bytes32[] memory)
+    // {
+    //     if (_market == 0) {
+    //         return listCreatedRequestsPerContest[_contestId];
+    //     } else {
+    //         return listResolvedRequestsPerContest[_contestId];
+    //     }
+    // }
 
     function getNumberOfGamesPerContest(uint256 _contestId)
         public
@@ -638,7 +653,7 @@ contract InterpoolContract is IpPool {
     {
         uint256 nbRequests = listResolvedRequestsPerContest[_contestId].length;
         uint8 homeScore = 255;
-        uint8 awayScore = 255;
+        uint8 awayScore;
         for (uint i = 0; i < nbRequests; i++) {
             bytes32 requestId = listResolvedRequestsPerContest[_contestId][i];
             uint256 nbGames = enetContract.getNumberOfGamesPerRequest(
@@ -702,7 +717,7 @@ contract InterpoolContract is IpPool {
         view
         returns (uint256)
     {
-        return (nbTicketsPerPlayersPerContest[_contestId].length);
+        return (listPlayersWithNbTicketsPerContest[_contestId].length);
     }
 
     function getContestPredictionEndDate() public view returns (uint256) {

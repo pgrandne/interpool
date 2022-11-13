@@ -18,7 +18,5 @@ export function useCurrentContest() {
             setCurrentContest(parseInt(ethers.utils.formatUnits(data._hex, 0)))
         },
     })
-
-
     return (currentContest)
 }
