@@ -269,6 +269,7 @@ contract InterpoolContract is IpPool {
             nbTicketsPerPlayersPerContest[currentContestId].push(
                 NbTicketsPerPlayer({player: msg.sender, nbTickets: nbTickets})
             );
+            verifPlayerPlayedPerContest[currentContestId][msg.sender] = true;
         }
     }
 
