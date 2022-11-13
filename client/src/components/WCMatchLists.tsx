@@ -294,7 +294,7 @@ function WCMatchLists({ ticket }: { ticket: number }) {
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129027-3d3dc5f0" className="content-grid-prediction">Poland</div>
                             {/*  */}
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129029-3d3dc5f0" className="content-grid-prediction-smaller">11/26</div>
-                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12902b-3d3dc5f0" className="content-grid-prediction-smaller">17h</div>
+                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12902b-3d3dc5f0" className="content-grid-prediction-smaller">20h</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12902d-3d3dc5f0" className="content-grid-prediction">Mexico</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12902f-3d3dc5f0" className="form-block w-form">
                                 <div className="form-3">

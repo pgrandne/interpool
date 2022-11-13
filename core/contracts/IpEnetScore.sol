@@ -25,25 +25,19 @@ contract IpEnetScores is ChainlinkClient {
         string status;
     }
 
-    struct Scores {
-        uint8 homeScore;
-        uint8 awayScore;
-        bool gamePlayed;
-    }
-
     mapping(bytes32 => bytes[]) private requestIdGames;
     error FailedTransferLINK(address to, uint256 amount);
     uint256 payment;
     bytes32 specId;
-
-    // @notice use struct Score for a game id
-    mapping(uint32 => Scores) private scoresPerGameId;
+    bytes32[] listRequestId;
 
     constructor() {
+        /// @notice address for Goerli Network : https://market.link/nodes/Enetpulse/integrations
         setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
         setChainlinkOracle(0xB9756312523826A566e222a34793E414A81c88E1);
-        payment = 100000000000000000;
         specId = 0x6431313062356334623833643432646361323065343130616335333763643934;
+        /// @notice Payment amount = 0.1 Link => 10^17 Juels
+        payment = 100000000000000000;
     }
 
     /* ========== EXTERNAL FUNCTIONS ========== */
@@ -92,34 +86,8 @@ contract IpEnetScores is ChainlinkClient {
         req.addUint("leagueId", _leagueId);
         req.addUint("date", _date);
         bytes32 requestId = sendOperatorRequest(req, payment);
+        listRequestId.push(requestId);
         return requestId;
-    }
-
-    function resolveRequestGames(uint256 _leagueId, uint256 _date) external {
-        uint256 market = 1;
-        Chainlink.Request memory req = buildOperatorRequest(
-            specId,
-            this.fulfillSchedule.selector
-        );
-        req.addUint("market", market);
-        req.addUint("leagueId", _leagueId);
-        req.addUint("date", _date);
-        bytes32 requestId = sendOperatorRequest(req, payment);
-        for (uint256 i = 0; i < requestIdGames[requestId].length; i++) {
-            GameResolve memory resultGame = _getGameResolveStruct(
-                requestIdGames[requestId][i]
-            );
-            if (
-                keccak256(abi.encodePacked(resultGame.status)) ==
-                keccak256(abi.encodePacked("finished"))
-            ) {
-                scoresPerGameId[resultGame.gameId] = Scores({
-                    homeScore: resultGame.homeScore,
-                    awayScore: resultGame.awayScore,
-                    gamePlayed: true
-                });
-            }
-        }
     }
 
     function setRequestIdGames(bytes32 _requestId, bytes[] memory _games)
@@ -158,6 +126,7 @@ contract IpEnetScores is ChainlinkClient {
         return chainlinkOracleAddress();
     }
 
+    /// @notice Get Numbers of Game for a request id
     function getNumberOfGamesPerRequest(bytes32 _requestId)
         external
         view
@@ -166,21 +135,23 @@ contract IpEnetScores is ChainlinkClient {
         return requestIdGames[_requestId].length;
     }
 
-    function getGameInfoPerRequestIdIndex(bytes32 _requestId, uint256 _idx)
+    /// @notice Get List of Games with info (game id, homeTeam name, awayTeam name) for a request
+    function getGameInfoPerRequestId(bytes32 _requestId)
         external
         view
-        returns (
-            uint32,
-            string memory,
-            string memory
-        )
+        returns (GameCreate[] memory)
     {
-        GameCreate memory gameInfo = _getGameCreateStruct(
-            requestIdGames[_requestId][_idx]
-        );
-        return (gameInfo.gameId, gameInfo.homeTeam, gameInfo.awayTeam);
+        uint256 nbGames = requestIdGames[_requestId].length;
+        GameCreate[] memory listGamesPerRequest = new GameCreate[](nbGames);
+        for (uint256 i = 0; i < nbGames; i++) {
+            listGamesPerRequest[i] = _getGameCreateStruct(
+                requestIdGames[_requestId][i]
+            );
+        }
+        return listGamesPerRequest;
     }
 
+    /// @notice Get Game id of a request by index of the request array
     function getGameIdPerRequestIndex(bytes32 _requestId, uint256 _idx)
         external
         view
@@ -192,21 +163,27 @@ contract IpEnetScores is ChainlinkClient {
         return gameInfo.gameId;
     }
 
-    function getScoresPerGameId(uint32 _gameId)
+    /// @notice Get Scores (HomeScore, AwayScore) from a Game Id in a Request
+    /// @notice If the game doesn't exist or the match is not finished, homeScore=255 is sent
+    function getScoresPerGameIdPerRequest(bytes32 _requestId, uint32 _gameId)
         external
         view
-        returns (
-            uint8,
-            uint8,
-            bool
-        )
+        returns (uint8, uint8)
     {
-        Scores memory scoresGame = scoresPerGameId[_gameId];
-        return (
-            scoresGame.homeScore,
-            scoresGame.awayScore,
-            scoresGame.gamePlayed
-        );
+        uint256 nbGames = requestIdGames[_requestId].length;
+        uint8 homeScore = 255;
+        uint8 awayScore;
+        for (uint256 i = 0; i < nbGames; i++) {
+            GameResolve memory gameResult = _getGameResolveStruct(
+                requestIdGames[_requestId][0]
+            );
+            if (_gameId == gameResult.gameId) {
+                homeScore = gameResult.homeScore;
+                awayScore = gameResult.awayScore;
+                break;
+            }
+        }
+        return (homeScore, awayScore);
     }
 
     /* ========== PRIVATE PURE FUNCTIONS ========== */
