@@ -565,6 +565,25 @@ export const ABI_Interpool =
                     "type": "address"
                 }
             ],
+            "name": "getVerifPlayerPlayedPerContest",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_player",
+                    "type": "address"
+                }
+            ],
             "name": "getWinningsPerPlayer",
             "outputs": [
                 {
@@ -707,6 +726,19 @@ export const ABI_Interpool =
                 }
             ],
             "name": "setEnetContract",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_poolContract",
+                    "type": "address"
+                }
+            ],
+            "name": "setPoolContract",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"

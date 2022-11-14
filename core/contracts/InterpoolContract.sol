@@ -196,9 +196,9 @@ contract InterpoolContract is Ownable, Pausable {
     IPool private poolContract;
 
     constructor() {
-        interpoolTicket = IERC20(0x1E0a4b2e73779fd6a1Db504CD3668f23F42cE683);
+        interpoolTicket = IERC20(0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1);
         setEnetContract(0x49672EdD419e4795307CCC906Cab0E8Fc5d147f9);
-        setPoolContract(0xd3bAbc11CCC23648a24c42D4812af2380C28626A);
+        setPoolContract(0x80A9c7C5F5BFD765A2dC3773dFF00d02Db8B34aE);
         gainPercentage = 5;
         currentContestId = 0; // initialisation of current contest id
     }
@@ -792,11 +792,20 @@ contract InterpoolContract is Ownable, Pausable {
         return poolContract.getGlobalPrizePool();
     }
 
+    /// @notice get pendings and claimed winnings for a player
     function getWinningsPerPlayer(address _player)
         external
         view
         returns (uint256, uint256)
     {
         return poolContract.getWinningsPerPlayer(_player);
+    }
+
+    function getVerifPlayerPlayedPerContest(address _player)
+        external
+        view
+        returns (bool)
+    {
+        return verifPlayerPlayedPerContest[currentContestId][_player];
     }
 }

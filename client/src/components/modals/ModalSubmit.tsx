@@ -31,7 +31,6 @@ function ModalSubmit({ prediction, setModalSubmit, setSubmitted }: {
         },
     })
 
-
     return (
         <div className="modal-wrapper">
             <div data-w-id="df8b8a49-b342-2aa4-caef-ff324eb8f754" className="modal-outside-trigger" onClick={(e) => { setModalSubmit(false) }}></div>
