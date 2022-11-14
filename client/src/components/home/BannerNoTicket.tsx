@@ -15,14 +15,14 @@ function BannerNoTicket() {
             <div id="w-node-_6b61e304-fb49-a93b-24a7-20abbc4407c8-3d3dc5f0" className="div-block colorvariation-2">
                 <div id="w-node-_6b61e304-fb49-a93b-24a7-20abbc4407c9-3d3dc5f0" className="div-block-2"><img src="images/piggy-bank-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_6b61e304-fb49-a93b-24a7-20abbc4407cb-3d3dc5f0" className="div-block-info">
-                    <div className="text-block-3 text-block-3-variation">Prize Pool</div>
+                    <div className="text-block-3">Prize Pool</div>
                     <PrizePool />
                 </div>
             </div>
             <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974ee-3d3dc5f0" className="div-block colorvariation-3">
                 <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974ef-3d3dc5f0" className="div-block-2"><img src="images/time-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f1-3d3dc5f0" className="div-block-info">
-                    <div className="text-block-3 text-block-3-variation">Prediction period</div>
+                    <div className="text-block-3">Prediction period</div>
                     <Countdown />
                 </div>
             </div>

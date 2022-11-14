@@ -511,7 +511,7 @@ ul {
 .text-block {
   font-family: 'Rubik Dirt', sans-serif;
   color: #fff;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 20px;
   font-weight: 500;
   text-align: right;
@@ -1784,9 +1784,9 @@ ul {
     padding-left: 0px;
   }
 
-  .text-block.text-block-variation {
+  /* .text-block.text-block-variation {
     font-size: 24px;
-  }
+  } */
 
   .text-block-3.text-block-3-variation {
     font-size: 17px;

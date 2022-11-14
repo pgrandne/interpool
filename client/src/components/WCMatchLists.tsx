@@ -284,25 +284,25 @@ function WCMatchLists({ ticket }: { ticket: number }) {
                             {/*  */}
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129017-3d3dc5f0" className="content-grid-prediction-smaller">11/26</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129019-3d3dc5f0" className="content-grid-prediction-smaller">14h</div>
-                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12901b-3d3dc5f0" className="content-grid-prediction">S. Arabia</div>
+                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12901b-3d3dc5f0" className="content-grid-prediction">Poland</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12901d-3d3dc5f0" className="form-block w-form">
                                 <div className="form-3">
                                     <input type="number" {...register('match15HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                     <input type="number" {...register('match15AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                 </div>
                             </div>
-                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129027-3d3dc5f0" className="content-grid-prediction">Poland</div>
+                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129027-3d3dc5f0" className="content-grid-prediction">S. Arabia</div>
                             {/*  */}
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129029-3d3dc5f0" className="content-grid-prediction-smaller">11/26</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12902b-3d3dc5f0" className="content-grid-prediction-smaller">20h</div>
-                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12902d-3d3dc5f0" className="content-grid-prediction">Mexico</div>
+                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12902d-3d3dc5f0" className="content-grid-prediction">Argentina</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12902f-3d3dc5f0" className="form-block w-form">
                                 <div className="form-3">
                                     <input type="number" {...register('match16HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                     <input type="number" {...register('match16AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                 </div>
                             </div>
-                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129039-3d3dc5f0" className="content-grid-prediction">Argentina</div>
+                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129039-3d3dc5f0" className="content-grid-prediction">Mexico</div>
                             {/*  */}
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12903b-3d3dc5f0" className="content-grid-prediction-smaller">11/29</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12903d-3d3dc5f0" className="content-grid-prediction-smaller">20h</div>
@@ -357,25 +357,25 @@ function WCMatchLists({ ticket }: { ticket: number }) {
                             {/*  */}
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129088-3d3dc5f0" className="content-grid-prediction-smaller">11/26</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12908a-3d3dc5f0" className="content-grid-prediction-smaller">11h</div>
-                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12908c-3d3dc5f0" className="content-grid-prediction">Australia</div>
+                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12908c-3d3dc5f0" className="content-grid-prediction">Tunisia</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12908e-3d3dc5f0" className="form-block w-form">
                                 <div className="form-3">
                                     <input type="number" {...register('match21HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                     <input type="number" {...register('match21AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                 </div>
                             </div>
-                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129098-3d3dc5f0" className="content-grid-prediction">Tunisia</div>
+                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129098-3d3dc5f0" className="content-grid-prediction">Australia</div>
                             {/*  */}
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12909a-3d3dc5f0" className="content-grid-prediction-smaller">11/26</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12909c-3d3dc5f0" className="content-grid-prediction-smaller">17h</div>
-                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12909e-3d3dc5f0" className="content-grid-prediction">Denmark</div>
+                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12909e-3d3dc5f0" className="content-grid-prediction">France</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290a0-3d3dc5f0" className="form-block w-form">
                                 <div className="form-3">
                                     <input type="number" {...register('match22HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                     <input type="number" {...register('match22AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                 </div>
                             </div>
-                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290aa-3d3dc5f0" className="content-grid-prediction">France</div>
+                            <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290aa-3d3dc5f0" className="content-grid-prediction">Denmark</div>
                             {/*  */}
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290ac-3d3dc5f0" className="content-grid-prediction-smaller">11/30</div>
                             <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290ae-3d3dc5f0" className="content-grid-prediction-smaller">16h</div>
@@ -505,25 +505,25 @@ function WCMatchLists({ ticket }: { ticket: number }) {
                             {/*  */}
                             <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001c7-3d3dc5f0" className="content-grid-prediction-smaller">11/27</div>
                             <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001c9-3d3dc5f0" className="content-grid-prediction-smaller">14h</div>
-                            <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001cb-3d3dc5f0" className="content-grid-prediction">Morocco</div>
+                            <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001cb-3d3dc5f0" className="content-grid-prediction">Belgium</div>
                             <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001cd-3d3dc5f0" className="form-block w-form">
                                 <div className="form-3">
                                     <input type="number" {...register('match33HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                     <input type="number" {...register('match33AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                 </div>
                             </div>
-                            <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001d7-3d3dc5f0" className="content-grid-prediction">Belgium</div>
+                            <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001d7-3d3dc5f0" className="content-grid-prediction">Morocco</div>
                             {/*  */}
                             <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001d9-3d3dc5f0" className="content-grid-prediction-smaller">11/27</div>
                             <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001db-3d3dc5f0" className="content-grid-prediction-smaller">17h</div>
-                            <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001dd-3d3dc5f0" className="content-grid-prediction">Canada</div>
+                            <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001dd-3d3dc5f0" className="content-grid-prediction">Croatia</div>
                             <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001df-3d3dc5f0" className="form-block w-form">
                                 <div className="form-3">
                                     <input type="number" {...register('match34HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                     <input type="number" {...register('match34AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                 </div>
                             </div>
-                            <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001e9-3d3dc5f0" className="content-grid-prediction">Croatia</div>
+                            <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001e9-3d3dc5f0" className="content-grid-prediction">Canada</div>
                             {/*  */}
                             <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001eb-3d3dc5f0" className="content-grid-prediction-smaller">12/01</div>
                             <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001ed-3d3dc5f0" className="content-grid-prediction-smaller">16h</div>
@@ -580,25 +580,25 @@ function WCMatchLists({ ticket }: { ticket: number }) {
                             {/*  */}
                             <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febefd-3d3dc5f0" className="content-grid-prediction-smaller">11/28</div>
                             <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febeff-3d3dc5f0" className="content-grid-prediction-smaller">11h</div>
-                            <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf01-3d3dc5f0" className="content-grid-prediction">Serbia</div>
+                            <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf01-3d3dc5f0" className="content-grid-prediction">Cameroon</div>
                             <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf03-3d3dc5f0" className="form-block w-form">
                                 <div className="form-3">
                                     <input type="number" {...register('match39HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                     <input type="number" {...register('match39AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                 </div>
                             </div>
-                            <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf0d-3d3dc5f0" className="content-grid-prediction">Cameroon</div>
+                            <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf0d-3d3dc5f0" className="content-grid-prediction">Serbia</div>
                             {/*  */}
                             <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf0f-3d3dc5f0" className="content-grid-prediction-smaller">11/28</div>
                             <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf11-3d3dc5f0" className="content-grid-prediction-smaller">17h</div>
-                            <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf13-3d3dc5f0" className="content-grid-prediction">Switzerland</div>
+                            <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf13-3d3dc5f0" className="content-grid-prediction">Brazil</div>
                             <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf15-3d3dc5f0" className="form-block w-form">
                                 <div className="form-3">
                                     <input type="number" {...register('match40HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                     <input type="number" {...register('match40AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
                                 </div>
                             </div>
-                            <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf1f-3d3dc5f0" className="content-grid-prediction">Brazil</div>
+                            <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf1f-3d3dc5f0" className="content-grid-prediction">Switzerland</div>
                             {/*  */}
                             <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf21-3d3dc5f0" className="content-grid-prediction-smaller">12/02</div>
                             <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf23-3d3dc5f0" className="content-grid-prediction-smaller">20h</div>
