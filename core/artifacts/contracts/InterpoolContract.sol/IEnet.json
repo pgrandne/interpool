@@ -33,90 +33,68 @@
           "internalType": "bytes32",
           "name": "_requestId",
           "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_index",
-          "type": "uint256"
-        }
-      ],
-      "name": "getGameInfoPerRequestIdIndex",
-      "outputs": [
-        {
-          "internalType": "uint32",
-          "name": "",
-          "type": "uint32"
-        },
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "_requestId",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_idx",
-          "type": "uint256"
-        }
-      ],
-      "name": "getGameResolve",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "uint32",
-              "name": "gameId",
-              "type": "uint32"
-            },
-            {
-              "internalType": "uint8",
-              "name": "homeScore",
-              "type": "uint8"
-            },
-            {
-              "internalType": "uint8",
-              "name": "awayScore",
-              "type": "uint8"
-            },
-            {
-              "internalType": "string",
-              "name": "status",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct IEnet.GameResolve",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "_requestId",
-          "type": "bytes32"
         }
       ],
       "name": "getNumberOfGamesPerRequest",
       "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_requestId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint32",
+          "name": "_gameId",
+          "type": "uint32"
+        }
+      ],
+      "name": "getScoresPerGameIdPerRequest",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_player",
+          "type": "address"
+        }
+      ],
+      "name": "getWinningsPerPlayer",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
         {
           "internalType": "uint256",
           "name": "",

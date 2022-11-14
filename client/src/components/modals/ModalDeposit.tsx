@@ -13,7 +13,7 @@ function Approve({ amount, amountApproved }: { amount: number, amountApproved: n
         address: addressNetwork.usdcContract,
         abi: erc20ABI,
         functionName: 'approve',
-        args: [addressNetwork.interPoolContract, ethers.BigNumber.from(amount * 10 ** 6)],
+        args: [addressNetwork.poolContract, ethers.BigNumber.from(amount * 10 ** 6)],
     })
     const { write } = useContractWrite({
         ...config,
@@ -43,7 +43,7 @@ function Deposit({ amount, amountApproved, setModalDeposit, setDeposited }: {
         mode: 'recklesslyUnprepared',
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
-        functionName: 'depositOnAave',
+        functionName: 'deposit',
         args: [ethers.BigNumber.from(amount)],
         onSuccess(data) {
             setTimeout(function () { setModalDeposit(false) }, 500)
@@ -64,7 +64,6 @@ function ModalDeposit({ nbTickets, setModalDeposit, setDeposited }: { nbTickets:
     const [balance, setBalance] = useState(50)
     const [amountApproved, setAmountApproved] = useState(0)
     const { address }: { address: any } = useAccount()
-    console.log(amountApproved)
     useContractReads({
         contracts: [
             {
@@ -77,7 +76,7 @@ function ModalDeposit({ nbTickets, setModalDeposit, setDeposited }: { nbTickets:
                 address: addressNetwork.usdcContract,
                 abi: erc20ABI,
                 functionName: 'allowance',
-                args: [address, addressNetwork.interPoolContract],
+                args: [address, addressNetwork.poolContract],
             },
         ],
         watch: true,

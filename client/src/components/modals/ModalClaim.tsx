@@ -11,7 +11,7 @@ function ModalClaim({ setModalClaim, pendingWinnings, setClaimed }: {
     const { config }: { config: any } = usePrepareContractWrite({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
-        functionName: 'claimFromInterpool',
+        functionName: 'claim',
     })
     const { write } = useContractWrite({
         ...config,

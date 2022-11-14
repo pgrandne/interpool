@@ -1,13 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.15;
 
-import {IpPool} from "./IpPool.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
 
 /// @title InterPool : InterPool Contract
 /// @author Perrin GRANDNE
-/// @notice Contract for
-/// @notice
+/// @notice Contract for InterPool Game, a prediction game for FIFA World Cup
+/// @notice This contract is used to test and improve calculations, it will merge with Pool Contract after validation
 /// @custom:experimental This is an experimental contract.
+
+/// @notice Only ERC-20 functions we need
+interface IERC20 {
+    /// @notice Get the number of tickets (token) per player
+    function balanceOf(address account) external view returns (uint);
+
+    /// @notice Get the Total Supply of the token
+    function totalSupply() external view returns (uint);
+}
 
 /// @notice Only EnetPulse functions we need
 interface IEnet {
@@ -38,12 +48,34 @@ interface IEnet {
     function getNumberOfGamesPerRequest(bytes32 _requestId)
         external
         view
-        returns (uint);
+        returns (uint256);
+
+    function getWinningsPerPlayer(address _player)
+        external
+        view
+        returns (uint256, uint256);
+}
+
+interface IPool {
+    function depositOnAave(uint _amount, address _player) external;
+
+    function claimFromPool(address _player) external;
+
+    function withdrawFromPool(uint256 _nbTickets, address _player) external;
+
+    function setWinnings(address _player, uint256 _winnings) external;
+
+    function getGlobalPrizePool() external view returns (uint256);
+
+    function getWinningsPerPlayer(address _player)
+        external
+        view
+        returns (uint256, uint256);
 }
 
 /* ========== CONTRACT BEGINNING ========== */
 
-contract IpFakeEnetScore is IpPool {
+contract InterpoolContract is Ownable, Pausable {
     struct GameResolve {
         uint32 gameId;
         uint8 homeScore;
@@ -155,11 +187,18 @@ contract IpFakeEnetScore is IpPool {
     /// @notice Percentage that each player will earn from the remaining winnings
     uint256 private gainPercentage;
 
+    IERC20 private interpoolTicket;
+
     /// @notice interface for EnetPulse Contract
     IEnet private enetContract;
 
+    /// @notice interface for Pool Contract
+    IPool private poolContract;
+
     constructor() {
-        enetContract = IEnet(0xeF249F41e80f34A2a96Dd07AB0403777317Ef726);
+        interpoolTicket = IERC20(0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1);
+        setEnetContract(0x49672EdD419e4795307CCC906Cab0E8Fc5d147f9);
+        poolContract = IPool(0x332E806AD041A832E0B8eF0470aF985B047903A7);
         gainPercentage = 5;
         currentContestId = 0; // initialisation of current contest id
     }
@@ -169,6 +208,15 @@ contract IpFakeEnetScore is IpPool {
     /// @notice Change the contract used for Prediction (only for testnet)
     function setEnetContract(address _enetContract) public onlyOwner {
         enetContract = IEnet(_enetContract);
+    }
+
+    /// @notice Pausable functions
+    function pause() public onlyOwner {
+        _pause();
+    }
+
+    function unpause() public onlyOwner {
+        _unpause();
     }
 
     /**
@@ -182,7 +230,7 @@ contract IpFakeEnetScore is IpPool {
         uint256 _leagueId,
         uint256 _dateEndContestPredictions,
         uint256[] memory _requestDates
-    ) public onlyOwner {
+    ) external onlyOwner {
         currentContestId++;
         uint256 nbRequest = _requestDates.length;
         for (uint256 i = 0; i < nbRequest; i++) {
@@ -203,7 +251,7 @@ contract IpFakeEnetScore is IpPool {
      */
 
     function resolveGames(uint256 _leagueId, uint256[] memory _requestDates)
-        public
+        external
         onlyOwner
     {
         uint256 nbRequest = _requestDates.length;
@@ -220,9 +268,9 @@ contract IpFakeEnetScore is IpPool {
      * Verify the contest is still open and the number of predictions is the expected number
      * Save scores of games in predictionsPerPlayerPerContest
      */
-    function savePrediction(GamePredict[] memory _gamePredictions) public {
+    function savePrediction(GamePredict[] memory _gamePredictions) external {
         require(
-            IpPool.interPoolTicket.balanceOf(msg.sender) > 0,
+            interpoolTicket.balanceOf(msg.sender) > 0,
             "You need a ticket for saving predictions!"
         );
         require(
@@ -235,7 +283,7 @@ contract IpFakeEnetScore is IpPool {
             "The number of predictions doesn't match!"
         );
         uint256 nbOfGames = getNumberOfGamesPerContest(currentContestId);
-        uint256 nbTickets = interPoolTicket.balanceOf(msg.sender);
+        uint256 nbTickets = interpoolTicket.balanceOf(msg.sender);
         /// Create/Update all predictions for a player
         for (uint256 i = 0; i < nbOfGames; i++) {
             predictionsPerPlayerPerGame[msg.sender][
@@ -267,8 +315,8 @@ contract IpFakeEnetScore is IpPool {
     }
 
     /// At the end of the contest, create the table with all infos of the contest
-    function createContestTable(uint _contestId) public onlyOwner {
-        nbTotalTicketsPerContest[_contestId] = interPoolTicket.totalSupply();
+    function createContestTable(uint _contestId) external onlyOwner {
+        nbTotalTicketsPerContest[_contestId] = interpoolTicket.totalSupply();
         PlayerPointsAndTickets[] memory pointsTable = getPointsTable(
             _contestId
         );
@@ -308,23 +356,30 @@ contract IpFakeEnetScore is IpPool {
         /// Update pendings winnings based on results from the contest Table
         for (uint256 i = 0; i < contestTable[_contestId].length; i++) {
             address player = contestTable[_contestId][i].player;
-            IpPool.winningsPerPlayer[player].pendingWinnings += contestTable[
-                _contestId
-            ][i].rewardPerRankPerPlayer;
-            IpPool.globalPendingWinnings += contestTable[_contestId][i]
-                .rewardPerRankPerPlayer;
+            poolContract.setWinnings(
+                player,
+                contestTable[_contestId][i].rewardPerRankPerPlayer
+            );
         }
     }
 
+    function deposit(uint256 _amount) external {
+        poolContract.depositOnAave(_amount, msg.sender);
+    }
+
     /// @notice witdraw USDC and burn ticket if the contest is finished
-    function withdraw(uint256 _nbTickets) public {
+    function withdraw(uint256 _nbTickets) external {
         require(
             verifPlayerPlayedPerContest[currentContestId][msg.sender] ==
                 false ||
                 block.timestamp > infoContest[currentContestId].dateEnd,
             "You cannot withdraw until the end of the contest!"
         );
-        withdrawFromPool(_nbTickets);
+        poolContract.withdrawFromPool(_nbTickets, msg.sender);
+    }
+
+    function claim() external {
+        poolContract.claimFromPool(msg.sender);
     }
 
     /* ========== INTERPOOL READ FUNCTIONS ========== */
@@ -440,7 +495,7 @@ contract IpFakeEnetScore is IpPool {
         uint256 nbExAequo;
         uint256 rewardNoExAequo;
         uint256 indexTable = 0;
-        uint256 prizePool = getGlobalPrizePool();
+        uint256 prizePool = poolContract.getGlobalPrizePool();
         uint256 nbTotalTickets = nbTotalTicketsPerContest[_contestId];
         PlayerPoints[] memory pointsTablePerTicket = new PlayerPoints[](
             nbTotalTickets
@@ -727,5 +782,17 @@ contract IpFakeEnetScore is IpPool {
 
     function getContestPredictionEndDate() public view returns (uint256) {
         return infoContest[currentContestId].dateEnd;
+    }
+
+    function getGlobalPrizePool() external view returns (uint256) {
+        return poolContract.getGlobalPrizePool();
+    }
+
+    function getWinningsPerPlayer(address _player)
+        external
+        view
+        returns (uint256, uint256)
+    {
+        return poolContract.getWinningsPerPlayer(_player);
     }
 }

@@ -45,9 +45,9 @@ function Navbar({ currentSection, setCurrentSection }: { currentSection: any, se
                     </li>
                 </ul>
             </nav>
-            <div className="hamburger-button w-nav-button">
+            {/* <div className="hamburger-button w-nav-button">
                 <div className="w-icon-nav-menu"></div>
-            </div>
+            </div> */}
             <div className="social-footer w-hidden-medium w-hidden-small w-hidden-tiny">
                 <a href="https://irruption-lab.gitbook.io/interpool/" target="_blank" rel="noreferrer" className="social-icon-link w-inline-block">
                     <div className="text-block-49">Documentation</div>

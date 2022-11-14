@@ -9,7 +9,7 @@ import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
  * @dev Uses @chainlink/contracts 0.4.2.
  */
 
-contract IpEnetScores is ChainlinkClient {
+contract IpEnetScore is ChainlinkClient {
     using Chainlink for Chainlink.Request;
     using CBORChainlink for BufferChainlink.buffer;
     struct GameCreate {
