@@ -114,7 +114,7 @@ function ModalDeposit({ nbTickets, setModalDeposit, setDeposited }: { nbTickets:
                 </div>
                 {balance >= nbTickets * 50 && <Approve amount={nbTickets * 50} amountApproved={amountApproved} />}
                 {balance >= nbTickets * 50 && <Deposit amount={nbTickets * 50} amountApproved={amountApproved} setModalDeposit={setModalDeposit} setDeposited={setDeposited} />}
-                {balance < 50 && <Faucet />}
+                {balance < nbTickets * 50 && <Faucet />}
                 <p className="paragraph-2">*Get your Deposit back anytime after the game completion.</p>
             </div>
             <ToastContainer />

@@ -18,7 +18,7 @@ export const rainbowMagicConnector = ({ chains }: MyWalletOptions): Wallet => ({
                 apiKey: process.env.REACT_APP_MAGICLINK_KEY!,
                 magicSdkConfiguration: {
                     network: {
-                        rpcUrl: 'https://goerli.prylabs.net', // your ethereum, polygon, or optimism mainnet/testnet rpc URL
+                        rpcUrl: `https://eth-goerli.alchemyapi.io/v2/${process.env.REACT_APP_ALCHEMY_ID}`, // your ethereum, polygon, or optimism mainnet/testnet rpc URL
                         chainId: 5,
                     },
                 },

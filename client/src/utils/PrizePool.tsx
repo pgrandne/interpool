@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { ABI_Interpool } from '../utils/ABI_Interpool'
 
 function PrizePool() {
-    const [prizePool, setPrizePool] = useState(1132.27)
+    const [prizePool, setPrizePool] = useState(0)
     const addressNetwork: any = useAddressNetwork()
 
     useContractRead({
@@ -13,7 +13,7 @@ function PrizePool() {
         abi: ABI_Interpool,
         functionName: 'getGlobalPrizePool',
         onSuccess(data: any) {
-            setPrizePool(135 + parseFloat(ethers.utils.formatUnits(data._hex, 6)))
+            setPrizePool(parseFloat(ethers.utils.formatUnits(data._hex, 6)))
         },
     })
 
