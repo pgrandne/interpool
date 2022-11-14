@@ -22,6 +22,7 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
             setRedeemed(true)
         },
     })
+    console.log(ticket)
 
     return (
         <div className="modal-wrapper">

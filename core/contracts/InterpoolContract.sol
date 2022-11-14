@@ -196,14 +196,18 @@ contract InterpoolContract is Ownable, Pausable {
     IPool private poolContract;
 
     constructor() {
-        interpoolTicket = IERC20(0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1);
+        interpoolTicket = IERC20(0x1E0a4b2e73779fd6a1Db504CD3668f23F42cE683);
         setEnetContract(0x49672EdD419e4795307CCC906Cab0E8Fc5d147f9);
-        poolContract = IPool(0x332E806AD041A832E0B8eF0470aF985B047903A7);
+        setPoolContract(0xd3bAbc11CCC23648a24c42D4812af2380C28626A);
         gainPercentage = 5;
         currentContestId = 0; // initialisation of current contest id
     }
 
     /* ========== INTERPOOL WRITE FUNCTIONS ========== */
+
+    function setPoolContract(address _poolContract) public onlyOwner {
+        poolContract = IPool(_poolContract);
+    }
 
     /// @notice Change the contract used for Prediction (only for testnet)
     function setEnetContract(address _enetContract) public onlyOwner {

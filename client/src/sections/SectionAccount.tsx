@@ -102,33 +102,18 @@ function SectionAccount() {
                     <div id="w-node-cd5c49f3-3443-15f4-fee3-549c3907df1f-3d3dc5f0" className="account-details-grid-heading">Total Winnings</div>
                     <div id="w-node-_691393fb-f6ac-f9a3-ad79-c9918787c975-3d3dc5f0" className="text-block-grid-content">${pendingWinnings + claimedWinnings}</div>
                 </div>
-                <h1>Current contest ranking</h1>
+                <h1>Final contest ranking</h1>
                 <div className="w-layout-grid grid-4">
-                    <div id="w-node-ade59832-9e80-0a14-2933-cb481c0bd5c8-3d3dc5f0" className="header-grid-history header-grid-history-left">Prediction Game</div>
-                    <div id="w-node-_529643fb-8c8a-4deb-3340-ec7494a5abee-3d3dc5f0" className="header-grid-history">Prize Pool</div>
+                    <div id="w-node-ade59832-9e80-0a14-2933-cb481c0bd5c8-3d3dc5f0" className="header-grid-history header-grid-history-left">Player</div>
+                    <div id="w-node-_529643fb-8c8a-4deb-3340-ec7494a5abee-3d3dc5f0" className="header-grid-history">Number of tickets</div>
                     <div id="w-node-_3516d465-5aa2-1ac4-fafa-6dfe38e10d3d-3d3dc5f0" className="header-grid-history">Rank</div>
-                    <div id="w-node-e0051b68-543d-1fe6-cef2-e0c50e02645a-3d3dc5f0" className="header-grid-history">Participants</div>
+                    <div id="w-node-e0051b68-543d-1fe6-cef2-e0c50e02645a-3d3dc5f0" className="header-grid-history">Global Prize Pool</div>
                     <div id="w-node-d12aa462-b1e7-5186-1dbe-5765aa5e3ae9-3d3dc5f0" className="header-grid-history header-grid-history-droite">Winnings</div>
-                    <div id="w-node-_64932c9e-4808-d561-0cd9-677953178864-3d3dc5f0" className="content-grid-history">#4</div>
-                    <div id="w-node-_3fb0138f-fb6f-aa8d-0711-d670c91d5750-3d3dc5f0" className="content-grid-history">$3,120.00</div>
-                    <div id="w-node-bcd0c380-d5a0-b33f-4f89-5178696c32d7-3d3dc5f0" className="content-grid-history">6</div>
-                    <div id="w-node-_138b185a-30d7-acc4-cfab-69438ef52dbc-3d3dc5f0" className="content-grid-history">142</div>
-                    <div id="w-node-_911736f7-4f0d-0086-e921-4ea6edb9cf9d-3d3dc5f0" className="content-grid-history">$82.00</div>
-                    <div id="w-node-_40b77038-886e-e802-1b32-bbf728ba0ed5-3d3dc5f0" className="content-grid-history">#3</div>
-                    <div id="w-node-d3d40ff3-4e40-38e2-2744-e06399c6d325-3d3dc5f0" className="content-grid-history">$3,107.35</div>
-                    <div id="w-node-cfd1cd2f-1b84-f26e-4217-15c2258c7db5-3d3dc5f0" className="content-grid-history">6</div>
-                    <div id="w-node-aeb18608-fab3-8a4e-a6db-c30d30f06258-3d3dc5f0" className="content-grid-history">142</div>
-                    <div id="w-node-_19d36965-20fe-1bb9-80bb-719aed32d378-3d3dc5f0" className="content-grid-history">$100.00</div>
-                    <div id="w-node-ea22a431-b6af-e7de-7b5c-e6a18d0d40d0-3d3dc5f0" className="content-grid-history">#2</div>
-                    <div id="w-node-_6497bf6f-9e3a-6155-d62b-3c44ec42a4e0-3d3dc5f0" className="content-grid-history">$2,802.10</div>
-                    <div id="w-node-f795d8da-7c6b-8f2f-aafa-4b984d7a3396-3d3dc5f0" className="content-grid-history">12</div>
-                    <div id="w-node-_1b67f4f5-654d-32bc-3435-cf7e57bd8c17-3d3dc5f0" className="content-grid-history">172</div>
-                    <div id="w-node-aa5db594-d675-ce87-abce-94475be03f2a-3d3dc5f0" className="content-grid-history">$22.00</div>
-                    <div id="w-node-_65888af4-c1e6-20a2-9cdb-2ee96df26bea-3d3dc5f0" className="content-grid-history">#1</div>
-                    <div id="w-node-_5171b502-a0b4-a67f-923c-2fae49b3d9ae-3d3dc5f0" className="content-grid-history">$1,820.00</div>
-                    <div id="w-node-f5c7c90b-8499-e785-855a-3dbb80a5169f-3d3dc5f0" className="content-grid-history">45</div>
-                    <div id="w-node-_5f7ef733-14a7-273c-7e28-e2aba74798af-3d3dc5f0" className="content-grid-history">102</div>
-                    <div id="w-node-_2325228c-eb24-899d-519d-258763b597cb-3d3dc5f0" className="content-grid-history">$1.00</div>
+                    <div id="w-node-_64932c9e-4808-d561-0cd9-677953178864-3d3dc5f0" className="content-grid-history"> To be announced</div>
+                    <div id="w-node-_3fb0138f-fb6f-aa8d-0711-d670c91d5750-3d3dc5f0" className="content-grid-history"> </div>
+                    <div id="w-node-bcd0c380-d5a0-b33f-4f89-5178696c32d7-3d3dc5f0" className="content-grid-history"> </div>
+                    <div id="w-node-_138b185a-30d7-acc4-cfab-69438ef52dbc-3d3dc5f0" className="content-grid-history"> </div>
+                    <div id="w-node-_911736f7-4f0d-0086-e921-4ea6edb9cf9d-3d3dc5f0" className="content-grid-history"> </div>
                 </div>
             </div>
             {modalRedeem && <ModalRedeem setModalRedeem={setModalRedeem} ticket={ticket} setRedeemed={setRedeemed} />}

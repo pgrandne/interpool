@@ -30,6 +30,9 @@ interface IERC20 {
         uint256 amount
     ) external returns (bool);
 
+    /// @notice Withdraw USDC from No Pool No Game
+    function transfer(address recipient, uint amount) external returns (bool);
+
     /// @notice Mint token when user deposits on the pool
     function mint(address sender, uint amount) external;
 
@@ -85,6 +88,7 @@ contract IpPool is Ownable, Pausable {
         poolAave = PoolAave(0x368EedF3f56ad10b9bC57eed4Dac65B26Bb667f6);
         aUsdcToken = IERC20(0x1Ee669290939f8a8864497Af3BC83728715265FF);
         interpoolTicket = IERC20(0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1);
+        setInterpoolContract(0xBCDc8D3f7f20D1FB9419FB1BdbF028bb2651bEf1);
         globalPendingWinnings = 0;
     }
 
@@ -133,6 +137,8 @@ contract IpPool is Ownable, Pausable {
             "There is no pending winnings!"
         );
         uint256 amount = winningsPerPlayer[_player].pendingWinnings;
+        poolAave.withdraw(address(usdcToken), amount, address(this));
+        usdcToken.transfer(_player, amount);
         poolAave.withdraw(address(usdcToken), amount, _player);
         winningsPerPlayer[_player].pendingWinnings = 0;
         winningsPerPlayer[_player].claimedWinnings += amount;
@@ -147,7 +153,12 @@ contract IpPool is Ownable, Pausable {
             "You don't have enough tickets!"
         );
         interpoolTicket.burn(_player, _nbTickets);
-        poolAave.withdraw(address(usdcToken), _nbTickets * 50 * 10**6, _player);
+        poolAave.withdraw(
+            address(usdcToken),
+            _nbTickets * 50 * 10**6,
+            address(this)
+        );
+        usdcToken.transfer(_player, _nbTickets * 50 * 10**6);
     }
 
     /// @notice update winnings per player and global pending winnings
