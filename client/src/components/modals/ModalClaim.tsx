@@ -1,4 +1,6 @@
-import { useContractWrite, usePrepareContractWrite } from 'wagmi'
+import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 
@@ -8,17 +10,34 @@ function ModalClaim({ setModalClaim, pendingWinnings, setClaimed }: {
     setClaimed: React.Dispatch<React.SetStateAction<boolean>>
 }) {
     const addressNetwork: any = useAddressNetwork()
+    const [loading, setLoading] = useState(false)
     const { config }: { config: any } = usePrepareContractWrite({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'claim',
     })
-    const { write } = useContractWrite({
+    const { data, write } = useContractWrite({
         ...config,
-        onSuccess(data) {
-            setTimeout(function () { setModalClaim(false) }, 500)
-            setClaimed(true)
+        onSuccess() {
+            toast("⚽ Claim Requested!")
         },
+        onError() {
+            toast("❌ Claim canceled!")
+            setLoading(false)
+
+        }
+    })
+
+    useWaitForTransaction({
+        hash: data?.hash,
+        onSuccess() {
+            setClaimed(true)
+            setModalClaim(false)
+        },
+        onError() {
+            toast("❌ Transaction failed!")
+            setLoading(false)
+        }
     })
 
     return (
@@ -40,11 +59,12 @@ function ModalClaim({ setModalClaim, pendingWinnings, setClaimed }: {
                         <div className="text-block-41">USDC</div>
                     </div>
                 </div>
-                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className="hollow-button white"
+                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className={!loading ? "hollow-button white" : "hollow-button notactive"}
                     onClick={(e) => {
                         e.preventDefault()
+                        setLoading(true)
                         write?.()
-                    }}>Claim now!</a>
+                    }}>{loading && <i className="fa fa-refresh fa-spin"></i>} Claim now!</a>
             </div>
         </div>
     )

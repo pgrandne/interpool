@@ -29,7 +29,7 @@ function SectionAccount() {
 
     useEffect(() => {
         if (redeemed) {
-            toast("⚽ Redeem Confirmation!")
+            toast("⚽ Withdraw Confirmation!")
             setRedeemed(false)
         }
         if (claimed) {

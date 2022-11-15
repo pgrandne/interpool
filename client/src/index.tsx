@@ -49,7 +49,7 @@ const wagmiClient = createClient({
 root.render(
   <React.StrictMode>
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains} modalSize="compact" theme={darkTheme({
+      <RainbowKitProvider showRecentTransactions={true} chains={chains} modalSize="compact" theme={darkTheme({
         accentColor: 'none',
         accentColorForeground: 'black',
         borderRadius: 'large',

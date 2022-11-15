@@ -8,8 +8,8 @@ export interface MyWalletOptions {
 
 export const rainbowMagicConnector = ({ chains }: MyWalletOptions): Wallet => ({
     id: 'magic',
-    name: 'eMail or Social Login',
-    iconUrl: './images/email.png',
+    name: 'Email',
+    iconUrl: './images/proton.png',
     iconBackground: '#fff',
     createConnector: (): any => {
         const connector = new MagicAuthConnector({

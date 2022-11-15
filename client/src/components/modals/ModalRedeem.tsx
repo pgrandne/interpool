@@ -1,7 +1,8 @@
-import { useContractWrite, usePrepareContractWrite } from 'wagmi'
+import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
-
+import { ToastContainer, toast } from 'react-toastify';
+import { useState } from 'react';
 
 function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
     setModalRedeem: React.Dispatch<React.SetStateAction<boolean>>,
@@ -9,20 +10,35 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
     setRedeemed: React.Dispatch<React.SetStateAction<boolean>>
 }) {
     const addressNetwork: any = useAddressNetwork()
+    const [loading, setLoading] = useState(false)
     const { config }: { config: any } = usePrepareContractWrite({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'withdraw',
         args: [ticket]
     })
-    const { write } = useContractWrite({
+    const { write, data } = useContractWrite({
         ...config,
-        onSuccess(data) {
-            setTimeout(function () { setModalRedeem(false) }, 500)
-            setRedeemed(true)
+        onSuccess() {
+            toast("⚽ Withdraw Requested!")
         },
+        onError() {
+            toast("❌ Withdraw Canceled!")
+            setLoading(false)
+        }
     })
-    console.log(ticket)
+
+    useWaitForTransaction({
+        hash: data?.hash,
+        onSuccess() {
+            setRedeemed(true)
+            setModalRedeem(false)
+        },
+        onError() {
+            toast("❌ Transaction failed!")
+            setLoading(false)
+        }
+    })
 
     return (
         <div className="modal-wrapper">
@@ -46,12 +62,14 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
                         <div className="text-block-41">USDC</div>
                     </div>
                 </div>
-                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className="hollow-button white"
+                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className={!loading ? "hollow-button white" : "hollow-button notactive"}
                     onClick={(e) => {
                         e.preventDefault()
+                        setLoading(true)
                         write?.()
-                    }}> Confirm Ticket Redeem</a>
+                    }}> {loading && <i className="fa fa-refresh fa-spin"></i>} Confirm Ticket Redeem</a>
             </div>
+            <ToastContainer />
         </div >
     )
 }
