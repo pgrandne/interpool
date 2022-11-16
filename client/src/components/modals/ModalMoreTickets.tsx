@@ -1,4 +1,4 @@
-import { useAccount, useContractRead, erc20ABI } from "wagmi";
+import { useAccount, useContractRead, usePrepareContractWrite, useContract, erc20ABI } from "wagmi";
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { useState } from "react";
 import { ethers } from "ethers";
@@ -74,7 +74,7 @@ function ModalMoreTickets({ setModalMoreTickets, ticket, pendingWinnings }: {
                         </div>
                     </div>
                 </div>
-                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className="hollow-button white">Confirm</a>
+                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className="hollow-button white notactive">Confirm</a>
             </div>
         </div>
     )

@@ -20,10 +20,10 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
     const { write, data } = useContractWrite({
         ...config,
         onSuccess() {
-            toast("⚽ Withdraw Requested!")
+            toast("⚽ Withdrawal requested")
         },
         onError() {
-            toast("❌ Withdraw Canceled!")
+            toast("❌ Withdrawal Canceled")
             setLoading(false)
         }
     })
