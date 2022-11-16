@@ -74,7 +74,7 @@ function SectionAccount() {
                     <div id="w-node-e00559bd-addc-db20-b067-e2b04976c8e7-3d3dc5f0" className="account-details-grid-heading">Tickets</div>
                     <div id="w-node-c1e81ac4-71c0-32d4-6233-8d1a57d9a86d-3d3dc5f0" className="text-block-grid-content">{ticket}</div>
                     <div id="w-node-_23834aa8-b05c-48c4-6c93-858034514a29-3d3dc5f0">
-                        <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className="hollow-button white"
+                        <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className={isConnected ? "hollow-button white" : "hollow-button notactive"}
                             onClick={(e) => {
                                 e.preventDefault()
                                 setModalRedeem(true)
@@ -86,13 +86,13 @@ function SectionAccount() {
                     </div>
                     <div id="w-node-_18474311-dda1-9d24-5fc2-19e8d34e7da1-3d3dc5f0" className="text-block-grid-content">${pendingWinnings}</div>
                     <div id="w-node-_3613a481-370e-2c98-3fc4-cbfe298cc1cd-3d3dc5f0" className="div-block-49">
-                        <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted"
+                        <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className={isConnected ? "hollow-button white hollow-button-inverted" : "hollow-button notactive"}
                             onClick={(e) => {
                                 e.preventDefault()
                                 setModalMoreTickets(true)
                             }}
                         >Get more tickets!</a>
-                        <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted"
+                        <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className={isConnected ? "hollow-button white hollow-button-inverted" : "hollow-button notactive"}
                             onClick={(e) => {
                                 e.preventDefault()
                                 setModalClaim(true)

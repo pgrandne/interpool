@@ -66,6 +66,7 @@ function ModalClaim({ setModalClaim, pendingWinnings, setClaimed }: {
                         write?.()
                     }}>{loading && <i className="fa fa-refresh fa-spin"></i>} Claim now!</a>
             </div>
+            <ToastContainer />
         </div>
     )
 }

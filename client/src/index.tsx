@@ -23,7 +23,7 @@ const root = ReactDOM.createRoot(
 );
 
 const { chains, provider } = configureChains(
-  [chain.polygonMumbai],
+  [chain.goerli],
   [alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_ID })],
 );
 

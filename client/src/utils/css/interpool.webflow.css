@@ -219,6 +219,7 @@ ul {
   border-radius: 25px;
   color: grey;
   cursor: not-allowed;
+  pointer-events: none;
 
 }
 
