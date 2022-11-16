@@ -1679,7 +1679,7 @@ textarea.w-select {
   overflow: hidden;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .w-lightbox-content {
     height: 96vh;
     margin-top: 2vh;
@@ -1688,10 +1688,10 @@ textarea.w-select {
   .w-lightbox-view,
   .w-lightbox-view:before {
     height: 96vh;
-  }
+  } */
 
-  /* .w-lightbox-content */
-  .w-lightbox-group,
+/* .w-lightbox-content */
+/* .w-lightbox-group,
   .w-lightbox-group .w-lightbox-view,
   .w-lightbox-group .w-lightbox-view:before {
     height: 84vh;
@@ -1720,7 +1720,7 @@ textarea.w-select {
   .w-lightbox-control:hover {
     opacity: 1;
   }
-}
+} */
 
 .w-lightbox-inactive,
 .w-lightbox-inactive:hover {

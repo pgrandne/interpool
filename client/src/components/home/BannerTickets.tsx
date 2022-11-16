@@ -9,7 +9,7 @@ import { useCurrentContest } from '../../utils/useCurrentContest'
 
 function BannerTickets({ ticket }: { ticket: number }) {
     const contestId = useCurrentContest();
-    const [rank, setRank] = useState('0');
+    const [rank, setRank] = useState('-');
     const [nbPlayers, setNbPlayers] = useState('0');
     const { address, isConnected } = useAccount();
     const addressNetwork = useAddressNetwork();
@@ -33,7 +33,7 @@ function BannerTickets({ ticket }: { ticket: number }) {
         ],
         watch: true,
         onSuccess(data: any) {
-            isConnected ? setRank(ethers.utils.formatUnits(data[0]._hex, 0)) : setRank("0")
+            // isConnected ? setRank(ethers.utils.formatUnits(data[0]._hex, 0)) : setRank("0")
             setNbPlayers(ethers.utils.formatUnits(data[1]._hex, 0))
         },
     })

@@ -152,7 +152,7 @@
       ]
     },
     "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol": {
-      "lastModificationDate": 1666105542509,
+      "lastModificationDate": 1668548926433,
       "contentHash": "a1c7f80ae26f5b2d7d563475627fbf25",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol",
       "solcConfig": {
@@ -190,8 +190,8 @@
       ]
     },
     "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1666105542505,
-      "contentHash": "af7bd64e1cfefbf6cb07f2adc1a25392",
+      "lastModificationDate": 1668548926429,
+      "contentHash": "834a0dde221759af42b030253315b086",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -301,7 +301,7 @@
       ]
     },
     "/home/perrin/Project/Interpool/core/contracts/IpErc20Ticket.sol": {
-      "lastModificationDate": 1668166648727,
+      "lastModificationDate": 1668533906683,
       "contentHash": "d51491a9d2363a97a8e94f5b5401a756",
       "sourceName": "contracts/IpErc20Ticket.sol",
       "solcConfig": {
@@ -341,8 +341,8 @@
       ]
     },
     "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/access/AccessControl.sol": {
-      "lastModificationDate": 1666105542381,
-      "contentHash": "e6ef731d275b1e7b2995f00fa56d9dab",
+      "lastModificationDate": 1668548925913,
+      "contentHash": "95a6c227d1b8843e9385518a5bce4853",
       "sourceName": "@openzeppelin/contracts/access/AccessControl.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -416,8 +416,8 @@
       ]
     },
     "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1666105542729,
-      "contentHash": "cf46906c4035f51639a22265066a9e78",
+      "lastModificationDate": 1668548927153,
+      "contentHash": "396031251978f8febfd90cb62cb240ec",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
         "version": "0.8.15",
@@ -442,7 +442,9 @@
           }
         }
       },
-      "imports": [],
+      "imports": [
+        "./math/Math.sol"
+      ],
       "versionPragmas": [
         "^0.8.0"
       ],
@@ -998,6 +1000,41 @@
       ],
       "artifacts": [
         "OracleInterface"
+      ]
+    },
+    "/home/perrin/Project/Interpool/core/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1668548926985,
+      "contentHash": "b9c58920ce74d6dc819161786112e7ee",
+      "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
+      "solcConfig": {
+        "version": "0.8.15",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Math"
       ]
     }
   }
