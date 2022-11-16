@@ -1,7 +1,8 @@
-import { useAccount, useContractReads, erc20ABI } from "wagmi";
+import { useAccount, useContractRead, erc20ABI } from "wagmi";
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { useState } from "react";
 import { ethers } from "ethers";
+import { ABI_Interpool } from '../../utils/ABI_Interpool'
 
 function ModalMoreTickets({ setModalMoreTickets, ticket, pendingWinnings }: {
     setModalMoreTickets: React.Dispatch<React.SetStateAction<boolean>>,
@@ -9,26 +10,20 @@ function ModalMoreTickets({ setModalMoreTickets, ticket, pendingWinnings }: {
     pendingWinnings: number
 }) {
     const addressNetwork = useAddressNetwork()
-    const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
+    const { address }: { address: any } = useAccount()
     const [usdcBalance, setUsdcBalance] = useState(0)
-    const usdcContract = {
+    const [newTicket, setNewTicket] = useState(1)
+
+    useContractRead({
         address: addressNetwork.usdcContract,
         abi: erc20ABI,
-    }
-
-    useContractReads({
-        contracts: [
-            {
-                ...usdcContract,
-                functionName: 'balanceOf',
-                args: [isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
-            },
-        ],
-        watch: true,
+        functionName: 'balanceOf',
+        args: [address],
         onSuccess(data: any) {
-            setUsdcBalance(parseInt(ethers.utils.formatUnits(data[0]._hex, 6)))
+            setUsdcBalance(parseFloat(ethers.utils.formatUnits(data._hex, 6)))
         },
     })
+
     return (
         <div className="modal-wrapper">
             <div data-w-id="8332a3c0-a742-fae8-9847-b84aee7f42c1" className="modal-outside-trigger" onClick={(e) => { setModalMoreTickets(false) }}></div>
@@ -46,7 +41,7 @@ function ModalMoreTickets({ setModalMoreTickets, ticket, pendingWinnings }: {
                     </div>
                     <div className="div-block-46">
                         <div className="text-block-50">Wallet balance:</div>
-                        <div className="text-block-51">{usdcBalance} USDC</div>
+                        <div className="text-block-51">{usdcBalance.toFixed(2)} USDC</div>
                     </div>
                 </div>
                 <div className="div-block-39 div-block-39-var-more-tickets">
@@ -54,7 +49,13 @@ function ModalMoreTickets({ setModalMoreTickets, ticket, pendingWinnings }: {
                         <div id="w-node-a176e6d6-2dd2-571b-7ec6-742bc50f177c-3d3dc5f0" className="div-block-38"><img src="images/next.png" loading="lazy" alt="" className="image-17" /></div>
                         <div id="w-node-a176e6d6-2dd2-571b-7ec6-742bc50f177e-3d3dc5f0" className="div-block-36">
                             <div className="div-block-37"><img src="images/ticket-2.png" loading="lazy" alt="" className="image-16" />
-                                <div className="text-block-43 text-block-43-variation">00</div>
+                                <input type="string" className="text-field w-input" maxLength={256} name="name-8" data-name="Name 8" placeholder={newTicket.toString()} id="name-8"
+                                    onChange={(e) => {
+                                        e.target.value !== '' ?
+                                            setNewTicket(parseInt(e.target.value)) :
+                                            setNewTicket(0)
+                                    }}
+                                />
                             </div>
                             <div className="text-block-41">x Ticket(s)</div>
                         </div>
@@ -67,7 +68,7 @@ function ModalMoreTickets({ setModalMoreTickets, ticket, pendingWinnings }: {
                         </div>
                         <div className="div-block-36 div-block-36-variation-more-tickets">
                             <div className="div-block-37 div-block-37-variation-more-tickets"><img src="images/usd-coin-usdc-logo.png" loading="lazy" srcSet="images/usd-coin-usdc-logo-p-500.png 500w, images/usd-coin-usdc-logo-p-800.png 800w, images/usd-coin-usdc-logo-p-2000.png 2000w, images/usd-coin-usdc-logo.png 2000w" sizes="100vw" alt="" className="image-16" />
-                                <div className="text-block-48">0</div>
+                                <div className="text-block-48">{50 * newTicket - pendingWinnings}</div>
                             </div>
                             <div className="text-block-47">USDC</div>
                         </div>

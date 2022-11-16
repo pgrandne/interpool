@@ -8,7 +8,7 @@ function SectionGetYourTickets() {
     const [deposited, setDeposited] = useState(false)
     useEffect(() => {
         if (deposited) {
-            toast("⚽ USDC Deposit Confirmation!")
+            toast(`⚽ ${nbTickets * 50} USDC deposit confirmed!`)
             setDeposited(false)
         }
     }, [deposited])

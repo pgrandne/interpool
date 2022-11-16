@@ -19,7 +19,7 @@ function ModalClaim({ setModalClaim, pendingWinnings, setClaimed }: {
     const { data, write } = useContractWrite({
         ...config,
         onSuccess() {
-            toast("⚽ Claim Requested!")
+            toast("⚽ Claim requested")
         },
         onError() {
             toast("❌ Claim canceled!")

@@ -27,7 +27,7 @@ function ModalSubmit({ prediction, setModalSubmit, setSubmitted }: {
     const { data, write } = useContractWrite({
         ...config,
         onSuccess() {
-            toast("⚽ Submission Requested!")
+            toast("⚽ Submission requested!")
         },
         onError() {
             toast("❌ Submission Canceled!")

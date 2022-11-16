@@ -22,7 +22,7 @@ function WCMatchLists({ ticket }: { ticket: number }) {
     const [predictionsOpen, setPredictionsOpen] = useState(true)
     useEffect(() => {
         if (submitted) {
-            toast("⚽ Your predictions are being recorded on the blockchain!")
+            toast("⚽ Your predictions have been saved on the blockchain!")
             setSubmitted(false)
         }
     }, [submitted])

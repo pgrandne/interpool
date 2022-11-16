@@ -19,7 +19,7 @@ function Approve({ amount, amountApproved }: { amount: number, amountApproved: n
     const { write, data } = useContractWrite({
         ...config,
         onSuccess() {
-            toast("⚽ USDC spending limit approval!")
+            toast(`⚽ ${amount} USDC spending limit approval`)
         },
         onError() {
             toast("❌ Approval Canceled!")
@@ -30,7 +30,7 @@ function Approve({ amount, amountApproved }: { amount: number, amountApproved: n
     useWaitForTransaction({
         hash: data?.hash,
         onSuccess() {
-            toast("⚽ USDC Approval Done!")
+            toast(`⚽ ${amount} USDC spending limit Approved!`)
             setApproving(false)
         },
         onError() {
@@ -65,7 +65,7 @@ function Deposit({ amount, amountApproved, setModalDeposit, setDeposited }: {
         functionName: 'deposit',
         args: [ethers.BigNumber.from(amount)],
         onSuccess() {
-            toast("⚽ USDC Deposit Request!")
+            toast(`⚽ ${amount} USDC deposit requested`)
         },
         onError() {
             toast("❌ Deposit Canceled!")
