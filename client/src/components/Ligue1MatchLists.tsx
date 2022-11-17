@@ -4,7 +4,7 @@ import { useAccount, useContractRead } from 'wagmi'
 import ModalSubmit from './modals/ModalSubmit'
 import { useAddressNetwork } from "../utils/useAddressNetwork"
 import { ABI_Interpool } from '../utils/ABI_Interpool'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { ethers } from 'ethers'
 interface IFormInput {
     match1HomeScore: string,
@@ -191,7 +191,6 @@ function Ligue1MatchLists({ ticket }: { ticket: number }) {
                 </div>
             </form >
             {modalSubmit && <ModalSubmit prediction={prediction} setModalSubmit={setModalSubmit} setSubmitted={setSubmitted} />}
-            <ToastContainer />
         </Fragment>
     )
 }

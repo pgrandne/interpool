@@ -1,7 +1,7 @@
 import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useState } from 'react';
 interface IPrediction {
     gameId: number,
@@ -66,7 +66,6 @@ function ModalSubmit({ prediction, setModalSubmit, setSubmitted }: {
                     }}
                 >{loading && <i className="fa fa-refresh fa-spin"></i>} Confirm!</a>
             </div>
-            <ToastContainer />
         </div>
     )
 }

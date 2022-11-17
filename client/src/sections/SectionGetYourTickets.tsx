@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ModalDeposit from "../components/modals/ModalDeposit";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useAccount } from "wagmi";
 
 function SectionGetYourTickets() {
@@ -45,7 +45,6 @@ function SectionGetYourTickets() {
                 </div>
             </div>
             {modalDeposit && <ModalDeposit nbTickets={nbTickets} setModalDeposit={setModalDeposit} setDeposited={setDeposited} />}
-            <ToastContainer />
         </section >
     )
 }

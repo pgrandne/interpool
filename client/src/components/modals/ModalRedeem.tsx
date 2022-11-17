@@ -1,7 +1,7 @@
 import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useState } from 'react';
 
 function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
@@ -69,7 +69,6 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
                         write?.()
                     }}> {loading && <i className="fa fa-refresh fa-spin"></i>} Confirm Ticket Redeem</a>
             </div>
-            <ToastContainer />
         </div >
     )
 }

@@ -8,6 +8,7 @@ import SectionHowToPlay from './sections/SectionHowToPlay';
 import SectionGetYourTickets from './sections/SectionGetYourTickets';
 import SectionHome from './sections/SectionHome';
 import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [sections, setSections] = useState<any>()
@@ -35,6 +36,7 @@ function App() {
       <SectionHowToPlay />
       <SectionAccount />
       <Footer />
+      <ToastContainer />
     </div>
   );
 }

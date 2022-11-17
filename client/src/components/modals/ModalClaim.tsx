@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
@@ -66,7 +66,6 @@ function ModalClaim({ setModalClaim, pendingWinnings, setClaimed }: {
                         write?.()
                     }}>{loading && <i className="fa fa-refresh fa-spin"></i>} Claim now!</a>
             </div>
-            <ToastContainer />
         </div>
     )
 }

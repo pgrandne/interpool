@@ -107,6 +107,11 @@ ul {
   padding-left: 0px;
 }
 
+ul.a {
+  list-style-type: square;
+  padding-left: 40px;
+}
+
 
 .button {
   display: inline-block;

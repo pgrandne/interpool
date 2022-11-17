@@ -13,8 +13,8 @@ const GetBalance = () => {
 }
 
 
-const Faucet = () => {
-    console.log(GetBalance())
+function Faucet() {
+    const { address }: { address: any } = useAccount()
     const [loading, setLoading] = useState(false)
     const { config } = usePrepareContractWrite({
         address: goerli.usdcContract,
@@ -59,11 +59,33 @@ const Faucet = () => {
         }
     })
 
+
+    const handleCopy = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        e.preventDefault()
+        toast.update("goerli", {
+            render: () => <Msg2 />
+        });
+    }
+
     const Msg: any = ({ closeToast, toastProps }: { closeToast: any, toastProps: any }) => (
         <div>
             ⚽ You need Goerli ETH to proceed transactions! <br />
-            Go claim < a href="https://goerlifaucet.com/" > here</a > <br />
-            Or ask us on < a href="https://twitter.com/IrruptionLab" > Twitter</a >
+            <ul className="a">
+                <li>Click <a href="/" onClick={(e) => { handleCopy(e) }} >here</a> to copy your address</li>
+                <li>Go claim < a href="https://goerlifaucet.com/" target="_blank" rel="noreferrer"> here</a ></li>
+                <li>Or ask us on < a href="https://twitter.com/IrruptionLab" target="_blank" rel="noreferrer"> Twitter</a ></li>
+            </ul>
+        </div >
+    )
+
+    const Msg2: any = ({ closeToast, toastProps }: { closeToast: any, toastProps: any }) => (
+        <div>
+            ⚽ You need Goerli ETH to proceed transactions! <br />
+            <ul className="a">
+                <li>Copied!</li>
+                <li>Go claim < a href="https://goerlifaucet.com/" target="_blank" rel="noreferrer" > here</a ></li>
+                <li>Or ask us on < a href="https://twitter.com/IrruptionLab" target="_blank" rel="noreferrer" > Twitter</a ></li>
+            </ul>
         </div >
     )
 
@@ -75,7 +97,16 @@ const Faucet = () => {
                     setLoading(true)
                     write?.()
                 } else {
-                    toast(<Msg />, { autoClose: 10000 })
+                    toast(<Msg />, {
+                        toastId: "goerli",
+                        position: 'top-left',
+                        autoClose: false,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: false,
+                        style: { width: "500px" }
+                    }
+                    )
                 }
             }}> {loading && <i className="fa fa-refresh fa-spin"></i>} Faucet 50 USDC</a >
     )

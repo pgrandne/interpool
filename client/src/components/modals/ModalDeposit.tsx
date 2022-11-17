@@ -5,7 +5,7 @@ import { erc20ABI } from 'wagmi'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import Faucet from '../../utils/Faucet'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function Approve({ amount, amountApproved }: { amount: number, amountApproved: number }) {
     const addressNetwork: any = useAddressNetwork()
@@ -154,7 +154,6 @@ function ModalDeposit({ nbTickets, setModalDeposit, setDeposited }: { nbTickets:
                 {balance < nbTickets * 50 && <Faucet />}
                 <p className="paragraph-2">*Get your Deposit back anytime after the game completion or before predictions submission.</p>
             </div>
-            <ToastContainer />
         </div>
     )
 }

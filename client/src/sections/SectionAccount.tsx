@@ -7,7 +7,7 @@ import { useAccount, useContractReads, erc20ABI } from "wagmi";
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ABI_Interpool } from '../utils/ABI_Interpool'
 import { ethers } from 'ethers'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function SectionAccount() {
     const addressNetwork = useAddressNetwork()
@@ -119,7 +119,6 @@ function SectionAccount() {
             {modalRedeem && <ModalRedeem setModalRedeem={setModalRedeem} ticket={ticket} setRedeemed={setRedeemed} />}
             {modalMoreTickets && <ModalMoreTickets setModalMoreTickets={setModalMoreTickets} ticket={ticket} pendingWinnings={pendingWinnings} />}
             {modalClaim && <ModalClaim setModalClaim={setModalClaim} pendingWinnings={pendingWinnings} setClaimed={setClaimed} />}
-            <ToastContainer />
         </section>
     )
 }
