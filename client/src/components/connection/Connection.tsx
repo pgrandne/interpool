@@ -15,7 +15,7 @@ function Connection() {
                     // color: "#000",
                 }}
             >
-                <ConnectButton />
+                <ConnectButton label="Connect" />
             </div >
         )
     } else {
