@@ -40,22 +40,24 @@ function Faucet() {
     const { data, write } = useContractWrite({
         ...config,
         onSuccess() {
-            toast("⚽ 100 USDC Requested!")
+            toast("⚽ 50 USDC Requested!")
         },
-        onError() {
+        onError(error) {
             toast("❌ Request Canceled!")
             setLoading(false)
+            console.log(error)
         }
     })
 
     useWaitForTransaction({
         hash: data?.hash,
         onSuccess() {
-            toast("⚽ 100 USDC Received!")
+            toast("⚽ 50 USDC Received!")
         },
-        onError() {
+        onError(error) {
             toast("❌ Transaction failed!")
             setLoading(false)
+            console.log(error)
         }
     })
 
@@ -69,12 +71,11 @@ function Faucet() {
 
     const Msg: any = ({ closeToast, toastProps }: { closeToast: any, toastProps: any }) => (
         <div>
-            ⚽ You need Goerli ETH to proceed transactions! <br />
-            <ul className="a">
-                <li>Click <a href="/" onClick={(e) => { handleCopy(e) }} >here</a> to copy your address</li>
-                <li>Go claim < a href="https://goerlifaucet.com/" target="_blank" rel="noreferrer"> here</a ></li>
-                <li>Or ask us on < a href="https://twitter.com/IrruptionLab" target="_blank" rel="noreferrer"> Twitter</a ></li>
-            </ul>
+            ⚽ You need Gas for transaction fees: <br />
+            <ol className="a">
+                <li>First, click <a href="/" onClick={(e) => { handleCopy(e) }} >here</a> to copy your address</li>
+                <li>Then, claim some < a href="https://goerlifaucet.com/" target="_blank" rel="noreferrer"> here</a > for free or DM us on < a href="https://twitter.com/IrruptionLab" target="_blank" rel="noreferrer"> Twitter</a ></li>
+            </ol>
         </div >
     )
 
@@ -100,10 +101,9 @@ function Faucet() {
                     toast(<Msg />, {
                         toastId: "goerli",
                         position: 'top-left',
-                        autoClose: false,
+                        autoClose: 15000,
                         hideProgressBar: false,
                         closeOnClick: false,
-                        pauseOnHover: false,
                         style: { width: "500px" }
                     }
                     )

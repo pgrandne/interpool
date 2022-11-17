@@ -552,7 +552,7 @@ ul.a {
 
 .div-block-ticket:hover {
   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-  filter: blur(0.5px);
+  /* filter: blur(1px); */
   animation: glowing 20s linear infinite;
   opacity: 1;
   transition: opacity .3s ease-in-out;
