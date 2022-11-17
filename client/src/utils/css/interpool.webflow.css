@@ -509,7 +509,7 @@ ul.a {
   background-color: #4e36e2;
   position: relative;
   z-index: 0;
-  animation: wiggle 2s linear infinite;
+  animation: wiggle 2s linear;
 }
 
 
