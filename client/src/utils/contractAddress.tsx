@@ -1,9 +1,10 @@
 export const mumbai = {
     name: 'Mumbai',
-    interPoolContract: '0xe324802179468bAD202E0fbded5EbB4643cDb270',
-    interPoolTicketContract: '0xED8573dE49Ee095607fF6fc3658869b75E60ff71',
+    interPoolContract: '0x46caF9ebEEa03ba564B71AacDfd65ffC9D0C0D42',
+    interPoolTicketContract: '0x2e489Db34cB848fE5C9e73A01b683A6Edf747011',
     usdcContract: '0x9aa7fEc87CA69695Dd1f879567CcF49F3ba417E2',
-    poolContract: 'dead'
+    poolContract: '0x00858C026e7Ef3DA9a98725B20d99B3001255254'
+    // enetContract: '0x50612995185cd0C339897eB92aeA9800929D76aE'
 }
 
 export const goerli = {
