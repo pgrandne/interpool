@@ -64,6 +64,7 @@ function Faucet() {
 
     const handleCopy = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault()
+        navigator.clipboard.writeText(address)
         toast.update("goerli", {
             render: () => <Msg2 />
         });
@@ -82,11 +83,10 @@ function Faucet() {
     const Msg2: any = ({ closeToast, toastProps }: { closeToast: any, toastProps: any }) => (
         <div>
             ⚽ You need Goerli ETH to proceed transactions! <br />
-            <ul className="a">
+            <ol className="a">
                 <li>Copied!</li>
-                <li>Go claim < a href="https://goerlifaucet.com/" target="_blank" rel="noreferrer" > here</a ></li>
-                <li>Or ask us on < a href="https://twitter.com/IrruptionLab" target="_blank" rel="noreferrer" > Twitter</a ></li>
-            </ul>
+                <li>Then, claim some < a href="https://goerlifaucet.com/" target="_blank" rel="noreferrer"> here</a > for free or DM us on < a href="https://twitter.com/IrruptionLab" target="_blank" rel="noreferrer"> Twitter</a ></li>
+            </ol>
         </div >
     )
 

@@ -8,10 +8,27 @@ The documentation of this dapp is available on this link https://perrin.gitbook.
 Interpool is open source, smart contracts are into this repository.
 
 This repository contains 4 smart contracts:
-   - InterpoolContract.sol : contract with rules for calculate ranking and scoring of contests : https://goerli.etherscan.io/address/0xEA32f5cc7318Ed376FEda4BEB10DD8192Bda3611
-   - IpEnetScore.sol : oracle contract for getting FIFA World Cup games data https://goerli.etherscan.io/address/0x49672EdD419e4795307CCC906Cab0E8Fc5d147f9
-   - IpErc20Ticket.sol : contract for ERC20 token ticket : 1 ticket = 50$ https://goerli.etherscan.io/address/0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1
-   - IpPool.sol : contract for deposit and withdraw on Aave https://goerli.etherscan.io/address/0x80A9c7C5F5BFD765A2dC3773dFF00d02Db8B34aE
+   - InterpoolContract.sol : contract with rules for calculate ranking and scoring of contests : 
+      * https://goerli.etherscan.io/address/0xEA32f5cc7318Ed376FEda4BEB10DD8192Bda3611
+   - IpEnetScore.sol : oracle contract for getting FIFA World Cup games data 
+      * https://goerli.etherscan.io/address/0x49672EdD419e4795307CCC906Cab0E8Fc5d147f9
+   - IpErc20Ticket.sol : contract for ERC20 token ticket : 1 ticket = 50$ 
+        * https://goerli.etherscan.io/address/0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1
+   - IpPool.sol : contract for deposit and withdraw on Aave 
+    https://goerli.etherscan.io/address/0x80A9c7C5F5BFD765A2dC3773dFF00d02Db8B34aE
+
+
+Contract Address on Ethereum Goerli Testnet:
+     * InterpoolContract.sol : https://goerli.etherscan.io/address/0xEA32f5cc7318Ed376FEda4BEB10DD8192Bda3611
+     * IpEnetScore.sol : https://goerli.etherscan.io/address/0x49672EdD419e4795307CCC906Cab0E8Fc5d147f9
+     * IpErc2OTicket.sol : https://goerli.etherscan.io/address/0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1
+     * IpPool.sol : https://goerli.etherscan.io/address/0x80A9c7C5F5BFD765A2dC3773dFF00d02Db8B34aE
+
+Contract Address on Polygon Mumbai Testnet:
+     * InterpoolContract.sol : https://mumbai.polygonscan.com/address/0x46caF9ebEEa03ba564B71AacDfd65ffC9D0C0D42
+     * IpEnetScore.sol : https://mumbai.polygonscan.com/address/0x50612995185cd0C339897eB92aeA9800929D76aE
+     * IpErc2OTicket.sol : https://mumbai.polygonscan.com/address/0x2e489Db34cB848fE5C9e73A01b683A6Edf747011
+     * IpPool.sol : https://mumbai.polygonscan.com/address/0x00858C026e7Ef3DA9a98725B20d99B3001255254
 
 ## Building Interpool
 ##### Clone the project

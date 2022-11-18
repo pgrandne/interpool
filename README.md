@@ -3,12 +3,13 @@ Interpool is a GameFi with no loosers, where the winners share the interests gen
 We've been widely inspired by PoolTogether which uses the same concept but for a lottery. On our project we wanted to remove the random factor, and replace it by the skill factor, so the best players can change the odds in their favor.
 Our first final version of our concept is a Prediction Game on the 2024 FIFA World Cup
 
-The documentation of this dapp is available on this link https://perrin.gitbook.io/interpool/
+The documentation of this dapp is available on this link https://irruption-lab.gitbook.io/interpool
+
 
 Interpool is open source, you can find all the project in this repository.
 This repository has 2 folders:
 - client for Front End
-- core for Core Contracts
+- core for Core Contracts (contracts are deployed on Goerli and Mumbai)
 
 ## Roadmap
 
@@ -21,7 +22,7 @@ This repository has 2 folders:
 
   
 ### LongTerm
-- [ ] Deploy on other networks
+- [ ] Deploy on one mainnet
 - [ ] Add several contests and sports
 - [ ] Build a DAO for managing the protocol
 
@@ -55,6 +56,9 @@ $ npm start
 The backend server must be launched to display and interact with the catalog
 Please follow next section for installing and deploying backend server
 
+5. Contracts addresses are saved on ./src/utils.contractAddress.tsx
+If you want to use your own deployed contracts, you have to update addresses from this file
+
 ### Core Contracts ###
 We use Hardhat
 
@@ -76,9 +80,9 @@ $ cd contracts
 4. We use .env for environment variables. Change the name of env.example to .env and fill in the 3 variables :
    - We use ALCHEMY_ID for the provider
    - We use PRIVATE KEY for the deployment
-   - We use ETHERSCAN_API for contracts verification
+   - We use ETHERSCAN_API/POLYGONSCAN_API for contracts verification
 
-5. We have configured 3 networks in `hardhat.config.js`:
+5. We have configured 3 networks in `hardhat.config.js` (contrats are deployed only on Goerli and Mumbai)
    - Ehtereum Goerli
    - Mainnet Optimism
    - Testnet Optimism
@@ -88,7 +92,7 @@ $ cd contracts
 6. For deploying a contract, go to "scripts" folder and open deploy.js. Replace the parameter of ContractFactory by the name of the contract that you want to deploy:
 `const Contract = await ethers.getContractFactory("InterpoolContract");`
 
-7. Compile and deploy the contract:
+7. Compile and deploy the contract on Goerli (change by another network like mumbai if you want):
 ```bash
 $ npx hardhat compile
 $ npx hardhat run --network goerli scripts/deploy.js
