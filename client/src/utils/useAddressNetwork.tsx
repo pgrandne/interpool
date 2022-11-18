@@ -13,7 +13,7 @@ const useAddressNetwork = () => {
                 case ('Goerli'):
                     setAddressNetwork(goerli);
                     break;
-                case ('Mumbai'):
+                case ('Polygon Mumbai'):
                     setAddressNetwork(mumbai);
                     break;
                 default:

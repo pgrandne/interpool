@@ -77,12 +77,12 @@ $ npm install
 $ cd contracts
 ```
 
-4. We use .env for environment variables. Change the name of env.example to .env and fill in the 3 variables :
+4. We use .env for environment variables. Change the name of env.example to .env and fill in the 3 variables:
    - We use ALCHEMY_ID for the provider
    - We use PRIVATE KEY for the deployment
    - We use ETHERSCAN_API/POLYGONSCAN_API for contracts verification
 
-5. We have configured 3 networks in `hardhat.config.js` (contrats are deployed only on Goerli and Mumbai)
+5. We have configured 3 networks in `hardhat.config.js` (contrats are deployed only on Goerli and Mumbai):
    - Ehtereum Goerli
    - Mainnet Optimism
    - Testnet Optimism
@@ -99,5 +99,5 @@ $ npx hardhat run --network goerli scripts/deploy.js
 ```
 8. Verify the contract on Etherscan
 ```bash
-$ npx hardhat verify --network goerli
+$ npx hardhat verify --network goerli YOUR_CONTRACT_ADDRESS
 ```

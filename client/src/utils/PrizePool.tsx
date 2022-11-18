@@ -1,4 +1,4 @@
-import { useContractRead } from 'wagmi'
+import { useContractRead, useNetwork } from 'wagmi'
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ethers } from 'ethers'
 import { useState } from 'react'
@@ -7,6 +7,7 @@ import { ABI_Interpool } from '../utils/ABI_Interpool'
 function PrizePool() {
     const [prizePool, setPrizePool] = useState(0)
     const addressNetwork: any = useAddressNetwork()
+    const { chain } = useNetwork()
 
     useContractRead({
         address: addressNetwork.interPoolContract,
@@ -18,7 +19,7 @@ function PrizePool() {
     })
 
     return (
-        <div id="w-node-_6b61e304-fb49-a93b-24a7-20abbc4407ce-3d3dc5f0" className="text-block text-block-variation">${prizePool.toFixed(2)}</div>
+        <div id="w-node-_6b61e304-fb49-a93b-24a7-20abbc4407ce-3d3dc5f0" className="text-block text-block-variation">{chain?.name === 'Goerli' ? prizePool.toFixed(2) : prizePool} </div>
     )
 }
 
