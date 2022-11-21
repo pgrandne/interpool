@@ -31,8 +31,6 @@ input[type=number] {
   grid-column-gap: 16px;
 }
 
-
-
 .content {
   height: 100%;
   /* padding-left: 329px; */
@@ -112,6 +110,10 @@ ul.a {
   padding-left: 40px;
 }
 
+.content-grid-history-selected {
+  color: green;
+  font-weight: bold;
+}
 
 .button {
   display: inline-block;

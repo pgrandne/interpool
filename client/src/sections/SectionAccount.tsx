@@ -8,6 +8,7 @@ import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ABI_Interpool } from '../utils/ABI_Interpool'
 import { ethers } from 'ethers'
 import { toast } from 'react-toastify';
+import ContestTable from "../components/ContestTable";
 
 function SectionAccount() {
     const addressNetwork = useAddressNetwork()
@@ -102,19 +103,8 @@ function SectionAccount() {
                     <div id="w-node-cd5c49f3-3443-15f4-fee3-549c3907df1f-3d3dc5f0" className="account-details-grid-heading">Total Winnings</div>
                     <div id="w-node-_691393fb-f6ac-f9a3-ad79-c9918787c975-3d3dc5f0" className="text-block-grid-content">${pendingWinnings + claimedWinnings}</div>
                 </div>
-                <h1>Final contest ranking</h1>
-                <div className="w-layout-grid grid-4">
-                    <div id="w-node-ade59832-9e80-0a14-2933-cb481c0bd5c8-3d3dc5f0" className="header-grid-history header-grid-history-left">Player</div>
-                    <div id="w-node-_529643fb-8c8a-4deb-3340-ec7494a5abee-3d3dc5f0" className="header-grid-history">Number of tickets</div>
-                    <div id="w-node-_3516d465-5aa2-1ac4-fafa-6dfe38e10d3d-3d3dc5f0" className="header-grid-history">Rank</div>
-                    <div id="w-node-e0051b68-543d-1fe6-cef2-e0c50e02645a-3d3dc5f0" className="header-grid-history">Global Prize Pool</div>
-                    <div id="w-node-d12aa462-b1e7-5186-1dbe-5765aa5e3ae9-3d3dc5f0" className="header-grid-history header-grid-history-droite">Winnings</div>
-                    <div id="w-node-_64932c9e-4808-d561-0cd9-677953178864-3d3dc5f0" className="content-grid-history"> To be announced</div>
-                    <div id="w-node-_3fb0138f-fb6f-aa8d-0711-d670c91d5750-3d3dc5f0" className="content-grid-history"> </div>
-                    <div id="w-node-bcd0c380-d5a0-b33f-4f89-5178696c32d7-3d3dc5f0" className="content-grid-history"> </div>
-                    <div id="w-node-_138b185a-30d7-acc4-cfab-69438ef52dbc-3d3dc5f0" className="content-grid-history"> </div>
-                    <div id="w-node-_911736f7-4f0d-0086-e921-4ea6edb9cf9d-3d3dc5f0" className="content-grid-history"> </div>
-                </div>
+                <h1>Current contest ranking</h1>
+                <ContestTable />
             </div>
             {modalRedeem && <ModalRedeem setModalRedeem={setModalRedeem} ticket={ticket} setRedeemed={setRedeemed} />}
             {modalMoreTickets && <ModalMoreTickets setModalMoreTickets={setModalMoreTickets} ticket={ticket} pendingWinnings={pendingWinnings} />}
