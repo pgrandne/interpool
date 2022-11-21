@@ -1,6 +1,6 @@
 import Countdown from '../../utils/Countdown'
 import PrizePool from '../../utils/PrizePool'
-import { useAccount, useContractReads } from 'wagmi'
+import { useContractRead } from 'wagmi'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { ethers } from 'ethers'
@@ -9,36 +9,17 @@ import { useCurrentContest } from '../../utils/useCurrentContest'
 
 function BannerTickets({ ticket }: { ticket: number }) {
     const contestId = useCurrentContest();
-    const [rank, setRank] = useState('-');
     const [nbPlayers, setNbPlayers] = useState('0');
-    const { address, isConnected } = useAccount();
     const addressNetwork = useAddressNetwork();
-    const interPoolContract = {
+    useContractRead({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
-    }
-    useContractReads({
-        contracts: [
-            {
-                ...interPoolContract,
-                functionName: 'getPlayerRank',
-                args: [contestId, address],
-            },
-            {
-                address: addressNetwork.interPoolContract,
-                abi: ABI_Interpool,
-                functionName: 'getNumberOfPlayers',
-                args: [contestId],
-            },
-        ],
-        watch: true,
+        functionName: 'getNumberOfPlayers',
+        args: [contestId],
         onSuccess(data: any) {
-            // isConnected ? setRank(ethers.utils.formatUnits(data[0]._hex, 0)) : setRank("0")
-            setNbPlayers(ethers.utils.formatUnits(data[1]._hex, 0))
+            setNbPlayers(ethers.utils.formatUnits(data._hex, 0))
         },
     })
-
-
 
     return (
         <div className="w-layout-grid grid grid-with-ticket">
@@ -53,10 +34,10 @@ function BannerTickets({ ticket }: { ticket: number }) {
                 </div>
             </div>
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb21704f-3d3dc5f0" className="div-block color-variation-1">
-                <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217050-3d3dc5f0" className="div-block-2"><img src="images/ranking-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
+                <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217050-3d3dc5f0" className="div-block-2"><img src="images/participant-white.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217052-3d3dc5f0" className="div-block-info">
-                    <div className="text-block-3">Current Rank</div>
-                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217055-3d3dc5f0" className="text-block">{rank === "0" ? "-" : rank} / {nbPlayers}</div>
+                    <div className="text-block-3">Participants</div>
+                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217055-3d3dc5f0" className="text-block">{nbPlayers}</div>
                 </div>
             </div>
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217057-3d3dc5f0" className="div-block colorvariation-2">
