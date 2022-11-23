@@ -19,7 +19,7 @@ function ContestTable() {
             <div className="header-grid-history header-grid-history-droite">Winnings</div>
             {/*0xFDdc8C8305C101e7Fa9b3C6a93008785e5f5F51d*/}
             {players.map(element =>
-                <Fragment>
+                <Fragment key={element.player}>
                     <div className={playerAddress === element.player ? "content-grid-history-selected" : "content-grid-history"}>{element.player.substring(0, 4)}...{element.player.substring(element.player.length - 4)}</div>
                     <div className={playerAddress === element.player ? "content-grid-history-selected" : "content-grid-history"}>{element.tickets}</div>
                     <div className={playerAddress === element.player ? "content-grid-history-selected" : "content-grid-history"}>{element.rank} / 20</div>

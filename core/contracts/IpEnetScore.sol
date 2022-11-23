@@ -175,7 +175,7 @@ contract IpEnetScore is ChainlinkClient {
         uint8 awayScore;
         for (uint256 i = 0; i < nbGames; i++) {
             GameResolve memory gameResult = _getGameResolveStruct(
-                requestIdGames[_requestId][0]
+                requestIdGames[_requestId][i]
             );
             if (_gameId == gameResult.gameId) {
                 homeScore = gameResult.homeScore;

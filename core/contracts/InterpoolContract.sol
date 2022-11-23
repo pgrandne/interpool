@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 /// @title InterPool : InterPool Contract
 /// @author Perrin GRANDNE
 /// @notice Contract for InterPool Game, a prediction game for FIFA World Cup
-/// @notice This contract is used to test and improve calculations, it will merge with Pool Contract after validation
+/// @notice This contract is used to test and improve calculations, it will be merged with Pool Contract after validation
 /// @custom:experimental This is an experimental contract.
 
 /// @notice Only ERC-20 functions we need
@@ -32,23 +32,7 @@ interface IEnet {
     function getScoresPerGameIdPerRequest(bytes32 _requestId, uint32 _gameId)
         external
         view
-        returns (
-            uint8,
-            uint8,
-            bool
-        );
-
-    /// @notice get a game id from a request id and an index
-    function getGameIdPerRequestIndex(bytes32 _requestId, uint256 _idx)
-        external
-        view
-        returns (uint32);
-
-    /// @notice Get Number of Games per Request Id
-    function getNumberOfGamesPerRequest(bytes32 _requestId)
-        external
-        view
-        returns (uint256);
+        returns (uint8, uint8);
 
     function getWinningsPerPlayer(address _player)
         external
@@ -76,17 +60,11 @@ interface IPool {
 /* ========== CONTRACT BEGINNING ========== */
 
 contract InterpoolContract is Ownable, Pausable {
-    struct GameResolve {
-        uint32 gameId;
-        uint8 homeScore;
-        uint8 awayScore;
-        string status;
-    }
-
     /// @notice structure for id league and end of contest for each contest
     struct ContestInfo {
         uint256 leagueId;
         uint256 dateEnd;
+        uint256 nbGames;
     }
 
     /// @notice structure for data received from the front end, predictions from a player
@@ -152,7 +130,7 @@ contract InterpoolContract is Ownable, Pausable {
     /// @notice and their number of ticket when they submitted their predictions
     /// @dev contest Id = Table with players and their number of tickets
     mapping(uint256 => NbTicketsPerPlayer[])
-        public listPlayersWithNbTicketsPerContest;
+        private listPlayersWithNbTicketsPerContest;
 
     /// @notice Total Number of Tickets per Contest
     /// @dev contest id => number ot tickets
@@ -161,11 +139,15 @@ contract InterpoolContract is Ownable, Pausable {
     /// @notice use struct Score for all game id predicted for a contest by a player
     /// @dev player => contest id => game id => score prediction
     mapping(address => mapping(uint32 => uint8[2]))
-        internal predictionsPerPlayerPerGame;
+        private predictionsPerPlayerPerGame;
+
+    /// @notice associate Results of game per Game id
+    /// @dev game Id => (homeScore, awayScore, played? :(0 if not played, 1 if played))
+    mapping(uint32 => uint8[3]) private scorePerGameId;
 
     /// @notice association between array of requests and contest
     /// @dev contest id => array of request id
-    mapping(uint256 => bytes32[]) private listCreatedRequestsPerContest;
+    mapping(uint256 => uint32[]) private listGamesPerContest;
 
     /// @notice association between array of requests and contest
     /// @dev contest id => array of request id
@@ -197,10 +179,12 @@ contract InterpoolContract is Ownable, Pausable {
 
     constructor() {
         interpoolTicket = IERC20(0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1);
-        setEnetContract(0x49672EdD419e4795307CCC906Cab0E8Fc5d147f9);
+        setEnetContract(0x376d4A2cB540e01A7E233C9b721c04087511Ef3a);
         setPoolContract(0x80A9c7C5F5BFD765A2dC3773dFF00d02Db8B34aE);
         gainPercentage = 5;
-        currentContestId = 0; // initialisation of current contest id
+
+        /// initialisation of contest
+        currentContestId = 0;
     }
 
     /* ========== INTERPOOL WRITE FUNCTIONS ========== */
@@ -227,24 +211,21 @@ contract InterpoolContract is Ownable, Pausable {
      * @notice Create a contest with a list of requests/games, league Id and end of predictions
      * @param _leagueId : 77: FIFA World Cup / 53: France Ligue / 42: UEFA Champion's League
      *  _dateEndContestPredictions: Date in timestamp for the end of predictions saving
-     * @param _requestDates : Array of days in timestamp for matches of the contest
+     * @param _listGameIds : Array of Games Id of the contest
      */
 
     function createContest(
         uint256 _leagueId,
         uint256 _dateEndContestPredictions,
-        uint256[] memory _requestDates
+        uint32[] memory _listGameIds
     ) external onlyOwner {
         currentContestId++;
-        uint256 nbRequest = _requestDates.length;
-        for (uint256 i = 0; i < nbRequest; i++) {
-            listCreatedRequestsPerContest[currentContestId].push(
-                enetContract.requestSchedule(0, _leagueId, _requestDates[i])
-            );
-        }
+        uint256 nbGames = _listGameIds.length;
+        listGamesPerContest[currentContestId] = _listGameIds;
         infoContest[currentContestId] = ContestInfo({
             leagueId: _leagueId,
-            dateEnd: _dateEndContestPredictions
+            dateEnd: _dateEndContestPredictions,
+            nbGames: nbGames
         });
     }
 
@@ -318,8 +299,34 @@ contract InterpoolContract is Ownable, Pausable {
         }
     }
 
+    /**
+     * @notice Save predictions for a player for the current contest
+     *  @param _gamePredictions: table of games with predicted scores received from the front end
+     * Verify the contest is still open and the number of predictions is the expected number
+     * Save scores of games in predictionsPerPlayerPerContest
+     */
+
+    function savePredictionPerOwner(
+        address _player,
+        GamePredict[] memory _gamePredictions
+    ) external onlyOwner {
+        uint256 nbOfGames = 48;
+        uint256 nbTickets = interpoolTicket.balanceOf(_player);
+        /// Create/Update all predictions for a player
+        for (uint256 i = 0; i < nbOfGames; i++) {
+            predictionsPerPlayerPerGame[_player][_gamePredictions[i].gameId] = [
+                _gamePredictions[i].homeScore,
+                _gamePredictions[i].awayScore
+            ];
+        }
+        listPlayersWithNbTicketsPerContest[currentContestId].push(
+            NbTicketsPerPlayer({player: _player, nbTickets: nbTickets})
+        );
+        verifPlayerPlayedPerContest[currentContestId][_player] = true;
+    }
+
     /// At the end of the contest, create the table with all infos of the contest
-    function createContestTable(uint _contestId) external onlyOwner {
+    function setContestTable(uint _contestId) external onlyOwner {
         nbTotalTicketsPerContest[_contestId] = interpoolTicket.totalSupply();
         PlayerPointsAndTickets[] memory pointsTable = getPointsTable(
             _contestId
@@ -386,6 +393,23 @@ contract InterpoolContract is Ownable, Pausable {
         poolContract.claimFromPool(msg.sender);
     }
 
+    function saveGameResult(uint256 _contestId, uint32[] memory _listGameIds)
+        public
+        onlyOwner
+    {
+        for (uint256 i = 0; i < _listGameIds.length; i++) {
+            (uint8 homeScore, uint8 awayScore) = getScoresPerGameId(
+                _contestId,
+                _listGameIds[i]
+            );
+            if (homeScore != 255) {
+                scorePerGameId[_listGameIds[i]][0] = homeScore;
+                scorePerGameId[_listGameIds[i]][1] = awayScore;
+                scorePerGameId[_listGameIds[i]][2] = 1;
+            }
+        }
+    }
+
     /* ========== INTERPOOL READ FUNCTIONS ========== */
 
     /**
@@ -424,36 +448,31 @@ contract InterpoolContract is Ownable, Pausable {
         uint256 playerScoring = 0;
         uint32 gameId;
         uint256 nbGames = getNumberOfGamesPerContest(_contestId);
-        uint32[] memory listGamesIdPerContest = new uint32[](nbGames);
-        listGamesIdPerContest = getIdGamesPerContest(_contestId);
         for (uint256 i = 0; i < nbGames; i++) {
-            gameId = listGamesIdPerContest[i];
-            (
-                uint8 resolveHomeScore,
-                uint8 resolveAwayScore
-            ) = getScoresPerGameId(_contestId, gameId);
-            (
-                uint8 playerHomeScore,
-                uint8 playerAwayScore
-            ) = getPrevisionsPerPlayerPerGame(_player, gameId);
-            gameResultPlayer = calculateMatchResult(
-                playerHomeScore,
-                playerAwayScore
-            );
-            gameResultOracle = calculateMatchResult(
-                resolveHomeScore,
-                resolveAwayScore
-            );
-            /// Check if the match happened, if homeScore = 255, the match doesn't exist or is not finished
-            if (
-                gameResultPlayer == gameResultOracle && resolveHomeScore != 255
-            ) {
-                playerScoring += 1;
-                if (
-                    playerHomeScore == resolveHomeScore &&
-                    playerAwayScore == resolveAwayScore
-                ) {
-                    playerScoring += 2;
+            gameId = listGamesPerContest[_contestId][i];
+            if (scorePerGameId[gameId][2] == 1) {
+                uint8 resolveHomeScore = scorePerGameId[gameId][0];
+                uint8 resolveAwayScore = scorePerGameId[gameId][1];
+                (
+                    uint8 playerHomeScore,
+                    uint8 playerAwayScore
+                ) = getPrevisionsPerPlayerPerGame(_player, gameId);
+                gameResultPlayer = calculateMatchResult(
+                    playerHomeScore,
+                    playerAwayScore
+                );
+                gameResultOracle = calculateMatchResult(
+                    resolveHomeScore,
+                    resolveAwayScore
+                );
+                if (gameResultPlayer == gameResultOracle) {
+                    playerScoring += 1;
+                    if (
+                        playerHomeScore == resolveHomeScore &&
+                        playerAwayScore == resolveAwayScore
+                    ) {
+                        playerScoring += 2;
+                    }
                 }
             }
         }
@@ -660,17 +679,12 @@ contract InterpoolContract is Ownable, Pausable {
     }
 
     /// @notice get the list of request per contest, there are created and resolved requests
-    /// @param _market : 0 for Created requests and 1 for Resolved requests
-    function getListRequestIdPerContest(uint256 _contestId, uint256 _market)
+    function getListRequestIdPerContest(uint256 _contestId)
         public
         view
         returns (bytes32[] memory)
     {
-        if (_market == 0) {
-            return listCreatedRequestsPerContest[_contestId];
-        } else {
-            return listResolvedRequestsPerContest[_contestId];
-        }
+        return listResolvedRequestsPerContest[_contestId];
     }
 
     /// @notice get number of Games for a contest
@@ -679,42 +693,7 @@ contract InterpoolContract is Ownable, Pausable {
         view
         returns (uint256)
     {
-        uint256 nbGames = 0;
-        uint256 nbRequest = listCreatedRequestsPerContest[_contestId].length;
-        for (uint256 i = 0; i < nbRequest; i++) {
-            bytes32 requestId = listCreatedRequestsPerContest[_contestId][i];
-            nbGames += enetContract.getNumberOfGamesPerRequest(requestId);
-        }
-        return nbGames;
-    }
-
-    /// @notice get the list of Game Id for a contest
-    function getIdGamesPerContest(uint256 _contestId)
-        public
-        view
-        returns (uint32[] memory)
-    {
-        uint256 nbGames = getNumberOfGamesPerContest(_contestId);
-        uint256 iGames;
-        uint32[] memory listGamesIdPerContest = new uint32[](nbGames);
-        for (
-            uint256 i = 0;
-            i < listCreatedRequestsPerContest[_contestId].length;
-            i++
-        ) {
-            nbGames = enetContract.getNumberOfGamesPerRequest(
-                listCreatedRequestsPerContest[_contestId][i]
-            );
-            for (uint256 j = 0; j < nbGames; j++) {
-                listGamesIdPerContest[iGames] = enetContract
-                    .getGameIdPerRequestIndex(
-                        listCreatedRequestsPerContest[_contestId][i],
-                        j
-                    );
-                iGames++;
-            }
-        }
-        return listGamesIdPerContest;
+        return listGamesPerContest[_contestId].length;
     }
 
     /// @notice get result of a game (homeScore, awayScore) for a game id of a contest
@@ -727,12 +706,13 @@ contract InterpoolContract is Ownable, Pausable {
         uint256 nbRequests = listResolvedRequestsPerContest[_contestId].length;
         uint8 homeScore = 255;
         uint8 awayScore;
-        bool existingGame;
         for (uint i = 0; i < nbRequests; i++) {
             bytes32 requestId = listResolvedRequestsPerContest[_contestId][i];
-            (homeScore, awayScore, existingGame) = enetContract
-                .getScoresPerGameIdPerRequest(requestId, _gameId);
-            if (existingGame = true) {
+            (homeScore, awayScore) = enetContract.getScoresPerGameIdPerRequest(
+                requestId,
+                _gameId
+            );
+            if (homeScore != 255) {
                 break;
             }
         }
@@ -749,10 +729,8 @@ contract InterpoolContract is Ownable, Pausable {
         GamePredict[] memory listPredictionsPerContest = new GamePredict[](
             nbGames
         );
-        uint32[] memory listGamesIdPerContest = new uint32[](nbGames);
-        listGamesIdPerContest = getIdGamesPerContest(_contestId);
         for (uint256 i = 0; i < nbGames; i++) {
-            gameId = listGamesIdPerContest[i];
+            gameId = listGamesPerContest[_contestId][i];
             listPredictionsPerContest[i] = GamePredict({
                 gameId: gameId,
                 homeScore: predictionsPerPlayerPerGame[_player][gameId][0],

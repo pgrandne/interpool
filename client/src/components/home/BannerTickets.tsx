@@ -36,15 +36,15 @@ function BannerTickets({ ticket }: { ticket: number }) {
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb21704f-3d3dc5f0" className="div-block color-variation-1">
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217050-3d3dc5f0" className="div-block-2"><img src="images/participant-white.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217052-3d3dc5f0" className="div-block-info">
-                    <div className="text-block-3">Participants</div>
-                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217055-3d3dc5f0" className="text-block">{nbPlayers}</div>
+                    <div className="text-block-3">Prizes</div>
+                    <PrizePool />
                 </div>
             </div>
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217057-3d3dc5f0" className="div-block colorvariation-2">
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217058-3d3dc5f0" className="div-block-2"><img src="images/piggy-bank-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb21705a-3d3dc5f0" className="div-block-info">
-                    <div className="text-block-3">Prize Pool</div>
-                    <PrizePool />
+                    <div className="text-block-3">Participants</div>
+                    <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217055-3d3dc5f0" className="text-block">{nbPlayers}</div>
                 </div>
             </div>
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb21705f-3d3dc5f0" className="div-block colorvariation-3">

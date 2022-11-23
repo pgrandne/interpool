@@ -10,7 +10,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 <div>
                     <div className="w-layout-grid grid-3">
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa3-3d3dc5f0">
-                            <div className="headers-grid-prediction header-group-a">Group A - Make your predictions!</div>
+                            <div className="headers-grid-prediction header-group-a">Group A</div>
                         </div>
                         {/*  */}
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">11/20</div>
@@ -83,7 +83,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 <div>
                     <div className="w-layout-grid grid-3">
                         <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c625-3d3dc5f0">
-                            <div className="headers-grid-prediction header-group-b">Group B - Make your predictions!</div>
+                            <div className="headers-grid-prediction header-group-b">Group B</div>
                         </div>
                         {/*  */}
                         <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c628-3d3dc5f0" className="content-grid-prediction-smaller">11/21</div>
@@ -158,7 +158,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 <div>
                     <div className="w-layout-grid grid-3">
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee128ff0-3d3dc5f0">
-                            <div className="headers-grid-prediction header-group-c">Group C - Make your predictions!</div>
+                            <div className="headers-grid-prediction header-group-c">Group C</div>
                         </div>
                         {/*  */}
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee128ff3-3d3dc5f0" className="content-grid-prediction-smaller">11/22</div>
@@ -231,7 +231,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 <div>
                     <div className="w-layout-grid grid-3">
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129061-3d3dc5f0">
-                            <div className="headers-grid-prediction header-group-d">Group D - Make your predictions!</div>
+                            <div className="headers-grid-prediction header-group-d">Group D</div>
                         </div>
                         {/*  */}
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129064-3d3dc5f0" className="content-grid-prediction-smaller">11/22</div>
@@ -306,7 +306,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 <div>
                     <div className="w-layout-grid grid-3">
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120012f-3d3dc5f0">
-                            <div className="headers-grid-prediction header-group-e">Group E - Make your predictions!</div>
+                            <div className="headers-grid-prediction header-group-e">Group E</div>
                         </div>
                         {/*  */}
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200132-3d3dc5f0" className="content-grid-prediction-smaller">11/23</div>
@@ -379,7 +379,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 <div>
                     <div className="w-layout-grid grid-3">
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001a0-3d3dc5f0">
-                            <div className="headers-grid-prediction header-goup-f">Group F - Make your predictions!</div>
+                            <div className="headers-grid-prediction header-goup-f">Group F</div>
                         </div>
                         {/*  */}
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001a3-3d3dc5f0" className="content-grid-prediction-smaller">11/23</div>
@@ -454,7 +454,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 <div>
                     <div className="w-layout-grid grid-3">
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febed6-3d3dc5f0">
-                            <div className="headers-grid-prediction header-group-g">Group G - Make your predictions!</div>
+                            <div className="headers-grid-prediction header-group-g">Group G</div>
                         </div>
                         {/*  */}
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febed9-3d3dc5f0" className="content-grid-prediction-smaller">11/24</div>
@@ -527,7 +527,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 <div>
                     <div className="w-layout-grid grid-3">
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf47-3d3dc5f0">
-                            <div className="headers-grid-prediction header-group-h">Group H - Make your predictions!</div>
+                            <div className="headers-grid-prediction header-group-h">Group H</div>
                         </div>
                         {/*  */}
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf4a-3d3dc5f0" className="content-grid-prediction-smaller">11/24</div>

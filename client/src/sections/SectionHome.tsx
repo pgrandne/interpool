@@ -3,29 +3,58 @@ import WCMatchListsClosed from "../components/WCMatchListsClosed";
 import BannerCountdown from "../components/home/BannerCountdown";
 import BannerNoTicket from "../components/home/BannerNoTicket";
 import BannerTickets from "../components/home/BannerTickets";
-import { useAccount, useContractRead, erc20ABI } from "wagmi";
+import { useAccount, useContractReads, erc20ABI } from "wagmi";
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ethers } from 'ethers'
 import { useState } from "react";
 import { players } from '../utils/manualResult'
+import { ABI_Interpool } from "../utils/ABI_Interpool";
+import { useCurrentContest } from "../utils/useCurrentContest";
 
 function SectionHome() {
     const addressNetwork = useAddressNetwork()
+    const currentContest = useCurrentContest()
     const [ticket, setTicket] = useState(0)
+    const [rank, setRank] = useState(0)
+    const [points, setPoints] = useState(0)
     const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
-    useContractRead({
+    const interPoolTicket = {
         address: addressNetwork.interPoolTicketContract,
         abi: erc20ABI,
-        functionName: 'balanceOf',
+    }
+    const interPool = {
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+    }
+
+
+    useContractReads({
+        contracts: [
+            {
+                ...interPoolTicket,
+                functionName: 'balanceOf',
+                args: [isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
+            },
+            {
+                ...interPool,
+                functionName: 'getPlayerRank',
+                args: [currentContest, isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
+            },
+            {
+                ...interPool,
+                functionName: 'getPointsOfPlayerForContest',
+                args: [currentContest, isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
+            },
+
+        ],
         watch: true,
-        args: [isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
         onSuccess(data: any) {
-            setTicket(parseInt(ethers.utils.formatUnits(data._hex, 0)))
+            setTicket(parseInt(ethers.utils.formatUnits(data[0]._hex, 0)))
+            setRank(parseInt(ethers.utils.formatUnits(data[1]._hex, 0)))
+            setPoints(parseInt(ethers.utils.formatUnits(data[2]._hex, 0)))
+
         },
     })
-
-    const found = players.find(element => element.player === address);
-    console.log(found)
 
     return (
         <section id="home" data-w-id="67ad9710-d385-0ebf-87e3-5d5f429160e0" className="section-home wf-section">
@@ -35,7 +64,7 @@ function SectionHome() {
                 {(ticket > 0) && <BannerTickets ticket={ticket} />}
                 <h1 className="heading-5">QATAR WORLD CUP 2022 <br />~ Prediction Game ~</h1>
                 <h1 className="heading-2">If you wanna win big, just be better than the others!</h1>
-                <div className="div-block-54">
+                {isConnected && <div className="div-block-54">
                     <div className="div-block-51">
                         <img src="images/arrow2-white.svg" loading="lazy" width="45" alt="" className="arrow-prediction" />
                         <h1 className="heading-10">Your predictions</h1>
@@ -44,17 +73,16 @@ function SectionHome() {
                     <div className="w-layout-grid grid-10">
                         <div className="div-block-52">
                             <h1 className="heading-10 heading-10-variation">Current rank:</h1>
-                            <h1 className="heading-10 heading-10-variation-2"> {found?.rank}/20</h1>
+                            <h1 className="heading-10 heading-10-variation-2"> {rank}/20</h1>
                         </div>
                         <div className="div-block-52 div-block-52-color-variation">
                             <h1 className="heading-10 heading-10-variation">Current score:</h1>
-                            <h1 className="heading-10 heading-10-variation-2">{found?.points}</h1>
+                            <h1 className="heading-10 heading-10-variation-2">{points}</h1>
                         </div>
                     </div>
                     <div className="div-block-53">
-
                     </div>
-                </div>
+                </div>}
                 {/* <WCMatchLists ticket={ticket} /> */}
                 <WCMatchListsClosed ticket={ticket} />
                 <div className="div-block-7">

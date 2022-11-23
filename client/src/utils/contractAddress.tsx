@@ -9,11 +9,11 @@ export const mumbai = {
 
 export const goerli = {
     name: 'Goerli',
-    interPoolContract: '0xEA32f5cc7318Ed376FEda4BEB10DD8192Bda3611',
+    interPoolContract: '0x075f6a630315e06A15EC6C1eb80867b442534Be7',
     interPoolTicketContract: '0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1',
     usdcContract: '0xA2025B15a1757311bfD68cb14eaeFCc237AF5b43',
     poolContract: '0x80A9c7C5F5BFD765A2dC3773dFF00d02Db8B34aE',
-    // enetContract: '0x49672EdD419e4795307CCC906Cab0E8Fc5d147f9'
+    // enetContract: '0x376d4A2cB540e01A7E233C9b721c04087511Ef3a'
 }
 
 export interface IFormInput {
