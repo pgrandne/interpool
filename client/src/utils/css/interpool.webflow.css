@@ -124,8 +124,7 @@ ul.a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 15px;
-  padding: 10px 40px;
+  padding: 10px 40px 5px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -136,7 +135,7 @@ ul.a {
   align-items: center;
   grid-column-gap: 80px;
   border-radius: 15px;
-  background-color: #40189d;
+  background-color: transparent;
 }
 
 .grid-10 {
@@ -149,33 +148,41 @@ ul.a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 10px 30px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  padding-right: 30px;
+  padding-left: 30px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   grid-column-gap: 10px;
   border-radius: 15px;
-  background-color: #4e36e2;
+  background-color: transparent;
 }
 
 .heading-10.heading-10-variation {
-  font-size: 20px;
+  font-size: 22px;
+  text-decoration: underline;
 }
+
+.heading-10.heading-10-variation-2 {
+  font-size: 22px;
+}
+
 
 .heading-10 {
   margin-bottom: 0px;
   border-radius: 15px;
-  font-family: 'Rubik Dirt', sans-serif;
-  color: #fff;
-  font-size: 24px;
-  font-weight: 400;
+  font-family: Oswald, sans-serif;
+  color: rgba(0, 0, 0, 0.74);
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
   text-align: center;
 }
 
 .arrow-prediction {
   padding-top: 10px;
-  opacity: 0.88;
+  opacity: 0.74;
 }
 
 .image-21 {
@@ -814,8 +821,8 @@ ul.a {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   grid-template-areas: "Area Area Area Area Area";
-  -ms-grid-columns: 0.25fr 0px 0.5fr 0px 0.75fr 0px 0.25fr 0px 0.75fr;
-  grid-template-columns: 0.25fr 0.5fr 0.75fr 0.25fr 0.75fr;
+  -ms-grid-columns: 0.4fr 0px 0.5fr 0px 0.5fr 0px 0.5fr 0px 0.3fr;
+  grid-template-columns: 0.4fr 0.5fr 0.5fr 0.5fr 0.3fr;
   -ms-grid-rows: 40px;
   grid-template-rows: 40px;
   border-radius: 15px;
@@ -869,8 +876,8 @@ ul.a {
 }
 
 .content-grid-prediction {
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 4px;
+  padding-left: 4px;
   text-align: center;
 }
 
@@ -1226,8 +1233,21 @@ ul.a {
   margin-bottom: 0px;
   border-radius: 7px;
   background-color: #fffdfd;
+  border: 1px solid #cccccc;
   text-align: center;
+  pointer-events: none;
+}
 
+.success-field {
+  background-color: rgba(144, 196, 63, 0.3);
+}
+
+.not-success-field {
+  background-color: rgba(253, 112, 114, 0.3);
+}
+
+.avg-success-field {
+  background-color: rgba(248, 199, 64, 0.3);
 }
 
 .form-3 {
@@ -1275,7 +1295,8 @@ ul.a {
 }
 
 .heading-5 {
-  margin-bottom: 30px;
+  margin-top: 40px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -1345,7 +1366,7 @@ ul.a {
 }
 
 .block-contest-result-in {
-  padding-top: 40px;
+  padding-top: 20px;
   padding-right: 20px;
   padding-left: 20px;
 }

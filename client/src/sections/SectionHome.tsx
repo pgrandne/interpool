@@ -7,7 +7,6 @@ import { useAccount, useContractReads, erc20ABI } from "wagmi";
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ethers } from 'ethers'
 import { useState } from "react";
-import { players } from '../utils/manualResult'
 import { ABI_Interpool } from "../utils/ABI_Interpool";
 import { useCurrentContest } from "../utils/useCurrentContest";
 
@@ -59,16 +58,16 @@ function SectionHome() {
     return (
         <section id="home" data-w-id="67ad9710-d385-0ebf-87e3-5d5f429160e0" className="section-home wf-section">
             <div className="container w-container">
+                <h1 className="heading-5">QATAR WORLD CUP 2022 <br />~ Prediction Game ~</h1>
+                <h1 className="heading-2">If you wanna win big, just be better than the others!</h1>
                 <BannerCountdown />
                 {(ticket === 0) && <BannerNoTicket />}
                 {(ticket > 0) && <BannerTickets ticket={ticket} />}
-                <h1 className="heading-5">QATAR WORLD CUP 2022 <br />~ Prediction Game ~</h1>
-                <h1 className="heading-2">If you wanna win big, just be better than the others!</h1>
                 {isConnected && <div className="div-block-54">
                     <div className="div-block-51">
-                        <img src="images/arrow2-white.svg" loading="lazy" width="45" alt="" className="arrow-prediction" />
-                        <h1 className="heading-10">Your predictions</h1>
-                        <img src="images/arrow2-white.svg" loading="lazy" width="45" alt="" className="image-21 arrow-prediction" />
+                        <img src="images/arrow2-black.svg" loading="lazy" width="30" alt="" className="arrow-prediction" />
+                        <h1 className="heading-10">Your predictions<br />(contest #01)</h1>
+                        <img src="images/arrow2-black.svg" loading="lazy" width="30" alt="" className="image-21 arrow-prediction" />
                     </div>
                     <div className="w-layout-grid grid-10">
                         <div className="div-block-52">
