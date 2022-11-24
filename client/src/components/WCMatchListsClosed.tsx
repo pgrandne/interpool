@@ -122,7 +122,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
             setGame3854607(data.filter(element => element[0] === 3854607)[0])
             setGame3854608(data.filter(element => element[0] === 3854608)[0])
         }
-    }, [loaded])
+    }, [data, loaded])
 
     return (
         <Fragment>
