@@ -435,7 +435,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                             </div>
                         </div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200142-3d3dc5f0" className="content-grid-prediction">Japan</div>
-                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200134-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200134-3d3dc5f0" className="content-grid-prediction-smaller">(1-2)</div>
                         {/* 3854585 */}
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200144-3d3dc5f0" className="content-grid-prediction-smaller">11/23</div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200148-3d3dc5f0" className="content-grid-prediction">Spain</div>
@@ -446,7 +446,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                             </div>
                         </div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200154-3d3dc5f0" className="content-grid-prediction">Costa Rica</div>
-                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200146-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200146-3d3dc5f0" className="content-grid-prediction-smaller">(7-0)</div>
                         {/* 3854588 */}
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200156-3d3dc5f0" className="content-grid-prediction-smaller">11/27</div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120015a-3d3dc5f0" className="content-grid-prediction">Japan</div>
@@ -519,7 +519,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                             </div>
                         </div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001c5-3d3dc5f0" className="content-grid-prediction">Canada</div>
-                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001b7-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001b7-3d3dc5f0" className="content-grid-prediction-smaller">1-0</div>
                         {/* 3854593 */}
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001c7-3d3dc5f0" className="content-grid-prediction-smaller">11/27</div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001cb-3d3dc5f0" className="content-grid-prediction">Belgium</div>
