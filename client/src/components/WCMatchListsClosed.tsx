@@ -3,6 +3,7 @@ import { useAccount, useContractRead } from 'wagmi'
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ABI_Interpool } from "../utils/ABI_Interpool";
 import { useCurrentContest } from "../utils/useCurrentContest";
+import ContestTable from './ContestTable';
 
 function WCMatchListsClosed({ ticket }: { ticket: number }) {
     const { address, isConnected } = useAccount()
@@ -139,17 +140,19 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
         resultAwayScore: number
     ) => {
         let color: string
-        if (playerHomeScore === resultHomeScore && playerAwayScore === resultAwayScore) {
+        if (isConnected && playerHomeScore === resultHomeScore && playerAwayScore === resultAwayScore) {
             color = "text-field-2 success-field"
-        } else if (calculateMatchResult(playerHomeScore, playerAwayScore) === calculateMatchResult(resultHomeScore, resultAwayScore)) {
+        } else if (isConnected && calculateMatchResult(playerHomeScore, playerAwayScore) === calculateMatchResult(resultHomeScore, resultAwayScore)) {
             color = "text-field-2 avg-success-field"
-        } else {
+        } else if (isConnected) {
             color = "text-field-2 not-success-field"
+        }
+        else {
+            color = "text-field-2 w-input"
         }
         return (color)
 
     }
-
     return (
         <Fragment>
             <div className="div-block-17">
@@ -778,9 +781,10 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 </div>
             </div>
             <div className="div-block-6">
-                {isConnected && <input type="submit" value="Predictions period closed!" className="hollow-button notactive" />}
+                {isConnected && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                 {!isConnected && <input type="submit" value="Please connect!" className="hollow-button notactive" />}
             </div>
+            <ContestTable />
         </Fragment >
     )
 }

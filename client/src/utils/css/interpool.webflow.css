@@ -138,9 +138,49 @@ ul.a {
   background-color: transparent;
 }
 
+.div-block-57 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  grid-column-gap: 20px;
+}
+
+.div-block-58 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  grid-column-gap: 2px;
+}
+
+.text-block-52 {
+  font-size: 14px;
+}
+
+
+
 .grid-10 {
   -ms-grid-rows: auto;
   grid-template-rows: auto;
+}
+
+.grid-11 {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-areas:
+    ".  .  .  .   "
+    "Area Area Area Area";
+  -ms-grid-columns: 0.75fr 10px 1fr 10px 0.75fr 10px 1fr;
+  grid-template-columns: 0.75fr 1fr 0.75fr 1fr;
+  -ms-grid-rows: auto 10px auto;
+  grid-template-rows: auto auto;
 }
 
 .div-block-52 {
@@ -158,6 +198,9 @@ ul.a {
   border-radius: 15px;
   background-color: transparent;
 }
+
+/* style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg); transform-style: preserve-3d;" className="heading-9 heading-nextcontest" */
+
 
 .heading-10.heading-10-variation {
   font-size: 22px;
@@ -923,6 +966,7 @@ ul.a {
   font-family: 'Reenie Beanie', sans-serif;
   font-size: 28px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .div-block-7 {
@@ -1038,7 +1082,7 @@ ul.a {
 }
 
 .grid-4 {
-  margin-top: 30px;
+  margin-top: 40px;
   margin-bottom: 20px;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -1857,6 +1901,15 @@ ul.a {
     padding-left: 0px;
   }
 
+  .grid-11 {
+    grid-column-gap: 10px;
+    grid-template-areas:
+      "Area-2 Area-2 Area-3 Area-3"
+      "Area-4 Area-4 Area-5 Area-5"
+      "Area   Area   Area   Area  ";
+    -ms-grid-columns: 0.7fr 10px 0.7fr 10px 0.8fr 10px 1.2fr;
+    grid-template-columns: 0.7fr 0.7fr 0.8fr 1.2fr;
+  }
 
   .grid.grid-account-section {
     -ms-grid-columns: 1fr 1fr;
@@ -1914,6 +1967,21 @@ ul.a {
     padding-right: 10px;
     padding-left: 10px;
     grid-column-gap: 5px;
+  }
+
+  .text-block-52 {
+    font-size: 12px;
+  }
+
+  .grid-11 {
+    grid-auto-columns: 0.25fr;
+    grid-column-gap: 10px;
+    grid-template-areas:
+      "Area-2 Area-3 Area-3"
+      "Area-4 Area-5 Area-5"
+      "Area   Area   Area  ";
+    -ms-grid-columns: 1.8fr 10px 1fr 10px 1fr;
+    grid-template-columns: 1.8fr 1fr 1fr;
   }
 
   .call-to-action-heading {
@@ -2076,6 +2144,42 @@ ul.a {
     padding-right: 0px;
     padding-left: 0px;
     grid-column-gap: 30px;
+  }
+
+  .div-block-57 {
+    grid-column-gap: 7px;
+  }
+
+  .text-block-52 {
+    font-size: 11px;
+  }
+
+  .text-block-52-tiret {
+    display: none;
+  }
+
+  .grid-11 {
+    grid-auto-columns: 0.5fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 10px;
+    -ms-grid-rows: auto 10px auto 10px auto 10px auto 10px auto;
+    grid-template-areas:
+      "Area-2"
+      "Area-3"
+      "Area-4"
+      "Area-5"
+      "Area  ";
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .div-block-58 {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    text-align: left;
   }
 
   .div-block-52 {
@@ -2391,6 +2495,17 @@ ul.a {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
   -ms-grid-column-span: 5;
+}
+
+#w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740b5-3d3dc5f0 {
+  -ms-grid-column: span 1;
+  grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+  grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
 }
 
 #w-node-a176e6d6-2dd2-571b-7ec6-742bc50f177e-3d3dc5f0 {

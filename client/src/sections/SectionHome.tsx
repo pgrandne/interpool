@@ -1,8 +1,9 @@
 // import WCMatchLists from "../components/WCMatchLists";
 import WCMatchListsClosed from "../components/WCMatchListsClosed";
-import BannerCountdown from "../components/home/BannerCountdown";
-import BannerNoTicket from "../components/home/BannerNoTicket";
-import BannerTickets from "../components/home/BannerTickets";
+import BannerCountdown from "../components/banner/BannerCountdown";
+import BannerNoTicket from "../components/banner/BannerNoTicket";
+import BannerTickets from "../components/banner/BannerTickets";
+import BannerNextPrediction from "../components/banner/BannerNextPrediction";
 import { useAccount, useContractReads, erc20ABI } from "wagmi";
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ethers } from 'ethers'
@@ -60,6 +61,7 @@ function SectionHome() {
             <div className="container w-container">
                 <h1 className="heading-5">QATAR WORLD CUP 2022 <br />~ Prediction Game ~</h1>
                 <h1 className="heading-2">If you wanna win big, just be better than the others!</h1>
+                {/* <BannerNextPrediction /> */}
                 <BannerCountdown />
                 {(ticket === 0) && <BannerNoTicket />}
                 {(ticket > 0) && <BannerTickets ticket={ticket} />}
@@ -82,6 +84,33 @@ function SectionHome() {
                     <div className="div-block-53">
                     </div>
                 </div>}
+                <div className="div-block-57">
+                    <div className="form-block w-form form-3">
+                        <input type="text" className="text-field-2 success-field" />
+                        <div className="div-block-58">
+                            <div className="text-block-52">Good scores</div>
+                            <div className="text-block-52 text-block-52-tiret">- </div>
+                            <div className="text-block-52">3 points</div>
+                        </div>
+                    </div>
+                    <div className="form-block w-form form-3">
+                        <input type="text" className="text-field-2 avg-success-field" />
+                        <div className="div-block-58">
+                            <div className="text-block-52">Good outcome</div>
+                            <div className="text-block-52 text-block-52-tiret">- </div>
+                            <div className="text-block-52">1 point</div>
+                        </div>
+                    </div>
+                    <div className="form-block w-form form-3">
+                        <input type="text" className="text-field-2 not-success-field" />
+                        <div className="div-block-58">
+                            <div className="text-block-52">Wrong outcome</div>
+                            <div className="text-block-52 text-block-52-tiret">- </div>
+                            <div className="text-block-52">1 point</div>
+                        </div>
+                    </div>
+                </div>
+                {/* </div></div></div><div class="form-block w-form"><form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-3" aria-label="Email Form 2"><input type="text" class="text-field-2 w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="" id="field-2" required=""><div class="div-block-58"><div class="text-block-52">Good outcome</div><div class="text-block-52 text-block-52-tiret">- </div><div class="text-block-52">1 point</div></div></form><div class="w-form-done" tabindex="-1" role="region" aria-label="Email Form 2 success"><div>Thank you! Your submission has been received!</div></div><div class="w-form-fail" tabindex="-1" role="region" aria-label="Email Form 2 failure"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="form-block w-form"><form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-3" aria-label="Email Form 2"><input type="text" class="text-field-2 w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="" id="field-2" required=""><div class="div-block-58"><div class="text-block-52">Wrong outcome</div><div class="text-block-52 text-block-52-tiret">- </div><div class="text-block-52">0 point</div></div></form><div class="w-form-done" tabindex="-1" role="region" aria-label="Email Form 2 success"><div>Thank you! Your submission has been received!</div></div><div class="w-form-fail" tabindex="-1" role="region" aria-label="Email Form 2 failure"><div>Oops! Something went wrong while submitting the form.</div></div></div></div> */}
                 {/* <WCMatchLists ticket={ticket} /> */}
                 <WCMatchListsClosed ticket={ticket} />
                 <div className="div-block-7">

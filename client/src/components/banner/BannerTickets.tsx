@@ -50,7 +50,7 @@ function BannerTickets({ ticket }: { ticket: number }) {
             <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb21705f-3d3dc5f0" className="div-block colorvariation-3">
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217060-3d3dc5f0" className="div-block-2"><img src="images/time-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217062-3d3dc5f0" className="div-block-info">
-                    <div className="text-block-3">Prediction period</div>
+                    <div className="text-block-3">Submission period</div>
                     <Countdown />
                 </div>
             </div>

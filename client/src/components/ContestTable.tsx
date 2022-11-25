@@ -4,7 +4,6 @@ import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ethers } from 'ethers'
 import { ABI_Interpool } from "../utils/ABI_Interpool";
 import { useCurrentContest } from "../utils/useCurrentContest";
-import { RainbowKitChainProvider } from "@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitChainContext";
 
 function ContestTable() {
     const addressNetwork = useAddressNetwork()

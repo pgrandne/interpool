@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ModalMoreTickets from "../components/modals/ModalMoreTickets";
 import ModalRedeem from "../components/modals/ModalRedeem";
 import ModalClaim from "../components/modals/ModalClaim";
-import BannerTickets from "../components/home/BannerTickets";
+import BannerTickets from "../components/banner/BannerTickets";
 import { useAccount, useContractReads, erc20ABI } from "wagmi";
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ABI_Interpool } from '../utils/ABI_Interpool'

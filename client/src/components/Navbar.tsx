@@ -55,6 +55,7 @@ function Navbar({ currentSection, setCurrentSection }: { currentSection: any, se
                 <a href="https://www.linkedin.com/company/irruption-lab" target="_blank" rel="noreferrer" className="social-icon-link w-inline-block"><img src="images/social-09-white.svg" width="17" alt="" /></a>
                 <a href="https://twitter.com/IrruptionLab" target="_blank" rel="noreferrer" className="social-icon-link w-inline-block"><img src="images/social-18-white.svg" width="17" alt="" /></a>
                 <a href="https://github.com/pgrandne/Interpool" target="_blank" rel="noreferrer" className="social-icon-link w-inline-block"><img src="images/social-33-white.svg" width="17" alt="" /></a>
+                <a href="https://www.youtube.com/@IrruptionLab" target="_blank" rel="noreferrer" className="social-icon-link w-inline-block"><img src="images/social-16-white.svg" width="17" alt="" /></a>
             </div>
         </div >
     )
