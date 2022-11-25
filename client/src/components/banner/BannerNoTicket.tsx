@@ -5,10 +5,12 @@ function BannerNoTicket() {
     return (
         <div className="w-layout-grid grid grid-no-ticket-yet">
             <a href="#get-your-tickets" id="w-node-c281c257-2dba-658d-2aa3-0705c6a485a3-3d3dc5f0" className="link-block-2">
-                <div id="w-node-_2b135944-a289-2599-66e8-4fff354fe2b1-3d3dc5f0" className="div-block-ticket">
-                    <div id="w-node-_4e7f2e1c-88ec-5813-188a-414986da3a49-3d3dc5f0" className="div-block-2"><img src="images/ticket-2-blanc.png" loading="lazy" width="35" alt="" className="image" /></div>
-                    <div className="div-block-info">
-                        <h1 data-w-id="57b8ba69-3cd6-333f-92d6-29d7b8e787b2" className="heading-9">Get your Tickets!</h1>
+                <div className="rainbow">
+                    <div id="w-node-_2b135944-a289-2599-66e8-4fff354fe2b1-3d3dc5f0" className="div-block-ticket">
+                        <div id="w-node-_4e7f2e1c-88ec-5813-188a-414986da3a49-3d3dc5f0" className="div-block-2"><img src="images/ticket-2-blanc.png" loading="lazy" width="35" alt="" className="image" /></div>
+                        <div className="div-block-info">
+                            <h1 data-w-id="57b8ba69-3cd6-333f-92d6-29d7b8e787b2" className="heading-9">Get your Tickets!</h1>
+                        </div>
                     </div>
                 </div>
             </a>

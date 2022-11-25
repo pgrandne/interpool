@@ -18,24 +18,8 @@ function BannerCountdown() {
     }, [countDown]);
 
     return (
-        <div className="block-contest-result-in block-home-section">
-            <div className="div-block colorvariation-4">
-                <div id="w-node-a6b17af5-47c5-7e56-de42-ea26d682ffad-3d3dc5f0" className="div-block-2"><img src="images/Coupe-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
-                <div id="w-node-a6b17af5-47c5-7e56-de42-ea26d682ffaf-3d3dc5f0" className="div-block-20">
-                    <div className="text-block-15">Winners announcement in </div>
-                    <div className="div-block-21">
-                        <div className="w-layout-grid grid-7">
-                            <div id="w-node-a6b17af5-47c5-7e56-de42-ea26d682ffb2-3d3dc5f0" className="text-block-16 text-block-16-right-align">{days} </div>
-                            <div id="w-node-f30833a2-a181-0371-c3fa-eee26d40a0bf-3d3dc5f0" className="text-block-16">D </div>
-                            <div className="text-block-16 text-block-16-right-align">{hours} </div>
-                            <div className="text-block-16">H </div>
-                            <div className="text-block-16 text-block-16-right-align">{minutes}</div>
-                            <div className="text-block-16">min </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="w-node-a6b17af5-47c5-7e56-de42-ea26d682ffb2-3d3dc5f0" className="text-block">{days}D {hours}H {minutes}m</div>
+
     )
 }
 export default BannerCountdown;

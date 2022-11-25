@@ -1,4 +1,32 @@
+import Countdown from '../../utils/Countdown'
+import PrizePool from '../../utils/PrizePool'
+import { useContractRead } from 'wagmi'
+import { useAddressNetwork } from '../../utils/useAddressNetwork'
+import { ABI_Interpool } from '../../utils/ABI_Interpool'
+import { ethers } from 'ethers'
+import { useState } from 'react'
+import { useCurrentContest } from '../../utils/useCurrentContest'
+import BannerCountdown from './BannerCountdown'
+import { toast } from 'react-toastify';
+
 function BannerNextPrediction() {
+    const contestId = useCurrentContest();
+    const [nbPlayers, setNbPlayers] = useState('0');
+    const addressNetwork = useAddressNetwork();
+    useContractRead({
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+        functionName: 'getNumberOfPlayers',
+        args: [contestId],
+        onSuccess(data: any) {
+            setNbPlayers(ethers.utils.formatUnits(data._hex, 0))
+        },
+    })
+
+    const handleClick = () => {
+        toast(`⚽ Predictions for the second phase of the World Cup will be available very soon!`)
+    }
+
     return (
         <div className="w-layout-grid grid-11">
             <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740b5-3d3dc5f0" className="div-block">
@@ -17,7 +45,7 @@ function BannerNextPrediction() {
                     <img src="images/piggy-bank-blanc.png" loading="lazy" alt="" className="image" width="40" /></div>
                 <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740c1-3d3dc5f0" className="div-block-info">
                     <div className="text-block-3">Prizes</div>
-                    <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740c4-3d3dc5f0" className="text-block">$1.206.92</div>
+                    <PrizePool />
                 </div>
             </div>
             <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740c6-3d3dc5f0" className="div-block colorvariation-2">
@@ -25,7 +53,7 @@ function BannerNextPrediction() {
                     <img src="images/participant-white.png" loading="lazy" alt="" className="image" width="40" />
                 </div>
                 <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740c9-3d3dc5f0" className="div-block-info">
-                    <div className="text-block-3">Participants</div><div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740cc-3d3dc5f0" className="text-block">102</div>
+                    <div className="text-block-3">Participants</div><div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740cc-3d3dc5f0" className="text-block">{nbPlayers}</div>
                 </div>
             </div>
             <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740ce-3d3dc5f0" className="div-block colorvariation-3">
@@ -34,28 +62,34 @@ function BannerNextPrediction() {
                 </div>
                 <div className="div-block-info">
                     <div className="text-block-3">Winner announcement</div>
-                    <div className="text-block">20D 10H 30m</div>
+                    <BannerCountdown />
                 </div>
             </div>
-            <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fb-3d3dc5f0" className="div-block colorvariation-5">
-                <div className="div-block-56">
-                    <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fc-3d3dc5f0" className="div-block-2">
-                        <img src="images/line-4.png" loading="lazy" alt="" className="image" width="35" />
+            <a href="/" id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fb-3d3dc5f0" className=" link-block-2"
+                onClick={(e) => {
+                    e.preventDefault()
+                    handleClick()
+                }}>
+                <div className="div-block colorvariation-5">
+                    <div className="div-block-56">
+                        <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fc-3d3dc5f0" className="div-block-2">
+                            <img src="images/line-4.png" loading="lazy" alt="" className="image" width="35" />
+                        </div>
+                        <div className="div-block-info">
+                            <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Submit your predictions for the next contest!</h1>
+                        </div>
                     </div>
-                    <div className="div-block-info">
-                        <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Submit your predictions for the next contest!</h1>
+                    <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740df-3d3dc5f0" className="div-block inner-div-block">
+                        <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740e0-3d3dc5f0" className="div-block-2">
+                            <img src="images/time-blanc.png" loading="lazy" alt="" className="image image-without-outline" width="40" />
+                        </div>
+                        <div className="div-block-info">
+                            <div className="text-block-3">Submission period</div>
+                            <div className="text-block text-block-pred-mobile-variation">07:10:30 </div>
+                        </div>
                     </div>
                 </div>
-                <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740df-3d3dc5f0" className="div-block inner-div-block">
-                    <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740e0-3d3dc5f0" className="div-block-2">
-                        <img src="time-blanc.png" loading="lazy" alt="" className="image image-without-outline" width="40" />
-                    </div>
-                    <div className="div-block-info">
-                        <div className="text-block-3">Prediction period</div>
-                        <div className="text-block text-block-pred-mobile-variation">07:10:30 </div>
-                    </div>
-                </div>
-            </div>
+            </a>
         </div>
     )
 }
