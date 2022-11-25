@@ -1236,6 +1236,8 @@ ul.a {
   border: 1px solid #cccccc;
   text-align: center;
   pointer-events: none;
+  height: 38px;
+  font-size: 14px;
 }
 
 .success-field {
