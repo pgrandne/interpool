@@ -14,8 +14,8 @@ This repository contains 4 smart contracts:
    - IpPool.sol : contract for deposit and withdraw on Aave
 
 Contract Address on Ethereum Goerli Testnet:
-   * InterpoolContract.sol : https://goerli.etherscan.io/address/0xEA32f5cc7318Ed376FEda4BEB10DD8192Bda3611
-   * IpEnetScore.sol : https://goerli.etherscan.io/address/0x49672EdD419e4795307CCC906Cab0E8Fc5d147f9
+   * InterpoolContract.sol : https://goerli.etherscan.io/address/0x075f6a630315e06A15EC6C1eb80867b442534Be7
+   * IpEnetScore.sol : https://goerli.etherscan.io/address/0x376d4A2cB540e01A7E233C9b721c04087511Ef3a
    * IpErc2OTicket.sol : https://goerli.etherscan.io/address/0xD81e4a61FD6Bf066539dF6EA48bfaeAe847DCdA1
    * IpPool.sol : https://goerli.etherscan.io/address/0x80A9c7C5F5BFD765A2dC3773dFF00d02Db8B34aE
 

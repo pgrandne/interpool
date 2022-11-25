@@ -573,7 +573,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                             </div>
                         </div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001c5-3d3dc5f0" className="content-grid-prediction">Canada</div>
-                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001b7-3d3dc5f0" className="content-grid-prediction-smaller">1-0</div>
+                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001b7-3d3dc5f0" className="content-grid-prediction-smaller">(1-0)</div>
                         {/* 3854593 */}
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001c7-3d3dc5f0" className="content-grid-prediction-smaller">11/27</div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001cb-3d3dc5f0" className="content-grid-prediction">Belgium</div>

@@ -17,8 +17,8 @@ This repository has 2 folders:
 - [x] Test with fake data
 - [x] Test with oracle on Ligue 1
 - [X] Deploy for World Cup
-- [ ] Add Contest Results Table
-- [ ] Add live feedback on player predictions
+- [X] Add Contest Results Table
+- [X] Add live feedback on player predictions
 
   
 ### LongTerm
