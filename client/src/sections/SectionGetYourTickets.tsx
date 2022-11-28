@@ -5,16 +5,17 @@ import { useAccount } from "wagmi";
 
 function SectionGetYourTickets() {
     const { isConnected } = useAccount()
+    const [nbTickets, setNbTickets] = useState(1);
+    const [modalDeposit, setModalDeposit] = useState(false);
     const [deposited, setDeposited] = useState(false)
     useEffect(() => {
         if (deposited) {
             toast(`⚽ ${nbTickets * 50} USDC deposit confirmed!`)
             setDeposited(false)
         }
-    }, [deposited])
+    }, [nbTickets, deposited])
 
-    const [nbTickets, setNbTickets] = useState(1);
-    const [modalDeposit, setModalDeposit] = useState(false);
+
     return (
         <section id="get-your-tickets" data-w-id="1d9e582d-b4e2-39bf-da9e-2c5517289a0e" className="section-buy-ticket wf-section">
             <div className="container-2 w-container">

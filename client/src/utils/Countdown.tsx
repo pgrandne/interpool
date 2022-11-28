@@ -6,21 +6,22 @@ import { ethers } from "ethers"
 
 function Countdown() {
     const [countDown, setCountDown] = useState(0)
-    const [countDownDate, setCountdownDate] = useState(0)
+    // const [countDownDate, setCountdownDate] = useState(0)
+    const countDownDate = 1670079600000
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(0)
     const [seconds, setSeconds] = useState(0)
 
-    const addressNetwork: any = useAddressNetwork()
+    // const addressNetwork: any = useAddressNetwork()
 
-    useContractRead({
-        address: addressNetwork.interPoolContract,
-        abi: ABI_Interpool,
-        functionName: 'getContestPredictionEndDate',
-        onSuccess(data: any) {
-            setCountdownDate(parseInt(ethers.utils.formatUnits(data._hex, 0)) * 1000)
-        },
-    })
+    // useContractRead({
+    //     address: addressNetwork.interPoolContract,
+    //     abi: ABI_Interpool,
+    //     functionName: 'getContestPredictionEndDate',
+    //     onSuccess(data: any) {
+    //         setCountdownDate(parseInt(ethers.utils.formatUnits(data._hex, 0)) * 1000)
+    //     },
+    // })
 
     useEffect(() => {
         const interval = setInterval(() => {

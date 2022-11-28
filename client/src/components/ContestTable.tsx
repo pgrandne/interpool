@@ -9,17 +9,18 @@ function ContestTable() {
     const addressNetwork = useAddressNetwork()
     const currentContest = useCurrentContest()
     const [playerAddress, setPlayerAddress] = useState('0x000000000000000000000000000000000000dEaD')
-    const { address }: { address: any } = useAccount()
+    const { address, isConnected }: { address: any, isConnected: boolean } = useAccount()
     const [pointsTable, setPointsTable] = useState([])
     let rank: any
     let previousScore: any
 
 
     useEffect(() => {
-        setPlayerAddress(address);
-    }, [address])
+        if (isConnected)
+            setPlayerAddress(address)
+    }, [isConnected, address])
 
-    const { data }: { data: any } = useContractRead({
+    useContractRead({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getPointsTable',
@@ -27,7 +28,7 @@ function ContestTable() {
         onSuccess(data: any) {
             setPointsTable(data.sort((a: any, b: any): any => parseInt(ethers.utils.formatUnits(b[2]._hex, 0)) - parseInt(ethers.utils.formatUnits(a[2]._hex, 0))))
         }
-    }) as any
+    })
 
     const calculateRank = (i: number, score: number) => {
         if (i === 0) {

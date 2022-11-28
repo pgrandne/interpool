@@ -27,6 +27,9 @@ function BannerNextPrediction() {
         toast(`⚽ Predictions for the second phase of the World Cup will be available very soon!`)
     }
 
+
+
+
     return (
         <div className="w-layout-grid grid-11">
             <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740b5-3d3dc5f0" className="div-block">
@@ -85,7 +88,7 @@ function BannerNextPrediction() {
                         </div>
                         <div className="div-block-info">
                             <div className="text-block-3">Submission period</div>
-                            <div className="text-block text-block-pred-mobile-variation">07:10:30 </div>
+                            <div className="text-block text-block-pred-mobile-variation"><Countdown /></div>
                         </div>
                     </div>
                 </div>
