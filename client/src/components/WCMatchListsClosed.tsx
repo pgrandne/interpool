@@ -197,7 +197,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                             </div>
                         </div>
                         <div id="w-node-fa5c4b58-87d9-fe96-9123-a51adf288593-3d3dc5f0" className="content-grid-prediction">Senegal</div>
-                        <div id="w-node-eaf6cb1a-e108-5e0f-c43b-4d89b4df2463-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-eaf6cb1a-e108-5e0f-c43b-4d89b4df2463-3d3dc5f0" className="content-grid-prediction-smaller">(1-3)</div>
                         {/* 3854556 */}
                         <div id="w-node-_32be76ec-3654-2da4-a250-739ce737e2ab-3d3dc5f0" className="content-grid-prediction-smaller">11/25</div>
 
@@ -209,7 +209,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                             </div>
                         </div>
                         <div id="w-node-dccd9955-d99f-e643-5046-b1f2a9e4b939-3d3dc5f0" className="content-grid-prediction">Ecuador</div>
-                        <div id="w-node-bc819bdc-3140-e9b5-957e-4e51ebb64a87-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-bc819bdc-3140-e9b5-957e-4e51ebb64a87-3d3dc5f0" className="content-grid-prediction-smaller">(1-1)</div>
                         {/* 3854558 */}
                         <div id="w-node-_16843c79-0e50-ae10-5caa-c81ecfd5a751-3d3dc5f0" className="content-grid-prediction-smaller">11/29</div>
                         <div id="w-node-_3795805a-2eea-af38-8afa-d4164c96e851-3d3dc5f0" className="content-grid-prediction">Ecuador</div>
@@ -275,7 +275,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                             </div>
                         </div>
                         <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c65c-3d3dc5f0" className="content-grid-prediction">IR Iran</div>
-                        <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c64e-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c64e-3d3dc5f0" className="content-grid-prediction-smaller">(0-2)</div>
                         {/* 3854561 */}
                         <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c65e-3d3dc5f0" className="content-grid-prediction-smaller">11/25</div>
                         <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c662-3d3dc5f0" className="content-grid-prediction">England</div>
@@ -286,7 +286,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                             </div>
                         </div>
                         <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c66e-3d3dc5f0" className="content-grid-prediction">USA</div>
-                        <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c660-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c660-3d3dc5f0" className="content-grid-prediction-smaller">(0-0)</div>
                         {/* 3854563 */}
                         <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c670-3d3dc5f0" className="content-grid-prediction-smaller">11/29</div>
                         <div id="w-node-_6d320c88-0c1c-8e7b-1a62-ca9cd216c674-3d3dc5f0" className="content-grid-prediction">Wales</div>
@@ -356,9 +356,9 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129019-3d3dc5f0" className="content-grid-prediction">S. Arabia</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129019-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
                         {/* 3854574 */}
-                        <div className="content-grid-prediction-smaller">11/26</div>
-                        <div className="content-grid-prediction">Argentina</div>
-                        <div className="form-block w-form">
+                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129019-3d3dc5f0" className="content-grid-prediction-smaller">11/26</div>
+                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129019-3d3dc5f0" className="content-grid-prediction">Argentina</div>
+                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129019-3d3dc5f0" className="form-block w-form">
                             <div id="" className="form-3">
                                 <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854574 === 'undefined' ? '' : game3854574[1].toString()} />
                                 <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854574 === 'undefined' ? '' : game3854574[2].toString()} />
