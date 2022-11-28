@@ -3,7 +3,7 @@ import { useAccount, useContractRead } from 'wagmi'
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ABI_Interpool } from "../utils/ABI_Interpool";
 import { useCurrentContest } from "../utils/useCurrentContest";
-// import ContestTable from './ContestTable';
+import ContestTable from './ContestTable';
 
 function WCMatchListsClosed({ ticket }: { ticket: number }) {
     const { address, isConnected } = useAccount()
@@ -784,7 +784,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 {isConnected && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                 {!isConnected && <input type="submit" value="Please connect!" className="hollow-button notactive" />}
             </div>
-            {/* <ContestTable /> */}
+            <ContestTable />
         </Fragment >
     )
 }
