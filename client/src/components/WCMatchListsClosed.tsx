@@ -792,7 +792,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                 {isConnected && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                 {!isConnected && <input type="submit" value="Please connect!" className="hollow-button notactive" />}
             </div>
-            {/* <ContestTable /> */}
+            <ContestTable />
         </Fragment >
     )
 }
