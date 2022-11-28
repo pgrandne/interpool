@@ -7,12 +7,11 @@ import { ethers } from 'ethers'
 import { useState } from 'react'
 import { useCurrentContest } from '../../utils/useCurrentContest'
 import BannerCountdown from './BannerCountdown'
-import { toast } from 'react-toastify';
 
-function BannerNextPrediction() {
-    const contestId = useCurrentContest();
-    const [nbPlayers, setNbPlayers] = useState('0');
-    const addressNetwork = useAddressNetwork();
+function BannerNextPrediction({ contestPage, setContestPage }: { contestPage: boolean, setContestPage: React.Dispatch<React.SetStateAction<boolean>> }) {
+    const contestId = useCurrentContest()
+    const [nbPlayers, setNbPlayers] = useState('0')
+    const addressNetwork = useAddressNetwork()
     useContractRead({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
@@ -24,11 +23,8 @@ function BannerNextPrediction() {
     })
 
     const handleClick = () => {
-        toast(`⚽ Predictions for the second phase of the World Cup will be available very soon!`)
+        setContestPage(!contestPage)
     }
-
-
-
 
     return (
         <div className="w-layout-grid grid-11">
@@ -76,10 +72,12 @@ function BannerNextPrediction() {
                 <div className="div-block colorvariation-5">
                     <div className="div-block-56">
                         <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fc-3d3dc5f0" className="div-block-2">
-                            <img src="images/line-4.png" loading="lazy" alt="" className="image" width="35" />
+                            {!contestPage && < img src="images/line-4.png" loading="lazy" alt="" className="image" width="35" />}
+                            {contestPage && <img src="images/previous.svg" loading="lazy" alt="" className="image" width="35" />}
                         </div>
                         <div className="div-block-info">
-                            <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Submit your predictions for the next contest!</h1>
+                            {!contestPage && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Submit your predictions for the next contest!</h1>}
+                            {contestPage && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Back to current contest!</h1>}
                         </div>
                     </div>
                     <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740df-3d3dc5f0" className="div-block inner-div-block">

@@ -901,6 +901,11 @@ ul.a {
   background-color: #fff;
 }
 
+.grid-knockout {
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
 .headers-grid-prediction {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -1296,21 +1301,23 @@ ul.a {
   background-color: #fffdfd;
   border: 1px solid #cccccc;
   text-align: center;
-  pointer-events: none;
   height: 38px;
   font-size: 14px;
 }
 
 .success-field {
   background-color: rgba(144, 196, 63, 0.3);
+  pointer-events: none;
 }
 
 .not-success-field {
   background-color: rgba(253, 112, 114, 0.3);
+  pointer-events: none;
 }
 
 .avg-success-field {
   background-color: rgba(248, 199, 64, 0.3);
+  pointer-events: none;
 }
 
 .form-3 {
@@ -1943,7 +1950,7 @@ ul.a {
 
   .heading-9 {
     /* line-height: 35px; */
-    line-height: 65px;
+    line-height: 25px;
   }
 }
 
@@ -2108,8 +2115,8 @@ ul.a {
   }
 
   .heading-9 {
-    font-size: 25px;
-    line-height: 50px;
+    font-size: 20px;
+    /* line-height: 50px; */
   }
 
   .div-block-49 {
@@ -2269,6 +2276,11 @@ ul.a {
     min-width: 240px;
     -ms-grid-columns: 0.25fr 0.25fr 0.5fr 0.25fr 0.5fr;
     grid-template-columns: 0.25fr 0.25fr 0.5fr 0.25fr 0.5fr;
+  }
+
+  .grid-knockout {
+    padding: auto;
+    margin: auto;
   }
 
   .content-grid-prediction {
