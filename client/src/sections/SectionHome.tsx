@@ -7,6 +7,7 @@ import { ethers } from 'ethers'
 import { useState } from 'react'
 import { ABI_Interpool } from '../utils/ABI_Interpool'
 import { useCurrentContest } from '../utils/useCurrentContest'
+import ModalNewContest from '../components/modals/ModalNewContest'
 
 function SectionHome() {
     const addressNetwork = useAddressNetwork()
@@ -14,7 +15,8 @@ function SectionHome() {
     const [ticket, setTicket] = useState(0)
     const [rank, setRank] = useState(0)
     const [points, setPoints] = useState(0)
-    const [contestPage, setContestPage] = useState(false)
+    const [newContestPage, setNewContestPage] = useState(false)
+    const [modalNewContest, setModalNewContest] = useState(false)
     const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
     const interPoolTicket = {
         address: addressNetwork.interPoolTicketContract,
@@ -59,8 +61,8 @@ function SectionHome() {
             <div className="container w-container">
                 <h1 className="heading-5">QATAR WORLD CUP 2022 <br />~ Prediction Game ~</h1>
                 <h1 className="heading-2">If you wanna win big, just be better than the others!</h1>
-                <BannerNextPrediction contestPage={contestPage} setContestPage={setContestPage} />
-                {isConnected && !contestPage && <div className="div-block-54">
+                <BannerNextPrediction newContestPage={newContestPage} setNewContestPage={setNewContestPage} setModalNewContest={setModalNewContest} />
+                {isConnected && !newContestPage && <div className="div-block-54">
                     <div className="div-block-51">
                         <img src="images/arrow2-black.svg" loading="lazy" width="30" alt="" className="arrow-prediction" />
                         <h1 className="heading-10">Your predictions<br />(contest #01)</h1>
@@ -79,7 +81,7 @@ function SectionHome() {
                     <div className="div-block-53">
                     </div>
                 </div>}
-                {isConnected && !contestPage && <div className="div-block-57">
+                {isConnected && !newContestPage && <div className="div-block-57">
                     <div className="form-block w-form form-3">
                         <input type="text" className="text-field-2 success-field" />
                         <div className="div-block-58">
@@ -105,13 +107,14 @@ function SectionHome() {
                         </div>
                     </div>
                 </div>}
-                {contestPage && <WCMatchLists ticket={ticket} />}
-                {!contestPage && <WCMatchListsClosed ticket={ticket} />}
+                {newContestPage && <WCMatchLists ticket={ticket} />}
+                {!newContestPage && <WCMatchListsClosed ticket={ticket} />}
                 <div className="div-block-7">
                     <div className="text-block-5">You have 100% chance to win *</div>
                     <div className="text-block-6">* This is actually true <a href="https://irruption-lab.gitbook.io/interpool/welcome/frequently-asked-questions#prizes-and-winning" target="_blank" rel="noreferrer" className="link-4">(see details)</a>
                     </div>
                 </div>
+                {modalNewContest && <ModalNewContest setModalNewContest={setModalNewContest} />}
             </div>
         </section>
     )

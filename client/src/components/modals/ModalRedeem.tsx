@@ -1,4 +1,4 @@
-import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
+import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { toast } from 'react-toastify';
@@ -10,7 +10,9 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
     setRedeemed: React.Dispatch<React.SetStateAction<boolean>>
 }) {
     const addressNetwork: any = useAddressNetwork()
+    const { address } = useAccount()
     const [loading, setLoading] = useState(false)
+    const [played, setPlayed] = useState(false)
     const { config }: { config: any } = usePrepareContractWrite({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
@@ -28,6 +30,16 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
         }
     })
 
+    useContractRead({
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+        functionName: 'getVerifPlayerPlayedPerContest',
+        args: [address],
+        onSuccess(data: any) {
+            setPlayed(data)
+        }
+    })
+
     useWaitForTransaction({
         hash: data?.hash,
         onSuccess() {
@@ -39,6 +51,13 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
             setLoading(false)
         }
     })
+
+    const compareDate = () => {
+        if (played && 1670022000000 > new Date().getTime())
+            return true
+        else
+            return false
+    }
 
     return (
         <div className="modal-wrapper">
@@ -62,12 +81,12 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
                         <div className="text-block-41">USDC</div>
                     </div>
                 </div>
-                <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className={!loading ? "hollow-button white" : "hollow-button notactive"}
+                {<a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className={!loading && !played ? "hollow-button white" : "hollow-button notactive"}
                     onClick={(e) => {
                         e.preventDefault()
                         setLoading(true)
                         write?.()
-                    }}> {loading && <i className="fa fa-refresh fa-spin"></i>} Confirm Ticket Redeem</a>
+                    }}> {loading && <i className="fa fa-refresh fa-spin"></i>} {compareDate() ? "Please wait the end of the contest" : "Confirm Ticket Redeem"}</a>}
             </div>
         </div >
     )

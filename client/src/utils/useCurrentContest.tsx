@@ -6,17 +6,17 @@ import { ABI_Interpool } from './ABI_Interpool'
 
 
 export function useCurrentContest() {
-    const [currentContest, setCurrentContest] = useState(0);
+    const [currentContest, setCurrentContest] = useState(1);
 
     const addressNetwork: any = useAddressNetwork()
 
-    useContractRead({
-        address: addressNetwork.interPoolContract,
-        abi: ABI_Interpool,
-        functionName: 'getCurrentContestId',
-        onSuccess(data: any) {
-            setCurrentContest(parseInt(ethers.utils.formatUnits(data._hex, 0)))
-        },
-    })
+    // useContractRead({
+    //     address: addressNetwork.interPoolContract,
+    //     abi: ABI_Interpool,
+    //     functionName: 'getCurrentContestId',
+    //     onSuccess(data: any) {
+    //         setCurrentContest(parseInt(ethers.utils.formatUnits(data._hex, 0)))
+    //     },
+    // })
     return (currentContest)
 }

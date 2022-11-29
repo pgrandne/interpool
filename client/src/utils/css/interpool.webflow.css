@@ -771,6 +771,7 @@ ul.a {
   display: -ms-flexbox;
   display: flex;
   grid-column-gap: 40px;
+  min-height: 50px;
 }
 
 .text-block-2 {
@@ -1789,6 +1790,7 @@ ul.a {
   line-height: 50px;
   font-weight: 600;
   text-align: center;
+
 }
 
 .heading-nextcontest {
@@ -2354,7 +2356,7 @@ ul.a {
 
   .grid-5 {
     -ms-grid-columns: 0.25fr 0.25fr 1fr;
-    grid-template-columns: 0.25fr 0.25fr 1fr;
+    grid-template-columns: 0.25fr 0.25fr 0.75fr;
   }
 
   .account-details-grid-heading {
