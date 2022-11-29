@@ -8,7 +8,6 @@ import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ABI_Interpool } from '../utils/ABI_Interpool'
 import { ethers } from 'ethers'
 import { toast } from 'react-toastify';
-import ContestTable from "../components/ContestTable";
 
 function SectionAccount() {
     const addressNetwork = useAddressNetwork()
@@ -103,8 +102,6 @@ function SectionAccount() {
                     <div id="w-node-cd5c49f3-3443-15f4-fee3-549c3907df1f-3d3dc5f0" className="account-details-grid-heading">Total Winnings</div>
                     <div id="w-node-_691393fb-f6ac-f9a3-ad79-c9918787c975-3d3dc5f0" className="text-block-grid-content">${pendingWinnings + claimedWinnings}</div>
                 </div>
-                {/* <h1>Current contest ranking</h1> */}
-                {/* <ContestTable /> */}
             </div>
             {modalRedeem && <ModalRedeem setModalRedeem={setModalRedeem} ticket={ticket} setRedeemed={setRedeemed} />}
             {modalMoreTickets && <ModalMoreTickets setModalMoreTickets={setModalMoreTickets} ticket={ticket} pendingWinnings={pendingWinnings} />}
