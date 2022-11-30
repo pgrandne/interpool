@@ -1,5 +1,6 @@
 import WCMatchLists from '../components/WCMatchLists'
 import WCMatchListsClosed from '../components/WCMatchListsClosed'
+import WCMatchNoPred from '../components/WCMatchNoPred'
 import BannerNextPrediction from '../components/banner/BannerNextPrediction'
 import { useAccount, useContractReads, erc20ABI } from 'wagmi'
 import { useAddressNetwork } from '../utils/useAddressNetwork'
@@ -17,6 +18,7 @@ function SectionHome() {
     const [points, setPoints] = useState(0)
     const [newContestPage, setNewContestPage] = useState(false)
     const [modalNewContest, setModalNewContest] = useState(false)
+    const [played, setPlayed] = useState(false)
     const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
     const interPoolTicket = {
         address: addressNetwork.interPoolTicketContract,
@@ -45,6 +47,12 @@ function SectionHome() {
                 functionName: 'getPointsOfPlayerForContest',
                 args: [currentContest, isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
             },
+            {
+                ...interPool,
+                functionName: 'getVerifPlayerPlayedPerContest',
+                args: [isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
+            },
+
 
         ],
         watch: true,
@@ -52,7 +60,7 @@ function SectionHome() {
             setTicket(parseInt(ethers.utils.formatUnits(data[0]._hex, 0)))
             setRank(parseInt(ethers.utils.formatUnits(data[1]._hex, 0)))
             setPoints(parseInt(ethers.utils.formatUnits(data[2]._hex, 0)))
-
+            setPlayed(data[3])
         },
     })
 
@@ -71,11 +79,11 @@ function SectionHome() {
                     <div className="w-layout-grid grid-10">
                         <div className="div-block-52">
                             <h1 className="heading-10 heading-10-variation">Current rank:</h1>
-                            <h1 className="heading-10 heading-10-variation-2"> {rank}/20</h1>
+                            <h1 className="heading-10 heading-10-variation-2">{played ? rank : "-"}/20</h1>
                         </div>
                         <div className="div-block-52 div-block-52-color-variation">
                             <h1 className="heading-10 heading-10-variation">Current score:</h1>
-                            <h1 className="heading-10 heading-10-variation-2">{points}</h1>
+                            <h1 className="heading-10 heading-10-variation-2">{played ? points : "-"}</h1>
                         </div>
                     </div>
                     <div className="div-block-53">
@@ -108,7 +116,8 @@ function SectionHome() {
                     </div>
                 </div>}
                 {newContestPage && <WCMatchLists ticket={ticket} />}
-                {!newContestPage && <WCMatchListsClosed ticket={ticket} />}
+                {!newContestPage && played && <WCMatchListsClosed ticket={ticket} />}
+                {!newContestPage && !played && <WCMatchNoPred />}
                 <div className="div-block-7">
                     <div className="text-block-5">You have 100% chance to win *</div>
                     <div className="text-block-6">* This is actually true <a href="https://irruption-lab.gitbook.io/interpool/welcome/frequently-asked-questions#prizes-and-winning" target="_blank" rel="noreferrer" className="link-4">(see details)</a>
