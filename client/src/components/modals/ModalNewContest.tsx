@@ -6,7 +6,7 @@ function ModalNewContest({ setModalNewContest }: { setModalNewContest: React.Dis
             <div className="modal-inner-wrapper">
                 <div className="div-block-41"><img src="images/close.png" loading="lazy" width="20" height="20" data-w-id="8332a3c0-a742-fae8-9847-b84aee7f42c4" alt="" className="image-18" onClick={(e) => { setModalNewContest(false) }} /></div>
                 <h2 className="heading-6 heading-6-variation-2 heading-6-var-3">Contest #02</h2>
-                <p>The group stage is not yet completed.<br />You will be able to submit your predictions very soon for knockout stage (round of 16).</p>
+                <p>The group stage is not yet completed but you can already submit your predictions for knockout stage (round of 16).</p>
             </div>
         </div>
     )

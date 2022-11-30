@@ -4,24 +4,23 @@ import { useAddressNetwork } from "./useAddressNetwork"
 import { ABI_Interpool } from './ABI_Interpool'
 import { ethers } from "ethers"
 
-function Countdown() {
+function SubmissionEndCountdown({ contestId }: { contestId: number }) {
     const [countDown, setCountDown] = useState(0)
-    // const [countDownDate, setCountdownDate] = useState(0)
-    const countDownDate = 1670079600000
+    const [countDownDate, setCountdownDate] = useState(1670079600000)
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(0)
     const [seconds, setSeconds] = useState(0)
+    const addressNetwork: any = useAddressNetwork()
 
-    // const addressNetwork: any = useAddressNetwork()
-
-    // useContractRead({
-    //     address: addressNetwork.interPoolContract,
-    //     abi: ABI_Interpool,
-    //     functionName: 'getContestPredictionEndDate',
-    //     onSuccess(data: any) {
-    //         setCountdownDate(parseInt(ethers.utils.formatUnits(data._hex, 0)) * 1000)
-    //     },
-    // })
+    useContractRead({
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+        functionName: 'getContestPredictionSubmissionEndDate',
+        args: [contestId],
+        onSuccess(data: any) {
+            setCountdownDate(parseInt(ethers.utils.formatUnits(data._hex, 0)) * 1000)
+        },
+    })
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -47,4 +46,4 @@ function Countdown() {
     )
 }
 
-export default Countdown;
+export default SubmissionEndCountdown;

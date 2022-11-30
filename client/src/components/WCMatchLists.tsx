@@ -14,7 +14,7 @@ interface IPrediction {
 }
 
 
-function WCMatchLists({ ticket }: { ticket: number }) {
+function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number }) {
     const addressNetwork = useAddressNetwork()
     const { isConnected } = useAccount()
     const [modalSubmit, setModalSubmit] = useState(false)
@@ -30,7 +30,8 @@ function WCMatchLists({ ticket }: { ticket: number }) {
     useContractRead({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
-        functionName: 'getContestPredictionEndDate',
+        functionName: 'getContestPredictionSubmissionEndDate',
+        args: [contestId],
         onSuccess(data: any) {
             new Date().getTime() > (parseInt(ethers.utils.formatUnits(data._hex, 0)) * 1000) ? setPredictionsOpen(false) : setPredictionsOpen(true)
         },

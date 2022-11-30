@@ -168,7 +168,12 @@ export const ABI_Interpool =
                 },
                 {
                     "internalType": "uint256",
-                    "name": "_dateEndContestPredictions",
+                    "name": "_dateEndPredictionsSubmission",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_dateEndContest",
                     "type": "uint256"
                 },
                 {
@@ -196,8 +201,33 @@ export const ABI_Interpool =
             "type": "function"
         },
         {
-            "inputs": [],
-            "name": "getContestPredictionEndDate",
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_contestId",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getContestEndDate",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_contestId",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getContestPredictionSubmissionEndDate",
             "outputs": [
                 {
                     "internalType": "uint256",
@@ -523,6 +553,11 @@ export const ABI_Interpool =
         {
             "inputs": [
                 {
+                    "internalType": "uint256",
+                    "name": "_contestId",
+                    "type": "uint256"
+                },
+                {
                     "internalType": "address",
                     "name": "_player",
                     "type": "address"
@@ -607,6 +642,11 @@ export const ABI_Interpool =
             "inputs": [
                 {
                     "internalType": "uint256",
+                    "name": "_contestId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
                     "name": "_leagueId",
                     "type": "uint256"
                 },
@@ -617,6 +657,24 @@ export const ABI_Interpool =
                 }
             ],
             "name": "resolveGames",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_contestId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bytes32",
+                    "name": "_requestId",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "saveExistingRequest",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -671,6 +729,11 @@ export const ABI_Interpool =
         },
         {
             "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_contestId",
+                    "type": "uint256"
+                },
                 {
                     "internalType": "address",
                     "name": "_player",
@@ -765,6 +828,11 @@ export const ABI_Interpool =
         },
         {
             "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_contestId",
+                    "type": "uint256"
+                },
                 {
                     "internalType": "uint256",
                     "name": "_nbTickets",

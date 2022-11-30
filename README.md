@@ -19,6 +19,7 @@ This repository has 2 folders:
 - [X] Deploy for World Cup
 - [X] Add Contest Results Table
 - [X] Add live feedback on player predictions
+- [X] Add multi contest (round of 8) : 2 contests at the same time
 
   
 ### LongTerm

@@ -1,7 +1,7 @@
-import Countdown from "../../utils/Countdown"
+import SubmissionEndCountdown from "../../utils/SubmissionEndCountdown"
 import PrizePool from "../../utils/PrizePool";
 
-function BannerNoTicket() {
+function BannerNoTicket({ contestId }: { contestId: number }) {
     return (
         <div className="w-layout-grid grid grid-no-ticket-yet">
             <a href="#get-your-tickets" id="w-node-c281c257-2dba-658d-2aa3-0705c6a485a3-3d3dc5f0" className="link-block-2">
@@ -25,7 +25,7 @@ function BannerNoTicket() {
                 <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974ef-3d3dc5f0" className="div-block-2"><img src="images/time-blanc.png" loading="lazy" width="40" alt="" className="image" /></div>
                 <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f1-3d3dc5f0" className="div-block-info">
                     <div className="text-block-3">Prediction period</div>
-                    <Countdown />
+                    <SubmissionEndCountdown contestId={contestId} />
                 </div>
             </div>
         </div>

@@ -1,21 +1,20 @@
-import Countdown from '../../utils/Countdown'
+import Countdown from '../../utils/SubmissionEndCountdown'
 import PrizePool from '../../utils/PrizePool'
 import { useContractRead } from 'wagmi'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { ethers } from 'ethers'
 import { useState } from 'react'
-import { useCurrentContest } from '../../utils/useCurrentContest'
+// import { useCurrentContest } from '../../utils/useCurrentContest'
 
 function BannerTickets({ ticket }: { ticket: number }) {
-    const contestId = useCurrentContest();
     const [nbPlayers, setNbPlayers] = useState('0');
     const addressNetwork = useAddressNetwork();
     useContractRead({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getNumberOfPlayers',
-        args: [contestId],
+        args: [1],
         onSuccess(data: any) {
             setNbPlayers(ethers.utils.formatUnits(data._hex, 0))
         },

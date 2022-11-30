@@ -4,10 +4,11 @@ pragma solidity 0.8.15;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 
-/// @title InterPool : InterPool Contract
+/// @title InterPool v1.2 : InterPool Contract New Version with Multi Contest
 /// @author Perrin GRANDNE
 /// @notice Contract for InterPool Game, a prediction game for FIFA World Cup
 /// @notice This contract is used to test and improve calculations, it will be merged with Pool Contract after validation
+/// @notice Some functions are created only for the test phase
 /// @custom:experimental This is an experimental contract.
 
 /// @notice Only ERC-20 functions we need
@@ -29,15 +30,14 @@ interface IEnet {
     ) external returns (bytes32);
 
     // @notice get result of a game (homeScore, awayScore) for a game id from a request
-    function getScoresPerGameIdPerRequest(bytes32 _requestId, uint32 _gameId)
-        external
-        view
-        returns (uint8, uint8);
+    function getScoresPerGameIdPerRequest(
+        bytes32 _requestId,
+        uint32 _gameId
+    ) external view returns (uint8, uint8);
 
-    function getWinningsPerPlayer(address _player)
-        external
-        view
-        returns (uint256, uint256);
+    function getWinningsPerPlayer(
+        address _player
+    ) external view returns (uint256, uint256);
 }
 
 interface IPool {
@@ -51,19 +51,19 @@ interface IPool {
 
     function getGlobalPrizePool() external view returns (uint256);
 
-    function getWinningsPerPlayer(address _player)
-        external
-        view
-        returns (uint256, uint256);
+    function getWinningsPerPlayer(
+        address _player
+    ) external view returns (uint256, uint256);
 }
 
 /* ========== CONTRACT BEGINNING ========== */
 
 contract InterpoolContract is Ownable, Pausable {
-    /// @notice structure for id league and end of contest for each contest
+    /// @notice structure for each contest : league id, end of predictions submission period, end of the contest
     struct ContestInfo {
         uint256 leagueId;
-        uint256 dateEnd;
+        uint256 dateEndSubmission;
+        uint256 dateEndContest;
         uint256 nbGames;
     }
 
@@ -210,13 +210,15 @@ contract InterpoolContract is Ownable, Pausable {
     /**
      * @notice Create a contest with a list of requests/games, league Id and end of predictions
      * @param _leagueId : 77: FIFA World Cup / 53: France Ligue / 42: UEFA Champion's League
-     *  _dateEndContestPredictions: Date in timestamp for the end of predictions saving
+     * @param _dateEndPredictionsSubmission: Date in timestamp for the end of predictions saving
+     * @param _dateEndContest: Date in timestamp for the end of the contest (when players will be able to claim their winnings ahd withdraw)
      * @param _listGameIds : Array of Games Id of the contest
      */
 
     function createContest(
         uint256 _leagueId,
-        uint256 _dateEndContestPredictions,
+        uint256 _dateEndPredictionsSubmission,
+        uint256 _dateEndContest,
         uint32[] memory _listGameIds
     ) external onlyOwner {
         currentContestId++;
@@ -224,24 +226,27 @@ contract InterpoolContract is Ownable, Pausable {
         listGamesPerContest[currentContestId] = _listGameIds;
         infoContest[currentContestId] = ContestInfo({
             leagueId: _leagueId,
-            dateEnd: _dateEndContestPredictions,
+            dateEndSubmission: _dateEndPredictionsSubmission,
+            dateEndContest: _dateEndContest,
             nbGames: nbGames
         });
     }
 
     /**
      * @notice Resolve games, results are stored in a mapping
+     * @param _contestId : Id of the contest associated to games to resolve
      * @param _leagueId : 77: FIFA World Cup / 53: France Ligue / 42: UEFA Champion's League
      * @param _requestDates : Array of days in timestamp for matches of the contest
      */
 
-    function resolveGames(uint256 _leagueId, uint256[] memory _requestDates)
-        external
-        onlyOwner
-    {
+    function resolveGames(
+        uint256 _contestId,
+        uint256 _leagueId,
+        uint256[] memory _requestDates
+    ) external onlyOwner {
         uint256 nbRequest = _requestDates.length;
         for (uint256 i = 0; i < nbRequest; i++) {
-            listResolvedRequestsPerContest[currentContestId].push(
+            listResolvedRequestsPerContest[_contestId].push(
                 enetContract.requestSchedule(1, _leagueId, _requestDates[i])
             );
         }
@@ -259,8 +264,8 @@ contract InterpoolContract is Ownable, Pausable {
             "You need a ticket for saving predictions!"
         );
         require(
-            block.timestamp < infoContest[currentContestId].dateEnd,
-            "Prediction Period is closed!"
+            block.timestamp < infoContest[currentContestId].dateEndSubmission,
+            "Submission Period for predictions is closed!"
         );
         require(
             _gamePredictions.length ==
@@ -300,13 +305,15 @@ contract InterpoolContract is Ownable, Pausable {
     }
 
     /**
-     * @notice Save predictions for a player for the current contest
-     *  @param _gamePredictions: table of games with predicted scores received from the front end
-     * Verify the contest is still open and the number of predictions is the expected number
-     * Save scores of games in predictionsPerPlayerPerContest
+     * @notice Save predictions for a player for contest done by contract owner
+     * @param _contestId : contest id associated to predictions
+     * @param _player : player associated to predictions
+     * @param _gamePredictions: table of games with predicted scores from previous smartc contract
+     * @dev This function is only for testnet, to recover existing predictions from a previous contract
      */
 
     function savePredictionPerOwner(
+        uint256 _contestId,
         address _player,
         GamePredict[] memory _gamePredictions
     ) external onlyOwner {
@@ -319,10 +326,10 @@ contract InterpoolContract is Ownable, Pausable {
                 _gamePredictions[i].awayScore
             ];
         }
-        listPlayersWithNbTicketsPerContest[currentContestId].push(
+        listPlayersWithNbTicketsPerContest[_contestId].push(
             NbTicketsPerPlayer({player: _player, nbTickets: nbTickets})
         );
-        verifPlayerPlayedPerContest[currentContestId][_player] = true;
+        verifPlayerPlayedPerContest[_contestId][_player] = true;
     }
 
     /// At the end of the contest, create the table with all infos of the contest
@@ -379,24 +386,29 @@ contract InterpoolContract is Ownable, Pausable {
     }
 
     /// @notice witdraw USDC and burn ticket if the contest is finished
-    function withdraw(uint256 _nbTickets) external {
+    function withdraw(uint256 _contestId, uint256 _nbTickets) external {
         require(
-            verifPlayerPlayedPerContest[currentContestId][msg.sender] ==
-                false ||
-                block.timestamp > infoContest[currentContestId].dateEnd,
+            verifPlayerPlayedPerContest[_contestId][msg.sender] == false ||
+                block.timestamp > infoContest[_contestId].dateEndContest,
             "You cannot withdraw until the end of the contest!"
         );
         poolContract.withdrawFromPool(_nbTickets, msg.sender);
     }
 
+    /// @notice claim pending winnings earned
     function claim() external {
         poolContract.claimFromPool(msg.sender);
     }
 
-    function saveGameResult(uint256 _contestId, uint32[] memory _listGameIds)
-        public
-        onlyOwner
-    {
+    /**
+     * @notice Save results of games in the mapping scorePerGameId
+     * @param _contestId : contest id associated to games
+     * @param _listGameIds : Table of all games id for which we want results from Enetpulse
+     */
+    function saveGameResult(
+        uint256 _contestId,
+        uint32[] memory _listGameIds
+    ) public onlyOwner {
         for (uint256 i = 0; i < _listGameIds.length; i++) {
             (uint8 homeScore, uint8 awayScore) = getScoresPerGameId(
                 _contestId,
@@ -410,6 +422,19 @@ contract InterpoolContract is Ownable, Pausable {
         }
     }
 
+    /**
+     * @notice Save requests id from Enetpulse/Chainlink used in a previous contract
+     * @param _contestId : contest id associated to predictions
+     * @param _requestId: existing request Id from a previous contract
+     * @dev This function is only for testnet, to recover existing requests from a previous contract
+     */
+    function saveExistingRequest(
+        uint256 _contestId,
+        bytes32 _requestId
+    ) external onlyOwner {
+        listResolvedRequestsPerContest[_contestId].push(_requestId);
+    }
+
     /* ========== INTERPOOL READ FUNCTIONS ========== */
 
     /**
@@ -420,11 +445,10 @@ contract InterpoolContract is Ownable, Pausable {
      */
 
     /// @notice calculate result of a game : 0 = homeTeam won / 1 = draw / 2 = awayTeam won
-    function calculateMatchResult(uint8 _homeScore, uint8 _awayScore)
-        public
-        pure
-        returns (uint256)
-    {
+    function calculateMatchResult(
+        uint8 _homeScore,
+        uint8 _awayScore
+    ) public pure returns (uint256) {
         uint256 gameResult;
         if (_homeScore > _awayScore) {
             gameResult = 0;
@@ -438,11 +462,10 @@ contract InterpoolContract is Ownable, Pausable {
 
     /// @notice calculate number of points for a player in a contest
     /// @notice good result : +1 / good scores for home and away team : +2
-    function getPointsOfPlayerForContest(uint256 _contestId, address _player)
-        public
-        view
-        returns (uint256)
-    {
+    function getPointsOfPlayerForContest(
+        uint256 _contestId,
+        address _player
+    ) public view returns (uint256) {
         uint256 gameResultPlayer;
         uint256 gameResultOracle;
         uint256 playerScoring = 0;
@@ -480,11 +503,9 @@ contract InterpoolContract is Ownable, Pausable {
     }
 
     /// @notice get number of tickets and number of points for all the players of the contest
-    function getPointsTable(uint256 _contestId)
-        public
-        view
-        returns (PlayerPointsAndTickets[] memory)
-    {
+    function getPointsTable(
+        uint256 _contestId
+    ) public view returns (PlayerPointsAndTickets[] memory) {
         uint256 nbPlayers = listPlayersWithNbTicketsPerContest[_contestId]
             .length;
         address player;
@@ -635,11 +656,10 @@ contract InterpoolContract is Ownable, Pausable {
     }
 
     /// @notice Get the rank of a player  in a contest based on his number of points
-    function getPlayerRank(uint _contestId, address _player)
-        public
-        view
-        returns (uint256)
-    {
+    function getPlayerRank(
+        uint _contestId,
+        address _player
+    ) public view returns (uint256) {
         PlayerPointsAndTickets[] memory pointsTable = getPointsTable(
             _contestId
         );
@@ -670,39 +690,32 @@ contract InterpoolContract is Ownable, Pausable {
     }
 
     /// @notice get the contest Table
-    function getContestTable(uint256 _contestId)
-        public
-        view
-        returns (ContestResult[] memory)
-    {
+    function getContestTable(
+        uint256 _contestId
+    ) public view returns (ContestResult[] memory) {
         return contestTable[_contestId];
     }
 
     /// @notice get the list of request per contest, there are created and resolved requests
-    function getListRequestIdPerContest(uint256 _contestId)
-        public
-        view
-        returns (bytes32[] memory)
-    {
+    function getListRequestIdPerContest(
+        uint256 _contestId
+    ) public view returns (bytes32[] memory) {
         return listResolvedRequestsPerContest[_contestId];
     }
 
     /// @notice get number of Games for a contest
-    function getNumberOfGamesPerContest(uint256 _contestId)
-        public
-        view
-        returns (uint256)
-    {
+    function getNumberOfGamesPerContest(
+        uint256 _contestId
+    ) public view returns (uint256) {
         return listGamesPerContest[_contestId].length;
     }
 
     /// @notice get result of a game (homeScore, awayScore) for a game id of a contest
     /// @notice if the game doesn't exist or is not finished the home score is 255 (to be excluded for nb points calculation)
-    function getScoresPerGameId(uint256 _contestId, uint32 _gameId)
-        public
-        view
-        returns (uint8, uint8)
-    {
+    function getScoresPerGameId(
+        uint256 _contestId,
+        uint32 _gameId
+    ) public view returns (uint8, uint8) {
         uint256 nbRequests = listResolvedRequestsPerContest[_contestId].length;
         uint8 homeScore = 255;
         uint8 awayScore;
@@ -741,11 +754,10 @@ contract InterpoolContract is Ownable, Pausable {
     }
 
     /// @notice get predictions per player for a specific game
-    function getPrevisionsPerPlayerPerGame(address _player, uint32 _gameId)
-        public
-        view
-        returns (uint8, uint8)
-    {
+    function getPrevisionsPerPlayerPerGame(
+        address _player,
+        uint32 _gameId
+    ) public view returns (uint8, uint8) {
         uint8[2] memory score = predictionsPerPlayerPerGame[_player][_gameId];
         return (score[0], score[1]);
     }
@@ -754,16 +766,22 @@ contract InterpoolContract is Ownable, Pausable {
         return currentContestId;
     }
 
-    function getNumberOfPlayers(uint256 _contestId)
-        public
-        view
-        returns (uint256)
-    {
+    function getNumberOfPlayers(
+        uint256 _contestId
+    ) public view returns (uint256) {
         return (listPlayersWithNbTicketsPerContest[_contestId].length);
     }
 
-    function getContestPredictionEndDate() public view returns (uint256) {
-        return infoContest[currentContestId].dateEnd;
+    function getContestPredictionSubmissionEndDate(
+        uint256 _contestId
+    ) external view returns (uint256) {
+        return infoContest[_contestId].dateEndSubmission;
+    }
+
+    function getContestEndDate(
+        uint256 _contestId
+    ) external view returns (uint256) {
+        return infoContest[_contestId].dateEndContest;
     }
 
     function getGlobalPrizePool() external view returns (uint256) {
@@ -771,19 +789,16 @@ contract InterpoolContract is Ownable, Pausable {
     }
 
     /// @notice get pendings and claimed winnings for a player
-    function getWinningsPerPlayer(address _player)
-        external
-        view
-        returns (uint256, uint256)
-    {
+    function getWinningsPerPlayer(
+        address _player
+    ) external view returns (uint256, uint256) {
         return poolContract.getWinningsPerPlayer(_player);
     }
 
-    function getVerifPlayerPlayedPerContest(address _player)
-        external
-        view
-        returns (bool)
-    {
-        return verifPlayerPlayedPerContest[currentContestId][_player];
+    function getVerifPlayerPlayedPerContest(
+        uint256 _contestId,
+        address _player
+    ) external view returns (bool) {
+        return verifPlayerPlayedPerContest[_contestId][_player];
     }
 }

@@ -3,11 +3,10 @@ import { useAccount, useContractRead } from "wagmi";
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ethers } from 'ethers'
 import { ABI_Interpool } from "../utils/ABI_Interpool";
-import { useCurrentContest } from "../utils/useCurrentContest";
+// import { useCurrentContest } from "../utils/useCurrentContest";
 
 function ContestTable() {
     const addressNetwork = useAddressNetwork()
-    const currentContest = useCurrentContest()
     const [playerAddress, setPlayerAddress] = useState('0x000000000000000000000000000000000000dEaD')
     const { address, isConnected }: { address: any, isConnected: boolean } = useAccount()
     const [pointsTable, setPointsTable] = useState([])
@@ -24,11 +23,16 @@ function ContestTable() {
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getPointsTable',
-        args: [currentContest],
+        args: [1],
         onSuccess(data: any) {
-            setPointsTable(data.sort((a: any, b: any): any => parseInt(ethers.utils.formatUnits(b[2]._hex, 0)) - parseInt(ethers.utils.formatUnits(a[2]._hex, 0))))
+            sortPointsTable(data)
         }
     })
+
+    const sortPointsTable = (data: any) => {
+        const tempTable = data.slice().sort((a: any, b: any) => parseInt(ethers.utils.formatUnits(b[2]._hex, 0)) - parseInt(ethers.utils.formatUnits(a[2]._hex, 0)))
+        setPointsTable(tempTable)
+    }
 
     const calculateRank = (i: number, score: number) => {
         if (i === 0) {

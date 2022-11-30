@@ -17,7 +17,7 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'withdraw',
-        args: [ticket]
+        args: [1, ticket]
     })
     const { write, data } = useContractWrite({
         ...config,
@@ -34,7 +34,7 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getVerifPlayerPlayedPerContest',
-        args: [address],
+        args: [1, address],
         onSuccess(data: any) {
             setPlayed(data)
         }

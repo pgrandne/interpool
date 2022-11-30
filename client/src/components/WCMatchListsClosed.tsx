@@ -2,13 +2,12 @@ import { Fragment, useState } from 'react'
 import { useAccount, useContractRead } from 'wagmi'
 import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ABI_Interpool } from "../utils/ABI_Interpool";
-import { useCurrentContest } from "../utils/useCurrentContest";
+// import { useCurrentContest } from "../utils/useCurrentContest";
 import ContestTable from './ContestTable';
 
 function WCMatchListsClosed({ ticket }: { ticket: number }) {
     const { address, isConnected } = useAccount()
     const addressNetwork = useAddressNetwork()
-    const currentContest = useCurrentContest()
     const [game3370549, setGame3370549] = useState([0, 0, 0])
     const [game3854554, setGame3854554] = useState([0, 0, 0])
     const [game3854559, setGame3854559] = useState([0, 0, 0])
@@ -113,7 +112,7 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getPrevisionsPerPlayerPerContest',
-        args: [currentContest, isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
+        args: [1, isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
         onSuccess(data: any) {
             if (isConnected) {
                 fetchScores(data)
