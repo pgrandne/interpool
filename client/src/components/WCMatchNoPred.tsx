@@ -449,7 +449,7 @@ function WCMatchNoPred() {
                             </div>
                         </div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120020d-3d3dc5f0" className="content-grid-prediction">Belgium</div>
-                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001ff-3d3dc5f0" className="content-grid-prediction-smaller"></div>
+                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001ff-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
                     </div>
                 </div>
             </div>
