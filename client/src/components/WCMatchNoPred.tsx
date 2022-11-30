@@ -208,7 +208,7 @@ function WCMatchNoPred() {
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129039-3d3dc5f0" className="content-grid-prediction">Mexico</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129019-3d3dc5f0" className="content-grid-prediction-smaller">(2-0)</div>
                         {/* 3854576 */}
-                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12903b-3d3dc5f0" className="content-grid-prediction-smaller">11/29</div>
+                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12903b-3d3dc5f0" className="content-grid-prediction-smaller">11/30</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12903f-3d3dc5f0" className="content-grid-prediction">Poland</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129041-3d3dc5f0" className="form-block w-form">
                             <div id="" className="form-3">
