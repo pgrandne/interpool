@@ -1323,6 +1323,11 @@ ul.a {
   pointer-events: none;
 }
 
+.not-connected-field {
+  background-color: #eeeeee;
+  pointer-events: none;
+}
+
 .form-3 {
   display: -webkit-box;
   display: -webkit-flex;

@@ -14,12 +14,46 @@ interface IPrediction {
 }
 
 
-function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number }) {
+function WcRound16({ ticket, played }: { ticket: number, played: boolean }) {
     const addressNetwork = useAddressNetwork()
-    const { isConnected } = useAccount()
+    const { address, isConnected } = useAccount()
     const [modalSubmit, setModalSubmit] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [predictionsOpen, setPredictionsOpen] = useState(true)
+
+    const [game3370550, setGame3370550] = useState([0, 0, 0])
+    const [game3370551, setGame3370551] = useState([0, 0, 0])
+    const [game3370552, setGame3370552] = useState([0, 0, 0])
+    const [game3370553, setGame3370553] = useState([0, 0, 0])
+    const [game3370554, setGame3370554] = useState([0, 0, 0])
+    const [game3370555, setGame3370555] = useState([0, 0, 0])
+    const [game3370556, setGame3370556] = useState([0, 0, 0])
+    const [game3370557, setGame3370557] = useState([0, 0, 0])
+
+    const fetchScores = (data: Array<Array<number>>) => {
+        setGame3370550(data.filter(element => element[0] === 3370550)[0])
+        setGame3370551(data.filter(element => element[0] === 3370551)[0])
+        setGame3370552(data.filter(element => element[0] === 3370552)[0])
+        setGame3370553(data.filter(element => element[0] === 3370553)[0])
+        setGame3370554(data.filter(element => element[0] === 3370554)[0])
+        setGame3370555(data.filter(element => element[0] === 3370555)[0])
+        setGame3370556(data.filter(element => element[0] === 3370556)[0])
+        setGame3370557(data.filter(element => element[0] === 3370557)[0])
+    }
+
+    useContractRead({
+        address: addressNetwork.interPoolContract,
+        abi: ABI_Interpool,
+        functionName: 'getPrevisionsPerPlayerPerContest',
+        args: [2, isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
+        onSuccess(data: any) {
+            if (isConnected) {
+                fetchScores(data)
+            }
+        }
+    })
+
+
     useEffect(() => {
         if (submitted) {
             toast("⚽ Your predictions have been saved on the blockchain!")
@@ -31,7 +65,7 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getContestPredictionSubmissionEndDate',
-        args: [contestId],
+        args: [2],
         onSuccess(data: any) {
             new Date().getTime() > (parseInt(ethers.utils.formatUnits(data._hex, 0)) * 1000) ? setPredictionsOpen(false) : setPredictionsOpen(true)
         },
@@ -59,6 +93,7 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                 { gameId: 3370557, homeScore: parseInt(data.match8HomeScore), awayScore: parseInt(data.match8AwayScore) }, //8
             ]
             setPrediction(result)
+            console.log(prediction)
             setModalSubmit(true)
         }
     }
@@ -77,8 +112,14 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">Netherlands</div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" {...register('match1HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
-                                <input type="number" {...register('match1AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
+                                <input type="number" {...register('match1HomeScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370550 === 'undefined' || !played ? '' : game3370550[1].toString()}
+                                />
+                                <input type="number" {...register('match1AwayScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370550 === 'undefined' || !played ? '' : game3370550[2].toString()}
+                                />
                             </div>
                         </div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">USA</div>
@@ -88,8 +129,14 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                         <div id="w-node-_28be1f7e-faa0-28a0-21e9-9a34415416a4-3d3dc5f0" className="content-grid-prediction">Argentina</div>
                         <div id="w-node-_7eac494d-c0b5-eef7-1df3-6c1eaba8e32c-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" {...register('match2HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
-                                <input type="number" {...register('match2AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
+                                <input type="number" {...register('match2HomeScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370551 === 'undefined' || !played ? '' : game3370551[1].toString()}
+                                />
+                                <input type="number" {...register('match2AwayScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370551 === 'undefined' || !played ? '' : game3370551[2].toString()}
+                                />
                             </div>
                         </div>
                         <div id="w-node-fe0180df-9e12-a68e-1094-526b4a728854-3d3dc5f0" className="content-grid-prediction">Australia</div>
@@ -99,8 +146,14 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                         <div id="w-node-_49848d3e-522f-7d50-53cd-161aa91a06c7-3d3dc5f0" className="content-grid-prediction">France</div>
                         <div id="w-node-d5271666-976d-36df-4581-1b566b68fa30-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" {...register('match3HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
-                                <input type="number" {...register('match3AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
+                                <input type="number" {...register('match3HomeScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370552 === 'undefined' || !played ? '' : game3370552[1].toString()}
+                                />
+                                <input type="number" {...register('match3AwayScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370552 === 'undefined' || !played ? '' : game3370552[2].toString()}
+                                />
                             </div>
                         </div>
                         <div id="w-node-fa5c4b58-87d9-fe96-9123-a51adf288593-3d3dc5f0" className="content-grid-prediction">Poland</div>
@@ -110,8 +163,14 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                         <div id="w-node-_36479ddc-fcb2-0310-2adf-d3787b232d7e-3d3dc5f0" className="content-grid-prediction">England</div>
                         <div id="w-node-_9e05f2ca-8e9d-0a81-fe77-946973f7b489-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" {...register('match4HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
-                                <input type="number" {...register('match4AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
+                                <input type="number" {...register('match4HomeScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370553 === 'undefined' || !played ? '' : game3370553[1].toString()}
+                                />
+                                <input type="number" {...register('match4AwayScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370553 === 'undefined' || !played ? '' : game3370553[2].toString()}
+                                />
                             </div>
                         </div>
                         <div id="w-node-dccd9955-d99f-e643-5046-b1f2a9e4b939-3d3dc5f0" className="content-grid-prediction">Senegal</div>
@@ -121,8 +180,14 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                         <div id="w-node-_3795805a-2eea-af38-8afa-d4164c96e851-3d3dc5f0" className="content-grid-prediction">1st Group E</div>
                         <div id="w-node-_006b4fe0-e8a9-281b-f781-f492cd502992-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" {...register('match5HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
-                                <input type="number" {...register('match5AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
+                                <input type="number" {...register('match5HomeScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370555 === 'undefined' || !played ? '' : game3370555[1].toString()}
+                                />
+                                <input type="number" {...register('match5AwayScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370555 === 'undefined' || !played ? '' : game3370555[2].toString()}
+                                />
                             </div>
                         </div>
                         <div id="w-node-_3c513a16-b1ef-9be5-a5ed-438efde39358-3d3dc5f0" className="content-grid-prediction">2nd Group F</div>
@@ -132,8 +197,14 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                         <div id="w-node-_49825600-23f6-faba-31b0-2008088bda12-3d3dc5f0" className="content-grid-prediction">1st Group G</div>
                         <div id="w-node-_5290c7e8-d089-7e9c-1eb3-a1437a212c84-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" {...register('match6HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
-                                <input type="number" {...register('match6AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
+                                <input type="number" {...register('match6HomeScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370554 === 'undefined' || !played ? '' : game3370554[1].toString()}
+                                />
+                                <input type="number" {...register('match6AwayScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370554 === 'undefined' || !played ? '' : game3370554[2].toString()}
+                                />
                             </div>
                         </div>
                         <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">2nd Group H</div>
@@ -143,8 +214,14 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                         <div id="w-node-_49825600-23f6-faba-31b0-2008088bda12-3d3dc5f0" className="content-grid-prediction">1st Group F</div>
                         <div id="w-node-_5290c7e8-d089-7e9c-1eb3-a1437a212c84-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" {...register('match7HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
-                                <input type="number" {...register('match7AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
+                                <input type="number" {...register('match7HomeScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370556 === 'undefined' || !played ? '' : game3370556[1].toString()}
+                                />
+                                <input type="number" {...register('match7AwayScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370556 === 'undefined' || !played ? '' : game3370556[2].toString()}
+                                />
                             </div>
                         </div>
                         <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">2nd Group E</div>
@@ -154,8 +231,14 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                         <div id="w-node-_49825600-23f6-faba-31b0-2008088bda12-3d3dc5f0" className="content-grid-prediction">1st Group H</div>
                         <div id="w-node-_5290c7e8-d089-7e9c-1eb3-a1437a212c84-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" {...register('match8HomeScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
-                                <input type="number" {...register('match8AwayScore', { required: true, min: 0, max: 99 })} className="text-field-2 w-input" />
+                                <input type="number" {...register('match8HomeScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370557 === 'undefined' || !played ? '' : game3370557[1].toString()}
+                                />
+                                <input type="number" {...register('match8AwayScore', { required: true, min: 0, max: 99 })}
+                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    placeholder={typeof game3370557 === 'undefined' || !played ? '' : game3370557[2].toString()}
+                                />
                             </div>
                         </div>
                         <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">2nd Group G</div>
@@ -163,9 +246,10 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
                     </div>
                 </div>
                 <div className="div-block-6">
-                    {isConnected && predictionsOpen && <input type="submit" value="Submit your predictions!" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />}
-                    {isConnected && !predictionsOpen && <input type="submit" value="Predictions period will start soon!" className="hollow-button notactive" />}
                     {!isConnected && <input type="submit" value="Please connect!" className="hollow-button notactive" />}
+                    {isConnected && !predictionsOpen && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
+                    {isConnected && predictionsOpen && <input type="submit" value={played ? "Update your predictions!" : "Submit your predictions!"} data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />}
+
                 </div>
             </form>
             {modalSubmit && <ModalSubmit prediction={prediction} setModalSubmit={setModalSubmit} setSubmitted={setSubmitted} />}
@@ -173,4 +257,4 @@ function WCMatchLists({ ticket, contestId }: { ticket: number, contestId: number
     )
 }
 
-export default WCMatchLists;
+export default WcRound16;

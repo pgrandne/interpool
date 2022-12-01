@@ -5,7 +5,7 @@ import { ABI_Interpool } from "../utils/ABI_Interpool";
 // import { useCurrentContest } from "../utils/useCurrentContest";
 import ContestTable from './ContestTable';
 
-function WCMatchListsClosed({ ticket }: { ticket: number }) {
+function WcGroupPhase({ ticket }: { ticket: number }) {
     const { address, isConnected } = useAccount()
     const addressNetwork = useAddressNetwork()
     const [game3370549, setGame3370549] = useState([0, 0, 0])
@@ -836,4 +836,4 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
     )
 }
 
-export default WCMatchListsClosed;
+export default WcGroupPhase;

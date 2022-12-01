@@ -1,5 +1,5 @@
-import WCMatchLists from '../components/WCMatchLists'
-import WCMatchListsClosed from '../components/WCMatchListsClosed'
+import WcRound16 from '../components/WcRound16'
+import WcGroupPhase from '../components/WcGroupPhase'
 import WCMatchNoPred from '../components/WCMatchNoPred'
 import BannerNextPrediction from '../components/banner/BannerNextPrediction'
 import { useAccount, useContractReads, erc20ABI } from 'wagmi'
@@ -114,8 +114,8 @@ function SectionHome() {
                         </div>
                     </div>
                 </div>}
-                {contestId === 2 && <WCMatchLists ticket={ticket} contestId={contestId} />}
-                {contestId === 1 && played && <WCMatchListsClosed ticket={ticket} />}
+                {contestId === 2 && <WcRound16 ticket={ticket} played={played} />}
+                {contestId === 1 && played && <WcGroupPhase ticket={ticket} />}
                 {contestId === 1 && !played && <WCMatchNoPred />}
                 <div className="div-block-7">
                     <div className="text-block-5">You have 100% chance to win *</div>

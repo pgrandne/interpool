@@ -8,10 +8,10 @@ function Navbar({ currentSection, setCurrentSection }: { currentSection: any, se
             <nav role="navigation" className="nav-menu w-nav-menu">
                 <ul>
                     <li>
-                        <a href="#home" className={(currentSection === "home") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}>
+                        <a href="#home" className={(currentSection === "header" || currentSection === "home") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}>
                             <div className="div-block-3">
-                                {(currentSection !== "home") && <img src="images/soccer-fieldb-blanc.png" loading="lazy" width="25" alt="" className="image-2 image-home-current" />}
-                                {(currentSection === "home") && <img src="images/soccer-field-blue.png" loading="lazy" width="25" alt="" className="image-2 image-home-current" />}
+                                {currentSection !== "header" && currentSection !== "home" && <img src="images/soccer-fieldb-blanc.png" loading="lazy" width="25" alt="" className="image-2 image-home-current" />}
+                                {(currentSection === "header" || currentSection === "home") && <img src="images/soccer-field-blue.png" loading="lazy" width="25" alt="" className="image-2 image-home-current" />}
                                 <div>Home</div>
                             </div>
                         </a>
