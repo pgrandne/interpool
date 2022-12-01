@@ -2069,8 +2069,8 @@ ul.a {
     padding-left: 0px;
     -ms-grid-columns: 1fr 0.5fr 1fr;
     grid-template-columns: 1fr 0.5fr 1fr;
-    -ms-grid-rows: 60px 130px 60px;
-    grid-template-rows: 60px 130px 60px;
+    -ms-grid-rows: 60px 60px 60px;
+    grid-template-rows: 60px 60px 60px;
   }
 
   .account-details-grid-heading {
@@ -2164,6 +2164,17 @@ ul.a {
   .heading-10-variation {
     font-size: 16px;
   }
+
+
+  .footer-left {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 20px;
+    font-size: 15px;
+    text-align: left;
+  }
+
+
 
   .heading-10-variation-2 {
     font-size: 16px;
@@ -2364,8 +2375,8 @@ ul.a {
   }
 
   .grid-5 {
-    -ms-grid-columns: 0.25fr 0.25fr 1fr;
-    grid-template-columns: 0.25fr 0.25fr 0.75fr;
+    -ms-grid-columns: 0.75fr 0.5fr 1fr;
+    grid-template-columns: 0.75fr 0.5fr 1fr;
   }
 
   .account-details-grid-heading {

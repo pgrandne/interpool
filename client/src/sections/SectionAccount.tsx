@@ -89,24 +89,26 @@ function SectionAccount() {
                         <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className={isConnected ? "hollow-button white hollow-button-inverted" : "hollow-button notactive"}
                             onClick={(e) => {
                                 e.preventDefault()
-                                setModalMoreTickets(true)
-                            }}
-                        >Get more tickets!</a>
-                        <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className={isConnected ? "hollow-button white hollow-button-inverted" : "hollow-button notactive"}
-                            onClick={(e) => {
-                                e.preventDefault()
                                 setModalClaim(true)
                             }}
                         >Claim now!</a>
                     </div>
                     <div id="w-node-cd5c49f3-3443-15f4-fee3-549c3907df1f-3d3dc5f0" className="account-details-grid-heading">Total Winnings</div>
                     <div id="w-node-_691393fb-f6ac-f9a3-ad79-c9918787c975-3d3dc5f0" className="text-block-grid-content">${pendingWinnings + claimedWinnings}</div>
+                    <div id="w-node-_3613a481-370e-2c98-3fc4-cbfe298cc1cd-3d3dc5f0" className="div-block-49">
+                        <a href="/" data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className={isConnected ? "hollow-button white hollow-button-inverted" : "hollow-button notactive"}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setModalMoreTickets(true)
+                            }}
+                        >Get more tickets!</a>
+                    </div>
                 </div>
             </div>
             {modalRedeem && <ModalRedeem setModalRedeem={setModalRedeem} ticket={ticket} setRedeemed={setRedeemed} />}
             {modalMoreTickets && <ModalMoreTickets setModalMoreTickets={setModalMoreTickets} ticket={ticket} pendingWinnings={pendingWinnings} />}
             {modalClaim && <ModalClaim setModalClaim={setModalClaim} pendingWinnings={pendingWinnings} setClaimed={setClaimed} />}
-        </section>
+        </section >
     )
 }
 
