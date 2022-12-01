@@ -50,10 +50,10 @@ function ContestTable() {
     return (
         <div className="w-layout-grid grid-4">
             <div className="header-grid-history header-grid-history-left">Player</div>
-            <div className="header-grid-history">Number of tickets</div>
+            <div className="header-grid-history">Nb of tickets</div>
             <div className="header-grid-history">Rank</div>
             <div className="header-grid-history">Points</div>
-            <div className="header-grid-history header-grid-history-droite">Winnings (TBA)</div>
+            <div className="header-grid-history header-grid-history-right">Winnings (TBA)</div>
             {pointsTable.map((element: any, i: number) =>
                 <Fragment key={i}>
                     <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>{element[0].substring(0, 4)}...{element[0].substring(element.player.length - 4)}</div>

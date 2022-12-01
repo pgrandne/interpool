@@ -1118,6 +1118,7 @@ ul.a {
 
 .grid-4 {
   margin-top: 40px;
+  padding-bottom: 5px;
   margin-bottom: 20px;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -1131,17 +1132,18 @@ ul.a {
 
 .header-grid-history {
   padding-bottom: 4px;
+  margin-bottom: 4px;
   border-bottom: 1px solid #000;
   background-color: rgba(72, 169, 248, 0.28);
   font-size: 18px;
   line-height: 24px;
 }
 
-.header-grid-history.header-grid-history-left {
+.header-grid-history-left {
   border-top-left-radius: 10px;
 }
 
-.header-grid-history.header-grid-history-droite {
+.header-grid-history-right {
   border-top-right-radius: 10px;
 }
 
@@ -1779,10 +1781,6 @@ ul.a {
   font-size: 30px;
 }
 
-.heading-8.heading-8-slogan-mobile {
-  display: none;
-}
-
 .heading-9 {
   margin-bottom: 0px;
   color: #fff;
@@ -1982,6 +1980,11 @@ ul.a {
     font-size: 12px;
   }
 
+  .grid-knockout {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
 
   .grid-11 {
     grid-column-gap: 10px;
@@ -2149,6 +2152,10 @@ ul.a {
     padding-left: 20px;
   }
 
+  .grid-4 {
+    text-align: center;
+  }
+
   .heading-10-variation {
     font-size: 16px;
   }
@@ -2276,13 +2283,17 @@ ul.a {
 
   .grid-3 {
     min-width: 240px;
-    -ms-grid-columns: 0.25fr 0.25fr 0.5fr 0.25fr 0.5fr;
-    grid-template-columns: 0.25fr 0.25fr 0.5fr 0.25fr 0.5fr;
+    -ms-grid-columns: 0.25fr 0.5fr 0.5fr 0.5fr 0.5fr;
+    grid-template-columns: 0.25fr 0.5fr 0.5fr 0.5fr 0.5fr;
   }
 
   .grid-knockout {
-    padding: auto;
-    margin: auto;
+    /* padding: auto; */
+    /* margin: auto; */
+
+    padding-left: 10px;
+    padding-right: 10px;
+
   }
 
   .content-grid-prediction {
@@ -2314,6 +2325,7 @@ ul.a {
 
   .heading-2 {
     font-size: 28px;
+    line-height: 30px;
   }
 
   .section-account {
@@ -2322,14 +2334,6 @@ ul.a {
   }
 
   .header-grid-history {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
     font-size: 13px;
   }
 
@@ -2375,6 +2379,7 @@ ul.a {
   }
 
   .heading-5 {
+    margin-top: 15px;
     margin-bottom: 10px;
     font-size: 26px;
   }
@@ -2485,12 +2490,6 @@ ul.a {
 
   .heading-8 {
     display: none;
-  }
-
-  .heading-8.heading-8-slogan-mobile {
-    display: block;
-    max-width: none;
-    text-align: center;
   }
 
   .heading-8.heading-8-slogan {

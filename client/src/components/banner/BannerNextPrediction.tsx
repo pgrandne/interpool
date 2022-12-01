@@ -20,6 +20,7 @@ function BannerNextPrediction({ contestId, setContestId, setModalNewContest }: {
         abi: ABI_Interpool,
         functionName: 'getNumberOfPlayers',
         args: [contestId],
+        watch: true,
         onSuccess(data: any) {
             setNbPlayers(ethers.utils.formatUnits(data._hex, 0))
         },
