@@ -390,23 +390,27 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12903f-3d3dc5f0" className="content-grid-prediction">Poland</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129041-3d3dc5f0" className="form-block w-form">
                             <div id="" className="form-3">
-                                <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854576 === 'undefined' ? '' : game3854576[1].toString()} />
-                                <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854576 === 'undefined' ? '' : game3854576[2].toString()} />
+                                <input type="number" className={typeof game3854576 === 'undefined' ? "text-field-2 w-input" : colorInput(game3854576[1], game3854576[2], 0, 2)}
+                                    readOnly placeholder={typeof game3854576 === 'undefined' ? '' : game3854576[1].toString()} />
+                                <input type="number" className={typeof game3854576 === 'undefined' ? "text-field-2 w-input" : colorInput(game3854576[1], game3854576[2], 0, 2)}
+                                    readOnly placeholder={typeof game3854576 === 'undefined' ? '' : game3854576[2].toString()} />
                             </div>
                         </div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12904b-3d3dc5f0" className="content-grid-prediction">Argentina</div>
-                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12903d-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12903d-3d3dc5f0" className="content-grid-prediction-smaller">(0-2)</div>
                         {/* 3854577 */}
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12904d-3d3dc5f0" className="content-grid-prediction-smaller">11/30</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129051-3d3dc5f0" className="content-grid-prediction">S. Arabia</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee129053-3d3dc5f0" className="form-block w-form">
                             <div id="" className="form-3">
-                                <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854577 === 'undefined' ? '' : game3854577[1].toString()} />
-                                <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854577 === 'undefined' ? '' : game3854577[2].toString()} />
+                                <input type="number" className={typeof game3854577 === 'undefined' ? "text-field-2 w-input" : colorInput(game3854577[1], game3854577[2], 1, 2)}
+                                    readOnly placeholder={typeof game3854577 === 'undefined' ? '' : game3854577[1].toString()} />
+                                <input type="number" className={typeof game3854577 === 'undefined' ? "text-field-2 w-input" : colorInput(game3854577[1], game3854577[2], 1, 2)}
+                                    readOnly placeholder={typeof game3854577 === 'undefined' ? '' : game3854577[2].toString()} />
                             </div>
                         </div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12905d-3d3dc5f0" className="content-grid-prediction">Mexico</div>
-                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12904f-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee12904f-3d3dc5f0" className="content-grid-prediction-smaller">(1-2)</div>
                     </div>
                 </div>
                 <div>
@@ -471,23 +475,27 @@ function WCMatchListsClosed({ ticket }: { ticket: number }) {
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290b0-3d3dc5f0" className="content-grid-prediction">Australia</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290b2-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854584 === 'undefined' ? '' : game3854584[1].toString()} />
-                                <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854584 === 'undefined' ? '' : game3854584[2].toString()} />
+                                <input type="number" className={typeof game3854584 === 'undefined' ? "text-field-2 w-input" : colorInput(game3854584[1], game3854584[2], 1, 0)}
+                                    readOnly placeholder={typeof game3854584 === 'undefined' ? '' : game3854584[1].toString()} />
+                                <input type="number" className={typeof game3854584 === 'undefined' ? "text-field-2 w-input" : colorInput(game3854584[1], game3854584[2], 1, 0)}
+                                    readOnly placeholder={typeof game3854584 === 'undefined' ? '' : game3854584[2].toString()} />
                             </div>
                         </div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290bc-3d3dc5f0" className="content-grid-prediction">Denmark</div>
-                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290ae-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290ae-3d3dc5f0" className="content-grid-prediction-smaller">(1-0)</div>
                         {/* 3854583 */}
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290be-3d3dc5f0" className="content-grid-prediction-smaller">11/30</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290c2-3d3dc5f0" className="content-grid-prediction">Tunisia</div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290c4-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
-                                <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854583 === 'undefined' ? '' : game3854583[1].toString()} />
-                                <input type="number" className="text-field-2 w-input" readOnly placeholder={typeof game3854583 === 'undefined' ? '' : game3854583[2].toString()} />
+                                <input type="number" className={typeof game3854583 === 'undefined' ? "text-field-2 w-input" : colorInput(game3854583[1], game3854583[2], 1, 0)}
+                                    readOnly placeholder={typeof game3854583 === 'undefined' ? '' : game3854583[1].toString()} />
+                                <input type="number" className={typeof game3854583 === 'undefined' ? "text-field-2 w-input" : colorInput(game3854583[1], game3854583[2], 1, 0)}
+                                    readOnly placeholder={typeof game3854583 === 'undefined' ? '' : game3854583[2].toString()} />
                             </div>
                         </div>
                         <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290ce-3d3dc5f0" className="content-grid-prediction">France</div>
-                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290c0-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d2061d74-31a7-ef0e-418d-e7adee1290c0-3d3dc5f0" className="content-grid-prediction-smaller">(1-0)</div>
                     </div>
                 </div>
             </div>
