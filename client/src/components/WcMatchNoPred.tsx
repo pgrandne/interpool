@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { useAccount } from 'wagmi'
 import ContestTable from './ContestTable';
 
-function WCMatchNoPred() {
+function WcMatchNoPred() {
     const { isConnected } = useAccount()
 
     return (
@@ -513,7 +513,7 @@ function WCMatchNoPred() {
                             </div>
                         </div>
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf31-3d3dc5f0" className="content-grid-prediction">Switzerland</div>
-                        <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf23-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf23-3d3dc5f0" className="content-grid-prediction-smaller">(2-3)</div>
                         {/* 3854601 */}
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf33-3d3dc5f0" className="content-grid-prediction-smaller">12/02</div>
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf37-3d3dc5f0" className="content-grid-prediction">Cameroon</div>
@@ -524,7 +524,7 @@ function WCMatchNoPred() {
                             </div>
                         </div>
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf43-3d3dc5f0" className="content-grid-prediction">Brazil</div>
-                        <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf35-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf35-3d3dc5f0" className="content-grid-prediction-smaller">(1-0)</div>
                     </div>
                 </div>
                 <div>
@@ -586,7 +586,7 @@ function WCMatchNoPred() {
                             </div>
                         </div>
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febfa2-3d3dc5f0" className="content-grid-prediction">Portugal</div>
-                        <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf94-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febf94-3d3dc5f0" className="content-grid-prediction-smaller">(2-1)</div>
                         {/* 3854608 */}
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febfa4-3d3dc5f0" className="content-grid-prediction-smaller">12/02</div>
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febfa8-3d3dc5f0" className="content-grid-prediction">Ghana</div>
@@ -597,7 +597,7 @@ function WCMatchNoPred() {
                             </div>
                         </div>
                         <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febfb4-3d3dc5f0" className="content-grid-prediction">Uruguay</div>
-                        <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febfa6-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-_74aead76-a63d-8f28-d55e-d94c20febfa6-3d3dc5f0" className="content-grid-prediction-smaller">(0-2)</div>
                     </div>
                 </div>
             </div>
@@ -611,4 +611,4 @@ function WCMatchNoPred() {
     )
 }
 
-export default WCMatchNoPred;
+export default WcMatchNoPred;

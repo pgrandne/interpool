@@ -195,7 +195,7 @@ function WcRound16({ ticket, played }: { ticket: number, played: boolean }) {
                         <div id="w-node-f4954d84-1ad6-5ba6-3f03-ddb58eac9cc1-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
                         {/* 3370554 1G 2H */}
                         <div id="w-node-_4ac478ef-02c5-7daa-0dc5-8378b2812116-3d3dc5f0" className="content-grid-prediction-smaller">12/05</div>
-                        <div id="w-node-_49825600-23f6-faba-31b0-2008088bda12-3d3dc5f0" className="content-grid-prediction">1st Group G</div>
+                        <div id="w-node-_49825600-23f6-faba-31b0-2008088bda12-3d3dc5f0" className="content-grid-prediction">Brazil</div>
                         <div id="w-node-_5290c7e8-d089-7e9c-1eb3-a1437a212c84-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match6HomeScore', { required: true, min: 0, max: 99 })}
@@ -208,7 +208,7 @@ function WcRound16({ ticket, played }: { ticket: number, played: boolean }) {
                                 />
                             </div>
                         </div>
-                        <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">2nd Group H</div>
+                        <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">Korea R.</div>
                         <div id="w-node-_432301b4-79cf-d381-abbc-64f0ef16a3cd-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
                         {/* 3370556 1F 2E */}
                         <div id="w-node-_4ac478ef-02c5-7daa-0dc5-8378b2812116-3d3dc5f0" className="content-grid-prediction-smaller">12/06</div>
@@ -229,7 +229,7 @@ function WcRound16({ ticket, played }: { ticket: number, played: boolean }) {
                         <div id="w-node-_432301b4-79cf-d381-abbc-64f0ef16a3cd-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
                         {/* 3370557 1H 2G */}
                         <div id="w-node-_4ac478ef-02c5-7daa-0dc5-8378b2812116-3d3dc5f0" className="content-grid-prediction-smaller">12/06</div>
-                        <div id="w-node-_49825600-23f6-faba-31b0-2008088bda12-3d3dc5f0" className="content-grid-prediction">1st Group H</div>
+                        <div id="w-node-_49825600-23f6-faba-31b0-2008088bda12-3d3dc5f0" className="content-grid-prediction">Portugal</div>
                         <div id="w-node-_5290c7e8-d089-7e9c-1eb3-a1437a212c84-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match8HomeScore', { required: true, min: 0, max: 99 })}
@@ -242,7 +242,7 @@ function WcRound16({ ticket, played }: { ticket: number, played: boolean }) {
                                 />
                             </div>
                         </div>
-                        <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">2nd Group G</div>
+                        <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">Switzerland</div>
                         <div id="w-node-_432301b4-79cf-d381-abbc-64f0ef16a3cd-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
                     </div>
                 </div>

@@ -8,10 +8,9 @@ import { useState } from 'react'
 // import { useCurrentContest } from '../../utils/useCurrentContest'
 import ContestEndCountdown from '../../utils/ContestEndCountdown'
 
-function BannerNextPrediction({ contestId, setContestId, setModalNewContest }: {
+function BannerNextPrediction({ contestId, setContestId }: {
     contestId: number,
     setContestId: React.Dispatch<React.SetStateAction<number>>,
-    setModalNewContest: React.Dispatch<React.SetStateAction<boolean>>,
 }) {
     const [nbPlayers, setNbPlayers] = useState('0')
     const addressNetwork = useAddressNetwork()
@@ -29,7 +28,6 @@ function BannerNextPrediction({ contestId, setContestId, setModalNewContest }: {
     const handleClick = () => {
         if (contestId === 1) {
             setContestId(2)
-            setModalNewContest(true)
         } else setContestId(1)
     }
 
