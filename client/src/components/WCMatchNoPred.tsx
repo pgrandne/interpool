@@ -365,7 +365,7 @@ function WCMatchNoPred() {
                             </div>
                         </div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120018a-3d3dc5f0" className="content-grid-prediction">Spain</div>
-                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120017c-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120017c-3d3dc5f0" className="content-grid-prediction-smaller">(2-1)</div>
                         {/* 3854590 */}
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120018c-3d3dc5f0" className="content-grid-prediction-smaller">12/01</div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200190-3d3dc5f0" className="content-grid-prediction">Costa Rica</div>
@@ -376,7 +376,7 @@ function WCMatchNoPred() {
                             </div>
                         </div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120019c-3d3dc5f0" className="content-grid-prediction">Germany</div>
-                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120018e-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120018e-3d3dc5f0" className="content-grid-prediction-smaller">(2-4)</div>
                     </div>
                 </div>
                 <div>
@@ -438,7 +438,7 @@ function WCMatchNoPred() {
                             </div>
                         </div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001fb-3d3dc5f0" className="content-grid-prediction">Morocco</div>
-                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001ed-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001ed-3d3dc5f0" className="content-grid-prediction-smaller">(1-2)</div>
                         {/* 3854595 */}
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001fd-3d3dc5f0" className="content-grid-prediction-smaller">12/01</div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd1200201-3d3dc5f0" className="content-grid-prediction">Croatia</div>
@@ -449,7 +449,7 @@ function WCMatchNoPred() {
                             </div>
                         </div>
                         <div id="w-node-d6998ca8-d344-e20b-6360-2aacd120020d-3d3dc5f0" className="content-grid-prediction">Belgium</div>
-                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001ff-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-d6998ca8-d344-e20b-6360-2aacd12001ff-3d3dc5f0" className="content-grid-prediction-smaller">(0-0)</div>
                     </div>
                 </div>
             </div>
