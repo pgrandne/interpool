@@ -81,6 +81,7 @@ function WcRound16({ ticket, played }: { ticket: number, played: boolean }) {
     const onSubmit: SubmitHandler<IFormInput> = data => {
         if (ticket === 0) {
             toast("⚽ Get your tickets to submit your predictions!")
+            document.getElementById('get-your-tickets')?.scrollIntoView();
         } else {
             const result = [
                 { gameId: 3370550, homeScore: parseInt(data.match1HomeScore), awayScore: parseInt(data.match1AwayScore) }, //1

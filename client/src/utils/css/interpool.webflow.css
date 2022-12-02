@@ -990,6 +990,22 @@ ul.a {
   justify-content: center;
 }
 
+.div-block-61 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-right: 30px;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.div-block-62 {
+  display: none;
+}
+
 .text-block-5 {
   font-family: 'Reenie Beanie', sans-serif;
   font-size: 36px;
@@ -1959,6 +1975,36 @@ ul.a {
   }
 }
 
+.div-block-61 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-right: 30px;
+  padding-left: 30px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.div-block-62 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  grid-column-gap: 4px;
+  opacity: 0.74;
+}
+
+.text-block-49 {
+  color: #000;
+}
+
 @media screen and (max-width: 767px) {
   h3 {
     margin-top: 10px;
@@ -2238,7 +2284,10 @@ ul.a {
     grid-row-gap: 20px;
   }
 
-
+  .div-block-61 {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 
   .div-block-58 {
     -webkit-box-orient: vertical;
@@ -2375,8 +2424,8 @@ ul.a {
   }
 
   .grid-5 {
-    -ms-grid-columns: 0.75fr 0.5fr 1fr;
-    grid-template-columns: 0.75fr 0.5fr 1fr;
+    -ms-grid-columns: 0.35fr 0.35fr 0.9fr;
+    grid-template-columns: 0.35fr 0.35fr 0.9fr;
   }
 
   .account-details-grid-heading {
@@ -2526,6 +2575,11 @@ ul.a {
 
   .text-block-51 {
     font-size: 12px;
+  }
+
+  .text-block-49 {
+    padding-right: 5px;
+    font-size: 15px;
   }
 }
 

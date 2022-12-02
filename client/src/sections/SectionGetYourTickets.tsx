@@ -21,7 +21,7 @@ function SectionGetYourTickets() {
             <div className="container-2 w-container">
                 <div className="div-block-18">
                     <h1 data-w-id="11d36449-1ec6-cc9e-b0ea-c2b94a3fc351" className="heading-6">Get your Tickets!</h1>
-                    <div className="text-block-13">Each ticket require a deposit of $50 that will be locked during the full contest period. <br />More tickets you get, higher will be your winnings! </div>
+                    <div className="text-block-13">Each ticket require a deposit of $50 that will be locked during the full contest period.<br />More tickets you get, higher will be your winnings! </div>
                     <div className="div-block-8">
                         <div className="form-block-2 w-form">
                             <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" className="form-2"><label className="field-label">Get</label>

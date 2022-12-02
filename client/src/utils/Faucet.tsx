@@ -108,7 +108,7 @@ function Faucet() {
                     }
                     )
                 }
-            }}> {loading && <i className="fa fa-refresh fa-spin"></i>} Faucet 50 USDC</a >
+            }}> {loading && <i className="fa fa-refresh fa-spin"></i>} Get free 50 USDC</a >
     )
 }
 
