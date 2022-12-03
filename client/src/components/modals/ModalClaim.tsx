@@ -54,9 +54,9 @@ function ModalClaim({ setModalClaim, pendingWinnings, setClaimed }: {
                 <div className="div-block-39 div-block-39-withdrawal-variation">
                     <div className="div-block-36">
                         <div className="div-block-37"><img src="images/usd-coin-usdc-logo.png" loading="lazy" srcSet="images/usd-coin-usdc-logo-p-500.png 500w, images/usd-coin-usdc-logo-p-800.png 800w, images/usd-coin-usdc-logo-p-2000.png 2000w, images/usd-coin-usdc-logo.png 2000w" sizes="100vw" alt="" className="image-16" />
-                            <div className="text-block-43">{pendingWinnings}</div>
+                            <div className="text-block-43">~{pendingWinnings.toFixed(2)}  </div>
                         </div>
-                        <div className="text-block-41">USDC</div>
+                        <div className="text-block-41"> USDC</div>
                     </div>
                 </div>
                 <a href="/" data-w-id="10726a2a-0f38-c4f5-17d4-b50ee7aa8dd5" className={!loading ? "hollow-button white" : "hollow-button notactive"}

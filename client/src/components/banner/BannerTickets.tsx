@@ -5,16 +5,17 @@ import { useAddressNetwork } from '../../utils/useAddressNetwork'
 import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { ethers } from 'ethers'
 import { useState } from 'react'
-// import { useCurrentContest } from '../../utils/useCurrentContest'
+import { useCurrentContest } from '../../utils/useCurrentContest'
 
 function BannerTickets({ ticket }: { ticket: number }) {
+    const currentContest = useCurrentContest()
     const [nbPlayers, setNbPlayers] = useState('0');
     const addressNetwork = useAddressNetwork();
     useContractRead({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getNumberOfPlayers',
-        args: [1],
+        args: [currentContest],
         onSuccess(data: any) {
             setNbPlayers(ethers.utils.formatUnits(data._hex, 0))
         },
