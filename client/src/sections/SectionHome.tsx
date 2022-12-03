@@ -15,7 +15,7 @@ function SectionHome() {
     const [ticket, setTicket] = useState(0)
     const [rank, setRank] = useState(0)
     const [points, setPoints] = useState(0)
-    const [contestId, setContestId] = useState(1)
+    const [contestId, setContestId] = useState(2)
     // const [modalNewContest, setModalNewContest] = useState(false)
     const [played, setPlayed] = useState(false)
     const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()

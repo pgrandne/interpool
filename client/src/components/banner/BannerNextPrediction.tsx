@@ -39,7 +39,7 @@ function BannerNextPrediction({ contestId, setContestId }: {
                 </div>
                 <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740b8-3d3dc5f0" className="div-block-info">
                     <div className="div-block-13">
-                        <div className="text-block-3">{contestId === 2 ? "Next contest" : "Current contest"}</div>
+                        <div className="text-block-3">{contestId === 2 ? "Current contest" : "Previous contest"}</div>
                     </div>
                     <div className="text-block">#0{contestId}</div>
                 </div>
@@ -90,8 +90,8 @@ function BannerNextPrediction({ contestId, setContestId }: {
                             {contestId === 2 && <img src="images/previous.svg" loading="lazy" alt="" className="image" width="35" />}
                         </div>
                         <div className="div-block-info">
-                            {contestId === 1 && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Submit your predictions for the next contest!</h1>}
-                            {contestId === 2 && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Back to current contest!</h1>}
+                            {contestId === 1 && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Submit your predictions for the current contest!</h1>}
+                            {contestId === 2 && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Back to previous contest!</h1>}
                         </div>
                     </div>
                     {contestId === 1 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740df-3d3dc5f0" className="div-block inner-div-block">
