@@ -30,7 +30,7 @@ function ContestTable() {
     })
 
     const sortPointsTable = (data: any) => {
-        const tempTable = data.slice().sort((a: any, b: any) => parseInt(ethers.utils.formatUnits(b[2]._hex, 0)) - parseInt(ethers.utils.formatUnits(a[2]._hex, 0)))
+        const tempTable = data.slice().sort((a: any, b: any) => parseInt(ethers.utils.formatUnits(b[2]._hex, 0)) - parseInt(ethers.utils.formatUnits(a[2]._hex, 0))).filter((element: any) => element[0] !== "0x0000000000000000000000000000000000000000")
         setPointsTable(tempTable)
     }
 
