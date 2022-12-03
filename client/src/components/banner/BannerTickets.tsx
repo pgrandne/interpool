@@ -1,4 +1,3 @@
-import Countdown from '../../utils/SubmissionEndCountdown'
 import PrizePool from '../../utils/PrizePool'
 import { useContractRead } from 'wagmi'
 import { useAddressNetwork } from '../../utils/useAddressNetwork'
@@ -6,6 +5,7 @@ import { ABI_Interpool } from '../../utils/ABI_Interpool'
 import { ethers } from 'ethers'
 import { useState } from 'react'
 import { useCurrentContest } from '../../utils/useCurrentContest'
+import SubmissionEndCountdown from '../../utils/SubmissionEndCountdown'
 
 function BannerTickets({ ticket }: { ticket: number }) {
     const currentContest = useCurrentContest()
@@ -52,7 +52,7 @@ function BannerTickets({ ticket }: { ticket: number }) {
                 <div id="w-node-_32c4b166-8f61-2091-35f0-1c2fdb217062-3d3dc5f0" className="div-block-info">
                     <div className="text-block-3">Submission period</div>
                     <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f4-3d3dc5f0" className="text-block text-block-variation">
-                        CLOSED
+                        <SubmissionEndCountdown contestId={currentContest} />
                     </div>
                 </div>
             </div>
