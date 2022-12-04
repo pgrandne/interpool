@@ -22,8 +22,8 @@ function ContestTable() {
     useContractRead({
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
-        functionName: 'getContestTable',
-        args: [1],
+        functionName: 'getPointsTable',
+        args: [2],
         onSuccess(data: any) {
             sortPointsTable(data)
         }
@@ -58,9 +58,9 @@ function ContestTable() {
                 <Fragment key={i}>
                     <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>{element[0].substring(0, 4)}...{element[0].substring(element.player.length - 4)}</div>
                     <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>{ethers.utils.formatUnits(element[1]._hex, 0)}</div>
-                    <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}> {calculateRank(i, parseInt(ethers.utils.formatUnits(element[2]._hex, 0)))} / 20</div>
+                    <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}> {calculateRank(i, parseInt(ethers.utils.formatUnits(element[2]._hex, 0)))} / 21</div>
                     <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>{ethers.utils.formatUnits(element[2]._hex, 0)}</div>
-                    <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>${parseFloat(ethers.utils.formatUnits(element[4]._hex, 6)).toFixed(2)}</div>
+                    <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>-</div>
                 </Fragment>)
             }
         </div >

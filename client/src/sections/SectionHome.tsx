@@ -69,7 +69,7 @@ function SectionHome() {
                 <h1 className="heading-5">QATAR WORLD CUP 2022 <br />~ Prediction Game ~</h1>
                 <h1 className="heading-2">If you wanna win big, just be better than the others!</h1>
                 <BannerNextPrediction contestId={contestId} setContestId={setContestId} />
-                {isConnected && contestId === 1 && <div className="div-block-54">
+                {isConnected && <div className="div-block-54">
                     <div className="div-block-51">
                         <img src="images/arrow2-black.svg" loading="lazy" width="30" alt="" className="arrow-prediction" />
                         <h1 className="heading-10">Your predictions<br />(contest #01)</h1>
@@ -88,7 +88,7 @@ function SectionHome() {
                     <div className="div-block-53">
                     </div>
                 </div>}
-                {isConnected && contestId === 1 && <div className="div-block-57">
+                {isConnected && <div className="div-block-57">
                     <div className="form-block w-form form-3">
                         <input type="text" className="text-field-2 success-field" />
                         <div className="div-block-58">

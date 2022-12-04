@@ -65,8 +65,7 @@ function BannerNextPrediction({ contestId, setContestId }: {
                     <img src="images/Coupe-blanc.png" loading="lazy" alt="" className="image" width="40" />
                 </div>
                 <div className="div-block-info">
-                    <div className="text-block-3">Winner announcement</div>
-                    <ContestEndCountdown contestId={contestId} />
+                    <div className="text-block-3">Winners announced</div>
                 </div>
             </div>}
             {contestId === 2 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740ce-3d3dc5f0" className="div-block colorvariation-3">
@@ -74,8 +73,8 @@ function BannerNextPrediction({ contestId, setContestId }: {
                     <img src="images/time-blanc.png" loading="lazy" alt="" className="image" width="40" />
                 </div>
                 <div className="div-block-info">
-                    <div className="text-block-3">Submission Period</div>
-                    <SubmissionEndCountdown contestId={contestId} />
+                    <div className="text-block-3">Winner annoucement</div>
+                    <ContestEndCountdown contestId={contestId} />
                 </div>
             </div>}
             <a href="/" id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fb-3d3dc5f0" className=" link-block-2"

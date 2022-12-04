@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { useAccount } from 'wagmi'
-import ContestTable from './ContestTable';
+import ContestTable from './ClosedContestTable';
 
 function WcMatchNoPred() {
     const { isConnected } = useAccount()
