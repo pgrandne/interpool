@@ -22,9 +22,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const ALCHEMY_API_KEY: any = process.env.REACT_APP_ALCHEMY_ID
+
 const { chains, provider } = configureChains(
   [chain.goerli, chain.polygonMumbai],
-  [alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_ID })],
+  [alchemyProvider({ apiKey: ALCHEMY_API_KEY })],
 );
 
 const connectors = connectorsForWallets([
@@ -49,7 +51,7 @@ const wagmiClient = createClient({
 root.render(
   <React.StrictMode>
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider showRecentTransactions={true} chains={chains} modalSize="compact" theme={darkTheme({
+      <RainbowKitProvider chains={chains} modalSize="compact" theme={darkTheme({
         accentColor: 'none',
         accentColorForeground: 'black',
         borderRadius: 'large',

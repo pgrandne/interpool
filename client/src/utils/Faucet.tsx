@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const GetBalance = () => {
     const { address } = useAccount()
     const { data }: { data: any } = useBalance({
-        addressOrName: address,
+        address: address,
     })
     return (parseFloat(data.formatted))
 }
