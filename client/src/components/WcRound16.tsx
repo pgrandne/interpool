@@ -176,31 +176,31 @@ function WcRound16({ ticket, played }: { ticket: number, played: boolean }) {
                     <div id="w-node-_49825600-23f6-faba-31b0-2008088bda12-3d3dc5f0" className="content-grid-prediction">Morocco</div>
                     <div id="w-node-_5290c7e8-d089-7e9c-1eb3-a1437a212c84-3d3dc5f0" className="form-block w-form">
                         <div className="form-3">
-                            <input type="number" className="text-field-2 not-connected-field"
+                            <input type="number" className={typeof game3370556 === 'undefined' ? "text-field-2 not-connected-field" : colorInput(game3370556[1], game3370556[2], 3, 0)}
                                 placeholder={typeof game3370556 === 'undefined' || !played ? '' : game3370556[1].toString()}
                             />
-                            <input type="number" className="text-field-2 not-connected-field"
+                            <input type="number" className={typeof game3370556 === 'undefined' ? "text-field-2 not-connected-field" : colorInput(game3370556[1], game3370556[2], 3, 0)}
                                 placeholder={typeof game3370556 === 'undefined' || !played ? '' : game3370556[2].toString()}
                             />
                         </div>
                     </div>
                     <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">Spain</div>
-                    <div id="w-node-_432301b4-79cf-d381-abbc-64f0ef16a3cd-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                    <div id="w-node-_432301b4-79cf-d381-abbc-64f0ef16a3cd-3d3dc5f0" className="content-grid-prediction-smaller">(3-0)</div>
                     {/* 3370557 1H 2G */}
                     <div id="w-node-_4ac478ef-02c5-7daa-0dc5-8378b2812116-3d3dc5f0" className="content-grid-prediction-smaller">12/06</div>
                     <div id="w-node-_49825600-23f6-faba-31b0-2008088bda12-3d3dc5f0" className="content-grid-prediction">Portugal</div>
                     <div id="w-node-_5290c7e8-d089-7e9c-1eb3-a1437a212c84-3d3dc5f0" className="form-block w-form">
                         <div className="form-3">
-                            <input type="number" className="text-field-2 not-connected-field"
+                            <input type="number" className={typeof game3370557 === 'undefined' ? "text-field-2 not-connected-field" : colorInput(game3370557[1], game3370557[2], 6, 1)}
                                 placeholder={typeof game3370557 === 'undefined' || !played ? '' : game3370557[1].toString()}
                             />
-                            <input type="number" className="text-field-2 not-connected-field"
+                            <input type="number" className={typeof game3370557 === 'undefined' ? "text-field-2 not-connected-field" : colorInput(game3370557[1], game3370557[2], 6, 1)}
                                 placeholder={typeof game3370557 === 'undefined' || !played ? '' : game3370557[2].toString()}
                             />
                         </div>
                     </div>
                     <div id="w-node-fa5aae3c-4413-c772-3895-ba8bb9702369-3d3dc5f0" className="content-grid-prediction">Switzerland</div>
-                    <div id="w-node-_432301b4-79cf-d381-abbc-64f0ef16a3cd-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                    <div id="w-node-_432301b4-79cf-d381-abbc-64f0ef16a3cd-3d3dc5f0" className="content-grid-prediction-smaller">(6-1)</div>
                 </div>
             </div>
             <div className="div-block-6">
