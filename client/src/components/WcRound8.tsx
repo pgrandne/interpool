@@ -15,7 +15,7 @@ interface IPrediction {
     awayScore: number
 }
 
-function WcRound8({ ticket, played, contestId }: { ticket: number, played: boolean, contestId: number }) {
+function WcRound8({ ticket, played, contestId, nbPlayers }: { ticket: number, played: boolean, contestId: number, nbPlayers: number }) {
     const addressNetwork = useAddressNetwork()
     const { address, isConnected } = useAccount()
     const [modalSubmit, setModalSubmit] = useState(false)
@@ -99,7 +99,7 @@ function WcRound8({ ticket, played, contestId }: { ticket: number, played: boole
 
     return (
         <Fragment>
-            <h2 className="heading-5">KNOCKOUT STAGE<br />~ Round of 8 ~</h2>
+            <h2 className="heading-5">KNOCKOUT STAGE<br />~ 1/4th of final ~</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid-knockout">
                     <div className="w-layout-grid grid-3">
@@ -182,6 +182,7 @@ function WcRound8({ ticket, played, contestId }: { ticket: number, played: boole
 
                     </div>
                 </div>
+                <div className="text-block-52">Note: During the knockout stage, <strong>you cannot predict any draw</strong>. A winner is expected, meaning you should add the penalties in your predictions. (Ex: if the score is 1-1 at the end of the prolongations, and the results of the penalties are 3-5, then correct prediction is 4-6)</div>
                 <div className="div-block-6">
                     {!isConnected && <input type="submit" value="Please connect!" className="hollow-button notactive" />}
                     {isConnected && !predictionsOpen && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}

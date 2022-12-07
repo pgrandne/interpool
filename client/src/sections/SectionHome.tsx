@@ -17,6 +17,7 @@ function SectionHome() {
     const [rank, setRank] = useState(0)
     const [points, setPoints] = useState(0)
     const [contestId, setContestId] = useState(3)
+    const [nbPlayers, setNbPlayers] = useState(0)
     // const [modalNewContest, setModalNewContest] = useState(false)
     const [played, setPlayed] = useState(false)
     const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
@@ -52,8 +53,11 @@ function SectionHome() {
                 functionName: 'getVerifPlayerPlayedPerContest',
                 args: [contestId, isConnected ? address : "0x000000000000000000000000000000000000dEaD"],
             },
-
-
+            {
+                ...interPool,
+                functionName: 'getNumberOfPlayers',
+                args: [contestId],
+            },
         ],
         watch: true,
         onSuccess(data: any) {
@@ -61,6 +65,7 @@ function SectionHome() {
             setRank(parseInt(ethers.utils.formatUnits(data[1]._hex, 0)))
             setPoints(parseInt(ethers.utils.formatUnits(data[2]._hex, 0)))
             setPlayed(data[3])
+            setNbPlayers(parseInt(ethers.utils.formatUnits(data[4]._hex, 0)))
         },
     })
 
@@ -79,7 +84,7 @@ function SectionHome() {
                     <div className="w-layout-grid grid-10">
                         <div className="div-block-52">
                             <h1 className="heading-10 heading-10-variation">Current rank:</h1>
-                            <h1 className="heading-10 heading-10-variation-2">{played ? rank : "-"}/20</h1>
+                            <h1 className="heading-10 heading-10-variation-2">{played ? rank : "-"}/{nbPlayers}</h1>
                         </div>
                         <div className="div-block-52 div-block-52-color-variation">
                             <h1 className="heading-10 heading-10-variation">Current score:</h1>
@@ -115,10 +120,10 @@ function SectionHome() {
                         </div>
                     </div>
                 </div>}
-                {contestId === 2 && <WcRound16 ticket={ticket} played={played} contestId={contestId} />}
-                {contestId === 1 && played && <WcGroupPhase ticket={ticket} contestId={contestId} />}
+                {contestId === 2 && <WcRound16 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
+                {contestId === 1 && played && <WcGroupPhase ticket={ticket} contestId={contestId} nbPlayers={nbPlayers} />}
                 {contestId === 1 && !played && <WcMatchNoPred />}
-                {contestId === 3 && <WcRound8 ticket={ticket} played={played} contestId={contestId} />}
+                {contestId === 3 && <WcRound8 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
                 <div className="div-block-7">
                     <div className="text-block-5">You have 100% chance to win *</div>
                     <div className="text-block-6">* This is actually true <a href="https://irruption-lab.gitbook.io/interpool/welcome/frequently-asked-questions#prizes-and-winning" target="_blank" rel="noreferrer" className="link-4">(see details)</a>
