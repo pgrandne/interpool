@@ -35,7 +35,7 @@ function ContestEndCountdown({ contestId }: { contestId: number }) {
     }, [countDownDate, countDown]);
 
     return (
-        <div id="w-node-a6b17af5-47c5-7e56-de42-ea26d682ffb2-3d3dc5f0" className="text-block">0D 0H 0m</div>
+        <div id="w-node-a6b17af5-47c5-7e56-de42-ea26d682ffb2-3d3dc5f0" className="text-block">{days}D {hours}H {minutes}m</div>
 
     )
 }

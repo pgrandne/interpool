@@ -1,4 +1,5 @@
 import WcRound16 from '../components/WcRound16'
+import WcRound8 from '../components/WcRound8'
 import WcGroupPhase from '../components/WcGroupPhase'
 import WcMatchNoPred from '../components/WcMatchNoPred'
 import BannerNextPrediction from '../components/banner/BannerNextPrediction'
@@ -15,7 +16,7 @@ function SectionHome() {
     const [ticket, setTicket] = useState(0)
     const [rank, setRank] = useState(0)
     const [points, setPoints] = useState(0)
-    const [contestId, setContestId] = useState(2)
+    const [contestId, setContestId] = useState(3)
     // const [modalNewContest, setModalNewContest] = useState(false)
     const [played, setPlayed] = useState(false)
     const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
@@ -72,7 +73,7 @@ function SectionHome() {
                 {isConnected && <div className="div-block-54">
                     <div className="div-block-51">
                         <img src="images/arrow2-black.svg" loading="lazy" width="30" alt="" className="arrow-prediction" />
-                        <h1 className="heading-10">Your predictions<br />(contest #01)</h1>
+                        <h1 className="heading-10">Your predictions<br />(contest #0{contestId})</h1>
                         <img src="images/arrow2-black.svg" loading="lazy" width="30" alt="" className="image-21 arrow-prediction" />
                     </div>
                     <div className="w-layout-grid grid-10">
@@ -114,9 +115,10 @@ function SectionHome() {
                         </div>
                     </div>
                 </div>}
-                {contestId === 2 && <WcRound16 ticket={ticket} played={played} />}
-                {contestId === 1 && played && <WcGroupPhase ticket={ticket} />}
+                {contestId === 2 && <WcRound16 ticket={ticket} played={played} contestId={contestId} />}
+                {contestId === 1 && played && <WcGroupPhase ticket={ticket} contestId={contestId} />}
                 {contestId === 1 && !played && <WcMatchNoPred />}
+                {contestId === 3 && <WcRound8 ticket={ticket} played={played} contestId={contestId} />}
                 <div className="div-block-7">
                     <div className="text-block-5">You have 100% chance to win *</div>
                     <div className="text-block-6">* This is actually true <a href="https://irruption-lab.gitbook.io/interpool/welcome/frequently-asked-questions#prizes-and-winning" target="_blank" rel="noreferrer" className="link-4">(see details)</a>

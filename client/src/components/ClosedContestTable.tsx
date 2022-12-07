@@ -4,7 +4,7 @@ import { useAddressNetwork } from '../utils/useAddressNetwork'
 import { ethers } from 'ethers'
 import { ABI_Interpool } from "../utils/ABI_Interpool";
 
-function ClosedContestTable() {
+function ClosedContestTable({ contestId }: { contestId: number }) {
     const addressNetwork = useAddressNetwork()
     const [playerAddress, setPlayerAddress] = useState('0x000000000000000000000000000000000000dEaD')
     const { address, isConnected }: { address: any, isConnected: boolean } = useAccount()
@@ -22,7 +22,7 @@ function ClosedContestTable() {
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getContestTable',
-        args: [1],
+        args: [contestId],
         onSuccess(data: any) {
             sortPointsTable(data)
         }

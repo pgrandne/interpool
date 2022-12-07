@@ -2,9 +2,9 @@ import { Fragment, useState } from 'react'
 import { useAccount, useContractRead } from 'wagmi'
 import { useAddressNetwork } from "../utils/useAddressNetwork"
 import { ABI_Interpool } from '../utils/ABI_Interpool'
-import CurrentContestTable from './CurrentContestTable';
+import ClosedContestTable from './ClosedContestTable';
 
-function WcRound16({ ticket, played }: { ticket: number, played: boolean }) {
+function WcRound16({ ticket, played, contestId }: { ticket: number, played: boolean, contestId: number }) {
     const addressNetwork = useAddressNetwork()
     const { address, isConnected } = useAccount()
 
@@ -208,7 +208,7 @@ function WcRound16({ ticket, played }: { ticket: number, played: boolean }) {
                 {isConnected && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
 
             </div>
-            <CurrentContestTable />
+            <ClosedContestTable contestId={contestId} />
         </Fragment >
     )
 }

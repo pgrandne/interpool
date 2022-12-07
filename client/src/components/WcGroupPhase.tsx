@@ -5,7 +5,7 @@ import { ABI_Interpool } from "../utils/ABI_Interpool";
 // import { useCurrentContest } from "../utils/useCurrentContest";
 import ClosedContestTable from './ClosedContestTable';
 
-function WcGroupPhase({ ticket }: { ticket: number }) {
+function WcGroupPhase({ ticket, contestId }: { ticket: number, contestId: number }) {
     const { address, isConnected } = useAccount()
     const addressNetwork = useAddressNetwork()
     const [game3370549, setGame3370549] = useState([0, 0, 0])
@@ -847,7 +847,7 @@ function WcGroupPhase({ ticket }: { ticket: number }) {
                 {isConnected && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                 {!isConnected && <input type="submit" value="Please connect!" className="hollow-button notactive" />}
             </div>
-            <ClosedContestTable />
+            <ClosedContestTable contestId={contestId} />
         </Fragment >
     )
 }
