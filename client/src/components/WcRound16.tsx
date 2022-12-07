@@ -203,7 +203,7 @@ function WcRound16({ ticket, played, contestId, nbPlayers }: { ticket: number, p
                     <div id="w-node-_432301b4-79cf-d381-abbc-64f0ef16a3cd-3d3dc5f0" className="content-grid-prediction-smaller">(6-1)</div>
                 </div>
             </div>
-            <div className="text-block-52 hero-title-wrapper">Note: During the knockout stage, <strong>you cannot predict any draw</strong>. <br />A winner is expected, meaning you should add the penalties in your predictions.<br />(Ex: if the score is 1-1 at the end of the prolongations, and the results of the penalties are 3-5, then correct prediction is 4-6)</div>
+            <div className="text-block-52 hero-title-wrapper">Note: During the knockout stage, <strong>you cannot predict any draw</strong>. A winner is expected, meaning you should add the penalties in your predictions.<br />(Ex: if the score is 1-1 at the end of the prolongations, and the results of the penalties are 3-5, then correct prediction is 4-6)</div>
             <div className="div-block-6">
                 {!isConnected && <input type="submit" value="Please connect!" className="hollow-button notactive" />}
                 {isConnected && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}

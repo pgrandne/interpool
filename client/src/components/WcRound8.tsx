@@ -95,8 +95,6 @@ function WcRound8({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
         }
     }
 
-
-
     return (
         <Fragment>
             <h2 className="heading-5">KNOCKOUT STAGE<br />~ 1/4th of final ~</h2>
@@ -159,7 +157,6 @@ function WcRound8({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">Portugal</div>
                         <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
 
-
                         {/* 3370568,England,France */}
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/10</div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">England</div>
@@ -177,18 +174,13 @@ function WcRound8({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
                         </div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">France</div>
                         <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
-
-
-
                     </div>
                 </div>
-                <div className="text-block-52 hero-title-wrapper">Note: During the knockout stage, <strong>you cannot predict any draw</strong>. <br />A winner is expected, meaning you should add the penalties in your predictions.<br />(Ex: if the score is 1-1 at the end of the prolongations, and the results of the penalties are 3-5, then correct prediction is 4-6)</div>
+                <div className="text-block-52 hero-title-wrapper">Note: During the knockout stage, <strong>you cannot predict any draw</strong>. A winner is expected, meaning you should add the penalties in your predictions.<br />(Ex: if the score is 1-1 at the end of the prolongations, and the results of the penalties are 3-5, then correct prediction is 4-6)</div>
                 <div className="div-block-6">
                     {!isConnected && <input type="submit" value="Please connect!" className="hollow-button notactive" />}
                     {isConnected && !predictionsOpen && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                     {isConnected && predictionsOpen && <input type="submit" value={played ? "Update your predictions!" : "Submit your predictions!"} data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />}
-
-
                 </div>
             </form>
             {modalSubmit && <ModalSubmit prediction={prediction} setModalSubmit={setModalSubmit} setSubmitted={setSubmitted} />}
