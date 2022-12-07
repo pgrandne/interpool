@@ -1142,7 +1142,7 @@ ul.a {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   border: 1px solid #000;
   border-radius: 10px;
-  background-color: #dbf0ff;
+  /* background-color: #dbf0ff; */
   text-align: center;
 }
 
@@ -1150,8 +1150,9 @@ ul.a {
   padding-bottom: 4px;
   margin-bottom: 4px;
   border-bottom: 1px solid #000;
-  background-color: rgba(72, 169, 248, 0.28);
+  background-color: #fff;
   font-size: 18px;
+  font-weight: 500;
   line-height: 24px;
 }
 

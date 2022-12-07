@@ -7,6 +7,7 @@ import SectionAccount from './sections/SectionAccount';
 import SectionHowToPlay from './sections/SectionHowToPlay';
 import SectionGetYourTickets from './sections/SectionGetYourTickets';
 import SectionHome from './sections/SectionHome';
+import SectionContestHistory from './sections/SectionContestHistory'
 import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
@@ -35,6 +36,7 @@ function App() {
       <SectionGetYourTickets />
       <SectionHowToPlay />
       <SectionAccount />
+      <SectionContestHistory />
       <Footer />
       <ToastContainer />
     </div>

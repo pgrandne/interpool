@@ -43,6 +43,16 @@ function Navbar({ currentSection, setCurrentSection }: { currentSection: any, se
                             </div>
                         </a>
                     </li>
+                    <li>
+                        <a href="#history" className={(currentSection === "history") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}>
+                            <div className="div-block-3">
+                                {(currentSection !== "history") && <img src="images/ranking-blanc.png" loading="lazy" width="23" alt="" className="image-2 image-account-inactive" />}
+                                {(currentSection === "history") && <img src="images/ranking-blue.png" loading="lazy" width="22" alt="" className="image-2 image-account-inactive" />}
+                                <div>Contest History</div>
+                            </div>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             {/* <div className="hamburger-button w-nav-button">
