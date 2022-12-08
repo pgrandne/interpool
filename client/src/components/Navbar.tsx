@@ -20,7 +20,7 @@ function Navbar({ currentSection, setCurrentSection }: { currentSection: any, se
                         <a href="#get-your-tickets" className={(currentSection === "get-your-tickets") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}>
                             <div className="div-block-3">
                                 {(currentSection !== "get-your-tickets") && <img src="images/ticket-2-blanc.png" loading="lazy" width="25" alt="" className="image-2 image-get-ticket-inactive" />}
-                                {(currentSection === "get-your-tickets") && <img src="images/ticket-2-bleu.png" loading="lazy" width="25" alt="" className="image-2 image-get-ticket-inactive" />}
+                                {(currentSection === "get-your-tickets") && <img src="images/ticket_blue_v2.svg" loading="lazy" width="25" alt="" className="image-2 image-get-ticket-inactive" />}
                                 <div>Get Tickets</div>
                             </div>
                         </a>
@@ -38,7 +38,7 @@ function Navbar({ currentSection, setCurrentSection }: { currentSection: any, se
                         <a href="#account" className={(currentSection === "account") ? "nav-link w-inline-block w--current" : "nav-link w-inline-block"}>
                             <div className="div-block-3">
                                 {(currentSection !== "account") && <img src="images/account-blanc.png" loading="lazy" width="23" alt="" className="image-2 image-account-inactive" />}
-                                {(currentSection === "account") && <img src="images/Account-blue.png" loading="lazy" width="22" alt="" className="image-2 image-account-inactive" />}
+                                {(currentSection === "account") && <img src="images/account_blue_v2.svg" loading="lazy" width="22" alt="" className="image-2 image-account-inactive" />}
                                 <div>Account</div>
                             </div>
                         </a>

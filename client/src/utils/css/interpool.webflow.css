@@ -2376,6 +2376,7 @@ ul.a {
 
   .section-buy-ticket {
     padding: 40px 10px;
+    background-image: url('../../images/Ticket_mobile.svg');
   }
 
   .div-block-8 {
@@ -2466,7 +2467,7 @@ ul.a {
   }
 
   .text-block-14 {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .block-contest-result-in {
