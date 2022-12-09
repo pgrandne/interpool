@@ -1,12 +1,12 @@
 import { Fragment, useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import ModalSubmit from './modals/ModalSubmit'
+import CurrentContestTable from './CurrentContestTable'
 import { useAccount, useContractReads } from 'wagmi'
 import { useAddressNetwork } from "../utils/useAddressNetwork"
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 import { ethers } from 'ethers'
 import { ABI_Interpool } from '../utils/ABI_Interpool'
-import CurrentContestTable from './CurrentContestTable';
 import { IFormInput } from '../utils/contractAddress'
 
 interface IPrediction {
@@ -95,6 +95,38 @@ function WcRound8({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
         }
     }
 
+    const calculateMatchResult = (homeScore: number, awayScore: number) => {
+        let gameResult: number;
+        if (homeScore > awayScore) {
+            gameResult = 0;
+        } else if (awayScore > homeScore) {
+            gameResult = 2;
+        } else {
+            gameResult = 1;
+        }
+        return gameResult;
+    }
+
+    const colorInput = (
+        playerHomeScore: number,
+        playerAwayScore: number,
+        resultHomeScore: number,
+        resultAwayScore: number
+    ) => {
+        let color: string
+        if (isConnected && playerHomeScore === resultHomeScore && playerAwayScore === resultAwayScore) {
+            color = "text-field-2 success-field"
+        } else if (isConnected && calculateMatchResult(playerHomeScore, playerAwayScore) === calculateMatchResult(resultHomeScore, resultAwayScore)) {
+            color = "text-field-2 avg-success-field"
+        } else if (isConnected) {
+            color = "text-field-2 not-success-field"
+        }
+        else {
+            color = "text-field-2 w-input not-connected-field"
+        }
+        return (color)
+    }
+
     return (
         <Fragment>
             <h2 className="heading-5">KNOCKOUT STAGE<br />~ 1/4th of final ~</h2>
@@ -110,34 +142,34 @@ function WcRound8({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match1HomeScore', { required: true, min: 0, max: 99 })}
-                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    className={typeof game3370565 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370565[1], game3370565[2], 5, 3)}
                                     placeholder={typeof game3370565 === 'undefined' || !played ? '' : game3370565[1].toString()}
                                 />
                                 <input type="number" {...register('match1AwayScore', { required: true, min: 0, max: 99 })}
-                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    className={typeof game3370565 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370565[1], game3370565[2], 5, 3)}
                                     placeholder={typeof game3370565 === 'undefined' || !played ? '' : game3370565[2].toString()}
                                 />
                             </div>
                         </div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">Brazil</div>
-                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">(5-3)</div>
                         {/* 3370566,Netherlands,Argentina */}
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/09</div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">Netherlands</div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match2HomeScore', { required: true, min: 0, max: 99 })}
-                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    className={typeof game3370566 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370566[1], game3370566[2], 5, 6)}
                                     placeholder={typeof game3370566 === 'undefined' || !played ? '' : game3370566[1].toString()}
                                 />
                                 <input type="number" {...register('match2AwayScore', { required: true, min: 0, max: 99 })}
-                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    className={typeof game3370566 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370566[1], game3370566[2], 5, 6)}
                                     placeholder={typeof game3370566 === 'undefined' || !played ? '' : game3370566[2].toString()}
                                 />
                             </div>
                         </div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">Argentina</div>
-                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">(5-6)</div>
 
                         {/* 3370567,Morocco,Portugal */}
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/10</div>
@@ -145,11 +177,11 @@ function WcRound8({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match3HomeScore', { required: true, min: 0, max: 99 })}
-                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    className="text-field-2 not-connected-field"
                                     placeholder={typeof game3370567 === 'undefined' || !played ? '' : game3370567[1].toString()}
                                 />
                                 <input type="number" {...register('match3AwayScore', { required: true, min: 0, max: 99 })}
-                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    className="text-field-2 not-connected-field"
                                     placeholder={typeof game3370567 === 'undefined' || !played ? '' : game3370567[2].toString()}
                                 />
                             </div>
@@ -163,11 +195,11 @@ function WcRound8({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match4HomeScore', { required: true, min: 0, max: 99 })}
-                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    className="text-field-2 not-connected-field"
                                     placeholder={typeof game3370568 === 'undefined' || !played ? '' : game3370568[1].toString()}
                                 />
                                 <input type="number" {...register('match4AwayScore', { required: true, min: 0, max: 99 })}
-                                    className={isConnected ? "text-field-2 w-input" : "text-field-2 not-connected-field"}
+                                    className="text-field-2 not-connected-field"
                                     placeholder={typeof game3370568 === 'undefined' || !played ? '' : game3370568[2].toString()}
                                 />
                             </div>
@@ -182,6 +214,7 @@ function WcRound8({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
                     {isConnected && !predictionsOpen && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                     {isConnected && predictionsOpen && <input type="submit" value={played ? "Update your predictions!" : "Submit your predictions!"} data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />}
                 </div>
+                <CurrentContestTable />
             </form>
             {modalSubmit && <ModalSubmit prediction={prediction} setModalSubmit={setModalSubmit} setSubmitted={setSubmitted} />}
         </Fragment >

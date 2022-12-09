@@ -42,7 +42,8 @@ function SectionGetYourTickets() {
                             }}
                         >Confirm</a>}
                     </div>
-                    <div className="text-block-14">* You can get your deposit back right after the end of the contest, or fill in your prediction for the next contest and win more prizes!</div>
+                    <div className="text-block-14">* You can get your deposit back right after the end of the contest!</div>
+                    <div className="text-block-14">or fill in your prediction for the next contest and win more prizes!</div>
                 </div>
             </div>
             {modalDeposit && <ModalDeposit nbTickets={nbTickets} setModalDeposit={setModalDeposit} setDeposited={setDeposited} />}

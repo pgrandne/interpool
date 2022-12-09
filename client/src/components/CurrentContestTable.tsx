@@ -5,7 +5,7 @@ import { ethers } from 'ethers'
 import { ABI_Interpool } from "../utils/ABI_Interpool";
 // import { useCurrentContest } from "../utils/useCurrentContest";
 
-function ContestTable() {
+function CurrentContestTable() {
     const addressNetwork = useAddressNetwork()
     const [playerAddress, setPlayerAddress] = useState('0x000000000000000000000000000000000000dEaD')
     const { address, isConnected }: { address: any, isConnected: boolean } = useAccount()
@@ -23,7 +23,7 @@ function ContestTable() {
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getPointsTable',
-        args: [2],
+        args: [3],
         onSuccess(data: any) {
             sortPointsTable(data)
         }
@@ -58,7 +58,7 @@ function ContestTable() {
                 <Fragment key={i}>
                     <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>{element[0].substring(0, 4)}...{element[0].substring(element.player.length - 4)}</div>
                     <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>{ethers.utils.formatUnits(element[1]._hex, 0)}</div>
-                    <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}> {calculateRank(i, parseInt(ethers.utils.formatUnits(element[2]._hex, 0)))} / 21</div>
+                    <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}> {calculateRank(i, parseInt(ethers.utils.formatUnits(element[2]._hex, 0)))} / 19</div>
                     <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>{ethers.utils.formatUnits(element[2]._hex, 0)}</div>
                     <div className={playerAddress === element[0] ? "content-grid-history-selected" : "content-grid-history"}>-</div>
                 </Fragment>)
@@ -66,7 +66,7 @@ function ContestTable() {
         </div >
     )
 }
-export default ContestTable;
+export default CurrentContestTable;
 
 
 
