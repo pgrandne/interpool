@@ -27,9 +27,9 @@ function BannerNextPrediction({ contestId, setContestId }: {
     })
 
     const handleClick = () => {
-        if (contestId === 3) {
-            setContestId(2)
-        } else setContestId(3)
+        if (contestId === 4) {
+            setContestId(3)
+        } else setContestId(4)
     }
 
     return (
@@ -61,7 +61,7 @@ function BannerNextPrediction({ contestId, setContestId }: {
                     <div className="text-block-3">Participants</div><div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740cc-3d3dc5f0" className="text-block">{nbPlayers}</div>
                 </div>
             </div>
-            {contestId === 2 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740ce-3d3dc5f0" className="div-block colorvariation-3">
+            {contestId === 3 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740ce-3d3dc5f0" className="div-block colorvariation-3">
                 <div className="div-block-2">
                     <img src="images/Coupe-blanc.png" loading="lazy" alt="" className="image" width="40" />
                 </div>
@@ -69,13 +69,13 @@ function BannerNextPrediction({ contestId, setContestId }: {
                     <div className="text-block-3">Winners announced</div>
                 </div>
             </div>}
-            {contestId === 3 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740ce-3d3dc5f0" className="div-block colorvariation-3">
+            {contestId === 4 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740ce-3d3dc5f0" className="div-block colorvariation-3">
                 <div className="div-block-2">
                     <img src="images/time-blanc.png" loading="lazy" alt="" className="image" width="40" />
                 </div>
                 <div className="div-block-info">
-                    <div className="text-block-3">Winner annoucement</div>
-                    <ContestEndCountdown contestId={contestId} />
+                    <div className="text-block-3">Submission period</div>
+                    <SubmissionEndCountdown contestId={contestId} />
                 </div>
             </div>}
             <a href="/" id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fb-3d3dc5f0" className=" link-block-2"
@@ -86,15 +86,15 @@ function BannerNextPrediction({ contestId, setContestId }: {
                 <div className="div-block colorvariation-5">
                     <div className="div-block-56">
                         <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fc-3d3dc5f0" className="div-block-2">
-                            {contestId === 2 && < img src="images/line-4.png" loading="lazy" alt="" className="image" width="35" />}
-                            {contestId === 3 && <img src="images/previous.svg" loading="lazy" alt="" className="image" width="35" />}
+                            {contestId === 3 && < img src="images/line-4.png" loading="lazy" alt="" className="image" width="35" />}
+                            {contestId === 4 && <img src="images/previous.svg" loading="lazy" alt="" className="image" width="35" />}
                         </div>
                         <div className="div-block-info">
-                            {contestId === 2 && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Submit your predictions for the current contest!</h1>}
-                            {contestId === 3 && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Check out results and prizes from previous contest!</h1>}
+                            {contestId === 3 && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Submit your predictions for the current contest!</h1>}
+                            {contestId === 4 && <h1 data-w-id="9150fb1c-3bd2-da6e-746d-6456b7f740ff" className="heading-9 heading-nextcontest">Check out results and prizes from previous contest!</h1>}
                         </div>
                     </div>
-                    {contestId === 2 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740df-3d3dc5f0" className="div-block inner-div-block">
+                    {contestId === 3 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740df-3d3dc5f0" className="div-block inner-div-block">
                         <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740e0-3d3dc5f0" className="div-block-2">
                             <img src="images/time-blanc.png" loading="lazy" alt="" className="image image-without-outline" width="40" />
                         </div>
