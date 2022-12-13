@@ -7,7 +7,7 @@ import { ABI_Interpool } from './ABI_Interpool'
 function ContestEndCountdown({ contestId }: { contestId: number }) {
     const addressNetwork = useAddressNetwork()
     const [countDown, setCountDown] = useState(0)
-    const [countDownDate, setCountDownDate] = useState(1670022000000)
+    const [countDownDate, setCountDownDate] = useState(1671391072000)
     const [days, setDays] = useState(0)
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(0)

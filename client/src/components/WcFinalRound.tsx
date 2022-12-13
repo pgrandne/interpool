@@ -15,20 +15,20 @@ interface IPrediction {
     awayScore: number
 }
 
-function WcRound4({ ticket, played, contestId, nbPlayers }: { ticket: number, played: boolean, contestId: number, nbPlayers: number }) {
+function WcFinalRound({ ticket, played, contestId, nbPlayers }: { ticket: number, played: boolean, contestId: number, nbPlayers: number }) {
     const addressNetwork = useAddressNetwork()
     const { address, isConnected } = useAccount()
     const [modalSubmit, setModalSubmit] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [predictionsOpen, setPredictionsOpen] = useState(true)
 
-    const [game3370569, setGame3370569] = useState([0, 0, 0])
-    const [game3370570, setGame3370570] = useState([0, 0, 0])
+    const [game3370571, setGame3370571] = useState([0, 0, 0])
+    const [game3370572, setGame3370572] = useState([0, 0, 0])
 
 
     const fetchScores = (data: Array<Array<number>>) => {
-        setGame3370569(data.filter(element => element[0] === 3370569)[0])
-        setGame3370570(data.filter(element => element[0] === 3370570)[0])
+        setGame3370571(data.filter(element => element[0] === 3370571)[0])
+        setGame3370572(data.filter(element => element[0] === 3370572)[0])
 
     }
 
@@ -82,8 +82,8 @@ function WcRound4({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
             document.getElementById('get-your-tickets')?.scrollIntoView();
         } else {
             const result = [
-                { gameId: 3370569, homeScore: parseInt(data.match1HomeScore), awayScore: parseInt(data.match1AwayScore) }, //1
-                { gameId: 3370570, homeScore: parseInt(data.match2HomeScore), awayScore: parseInt(data.match2AwayScore) }, //2
+                { gameId: 3370571, homeScore: parseInt(data.match1HomeScore), awayScore: parseInt(data.match1AwayScore) }, //1
+                { gameId: 3370572, homeScore: parseInt(data.match2HomeScore), awayScore: parseInt(data.match2AwayScore) }, //2
             ]
             setPrediction(result)
             setModalSubmit(true)
@@ -124,46 +124,46 @@ function WcRound4({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
 
     return (
         <Fragment>
-            <h2 className="heading-5">KNOCKOUT STAGE<br />~ semi-final ~</h2>
+            <h2 className="heading-5">KNOCKOUT STAGE<br />~ final ~</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid-knockout">
                     <div className="w-layout-grid grid-3">
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa3-3d3dc5f0">
                             <div className="headers-grid-prediction header-group-a">Make your predictions!</div>
                         </div>
-                        {/* 3370569,Argentina,Croatia] */}
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/13</div>
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">Argentina</div>
+                        {/* 3370571,Croatia,France/Morocco] */}
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/17</div>
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">Croatia</div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match1HomeScore', { required: true, min: 0, max: 99 })}
-                                    className={typeof game3370569 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370569[1], game3370569[2], 3, 0)}
-                                    placeholder={typeof game3370569 === 'undefined' || !played ? '' : game3370569[1].toString()}
+                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
+                                    placeholder={typeof game3370571 === 'undefined' || !played ? '' : game3370571[1].toString()}
                                 />
                                 <input type="number" {...register('match1AwayScore', { required: true, min: 0, max: 99 })}
-                                    className={typeof game3370569 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370569[1], game3370569[2], 3, 0)}
-                                    placeholder={typeof game3370569 === 'undefined' || !played ? '' : game3370569[2].toString()}
+                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
+                                    placeholder={typeof game3370571 === 'undefined' || !played ? '' : game3370571[2].toString()}
                                 />
                             </div>
                         </div>
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">Croatia</div>
-                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">(3-0)</div>
-                        {/* 3370570,France,Morocco */}
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/14</div>
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">France</div>
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">France/Morocco</div>
+                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller"></div>
+                        {/* 3370572,Argentina,France/Morocco */}
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/18</div>
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">Argentina</div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match2HomeScore', { required: true, min: 0, max: 99 })}
                                     className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
-                                    placeholder={typeof game3370570 === 'undefined' || !played ? '' : game3370570[1].toString()}
+                                    placeholder={typeof game3370572 === 'undefined' || !played ? '' : game3370572[1].toString()}
                                 />
                                 <input type="number" {...register('match2AwayScore', { required: true, min: 0, max: 99 })}
                                     className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
-                                    placeholder={typeof game3370570 === 'undefined' || !played ? '' : game3370570[2].toString()}
+                                    placeholder={typeof game3370572 === 'undefined' || !played ? '' : game3370572[2].toString()}
                                 />
                             </div>
                         </div>
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">Morocco</div>
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">France/Morocco</div>
                         <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
                     </div>
                 </div>
@@ -180,4 +180,4 @@ function WcRound4({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
     )
 }
 
-export default WcRound4;
+export default WcFinalRound;

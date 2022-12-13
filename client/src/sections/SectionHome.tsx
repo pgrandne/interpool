@@ -1,8 +1,9 @@
-import WcRound16 from '../components/WcRound16'
+// import WcRound16 from '../components/WcRound16'
 import WcRound8 from '../components/WcRound8'
 import WcRound4 from '../components/WcRound4'
-import WcGroupPhase from '../components/WcGroupPhase'
-import WcMatchNoPred from '../components/WcMatchNoPred'
+import WcFinalRound from '../components/WcFinalRound'
+// import WcGroupPhase from '../components/WcGroupPhase'
+// import WcMatchNoPred from '../components/WcMatchNoPred'
 import BannerNextPrediction from '../components/banner/BannerNextPrediction'
 import { useAccount, useContractReads, erc20ABI } from 'wagmi'
 import { useAddressNetwork } from '../utils/useAddressNetwork'
@@ -121,11 +122,12 @@ function SectionHome() {
                         </div>
                     </div>
                 </div>}
-                {contestId === 2 && <WcRound16 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
+                {/* {contestId === 2 && <WcRound16 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
                 {contestId === 1 && played && <WcGroupPhase ticket={ticket} contestId={contestId} nbPlayers={nbPlayers} />}
-                {contestId === 1 && !played && <WcMatchNoPred />}
+                {contestId === 1 && !played && <WcMatchNoPred />} */}
                 {contestId === 3 && <WcRound8 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
                 {contestId === 4 && <WcRound4 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
+                {contestId === 5 && <WcFinalRound ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
                 <div className="div-block-7">
                     <div className="text-block-5">You have 100% chance to win *</div>
                     <div className="text-block-6">* This is actually true <a href="https://irruption-lab.gitbook.io/interpool/welcome/frequently-asked-questions#prizes-and-winning" target="_blank" rel="noreferrer" className="link-4">(see details)</a>
