@@ -154,11 +154,11 @@ function WcRound4({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match2HomeScore', { required: true, min: 0, max: 99 })}
-                                    className="text-field-2 w-input"
+                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
                                     placeholder={typeof game3370570 === 'undefined' || !played ? '' : game3370570[1].toString()}
                                 />
                                 <input type="number" {...register('match2AwayScore', { required: true, min: 0, max: 99 })}
-                                    className="text-field-2 w-input"
+                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
                                     placeholder={typeof game3370570 === 'undefined' || !played ? '' : game3370570[2].toString()}
                                 />
                             </div>
