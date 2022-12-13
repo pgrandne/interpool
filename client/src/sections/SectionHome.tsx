@@ -85,7 +85,7 @@ function SectionHome() {
                     <div className="w-layout-grid grid-10">
                         <div className="div-block-52">
                             <h1 className="heading-10 heading-10-variation">Current rank:</h1>
-                            <h1 className="heading-10 heading-10-variation-2">{played ? "-" : "-"}/{nbPlayers}</h1>
+                            <h1 className="heading-10 heading-10-variation-2">{played ? rank : "-"} / {nbPlayers}</h1>
                         </div>
                         <div className="div-block-52 div-block-52-color-variation">
                             <h1 className="heading-10 heading-10-variation">Current score:</h1>
