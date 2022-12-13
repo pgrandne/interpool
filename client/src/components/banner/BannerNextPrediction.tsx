@@ -61,14 +61,17 @@ function BannerNextPrediction({ contestId, setContestId }: {
                     <div className="text-block-3">Participants</div><div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740cc-3d3dc5f0" className="text-block">{nbPlayers}</div>
                 </div>
             </div>
-            {contestId === 3 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740ce-3d3dc5f0" className="div-block colorvariation-3">
+            {contestId === 3 && <a href="/#history" id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740ce-3d3dc5f0" className="div-block colorvariation-3 link-block-2">
                 <div className="div-block-2">
                     <img src="images/Coupe-blanc.png" loading="lazy" alt="" className="image" width="40" />
                 </div>
                 <div className="div-block-info">
                     <div className="text-block-3">Winners announced</div>
+                    <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f4-3d3dc5f0" className="text-block text-block-variation">
+                        see below
+                    </div>
                 </div>
-            </div>}
+            </a>}
             {contestId === 4 && <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740ce-3d3dc5f0" className="div-block colorvariation-3">
                 <div className="div-block-2">
                     <img src="images/time-blanc.png" loading="lazy" alt="" className="image" width="40" />
@@ -86,7 +89,7 @@ function BannerNextPrediction({ contestId, setContestId }: {
                 <div className="div-block colorvariation-5">
                     <div className="div-block-56">
                         <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fc-3d3dc5f0" className="div-block-2">
-                            {contestId === 3 && < img src="images/line-4.png" loading="lazy" alt="" className="image" width="35" />}
+                            {contestId === 3 && < img src="images/previous.svg" loading="lazy" alt="" className="image-21 image" width="35" />}
                             {contestId === 4 && <img src="images/previous.svg" loading="lazy" alt="" className="image" width="35" />}
                         </div>
                         <div className="div-block-info">

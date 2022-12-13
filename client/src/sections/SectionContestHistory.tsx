@@ -3,7 +3,7 @@ import ClosedContestTable from "../components/ClosedContestTable";
 
 
 function SectionContestHistory() {
-    const [contestId, setContestId] = useState(0)
+    const [contestId, setContestId] = useState(3)
 
     return (
         <section id="history" data-w-id="90400c33-4d36-cc84-d01f-507bc873a726" className="section-account wf-section">
