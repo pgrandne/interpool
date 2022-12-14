@@ -3,12 +3,15 @@ import ClosedContestTable from "../components/ClosedContestTable";
 
 
 function SectionContestHistory() {
-    const [contestId, setContestId] = useState(3)
+    const [contestId, setContestId] = useState(4)
 
     return (
         <section id="history" data-w-id="90400c33-4d36-cc84-d01f-507bc873a726" className="section-account wf-section">
             <div className="container-3 w-container">
                 <h1>Contest History</h1>
+                <br />
+                <h2 className="pointer" onClick={() => contestId === 4 ? setContestId(0) : setContestId(4)}>Contest #04 {contestId === 4 ? <i className="fa fa-solid fa-angle-up"></i> : <i className="fa fa-solid fa-angle-down"></i>}</h2>
+                {contestId === 4 && <ClosedContestTable contestId={4} nbPlayers={20} />}
                 <br />
                 <h2 className="pointer" onClick={() => contestId === 3 ? setContestId(0) : setContestId(3)}>Contest #03 {contestId === 3 ? <i className="fa fa-solid fa-angle-up"></i> : <i className="fa fa-solid fa-angle-down"></i>}</h2>
                 {contestId === 3 && <ClosedContestTable contestId={3} nbPlayers={19} />}

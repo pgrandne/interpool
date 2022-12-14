@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import ModalSubmit from './modals/ModalSubmit'
-import CurrentContestTable from './CurrentContestTable'
+import ClosedContestTable from './ClosedContestTable'
 import { useAccount, useContractReads } from 'wagmi'
 import { useAddressNetwork } from "../utils/useAddressNetwork"
 import { toast } from 'react-toastify'
@@ -153,17 +153,17 @@ function WcRound4({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match2HomeScore', { required: true, min: 0, max: 99 })}
-                                    className={predictionsOpen ? "text-field-2 w-input not-connected-field" : "text-field-2 w-input not-connected-field"}
+                                    className={typeof game3370570 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370570[1], game3370570[2], 2, 0)}
                                     placeholder={typeof game3370570 === 'undefined' || !played ? '' : game3370570[1].toString()}
                                 />
                                 <input type="number" {...register('match2AwayScore', { required: true, min: 0, max: 99 })}
-                                    className={predictionsOpen ? "text-field-2 w-input not-connected-field" : "text-field-2 w-input not-connected-field"}
+                                    className={typeof game3370570 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370570[1], game3370570[2], 2, 0)}
                                     placeholder={typeof game3370570 === 'undefined' || !played ? '' : game3370570[2].toString()}
                                 />
                             </div>
                         </div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">Morocco</div>
-                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">(2-0)</div>
                     </div>
                 </div>
                 <div className="text-block-52 hero-title-wrapper">Note: During the knockout stage, <strong>you cannot predict any draw</strong>. A winner is expected, meaning you should add the penalties in your predictions.<br />(Ex: if the score is 1-1 at the end of the prolongations, and the results of the penalties are 3-5, then correct prediction is 4-6)</div>
@@ -172,7 +172,7 @@ function WcRound4({ ticket, played, contestId, nbPlayers }: { ticket: number, pl
                     {isConnected && !predictionsOpen && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                     {isConnected && predictionsOpen && <input type="submit" value={played ? "Update your predictions!" : "Submit your predictions!"} data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />}
                 </div>
-                <CurrentContestTable contestId={contestId} nbPlayers={nbPlayers} />
+                <ClosedContestTable contestId={contestId} nbPlayers={nbPlayers} />
             </form>
             {modalSubmit && <ModalSubmit prediction={prediction} setModalSubmit={setModalSubmit} setSubmitted={setSubmitted} />}
         </Fragment >

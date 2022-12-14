@@ -124,31 +124,14 @@ function WcFinalRound({ ticket, played, contestId, nbPlayers }: { ticket: number
 
     return (
         <Fragment>
-            <h2 className="heading-5">KNOCKOUT STAGE<br />~ final ~</h2>
+            <h2 className="heading-5">FIFA WORLD CUP<br />~ Final stage~</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid-knockout">
-                    <div className="w-layout-grid grid-3">
+                    <div className="w-layout-grid grid-3 grid-3-final">
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa3-3d3dc5f0">
                             <div className="headers-grid-prediction header-group-a">Make your predictions!</div>
                         </div>
-                        {/* 3370571,Croatia,France/Morocco] */}
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/17</div>
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">Croatia</div>
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
-                            <div className="form-3">
-                                <input type="number" {...register('match1HomeScore', { required: true, min: 0, max: 99 })}
-                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
-                                    placeholder={typeof game3370571 === 'undefined' || !played ? '' : game3370571[1].toString()}
-                                />
-                                <input type="number" {...register('match1AwayScore', { required: true, min: 0, max: 99 })}
-                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
-                                    placeholder={typeof game3370571 === 'undefined' || !played ? '' : game3370571[2].toString()}
-                                />
-                            </div>
-                        </div>
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">France/Morocco</div>
-                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller"></div>
-                        {/* 3370572,Argentina,France/Morocco */}
+                        {/* 3370572,Argentina,France */}
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/18</div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">Argentina</div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
@@ -163,8 +146,31 @@ function WcFinalRound({ ticket, played, contestId, nbPlayers }: { ticket: number
                                 />
                             </div>
                         </div>
-                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">France/Morocco</div>
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">France</div>
                         <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        {/* 3370571,Croatia,Morocco] */}
+                        <div id="w-node-b26be604-6192-92d3-fdff-85d6fd23853b-3d3dc5f0">
+                            <div className="text-block-53">Final</div>
+                        </div>
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aa6-3d3dc5f0" className="content-grid-prediction-smaller">12/17</div>
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aaa-3d3dc5f0" className="content-grid-prediction">Croatia</div>
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
+                            <div className="form-3">
+                                <input type="number" {...register('match1HomeScore', { required: true, min: 0, max: 99 })}
+                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
+                                    placeholder={typeof game3370571 === 'undefined' || !played ? '' : game3370571[1].toString()}
+                                />
+                                <input type="number" {...register('match1AwayScore', { required: true, min: 0, max: 99 })}
+                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
+                                    placeholder={typeof game3370571 === 'undefined' || !played ? '' : game3370571[2].toString()}
+                                />
+                            </div>
+                        </div>
+                        <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">Morocco</div>
+                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-_4487f981-7a9f-9635-17c7-76ca4606cc48-3d3dc5f0">
+                            <div className="text-block-53 text-block-53-variante">Third place play-off</div>
+                        </div>
                     </div>
                 </div>
                 <div className="text-block-52 hero-title-wrapper">Note: During the knockout stage, <strong>you cannot predict any draw</strong>. A winner is expected, meaning you should add the penalties in your predictions.<br />(Ex: if the score is 1-1 at the end of the prolongations, and the results of the penalties are 3-5, then correct prediction is 4-6)</div>
@@ -173,7 +179,7 @@ function WcFinalRound({ ticket, played, contestId, nbPlayers }: { ticket: number
                     {isConnected && !predictionsOpen && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                     {isConnected && predictionsOpen && <input type="submit" value={played ? "Update your predictions!" : "Submit your predictions!"} data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />}
                 </div>
-                <CurrentContestTable contestId={contestId} nbPlayers={nbPlayers} />
+                {/* <CurrentContestTable contestId={contestId} nbPlayers={nbPlayers} /> */}
             </form>
             {modalSubmit && <ModalSubmit prediction={prediction} setModalSubmit={setModalSubmit} setSubmitted={setSubmitted} />}
         </Fragment >

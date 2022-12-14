@@ -1,5 +1,5 @@
 // import WcRound16 from '../components/WcRound16'
-import WcRound8 from '../components/WcRound8'
+// import WcRound8 from '../components/WcRound8'
 import WcRound4 from '../components/WcRound4'
 import WcFinalRound from '../components/WcFinalRound'
 // import WcGroupPhase from '../components/WcGroupPhase'
@@ -18,7 +18,7 @@ function SectionHome() {
     const [ticket, setTicket] = useState(0)
     const [rank, setRank] = useState(0)
     const [points, setPoints] = useState(0)
-    const [contestId, setContestId] = useState(4)
+    const [contestId, setContestId] = useState(5)
     const [nbPlayers, setNbPlayers] = useState(0)
     // const [modalNewContest, setModalNewContest] = useState(false)
     const [played, setPlayed] = useState(false)
@@ -86,7 +86,7 @@ function SectionHome() {
                     <div className="w-layout-grid grid-10">
                         <div className="div-block-52">
                             <h1 className="heading-10 heading-10-variation">Current rank:</h1>
-                            <h1 className="heading-10 heading-10-variation-2">{played ? rank : "-"} / {nbPlayers}</h1>
+                            <h1 className="heading-10 heading-10-variation-2">{played ? "-" : "-"} / {nbPlayers}</h1>
                         </div>
                         <div className="div-block-52 div-block-52-color-variation">
                             <h1 className="heading-10 heading-10-variation">Current score:</h1>
@@ -125,7 +125,7 @@ function SectionHome() {
                 {/* {contestId === 2 && <WcRound16 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
                 {contestId === 1 && played && <WcGroupPhase ticket={ticket} contestId={contestId} nbPlayers={nbPlayers} />}
                 {contestId === 1 && !played && <WcMatchNoPred />} */}
-                {contestId === 3 && <WcRound8 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
+                {/* {contestId === 3 && <WcRound8 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />} */}
                 {contestId === 4 && <WcRound4 ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
                 {contestId === 5 && <WcFinalRound ticket={ticket} played={played} contestId={contestId} nbPlayers={nbPlayers} />}
                 <div className="div-block-7">
