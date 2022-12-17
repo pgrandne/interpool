@@ -54,13 +54,9 @@ function WcFinalRound({ ticket, played, contestId, nbPlayers }: { ticket: number
             if (isConnected) {
                 fetchScores(data[0])
                 new Date().getTime() > (parseInt(ethers.utils.formatUnits(data[1]._hex, 0)) * 1000) ? setPredictionsOpen(false) : setPredictionsOpen(true)
-
             }
         }
-
     })
-
-
 
     useEffect(() => {
         if (submitted) {
@@ -157,17 +153,17 @@ function WcFinalRound({ ticket, played, contestId, nbPlayers }: { ticket: number
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match1HomeScore', { required: true, min: 0, max: 99 })}
-                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
+                                    className={typeof game3370571 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370571[1], game3370571[2], 2, 1)}
                                     placeholder={typeof game3370571 === 'undefined' || !played ? '' : game3370571[1].toString()}
                                 />
                                 <input type="number" {...register('match1AwayScore', { required: true, min: 0, max: 99 })}
-                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
+                                    className={typeof game3370571 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370571[1], game3370571[2], 2, 1)}
                                     placeholder={typeof game3370571 === 'undefined' || !played ? '' : game3370571[2].toString()}
                                 />
                             </div>
                         </div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">Morocco</div>
-                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">(2-1)</div>
                         <div id="w-node-_4487f981-7a9f-9635-17c7-76ca4606cc48-3d3dc5f0">
                             <div className="text-block-53 text-block-53-variante">Third place play-off</div>
                         </div>
@@ -179,7 +175,7 @@ function WcFinalRound({ ticket, played, contestId, nbPlayers }: { ticket: number
                     {isConnected && !predictionsOpen && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                     {isConnected && predictionsOpen && <input type="submit" value={played ? "Update your predictions!" : "Submit your predictions!"} data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />}
                 </div>
-                {/* <CurrentContestTable contestId={contestId} nbPlayers={nbPlayers} /> */}
+                <CurrentContestTable contestId={contestId} nbPlayers={nbPlayers} />
             </form>
             {modalSubmit && <ModalSubmit prediction={prediction} setModalSubmit={setModalSubmit} setSubmitted={setSubmitted} />}
         </Fragment >
