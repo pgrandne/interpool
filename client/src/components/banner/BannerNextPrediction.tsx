@@ -77,7 +77,7 @@ function BannerNextPrediction({ contestId, setContestId }: {
                     <img src="images/Coupe-blanc.png" loading="lazy" alt="" className="image" width="40" />
                 </div>
                 <div className="div-block-info">
-                    <div className="text-block-3">Winner annoucement</div>
+                    <div className="text-block-3">Winner announced</div>
                     <ContestEndCountdown contestId={contestId} />
                 </div>
             </div>}

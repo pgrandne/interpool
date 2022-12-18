@@ -133,17 +133,17 @@ function WcFinalRound({ ticket, played, contestId, nbPlayers }: { ticket: number
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2aac-3d3dc5f0" className="form-block w-form">
                             <div className="form-3">
                                 <input type="number" {...register('match2HomeScore', { required: true, min: 0, max: 99 })}
-                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
+                                    className={typeof game3370572 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370572[1], game3370572[2], 7, 5)}
                                     placeholder={typeof game3370572 === 'undefined' || !played ? '' : game3370572[1].toString()}
                                 />
                                 <input type="number" {...register('match2AwayScore', { required: true, min: 0, max: 99 })}
-                                    className={predictionsOpen ? "text-field-2 w-input" : "text-field-2 w-input not-connected-field"}
+                                    className={typeof game3370571 === 'undefined' || !played ? "text-field-2 not-connected-field" : colorInput(game3370572[1], game3370572[2], 7, 5)}
                                     placeholder={typeof game3370572 === 'undefined' || !played ? '' : game3370572[2].toString()}
                                 />
                             </div>
                         </div>
                         <div id="w-node-_00510f3a-ddab-1583-dfaa-8b7e172c2ab6-3d3dc5f0" className="content-grid-prediction">France</div>
-                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">-</div>
+                        <div id="w-node-f72edf64-997b-08bb-0ee5-629f72111b84-3d3dc5f0" className="content-grid-prediction-smaller">(7-5)</div>
                         {/* 3370571,Croatia,Morocco] */}
                         <div id="w-node-b26be604-6192-92d3-fdff-85d6fd23853b-3d3dc5f0">
                             <div className="text-block-53">Final</div>
