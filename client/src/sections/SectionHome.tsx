@@ -11,7 +11,7 @@ import { ethers } from 'ethers'
 import { useState } from 'react'
 import { ABI_Interpool } from '../utils/ABI_Interpool'
 // import { useCurrentContest } from '../utils/useCurrentContest'
-// import ModalNewContest from '../components/modals/ModalNewContest'
+import ModalNewContest from '../components/modals/ModalNewContest'
 
 function SectionHome() {
     const addressNetwork = useAddressNetwork()
@@ -20,7 +20,7 @@ function SectionHome() {
     const [points, setPoints] = useState(0)
     const [contestId, setContestId] = useState(5)
     const [nbPlayers, setNbPlayers] = useState(0)
-    // const [modalNewContest, setModalNewContest] = useState(false)
+    const [modalNewContest, setModalNewContest] = useState(true)
     const [played, setPlayed] = useState(false)
     const { isConnected, address }: { isConnected: boolean, address: any } = useAccount()
     const interPoolTicket = {
@@ -133,7 +133,7 @@ function SectionHome() {
                     <div className="text-block-6">* This is actually true <a href="https://irruption-lab.gitbook.io/interpool/welcome/frequently-asked-questions#prizes-and-winning" target="_blank" rel="noreferrer" className="link-4">(see details)</a>
                     </div>
                 </div>
-                {/* {modalNewContest && <ModalNewContest setModalNewContest={setModalNewContest} />} */}
+                {modalNewContest && <ModalNewContest setModalNewContest={setModalNewContest} />}
             </div>
         </section>
     )

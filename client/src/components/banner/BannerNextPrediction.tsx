@@ -78,7 +78,9 @@ function BannerNextPrediction({ contestId, setContestId }: {
                 </div>
                 <div className="div-block-info">
                     <div className="text-block-3">Winner announced</div>
-                    <ContestEndCountdown contestId={contestId} />
+                    <div id="w-node-_40b5d444-6d80-431b-5657-b9e2ab6974f4-3d3dc5f0" className="text-block text-block-variation">
+                        see below
+                    </div>
                 </div>
             </div>}
             <a href="/" id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740fb-3d3dc5f0" className=" link-block-2"
