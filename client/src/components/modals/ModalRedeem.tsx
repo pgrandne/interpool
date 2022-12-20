@@ -34,7 +34,7 @@ function ModalRedeem({ setModalRedeem, ticket, setRedeemed }: {
         address: addressNetwork.interPoolContract,
         abi: ABI_Interpool,
         functionName: 'getVerifPlayerPlayedPerContest',
-        args: [1, address],
+        args: [6, address],
         onSuccess(data: any) {
             setPlayed(data)
         }

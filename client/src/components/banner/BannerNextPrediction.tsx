@@ -50,7 +50,8 @@ function BannerNextPrediction({ contestId, setContestId }: {
                     <img src="images/piggy-bank-blanc.png" loading="lazy" alt="" className="image" width="40" /></div>
                 <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740c1-3d3dc5f0" className="div-block-info">
                     <div className="text-block-3">{contestId === currentContest ? "Estimated Prizes" : "Prizes"}</div>
-                    {contestId === currentContest ? <PrizePool /> : <div className="text-block text-block-variation">$544.79</div>}
+                    {contestId === 4 && <div className="text-block text-block-variation">$544.79</div>}
+                    {contestId === 5 && <div className="text-block text-block-variation">$911.06</div>}
                 </div>
             </div>
             <div id="w-node-_9150fb1c-3bd2-da6e-746d-6456b7f740c6-3d3dc5f0" className="div-block colorvariation-2">

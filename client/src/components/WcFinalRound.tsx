@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import ModalSubmit from './modals/ModalSubmit'
-import CurrentContestTable from './CurrentContestTable'
+import ClosedContestTable from './ClosedContestTable'
 import { useAccount, useContractReads } from 'wagmi'
 import { useAddressNetwork } from "../utils/useAddressNetwork"
 import { toast } from 'react-toastify'
@@ -175,7 +175,7 @@ function WcFinalRound({ ticket, played, contestId, nbPlayers }: { ticket: number
                     {isConnected && !predictionsOpen && <input type="submit" value="Submission period closed!" className="hollow-button notactive" />}
                     {isConnected && predictionsOpen && <input type="submit" value={played ? "Update your predictions!" : "Submit your predictions!"} data-w-id="072ecfd4-6168-39ba-d6f7-70c0be435150" className="hollow-button white hollow-button-inverted" />}
                 </div>
-                <CurrentContestTable contestId={contestId} nbPlayers={nbPlayers} />
+                <ClosedContestTable contestId={contestId} nbPlayers={nbPlayers} />
             </form>
             {modalSubmit && <ModalSubmit prediction={prediction} setModalSubmit={setModalSubmit} setSubmitted={setSubmitted} />}
         </Fragment >
