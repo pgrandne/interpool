@@ -23,7 +23,7 @@ function Footer() {
                                 <img src="images/social-16-black.svg" alt="" width="17" />
                             </a>
                         </div>
-                        <div className="footer-text">by <a href="https://irruption-lab.webflow.io/" className="link-2">Irruption Lab</a>
+                        <div className="footer-text">by <a href="https://irruptionlab.com" className="link-2">Irruption Lab</a>
                         </div>
                     </div>
                 </div>
